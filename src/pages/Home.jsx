@@ -7,7 +7,7 @@ function Home() {
         <div>
             <h1>Home Page</h1>
             <button onClick={() => navigate("/second")}>
-                Go to Home Page
+                Go to Database Page
             </button>
             {/* call our book search component */}
             <BookSearch />
