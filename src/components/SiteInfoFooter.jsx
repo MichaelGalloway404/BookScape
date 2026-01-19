@@ -13,4 +13,4 @@ function SiteInfoFooter(props) {
   );
 }
 
-export default Test;
+export default SiteInfoFooter;
