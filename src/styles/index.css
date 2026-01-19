@@ -1,0 +1,13 @@
+body {
+  display: flex;
+  justify-content: center;
+  background-color: rgb(84, 199, 199);
+}
+
+.primary{
+  color: orange;
+}
+
+.font-xl{
+  font-size: 72px;
+}
