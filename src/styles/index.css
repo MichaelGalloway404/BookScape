@@ -5,7 +5,8 @@ body {
 }
 
 .primary{
-  color: orange;
+  color: rgb(0, 0, 0);
+  background-color: bisque;
 }
 
 .font-xl{
