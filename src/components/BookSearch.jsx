@@ -3,14 +3,13 @@ import axios from "axios";
 import styles from "./BookSearch.module.css"
 
 const BOOKS_PER_PAGE = 10;
-const [page, setPage] = useState(0);
-
 
 export default function BookSearch() {
   // use state vars as to not rerender if needed
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [results, setResults] = useState([]);
+  const [page, setPage] = useState(0);
 
   async function searchForBooks() {
     // The URLSearchParams interface defines utility methods to work with the query string of a URL.
