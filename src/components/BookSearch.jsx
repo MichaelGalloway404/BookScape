@@ -147,7 +147,6 @@ export default function BookSearch() {
         ))}
 
       </ul>
-      
       {/* Pagination controls */}
       {results.length > BOOKS_PER_PAGE && (
         <div className={styles.pagination}>
@@ -159,6 +158,7 @@ export default function BookSearch() {
 
           <button onClick={nextPage}>Next</button>
         </div>
+      )}
     </div>
   );
 
