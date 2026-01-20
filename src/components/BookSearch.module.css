@@ -1,3 +1,61 @@
 .testCss{
     background-color: cadetblue;
 }
+
+/* Remove default list styling */
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 2rem auto;
+  display: grid;
+
+  /* Responsive grid */
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1.5rem;
+
+  max-width: 1200px;
+}
+
+/* Individual book card */
+ul li {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 1rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Hover effect */
+ul li:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+}
+
+/* Book cover */
+ul li img {
+  width: 100%;
+  max-width: 140px;
+  height: auto;
+  border-radius: 6px;
+  margin-bottom: 0.75rem;
+}
+
+/* Title */
+ul li p strong {
+  display: block;
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+/* Author + ISBN */
+ul li p {
+  margin: 0.25rem 0;
+  font-size: 0.9rem;
+  color: #444;
+}
