@@ -2,6 +2,10 @@ import { useState } from "react";
 import axios from "axios";
 import styles from "./BookSearch.module.css"
 
+const BOOKS_PER_PAGE = 10;
+const [page, setPage] = useState(0);
+
+
 export default function BookSearch() {
   // use state vars as to not rerender if needed
   const [title, setTitle] = useState("");
@@ -50,12 +54,31 @@ export default function BookSearch() {
       // Update React state with the formatted book results
       setResults(covers);
 
+      setPage(0); // reset to first page on new search
+
+
     } catch (err) {
       console.error(err);
       alert("Search failed");
     }
 
   }
+
+  const totalPages = Math.ceil(results.length / BOOKS_PER_PAGE);
+
+  const visibleBooks = results.slice(
+    page * BOOKS_PER_PAGE,
+    (page + 1) * BOOKS_PER_PAGE
+  );
+
+  function nextPage() {
+    setPage(prev => (prev + 1) % totalPages);
+  }
+
+  function prevPage() {
+    setPage(prev => (prev - 1 + totalPages) % totalPages);
+  }
+
 
   return (
     <div>
@@ -124,6 +147,18 @@ export default function BookSearch() {
         ))}
 
       </ul>
+      
+      {/* Pagination controls */}
+      {results.length > BOOKS_PER_PAGE && (
+        <div className={styles.pagination}>
+          <button onClick={prevPage}>Previous</button>
+
+          <span>
+            Page {page + 1} of {totalPages}
+          </span>
+
+          <button onClick={nextPage}>Next</button>
+        </div>
     </div>
   );
 
