@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import styles from "./BookSearch.module.css"
 
 export default function BookSearch() {
   // use state vars as to not rerender if needed
@@ -58,7 +59,8 @@ export default function BookSearch() {
 
   return (
     <div>
-      <h2>Search Books</h2>
+      {/* testing out css modules */}
+      <h2 className={styles.testCss}>Search Books</h2>
 
       {/* Title input field */}
       <input
