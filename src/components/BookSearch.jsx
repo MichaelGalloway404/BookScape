@@ -118,7 +118,7 @@ export default function BookSearch() {
       <ul>
 
         {/* Loop over the results array and render one <li> per book */}
-        {results.map((book, i) => (
+        {visibleBooks.map((book, i) => (
           // Each list items have a unique key for React
           <li key={i}>
 
