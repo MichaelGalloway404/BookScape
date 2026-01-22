@@ -82,7 +82,7 @@ export default function BookSearch() {
   return (
     <div>
       {/* testing out css modules */}
-      <h2 className={styles.testCss}>Search Books</h2>
+      <h2>Search Books</h2>
 
       {/* Title input field */}
       <input
