@@ -69,3 +69,21 @@
 .pagination button:hover {
   background: #444;
 }
+
+
+
+/* for phones */
+@media (max-width: 600px) {
+  .bookCoverGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .bookCoverGrid .bookCard {
+    padding: 0.75rem;
+  }
+
+  .bookCoverGrid .bookCard .bookInfo {
+    font-size: 0.9rem;
+  }
+}
