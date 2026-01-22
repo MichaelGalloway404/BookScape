@@ -114,36 +114,38 @@ export default function BookSearch() {
         Search
       </button>
 
-      {/* List container for search results */}
-      <ul className={styles.bookCoverGrid}>
+      {visibleBooks.length > 0 && (
+        /* List container for search results */
+        <ul className={styles.bookCoverGrid}>
 
-        {/* Loop over the results array and render one <li> per book */}
-        {visibleBooks.map((book, i) => (
-          // Each list items have a unique key for React
-          <li className={styles.bookCard} key={i}>
+          {/* Loop over the results array and render one <li> per book */}
+          {visibleBooks.map((book, i) => (
+            // Each list items have a unique key for React
+            <li className={styles.bookCard} key={i}>
 
-            {/* Book cover image */}
-            <img className={styles.coverImage}
-              // URL built from the Open Library cover ID
-              src={book.coverUrl}
+              {/* Book cover image */}
+              <img className={styles.coverImage}
+                // URL built from the Open Library cover ID
+                src={book.coverUrl}
 
-              // screen readers text classic html
-              alt={book.title}
-            />
+                // screen readers text classic html
+                alt={book.title}
+              />
 
-            {/* Book title */}
-            <p className={styles.bookInfo} >
-              <h5><strong>{book.title}</strong></h5>
-            </p>
+              {/* Book title */}
+              <p className={styles.bookInfo} >
+                <h5><strong>{book.title}</strong></h5>
+              </p>
 
-            {/* Book author */}
-            <p className={styles.bookInfo} >
-              {book.author}
-            </p>
-          </li>
-        ))}
+              {/* Book author */}
+              <p className={styles.bookInfo} >
+                {book.author}
+              </p>
+            </li>
+          ))}
+        </ul>
+      )}
 
-      </ul>
       {/* Pagination controls */}
       {results.length > BOOKS_PER_PAGE && (
         <div className={styles.pagination}>
