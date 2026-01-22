@@ -21,7 +21,6 @@
   background: #036b9b;
   border-radius: 12px;
   padding: 1rem;
-
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -46,18 +45,12 @@
   margin-bottom: 0.75rem;
 }
 
-/* Title */
+/* book info */
 .bookCoverGrid .bookCard .bookInfo {
   display: block;
   font-size: 1rem;
-  margin-bottom: 0.25rem;
-}
-
-/* Author + ISBN */
-.bookCoverGrid .bookCard .bookInfo {
   margin: 0.25rem 0;
-  font-size: 0.9rem;
-  color: #444;
+  color: #000000;
 }
 
 .pagination {
