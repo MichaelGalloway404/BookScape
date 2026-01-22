@@ -115,7 +115,7 @@ export default function BookSearch() {
       </button>
 
       {/* List container for search results */}
-      <ul>
+      <ul className={styles.bookCoverGrid}>
 
         {/* Loop over the results array and render one <li> per book */}
         {visibleBooks.map((book, i) => (
