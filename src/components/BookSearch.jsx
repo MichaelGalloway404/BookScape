@@ -123,7 +123,7 @@ export default function BookSearch() {
           <li className={styles.bookCard} key={i}>
 
             {/* Book cover image */}
-            <img
+            <img className={styles.coverImage}
               // URL built from the Open Library cover ID
               src={book.coverUrl}
 
@@ -132,16 +132,14 @@ export default function BookSearch() {
             />
 
             {/* Book title */}
-            <p>
+            <p className={styles.bookInfo} >
               <strong>{book.title}</strong>
             </p>
 
             {/* Book author */}
-            <p>{book.author}</p>
-
-            {/* Book ISBN (can be null) */}
-            <p>ISBN: {book.isbn}</p>
-
+            <p className={styles.bookInfo} >
+              {book.author}
+            </p>
           </li>
         ))}
 

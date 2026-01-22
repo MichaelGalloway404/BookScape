@@ -38,7 +38,7 @@
 }
 
 /* Book cover */
-.bookCoverGrid .bookCard img {
+.bookCoverGrid .bookCard .coverImage {
   width: 100%;
   max-width: 140px;
   height: auto;
@@ -47,14 +47,14 @@
 }
 
 /* Title */
-.bookCoverGrid .bookCard p strong {
+.bookCoverGrid .bookCard .bookInfo {
   display: block;
   font-size: 1rem;
   margin-bottom: 0.25rem;
 }
 
 /* Author + ISBN */
-.bookCoverGrid .bookCard p {
+.bookCoverGrid .bookCard .bookInfo {
   margin: 0.25rem 0;
   font-size: 0.9rem;
   color: #444;
