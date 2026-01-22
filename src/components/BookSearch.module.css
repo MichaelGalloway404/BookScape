@@ -17,7 +17,7 @@
 }
 
 /* Individual book card */
-ul li {
+.bookCoverGrid .bookCard {
   background: #ffffff;
   border-radius: 12px;
   padding: 1rem;
@@ -32,13 +32,13 @@ ul li {
 }
 
 /* Hover effect */
-ul li:hover {
+.bookCoverGrid .bookCard:hover {
   transform: translateY(-4px);
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
 }
 
 /* Book cover */
-ul li img {
+.bookCoverGrid .bookCard img {
   width: 100%;
   max-width: 140px;
   height: auto;
@@ -47,14 +47,14 @@ ul li img {
 }
 
 /* Title */
-ul li p strong {
+.bookCoverGrid .bookCard p strong {
   display: block;
   font-size: 1rem;
   margin-bottom: 0.25rem;
 }
 
 /* Author + ISBN */
-ul li p {
+.bookCoverGrid .bookCard p {
   margin: 0.25rem 0;
   font-size: 0.9rem;
   color: #444;

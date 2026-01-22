@@ -120,7 +120,7 @@ export default function BookSearch() {
         {/* Loop over the results array and render one <li> per book */}
         {visibleBooks.map((book, i) => (
           // Each list items have a unique key for React
-          <li key={i}>
+          <li className={styles.bookCard} key={i}>
 
             {/* Book cover image */}
             <img
