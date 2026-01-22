@@ -12,7 +12,7 @@ function SiteInfoFooter(props) {
       <p className={style.footerInfo}>
         This is a website
       </p>
-      <p className={`${style.footerInfo}, ${style.fontXl}`}>
+      <p className={`${style.footerInfo} ${style.fontXl}`}>
         Books are Great.
       </p>
       <p className={style.footerInfo}>Today is: {day} the {date}, {year}</p>
