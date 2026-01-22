@@ -2,13 +2,21 @@ import '../styles/index.css'
 
 function SiteInfoFooter(props) {
   let className = props.primary ? 'primary' : '';
+  const today = new Date();
+  const day = today.toLocaleDateString("en-US", { weekday: "long" });
+  const date = today.getDate();
+  const year = today.getFullYear();
+
   return (
     <div>
-       {/*testing common prop usage  */}
-      <h1 className={className}>This is my website</h1>
-      <h2 className={`${className} font-xl`}>Books are an entry way that only the individual can experiance,
-         though the ground may have been traversed by another just as life the experiance is yours.
-      </h2>
+      {/*testing common prop usage  */}
+      <p className={className}>
+        This is a website
+      </p>
+      <p className={`${className} font-xl`}>
+        Books are Great.
+      </p>
+      <p>Today is {day} {date}, {year}</p>
     </div>
   );
 }
