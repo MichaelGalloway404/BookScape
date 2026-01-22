@@ -1,7 +1,6 @@
 import style from './SiteInfoFooter.module.css'
 
 function SiteInfoFooter(props) {
-  let className = props.primary ? 'primary' : '';
   const today = new Date();
   const day = today.toLocaleDateString("en-US", { weekday: "long" });
   const date = today.getDate();
@@ -10,13 +9,13 @@ function SiteInfoFooter(props) {
   return (
     <div>
       {/*testing common prop usage  */}
-      <p className={style.className}>
+      <p className={style.footerInfo}>
         This is a website
       </p>
-      <p className={`${style.className}, ${style.fontXl}`}>
+      <p className={`${style.footerInfo}, ${style.fontXl}`}>
         Books are Great.
       </p>
-      <p className={className}>Today is: {day} the {date}, {year}</p>
+      <p className={footerInfo}>Today is: {day} the {date}, {year}</p>
     </div>
   );
 }
