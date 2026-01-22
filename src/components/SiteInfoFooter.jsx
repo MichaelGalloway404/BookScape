@@ -16,7 +16,7 @@ function SiteInfoFooter(props) {
       <p className={`${className} font-xl`}>
         Books are Great.
       </p>
-      <p>Today is {day} {date}, {year}</p>
+      <p className={className}>Today is: {day} the {date}, {year}</p>
     </div>
   );
 }
