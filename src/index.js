@@ -11,7 +11,7 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <App />
-      <SiteInfoFooter primary={true}/>
+      <SiteInfoFooter/>
     </BrowserRouter>
   </React.StrictMode>
 );

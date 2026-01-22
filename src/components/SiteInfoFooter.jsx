@@ -1,4 +1,4 @@
-import '../styles/index.css'
+import style from './SiteInfoFooter.module.css'
 
 function SiteInfoFooter(props) {
   let className = props.primary ? 'primary' : '';
@@ -10,10 +10,10 @@ function SiteInfoFooter(props) {
   return (
     <div>
       {/*testing common prop usage  */}
-      <p className={className}>
+      <p className={style.className}>
         This is a website
       </p>
-      <p className={`${className} font-xl`}>
+      <p className={`${style.className}, ${style.font-xl}`}>
         Books are Great.
       </p>
       <p className={className}>Today is: {day} the {date}, {year}</p>
