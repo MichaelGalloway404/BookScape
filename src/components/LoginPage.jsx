@@ -9,7 +9,8 @@ function LoginPage() {
     const [password, setPassword] = useState("");
 
     const showUserInfo = () =>{
-        alert(userName,password);
+        alert(password);
+        alert(userName);
     }
 
     return (
