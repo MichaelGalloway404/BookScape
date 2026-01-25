@@ -24,12 +24,20 @@ function LoginPage() {
                     <form>
                         <div className={style.inputGroup}>
                             <label>User Name</label>
-                            <input type="userName" placeholder="exampleN@me" required />
+                            <input 
+                                type="userName" 
+                                placeholder="exampleN@me" 
+                                required
+                                onChange={(e) => setUserName(e.target.value)} />
                         </div>
 
                         <div className={style.inputGroup}>
                             <label>Password</label>
-                            <input type="password" placeholder="••••••••" required />
+                            <input 
+                                type="password" 
+                                placeholder="••••••••" 
+                                required 
+                                onChange={(e) => setPassword(e.target.value)} />
                         </div>
 
                         <button className={style.loginButton} type="submit">Sign In</button>
