@@ -9,6 +9,9 @@ function Home() {
             <button onClick={() => navigate("/second")}>
                 Go to Database Page
             </button>
+            <button onClick={() => navigate("/login")}>
+                Go to Login Page
+            </button>
             {/* call our book search component */}
             <BookSearch />
         </div>
