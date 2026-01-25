@@ -9,8 +9,8 @@ function LoginPage() {
     const [password, setPassword] = useState("");
     let showInfo = false;
 
-    const showUserInfo = () =>{
-        showInfo =true;
+    const showUserInfo = () => {
+        showInfo = true;
         // alert(password);
         // alert(userName);
     }
@@ -21,33 +21,34 @@ function LoginPage() {
                 <div className={style.loginCard}>
                     <h1>Welcome Back</h1>
                     <p>Please sign in to your account</p>
-                    
+
                     <form>
                         <div className={style.inputGroup}>
                             <label>User Name</label>
-                            <input 
-                                type="userName" 
-                                placeholder="exampleN@me" 
+                            <input
+                                type="userName"
+                                placeholder="exampleN@me"
                                 required
                                 onChange={(e) => setUserName(e.target.value)} />
                         </div>
 
                         <div className={style.inputGroup}>
                             <label>Password</label>
-                            <input 
-                                type="password" 
-                                placeholder="••••••••" 
-                                required 
+                            <input
+                                type="password"
+                                placeholder="••••••••"
+                                required
                                 onChange={(e) => setPassword(e.target.value)} />
                         </div>
-                        {/* display username password for now */}
-                        {/* <button className={style.loginButton} type="submit">Sign In</button> */}
-                        <button className={style.loginButton} onClick={showUserInfo} >Sign In</button>
+
                     </form>
+                    {/* display username password for now */}
+                    {/* <button className={style.loginButton} type="submit">Sign In</button> */}
+                    <button className={style.loginButton} onClick={showUserInfo} >Sign In</button>
                     {showInfo ? <h2>user name: {userName}</h2> : <h2>user name:</h2>}
                     {showInfo ? <h2>password: {password}</h2> : <h2>password: </h2>}
-                    
-                    
+
+
 
                     <div className={style.footerText}>
                     </div>
