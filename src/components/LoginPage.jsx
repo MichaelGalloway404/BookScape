@@ -19,9 +19,7 @@ function LoginPage() {
                 <div className={style.loginCard}>
                     <h1>Welcome Back</h1>
                     <p>Please sign in to your account</p>
-                    {/* display username password for now */}
-                    <button onClick={showUserInfo}>Show Info</button>
-
+                    
                     <form>
                         <div className={style.inputGroup}>
                             <label>User Name</label>
@@ -40,12 +38,13 @@ function LoginPage() {
                                 required 
                                 onChange={(e) => setPassword(e.target.value)} />
                         </div>
-
-                        <button className={style.loginButton} type="submit">Sign In</button>
+                        {/* display username password for now */}
+                        <button className={style.loginButton} onClick={showUserInfo} type="submit">Sign In</button>
                     </form>
+                    <h2>user name: {userName}</h2>
+                    <h2>password: {password}</h2>
 
                     <div className={style.footerText}>
-                        {/* <a href="#">Forgot password?</a> */}
                     </div>
                 </div>
                 <button onClick={() => navigate("/")}>
