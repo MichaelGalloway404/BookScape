@@ -41,7 +41,8 @@ function LoginPage() {
                                 onChange={(e) => setPassword(e.target.value)} />
                         </div>
                         {/* display username password for now */}
-                        <button className={style.loginButton} onClick={showUserInfo} type="submit">Sign In</button>
+                        {/* <button className={style.loginButton} type="submit">Sign In</button> */}
+                        <button className={style.loginButton} onClick={showUserInfo} >Sign In</button>
                     </form>
                     {showInfo ? <h2>user name: {userName}</h2> : <h2>user name:</h2>}
                     {showInfo ? <h2>password: {password}</h2> : <h2>password: </h2>}
