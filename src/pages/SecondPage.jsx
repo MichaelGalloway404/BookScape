@@ -2,9 +2,9 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function SecondPage() {
-  const navigate = useNavigate();
+    const navigate = useNavigate();
 
-  const [name, setName] = useState("");
+    const [name, setName] = useState("");
     const [phrase, setPhrase] = useState("");
     const [phrases, setPhrases] = useState([]);
 
@@ -53,9 +53,9 @@ function SecondPage() {
         }
     };
 
-  return (
-    <div>
-      <h1>Second Page</h1>
+    return (
+        <div>
+            <h1>Second Page</h1>
             <input
                 placeholder="Your name"
                 value={name}
@@ -70,7 +70,7 @@ function SecondPage() {
             <br />
 
             <button onClick={submitPhrase}>Submit</button>
-            <button onClick={loadPhrases} style={{ marginLeft: 10 }}>
+            <button onClick={loadPhrases}>
                 Load Phrases
             </button>
 
@@ -82,11 +82,11 @@ function SecondPage() {
                 ))}
             </ul>
 
-      <button onClick={() => navigate("/")}>
-        Return Home
-      </button>
-    </div>
-  );
+            <button onClick={() => navigate("/")}>
+                Return Home
+            </button>
+        </div>
+    );
 }
 
 export default SecondPage;

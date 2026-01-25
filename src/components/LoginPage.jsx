@@ -1,9 +1,16 @@
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import style from './LoginPage.module.css'
 
 function LoginPage() {
 
     const navigate = useNavigate();
+    const [userName, setUserName] = useState("");
+    const [password, setPassword] = useState("");
+
+    const showUserInfo = () =>{
+        alert(userName,password);
+    }
 
     return (
         <>
@@ -11,11 +18,13 @@ function LoginPage() {
                 <div className={style.loginCard}>
                     <h1>Welcome Back</h1>
                     <p>Please sign in to your account</p>
+                    {/* display username password for now */}
+                    <button onClick={showUserInfo}>Show Info</button>
 
                     <form>
                         <div className={style.inputGroup}>
-                            <label>Email</label>
-                            <input type="email" placeholder="you@example.com" required />
+                            <label>User Name</label>
+                            <input type="userName" placeholder="exampleN@me" required />
                         </div>
 
                         <div className={style.inputGroup}>
