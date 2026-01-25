@@ -27,7 +27,7 @@ function LoginPage() {
                     </form>
 
                     <div className={style.footerText}>
-                        <a>Forgot password?</a>
+                        {/* <a href="#">Forgot password?</a> */}
                     </div>
                 </div>
                 <button onClick={() => navigate("/")}>
