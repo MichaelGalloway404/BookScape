@@ -7,10 +7,12 @@ function LoginPage() {
     const navigate = useNavigate();
     const [userName, setUserName] = useState("");
     const [password, setPassword] = useState("");
+    let showInfo = false;
 
     const showUserInfo = () =>{
-        alert(password);
-        alert(userName);
+        showInfo =true;
+        // alert(password);
+        // alert(userName);
     }
 
     return (
@@ -41,8 +43,10 @@ function LoginPage() {
                         {/* display username password for now */}
                         <button className={style.loginButton} onClick={showUserInfo} type="submit">Sign In</button>
                     </form>
-                    <h2>user name: {userName}</h2>
-                    <h2>password: {password}</h2>
+                    {showInfo ? <h2>user name: {userName}</h2> : <h2>user name:</h2>}
+                    {showInfo ? <h2>password: {password}</h2> : <h2>password: </h2>}
+                    
+                    
 
                     <div className={style.footerText}>
                     </div>
