@@ -15,14 +15,14 @@
 } */
 
 /* Container */
-.login-container {
+.loginContainer {
   width: 100%;
   max-width: 420px;
   padding: 1rem;
 }
 
 /* Card */
-.login-card {
+.loginCard {
   background: #ffffff;
   padding: 2.5rem;
   border-radius: 16px;
@@ -31,31 +31,31 @@
 }
 
 /* Headings */
-.login-card h1 {
+.loginCard h1 {
   margin-bottom: 0.5rem;
   color: #222;
 }
 
-.login-card p {
+.loginCard p {
   margin-bottom: 2rem;
   color: #666;
   font-size: 0.95rem;
 }
 
 /* Inputs */
-.input-group {
+.inputGroup {
   text-align: left;
   margin-bottom: 1.5rem;
 }
 
-.input-group label {
+.inputGroup label {
   display: block;
   margin-bottom: 0.4rem;
   font-weight: 600;
   color: #333;
 }
 
-.input-group input {
+.inputGroup input {
   width: 100%;
   padding: 0.75rem 1rem;
   border-radius: 8px;
@@ -64,7 +64,7 @@
   transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-.input-group input:focus {
+.inputGroup input:focus {
   outline: none;
   border-color: #00b4d8;
   box-shadow: 0 0 0 3px rgba(0, 180, 216, 0.25);
@@ -90,16 +90,16 @@
 }
 
 /* Footer */
-.footer-text {
+.footerText {
   margin-top: 1.5rem;
 }
 
-.footer-text a {
+.footerText a {
   text-decoration: none;
   color: #036b9b;
   font-size: 0.9rem;
 }
 
-.footer-text a:hover {
+.footerText a:hover {
   text-decoration: underline;
 }
