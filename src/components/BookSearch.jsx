@@ -47,7 +47,7 @@ export default function BookSearch() {
           // Safely grab the first ISBN if it exists
           // Optional chaining (?.) prevents runtime errors
           // If no ISBN exists, store null
-          isbn: doc.isbn?.[0] || null
+          isbn: doc.isbn || null
         }));
 
       // Update React state with the formatted book results
