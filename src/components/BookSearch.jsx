@@ -18,6 +18,9 @@ export default function BookSearch() {
     if (title) params.append("title", title);   // add title to query if user typed it
     if (author) params.append("author", author);// add auther to query if user typed it
 
+    console.log(params);
+    console.log(params.toString());
+
     try {
       // params.toString() converts URLSearchParams into a query string
       const res = await axios.get(
