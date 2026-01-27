@@ -1,9 +1,6 @@
 .footerInfo{
   color: rgb(0, 0, 0);
-  background-color: bisque;
-  width: fit-content;
-}
-
-.fontXl{
-  font-size: 24px;
+  display: flex;
+  justify-content: right;
+  align-items: end;
 }
