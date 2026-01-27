@@ -11,6 +11,10 @@ export default function BookSearch() {
   const [results, setResults] = useState([]);
   const [page, setPage] = useState(0);
 
+  // const isbn = "9780439554930";
+  // const coverSize = "M";
+  // const coverUrl = `https://covers.openlibrary.org/b/isbn/${isbn}-${coverSize}.jpg`;
+
   async function searchForBooks() {
     // The URLSearchParams interface defines utility methods to work with the query string of a URL.
     // URLSearchParams objects are iterable
