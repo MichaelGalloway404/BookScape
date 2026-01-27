@@ -19,7 +19,7 @@ export default function BookSearch() {
     if (author) params.append("author", author);// add auther to query if user typed it
 
     // Ask Open Library to include isbn explicitly
-    params.append("fields", "title,author_name,isbn");
+    params.append("fields", "cover_i,title,author_name,isbn");
     params.append("limit", "20");
 
     console.log(params);
@@ -54,7 +54,7 @@ export default function BookSearch() {
           // Safely grab the first ISBN if it exists
           // Optional chaining (?.) prevents runtime errors
           // If no ISBN exists, store null
-          isbn: doc.isbn?.[0] || null
+          isbn: doc.isbn?.[0] || "null"
         }));
 
       // Update React state with the formatted book results
