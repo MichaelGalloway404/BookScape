@@ -139,7 +139,11 @@ export default function BookSearch() {
 
               {/* Book author */}
               <p className={styles.bookInfo} >
-                {book.author}
+                Author: {book.author}
+              </p>
+              {/* Book ISBN */}
+              <p className={styles.bookInfo} >
+                ISBN: {book.isbn}
               </p>
             </li>
           ))}
