@@ -43,6 +43,9 @@ function LoginPage() {
                     <div className={style.footerText}>
                     </div>
                 </div>
+                <button onClick={() => navigate("/second")}>
+                    Go to Database Page
+                </button>
                 <button onClick={() => navigate("/")}>
                     Return Home
                 </button>

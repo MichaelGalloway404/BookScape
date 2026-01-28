@@ -8,9 +8,6 @@ function Home() {
     return (
         <div>
             <h1>Home Page</h1>
-            <button onClick={() => navigate("/second")}>
-                Go to Database Page
-            </button>
             <button onClick={() => navigate("/login")}>
                 Login
             </button>
