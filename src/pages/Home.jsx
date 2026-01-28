@@ -12,12 +12,12 @@ function Home() {
                 Go to Database Page
             </button>
             <button onClick={() => navigate("/login")}>
-                Go to Login Page
+                Login
             </button>
             {/* call our book search component */}
             <BookSearch />
-            {/* <BackgroundColorPicker />
-            <ColorPalettePicker /> */}
+            <BackgroundColorPicker />
+            <ColorPalettePicker />
         </div>
     );
 }
