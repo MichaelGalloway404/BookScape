@@ -1,5 +1,4 @@
 .container {
-  min-height: 100vh;
   padding: 40px;
   font-family: Arial, sans-serif;
   transition: background-color 0.3s ease;
