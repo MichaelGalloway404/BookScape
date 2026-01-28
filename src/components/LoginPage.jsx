@@ -8,9 +8,15 @@ function LoginPage() {
     const [userName, setUserName] = useState("");
     const [password, setPassword] = useState("");
 
-    const showInfo = () =>{
+    const showInfo = () => {
         alert(userName);
         alert(password);
+    }
+
+    // simple sesson login test for learning
+    const login = () => {
+        localStorage.setItem("isAuthenticated", "true");
+        navigate("/second");
     }
     return (
         <>
@@ -18,7 +24,7 @@ function LoginPage() {
                 <div className={style.loginCard}>
                     <h1>Welcome Back</h1>
                     <p>Please sign in to your account</p>
-                    <button onClick={showInfo}/>
+                    <button onClick={showInfo} />
                     <form>
                         <div className={style.inputGroup}>
                             <label>User Name</label>
@@ -40,12 +46,13 @@ function LoginPage() {
                         {/* display username password for now */}
                         <button className={style.loginButton} type="submit">Sign In</button>
                     </form>
+                    <button className={style.loginButton} onClick={login}>LOGIN TEST</button>
                     <div className={style.footerText}>
                     </div>
                 </div>
-                <button onClick={() => navigate("/second")}>
+                {/* <button onClick={() => navigate("/second")}>
                     Go to Database Page
-                </button>
+                </button> */}
                 <button onClick={() => navigate("/")}>
                     Return Home
                 </button>
