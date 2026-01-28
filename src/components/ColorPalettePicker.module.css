@@ -1,34 +1,13 @@
 .container {
-  min-height: 100vh;
   padding: 40px;
   font-family: Arial, sans-serif;
   background-color: var(--bg-color);
   transition: background-color 0.3s ease;
 }
 
-.title {
-  margin-bottom: 20px;
-}
-
-.palette {
-  display: flex;
-  gap: 12px;
-}
-
-.swatch {
-  width: 40px;
+.colorInput {
+  width: 60px;
   height: 40px;
-  border-radius: 50%;
-  border: 2px solid #ccc;
+  border: none;
   cursor: pointer;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
-}
-
-.swatch:hover {
-  transform: scale(1.1);
-}
-
-.swatch:focus-visible {
-  outline: none;
-  box-shadow: 0 0 0 3px black;
 }
