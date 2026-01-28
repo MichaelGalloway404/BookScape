@@ -15,7 +15,7 @@ function LoginPage() {
 
     // simple sesson login test for learning
     const login = () => {
-        localStorage.setItem("isAuthenticated", "true");
+        localStorage.setItem("isAuthenticated", "false");
         navigate("/second");
     }
     return (
