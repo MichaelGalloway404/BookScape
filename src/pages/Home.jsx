@@ -16,8 +16,9 @@ function Home() {
             </button>
             {/* call our book search component */}
             <BookSearch />
-            <BackgroundColorPicker />
-            <ColorPalettePicker />
+            <ColorPalettePicker>
+                <BackgroundColorPicker />
+            </ColorPalettePicker>
         </div>
     );
 }
