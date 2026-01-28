@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import BookSearch from '../components/BookSearch';
+import BackgroundColorPicker from '../components/BackgroundColorPicker';
 
 function Home() {
     const navigate = useNavigate();
@@ -14,6 +15,7 @@ function Home() {
             </button>
             {/* call our book search component */}
             <BookSearch />
+            <BackgroundColorPicker />
         </div>
     );
 }
