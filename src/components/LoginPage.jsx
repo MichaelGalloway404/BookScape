@@ -14,10 +14,19 @@ function LoginPage() {
     }
 
     // simple sesson login test for learning
-    const login = () => {
-        localStorage.setItem("isAuthenticated", "false");
-        navigate("/second");
-    }
+    const login = (e) => {
+        e.preventDefault();
+
+        // TEMP: fake auth check
+        if (userName === "root" && password === "root") {
+            localStorage.setItem("isAuthenticated", "true");
+            navigate("/second");
+        } else {
+            alert("Invalid login");
+        }
+
+
+    };
     return (
         <>
             <div className={style.loginContainer}>
