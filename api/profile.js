@@ -1,14 +1,31 @@
-import { pool } from "../lib/db";
-import { authenticate } from "@/lib/auth";
+import { Pool } from "pg";
 
-// API  for simple user auth
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+});
+
+// API for simple user auth (protected)
 export default async function handler(req, res) {
-  authenticate(req, res, async () => {
+  // Example: simple auth using header token
+  const userId = req.headers["x-user-id"];
+
+  if (!userId) {
+    return res.status(401).json({ error: "Unauthorized" });
+  }
+
+  try {
     const result = await pool.query(
       "SELECT id, username FROM users WHERE id = $1",
-      [req.userId]
+      [userId]
     );
 
-    res.status(200).json(result.rows[0]);
-  });
+    if (result.rowCount === 0) {
+      return res.status(401).json({ error: "Invalid user" });
+    }
+
+    return res.status(200).json(result.rows[0]);
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ error: "Server error" });
+  }
 }

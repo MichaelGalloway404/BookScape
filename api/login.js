@@ -1,6 +1,10 @@
-import { pool } from "../lib/db";
+import { Pool } from "pg";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+});
 
 // secure API for logging in a user
 export default async function handler(req, res) {
