@@ -1,10 +1,10 @@
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import style from './LoginPage.module.css'
 
 function LoginPage() {
 
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
     const [userName, setUserName] = useState("");
     const [password, setPassword] = useState("");
 
