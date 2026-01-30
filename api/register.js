@@ -1,13 +1,12 @@
-import { pool } from "@/lib/db";
+import { pool } from "../lib/db";
 import bcrypt from "bcrypt";
 
-// API for creating a user
 export default async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
-  const { username, password } = req.body;
+  const { username, password } = req.body || {};
 
   if (!username || !password) {
     return res.status(400).json({ error: "Missing username or password" });
@@ -21,15 +20,14 @@ export default async function handler(req, res) {
       [username, hash]
     );
 
-    res.status(201).json({ ok: true });
+    return res.status(201).json({ ok: true });
   } catch (err) {
     console.error(err);
 
-    // UNIQUE constraint violation
     if (err.code === "23505") {
       return res.status(409).json({ error: "Username already exists" });
     }
 
-    res.status(500).json({ error: "Server error" });
+    return res.status(500).json({ error: "Server error" });
   }
 }
