@@ -17,15 +17,12 @@ function App() {
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signUp" element={<SignupPage />} />
 
-      <Route
-        path="/second"
-        element={
+      <Route path="/second" element={
           <ProtectedRoute>
             <SecondPage />
           </ProtectedRoute>
-        }
-      />
-
+        } />
+        
     </Routes>
   );
 }
