@@ -1,0 +1,32 @@
+.signupContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.signupCard {
+  width: 350px;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.inputGroup {
+  margin-bottom: 1rem;
+}
+
+.signupButton {
+  width: 100%;
+  padding: 0.75rem;
+}
+
+.errorText {
+  color: red;
+  margin-bottom: 1rem;
+}
+
+.footerText span {
+  color: blue;
+  cursor: pointer;
+}

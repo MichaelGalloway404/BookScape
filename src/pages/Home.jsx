@@ -14,10 +14,10 @@ function Home() {
             <button onClick={() => navigate("/search")}>
                 Search for a book
             </button>
-            {/* <BookSearch /> */}
+            <button onClick={() => navigate("/signUp")}>
+                Search for a book
+            </button>
 
-            {/* <BackgroundColorPicker />
-            <ColorPalettePicker /> */}
         </div>
     );
 }

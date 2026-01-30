@@ -2,68 +2,77 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import style from './LoginPage.module.css'
 
+// authenticate and loggin a user
 function LoginPage() {
-
     const navigate = useNavigate();
     const [userName, setUserName] = useState("");
     const [password, setPassword] = useState("");
 
-    const showInfo = () => {
-        alert(userName);
-        alert(password);
-    }
-
-    // simple sesson login test for learning
-    const login = (e) => {
+    const login = async (e) => {
         e.preventDefault();
 
-        // TEMP: fake auth check
-        if (userName === "root" && password === "root") {
-            localStorage.setItem("isAuthenticated", "true");
+        try {
+            const res = await fetch("http://localhost:3000/api/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    username: userName,
+                    password: password,
+                }),
+            });
+
+            if (!res.ok) {
+                throw new Error("Invalid credentials");
+            }
+
+            const data = await res.json();
+
+            // store JWT
+            localStorage.setItem("token", data.token);
+
             navigate("/second");
-        } else {
-            alert("Invalid login");
+        } catch (err) {
+            alert("Login failed");
         }
     };
+
     return (
         <>
             <div className={style.loginContainer}>
                 <div className={style.loginCard}>
                     <h1>Welcome Back</h1>
                     <p>Please sign in to your account</p>
-                    <button onClick={showInfo} />
-                    <form>
+                    <form onSubmit={login}>
                         <div className={style.inputGroup}>
                             <label>User Name</label>
                             <input
-                                type="userName"
-                                placeholder="exampleN@me"
+                                type="text"
                                 required
-                                onChange={(e) => setUserName(e.target.value)} />
+                                value={userName}
+                                onChange={(e) => setUserName(e.target.value)}
+                            />
                         </div>
 
                         <div className={style.inputGroup}>
                             <label>Password</label>
                             <input
                                 type="password"
-                                placeholder="••••••••"
                                 required
-                                onChange={(e) => setPassword(e.target.value)} />
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                            />
                         </div>
-                        {/* display username password for now */}
-                        <button className={style.loginButton} type="submit">Sign In</button>
+
+                        <button className={style.loginButton} type="submit">
+                            Sign In
+                        </button>
                     </form>
-                    <button className={style.loginButton} onClick={login}>LOGIN TEST</button>
-                    <div className={style.footerText}>
+
+                    <div className={style.footerText}> im footer
                     </div>
                 </div>
-                {/* <button onClick={() => navigate("/second")}>
-                    Go to Database Page
-                </button> */}
-
-                {/* <button onClick={() => navigate("/")}>
-                    Return Home
-                </button> */}
             </div>
         </>
     );

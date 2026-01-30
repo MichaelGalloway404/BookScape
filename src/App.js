@@ -4,6 +4,7 @@ import SecondPage from "./pages/SecondPage";
 import LoginPage from "./pages/LoginPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import BookSearch from "./pages/BookSearch"
+import SignupPage from "./pages/SignupPage";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Route path="/search" element={<BookSearch />} />
 
       <Route path="/login" element={<LoginPage />} />
+      <Route path="/signUp" element={<SignupPage />} />
 
       <Route
         path="/second"
