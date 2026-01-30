@@ -1,7 +1,4 @@
 import { useNavigate } from "react-router-dom";
-// import BookSearch from '../components/BookSearch';
-// import BackgroundColorPicker from '../components/BackgroundColorPicker';
-// import ColorPalettePicker from '../components/ColorPalettePicker';
 
 function Home() {
     const navigate = useNavigate();
