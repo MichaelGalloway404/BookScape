@@ -9,13 +9,23 @@ export default async function handler(req, res) {
 
   const { username, password } = req.body;
 
-  const hash = await bcrypt.hash(password, 10);
+  try {
+    const hash = await bcrypt.hash(password, 10);
 
-  // add new user
-  await pool.query(
-    "INSERT INTO users (username, password_hash) VALUES ($1, $2)",
-    [username, hash]
-  );
+    await pool.query(
+      "INSERT INTO users (username, password_hash) VALUES ($1, $2)",
+      [username, hash]
+    );
 
-  res.status(200).json({ ok: true });
+    res.status(201).json({ ok: true });
+  } catch (err) {
+    console.error(err);
+
+    // PostgreSQL duplicate key error code for UNIQUE constraint
+    if (err.code === "23505") {
+      return res.status(409).json({ error: "Username already exists" });
+    }
+
+    res.status(500).json({ error: "Server error" });
+  }
 }
