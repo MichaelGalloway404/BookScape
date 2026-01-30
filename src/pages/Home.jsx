@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import BookSearch from '../components/BookSearch';
-import BackgroundColorPicker from '../components/BackgroundColorPicker';
-import ColorPalettePicker from '../components/ColorPalettePicker';
+// import BookSearch from '../components/BookSearch';
+// import BackgroundColorPicker from '../components/BackgroundColorPicker';
+// import ColorPalettePicker from '../components/ColorPalettePicker';
 
 function Home() {
     const navigate = useNavigate();
@@ -11,10 +11,13 @@ function Home() {
             <button onClick={() => navigate("/login")}>
                 Login
             </button>
-            {/* call our book search component */}
-            <BookSearch />
-            <BackgroundColorPicker />
-            <ColorPalettePicker />
+            <button onClick={() => navigate("/search")}>
+                Search for a book
+            </button>
+            {/* <BookSearch /> */}
+
+            {/* <BackgroundColorPicker />
+            <ColorPalettePicker /> */}
         </div>
     );
 }

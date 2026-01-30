@@ -24,8 +24,6 @@ function LoginPage() {
         } else {
             alert("Invalid login");
         }
-
-
     };
     return (
         <>
