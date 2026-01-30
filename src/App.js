@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
-import SecondPage from "./pages/SecondPage";
+import UsersPage from "./pages/UsersPage";
 import LoginPage from "./pages/LoginPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import BookSearch from "./pages/BookSearch"
@@ -19,10 +19,10 @@ function App() {
 
       <Route path="/second" element={
           <ProtectedRoute>
-            <SecondPage />
+            <UsersPage />
           </ProtectedRoute>
         } />
-        
+
     </Routes>
   );
 }

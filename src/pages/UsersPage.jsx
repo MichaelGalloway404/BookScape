@@ -1,4 +1,4 @@
-function SecondPage() {
+function UsersPage() {
     return (
         <>
             <h1>Users Page</h1>
@@ -6,4 +6,4 @@ function SecondPage() {
     );
 }
 
-export default SecondPage;
+export default UsersPage;
