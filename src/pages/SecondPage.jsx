@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 function SecondPage() {
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     const [name, setName] = useState("");
     const [phrase, setPhrase] = useState("");
@@ -82,9 +82,9 @@ function SecondPage() {
                 ))}
             </ul>
 
-            <button onClick={() => navigate("/")}>
+            {/* <button onClick={() => navigate("/")}>
                 Return Home
-            </button>
+            </button> */}
         </div>
     );
 }

@@ -91,7 +91,7 @@ export default function BookSearch() {
 
 
   return (
-    <div>
+    <>
       {/* testing out css modules */}
       <h2>Search Books</h2>
 
@@ -173,7 +173,7 @@ export default function BookSearch() {
           <button onClick={nextPage}>Next</button>
         </div>
       )}
-    </div>
+    </>
   );
 
 }

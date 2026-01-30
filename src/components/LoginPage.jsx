@@ -1,10 +1,10 @@
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import style from './LoginPage.module.css'
 
 function LoginPage() {
 
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     const [userName, setUserName] = useState("");
     const [password, setPassword] = useState("");
 
@@ -60,9 +60,10 @@ function LoginPage() {
                 {/* <button onClick={() => navigate("/second")}>
                     Go to Database Page
                 </button> */}
-                <button onClick={() => navigate("/")}>
+
+                {/* <button onClick={() => navigate("/")}>
                     Return Home
-                </button>
+                </button> */}
             </div>
         </>
     );
