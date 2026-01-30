@@ -1,5 +1,7 @@
-import { pool } from "@/lib/db";
+import { Pool } from "@/lib/db";
 import bcrypt from "bcrypt";
+
+const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 
 // API for creating a user
 export default async function handler(req, res) {
