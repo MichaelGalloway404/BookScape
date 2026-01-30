@@ -15,7 +15,7 @@ function Home() {
                 Search for a book
             </button>
             <button onClick={() => navigate("/signUp")}>
-                Search for a book
+                Sign Up
             </button>
 
         </div>
