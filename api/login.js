@@ -41,7 +41,11 @@ export default async function handler(req, res) {
 
     const token = jwt.sign({ userId: user.id }, secret, { expiresIn: "1h" });
 
-    res.status(200).json({ token });
+    // Set HttpOnly cookie
+    res.setHeader("Set-Cookie", `token=${token}; HttpOnly; Path=/; Max-Age=3600; SameSite=Strict; Secure`);
+
+    // Send minimal response
+    res.status(200).json({ ok: true });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Server error" });
