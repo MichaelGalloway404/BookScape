@@ -1,7 +1,5 @@
-import { Pool } from "@/lib/db";
+import { pool } from "@/lib/db";
 import bcrypt from "bcrypt";
-
-const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 
 // API for creating a user
 export default async function handler(req, res) {
@@ -10,6 +8,10 @@ export default async function handler(req, res) {
   }
 
   const { username, password } = req.body;
+
+  if (!username || !password) {
+    return res.status(400).json({ error: "Missing username or password" });
+  }
 
   try {
     const hash = await bcrypt.hash(password, 10);
@@ -23,7 +25,7 @@ export default async function handler(req, res) {
   } catch (err) {
     console.error(err);
 
-    // PostgreSQL duplicate key error code for UNIQUE constraint
+    // UNIQUE constraint violation
     if (err.code === "23505") {
       return res.status(409).json({ error: "Username already exists" });
     }
