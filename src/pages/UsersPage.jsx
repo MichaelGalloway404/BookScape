@@ -3,12 +3,10 @@ import { useNavigate } from "react-router-dom";
 
 function UsersPage() {
     const [user, setUser] = useState(null);
-    const [error, setError] = useState("");
     const navigate = useNavigate();
 
     useEffect(() => {
         const loadUser = async () => {
-            setError("");
             try {
                 const res = await fetch("/api/currentUser", {
                     credentials: "include",
@@ -23,7 +21,6 @@ function UsersPage() {
                 setUser(data);
             } catch (err) {
                 console.error(err);
-                setError("You are not logged in");
                 navigate("/login");
             }
         };
