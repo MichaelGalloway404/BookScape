@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 function UsersPage() {
   const [user, setUser] = useState(null);
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
