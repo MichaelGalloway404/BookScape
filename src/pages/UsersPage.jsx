@@ -2,93 +2,84 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function UsersPage() {
-    const [user, setUser] = useState(null);
-    const [books, setBooks] = useState([]);
-    const navigate = useNavigate();
+  const [user, setUser] = useState(null);
+  const [books, setBooks] = useState([]);
+  const navigate = useNavigate();
 
-    useEffect(() => {
-        const loadUserAndBooks = async () => {
-            try {
-                const token = localStorage.getItem("token");
+  useEffect(() => {
+    const loadUserAndBooks = async () => {
+      try {
+        // Fetch current user, cookie is sent automatically
+        const userRes = await fetch("/api/currentUser", {
+          credentials: "include", // important for HttpOnly cookie
+        });
 
-                if (!token) {
-                    throw new Error("No token found");
-                }
+        const userData = await userRes.json();
 
-                const userRes = await fetch("/api/currentUser", {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                });
+        if (!userRes.ok) {
+          throw new Error(userData.error || "Not authenticated");
+        }
 
-                const userData = await userRes.json();
+        setUser(userData);
 
-                if (!userRes.ok) {
-                    throw new Error(userData.error || "Not authenticated");
-                }
+        // Fetch user's saved books
+        const booksRes = await fetch("/api/userBooks", {
+          credentials: "include", // also required here
+        });
 
-                setUser(userData);
+        const booksData = await booksRes.json();
 
-                const booksRes = await fetch("/api/userBooks", {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                });
+        if (!booksRes.ok) {
+          throw new Error(booksData.error || "Failed to load books");
+        }
 
-                const booksData = await booksRes.json();
+        setBooks(booksData);
+      } catch (err) {
+        console.error(err);
+        navigate("/login");
+      }
+    };
 
-                if (!booksRes.ok) {
-                    throw new Error(booksData.error || "Failed to load books");
-                }
+    loadUserAndBooks();
+  }, [navigate]);
 
-                setBooks(booksData);
-            } catch (err) {
-                console.error(err);
-                navigate("/login");
-            }
-        };
+  if (!user) {
+    return <p>Loading user...</p>;
+  }
 
-        loadUserAndBooks();
-    }, [navigate]);
+  return (
+    <>
+      <h1>Users Page</h1>
 
+      <p><strong>ID:</strong> {user.id}</p>
+      <p><strong>Username:</strong> {user.username}</p>
 
-    if (!user) {
-        return <p>Loading user...</p>;
-    }
+      <button onClick={() => navigate("/search")}>
+        Search for a book
+      </button>
 
-    return (
-        <>
-            <h1>Users Page</h1>
+      <h2>Your Books</h2>
 
-            <p><strong>ID:</strong> {user.id}</p>
-            <p><strong>Username:</strong> {user.username}</p>
-
-            <button onClick={() => navigate("/search")}>
-                Search for a book
-            </button>
-
-            <h2>Your Books</h2>
-
-            {books.length === 0 ? (
-                <p>No saved books yet.</p>
-            ) : (
-                <div style={{ display: "flex", flexWrap: "wrap", gap: "16px" }}>
-                    {books.map(book => (
-                        <div key={book.id} style={{ width: "150px" }}>
-                            <img
-                                src={`https://covers.openlibrary.org/b/id/${book.cover_id}-M.jpg`}
-                                alt="Book cover"
-                                style={{ width: "100%" }}
-                            />
-                            <p style={{ fontSize: "12px" }}>
-                                ISBN: {book.isbn || "N/A"}
-                            </p>
-                        </div>
-                    ))}
-                </div>
-            )}
-        </>
-    );
+      {books.length === 0 ? (
+        <p>No saved books yet.</p>
+      ) : (
+        <div style={{ display: "flex", flexWrap: "wrap", gap: "16px" }}>
+          {books.map(book => (
+            <div key={book.id} style={{ width: "150px" }}>
+              <img
+                src={`https://covers.openlibrary.org/b/id/${book.cover_id}-M.jpg`}
+                alt="Book cover"
+                style={{ width: "100%" }}
+              />
+              <p style={{ fontSize: "12px" }}>
+                ISBN: {book.isbn || "N/A"}
+              </p>
+            </div>
+          ))}
+        </div>
+      )}
+    </>
+  );
 }
 
 export default UsersPage;

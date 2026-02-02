@@ -1,6 +1,5 @@
-import { Pool } from "pg";
 import jwt from "jsonwebtoken";
-import cookie from "cookie";
+import { Pool } from "pg";
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
@@ -8,32 +7,31 @@ const pool = new Pool({
 
 export default async function handler(req, res) {
   try {
-    const cookies = cookie.parse(req.headers.cookie || "");
-    const token = cookies.token;
+    const cookie = req.headers.cookie;
+
+    if (!cookie) {
+      return res.status(401).json({ error: "No token" });
+    }
+
+    const token = cookie
+      .split("; ")
+      .find(row => row.startsWith("token="))
+      ?.split("=")[1];
 
     if (!token) {
-      return res.status(401).json({ error: "Not authenticated" });
+      return res.status(401).json({ error: "Missing token" });
     }
 
-    const secret = process.env.JWT_SECRET;
-    if (!secret) {
-      throw new Error("JWT_SECRET not set");
-    }
-
-    const payload = jwt.verify(token, secret);
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
     const result = await pool.query(
       "SELECT id, username FROM users WHERE id = $1",
-      [payload.userId]
+      [decoded.userId]
     );
-
-    if (!result.rows.length) {
-      return res.status(401).json({ error: "User not found" });
-    }
 
     res.status(200).json(result.rows[0]);
   } catch (err) {
     console.error(err);
-    res.status(401).json({ error: "Invalid token" });
+    res.status(401).json({ error: "Invalid or expired token" });
   }
 }

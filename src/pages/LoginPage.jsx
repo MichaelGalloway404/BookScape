@@ -17,6 +17,7 @@ function LoginPage() {
                 headers: {
                     "Content-Type": "application/json",
                 },
+                credentials: "include", // REQUIRED for cookies
                 body: JSON.stringify({
                     username: userName,
                     password: password,
@@ -27,16 +28,12 @@ function LoginPage() {
                 throw new Error("Invalid credentials");
             }
 
-            const data = await res.json();
-
-            // store JWT
-            localStorage.setItem("token", data.token);
-
             navigate("/second");
         } catch (err) {
             alert("Login failed");
         }
     };
+
 
     return (
         <>
