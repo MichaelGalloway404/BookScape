@@ -94,24 +94,16 @@ export default function BookSearch() {
   // save a book to our user db
   async function saveBook(book) {
     try {
-      const userRes = await fetch("/api/currentUser", {
-        credentials: "include",
-      });
-
-      const user = await userRes.json();
-
-      if (!userRes.ok) {
-        throw new Error("Not logged in");
-      }
+      const token = localStorage.getItem("token");
 
       const res = await fetch("/api/books", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "x-user-id": user.id,
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
-          isbn: book.isbn === "null" ? null : book.isbn,
+          isbn: book.isbn,
           cover_id: book.coverUrl.split("/b/id/")[1].split("-")[0],
         }),
       });
@@ -128,8 +120,6 @@ export default function BookSearch() {
       alert(err.message);
     }
   }
-
-
 
 
   return (

@@ -9,30 +9,38 @@ function UsersPage() {
   useEffect(() => {
     const loadUserAndBooks = async () => {
       try {
-        // Load current user
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+          throw new Error("No token");
+        }
+
+        // Load current user (JWT-based)
         const userRes = await fetch("/api/currentUser", {
-          credentials: "include",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         });
 
         const userData = await userRes.json();
 
         if (!userRes.ok) {
-          throw new Error("Not authenticated");
+          throw new Error(userData.error || "Not authenticated");
         }
 
         setUser(userData);
 
-        // Load user books
+        // Load user's saved books (JWT-based)
         const booksRes = await fetch("/api/userBooks", {
           headers: {
-            "x-user-id": userData.id,
+            Authorization: `Bearer ${token}`,
           },
         });
 
         const booksData = await booksRes.json();
 
         if (!booksRes.ok) {
-          throw new Error("Failed to load books");
+          throw new Error(booksData.error || "Failed to load books");
         }
 
         setBooks(booksData);
@@ -74,7 +82,7 @@ function UsersPage() {
                 style={{ width: "100%" }}
               />
               <p style={{ fontSize: "12px" }}>
-                ISBN: {book.isbn}
+                ISBN: {book.isbn || "N/A"}
               </p>
             </div>
           ))}
