@@ -8,9 +8,6 @@ function Home() {
             <button onClick={() => navigate("/login")}>
                 Login
             </button>
-            <button onClick={() => navigate("/search")}>
-                Search for a book
-            </button>
             <button onClick={() => navigate("/signUp")}>
                 Sign Up
             </button>
