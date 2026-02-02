@@ -3,6 +3,12 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
 const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+const isProd = process.env.NODE_ENV === "production";
+
+res.setHeader(
+  "Set-Cookie",
+  `token=${token}; HttpOnly; Path=/; Max-Age=3600; SameSite=Lax; ${isProd ? "Secure" : ""}`
+);
 
 export default async function handler(req, res) {
   if (req.method !== "POST") return res.status(405).json({ error: "Method not allowed" });
