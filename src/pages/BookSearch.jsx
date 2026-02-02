@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import styles from "./BookSearch.module.css"
+import { useNavigate } from "react-router-dom";
 
 const BOOKS_PER_PAGE = 10;
 
@@ -16,6 +17,7 @@ export default function BookSearch() {
   // const coverUrl = `https://covers.openlibrary.org/b/isbn/${isbn}-${coverSize}.jpg`;
 
   async function searchForBooks() {
+    const navigate = useNavigate();
     // The URLSearchParams interface defines utility methods to work with the query string of a URL.
     // URLSearchParams objects are iterable
     const params = new URLSearchParams();
@@ -173,6 +175,9 @@ export default function BookSearch() {
           <button onClick={nextPage}>Next</button>
         </div>
       )}
+      <button onClick={() => navigate("/second")}>
+        Back to userPage
+      </button>
     </>
   );
 

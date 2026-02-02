@@ -37,6 +37,9 @@ function UsersPage() {
             <h1>Users Page</h1>
             <p><strong>ID:</strong> {user.id}</p>
             <p><strong>Username:</strong> {user.username}</p>
+            <button onClick={() => navigate("/search")}>
+                Search for a book
+            </button>
         </>
     );
 }
