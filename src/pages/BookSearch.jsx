@@ -11,13 +11,13 @@ export default function BookSearch() {
   const [author, setAuthor] = useState("");
   const [results, setResults] = useState([]);
   const [page, setPage] = useState(0);
+  const navigate = useNavigate();
 
   // const isbn = "9780439554930";
   // const coverSize = "M";
   // const coverUrl = `https://covers.openlibrary.org/b/isbn/${isbn}-${coverSize}.jpg`;
 
   async function searchForBooks() {
-    const navigate = useNavigate();
     // The URLSearchParams interface defines utility methods to work with the query string of a URL.
     // URLSearchParams objects are iterable
     const params = new URLSearchParams();
