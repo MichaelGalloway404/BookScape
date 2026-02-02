@@ -91,6 +91,37 @@ export default function BookSearch() {
     setPage(prev => (prev - 1 + totalPages) % totalPages);
   }
 
+  // save a book to our user db
+  async function saveBook(book) {
+    try {
+      const userId = localStorage.getItem("userId"); // or token later
+
+      const res = await fetch("/api/books", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-user-id": userId,
+        },
+        body: JSON.stringify({
+          isbn: book.isbn,
+          cover_id: book.coverUrl.split("/b/id/")[1].split("-")[0],
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || "Failed to save book");
+      }
+
+      alert("Book saved!");
+    } catch (err) {
+      console.error(err);
+      alert("Could not save book");
+    }
+  }
+
+
 
   return (
     <>
@@ -158,6 +189,14 @@ export default function BookSearch() {
               <p className={styles.bookInfo} >
                 ISBN: {book.isbn}
               </p>
+              {/* add a book */}
+              <button
+                className={styles.addButton}
+                onClick={() => saveBook(book)}
+              >
+                Add
+              </button>
+
             </li>
           ))}
         </ul>
