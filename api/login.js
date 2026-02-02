@@ -2,9 +2,7 @@ import { Pool } from "pg";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-});
+const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 
 export default async function handler(req, res) {
   if (req.method !== "POST") return res.status(405).json({ error: "Method not allowed" });
@@ -29,16 +27,15 @@ export default async function handler(req, res) {
 
     const token = jwt.sign({ userId: user.id }, secret, { expiresIn: "1h" });
 
-    // Cookie works on localhost & production
     const isProd = process.env.NODE_ENV === "production";
     res.setHeader(
       "Set-Cookie",
       `token=${token}; HttpOnly; Path=/; Max-Age=3600; SameSite=Lax; ${isProd ? "Secure" : ""}`
     );
 
-    return res.status(200).json({ ok: true });
+    res.status(200).json({ ok: true });
   } catch (err) {
     console.error(err);
-    return res.status(500).json({ error: "Server error" });
+    res.status(500).json({ error: "Server error" });
   }
 }

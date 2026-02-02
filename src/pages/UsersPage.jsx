@@ -9,57 +9,33 @@ function UsersPage() {
   useEffect(() => {
     const loadUserAndBooks = async () => {
       try {
-        // Fetch current user, cookie is sent automatically
-        const userRes = await fetch("/api/currentUser", {
-          credentials: "include", // important for HttpOnly cookie
-        });
-
+        const userRes = await fetch("/api/currentUser", { credentials: "include" });
+        if (!userRes.ok) throw new Error("Not authenticated");
         const userData = await userRes.json();
-
-        if (!userRes.ok) {
-          throw new Error(userData.error || "Not authenticated");
-        }
-
         setUser(userData);
 
-        // Fetch user's saved books
-        const booksRes = await fetch("/api/userBooks", {
-          credentials: "include", // also required here
-        });
-
+        const booksRes = await fetch("/api/userBooks", { credentials: "include" });
+        if (!booksRes.ok) throw new Error("Failed to load books");
         const booksData = await booksRes.json();
-
-        if (!booksRes.ok) {
-          throw new Error(booksData.error || "Failed to load books");
-        }
-
         setBooks(booksData);
       } catch (err) {
         console.error(err);
         navigate("/login");
       }
     };
-
     loadUserAndBooks();
   }, [navigate]);
 
-  if (!user) {
-    return <p>Loading user...</p>;
-  }
+  if (!user) return <p>Loading user...</p>;
 
   return (
     <>
       <h1>Users Page</h1>
-
       <p><strong>ID:</strong> {user.id}</p>
       <p><strong>Username:</strong> {user.username}</p>
-
-      <button onClick={() => navigate("/search")}>
-        Search for a book
-      </button>
+      <button onClick={() => navigate("/search")}>Search for a book</button>
 
       <h2>Your Books</h2>
-
       {books.length === 0 ? (
         <p>No saved books yet.</p>
       ) : (
@@ -71,9 +47,7 @@ function UsersPage() {
                 alt="Book cover"
                 style={{ width: "100%" }}
               />
-              <p style={{ fontSize: "12px" }}>
-                ISBN: {book.isbn || "N/A"}
-              </p>
+              <p style={{ fontSize: "12px" }}>ISBN: {book.isbn || "N/A"}</p>
             </div>
           ))}
         </div>

@@ -1,9 +1,7 @@
 import jwt from "jsonwebtoken";
 import { Pool } from "pg";
 
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-});
+const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 
 export default async function handler(req, res) {
   try {
@@ -24,11 +22,11 @@ export default async function handler(req, res) {
       [decoded.userId]
     );
 
-    if (result.rowCount === 0) return res.status(401).json({ error: "User not found" });
+    if (!result.rows.length) return res.status(401).json({ error: "User not found" });
 
-    return res.status(200).json(result.rows[0]);
+    res.status(200).json(result.rows[0]);
   } catch (err) {
     console.error(err);
-    return res.status(401).json({ error: "Invalid or expired token" });
+    res.status(401).json({ error: "Invalid or expired token" });
   }
 }
