@@ -7,15 +7,10 @@ const pool = new Pool({
 });
 
 export default async function handler(req, res) {
-  if (req.method !== "POST") {
-    return res.status(405).json({ error: "Method not allowed" });
-  }
+  if (req.method !== "POST") return res.status(405).json({ error: "Method not allowed" });
 
   const { username, password } = req.body;
-
-  if (!username || !password) {
-    return res.status(400).json({ error: "Missing username or password" });
-  }
+  if (!username || !password) return res.status(400).json({ error: "Missing username or password" });
 
   try {
     const result = await pool.query(
@@ -23,31 +18,27 @@ export default async function handler(req, res) {
       [username]
     );
 
-    if (!result.rows.length) {
-      return res.status(401).json({ error: "Invalid credentials" });
-    }
+    if (!result.rows.length) return res.status(401).json({ error: "Invalid credentials" });
 
     const user = result.rows[0];
     const valid = await bcrypt.compare(password, user.password_hash);
-
-    if (!valid) {
-      return res.status(401).json({ error: "Invalid credentials" });
-    }
+    if (!valid) return res.status(401).json({ error: "Invalid credentials" });
 
     const secret = process.env.JWT_SECRET;
-    if (!secret) {
-      throw new Error("JWT_SECRET is not set in environment variables");
-    }
+    if (!secret) throw new Error("JWT_SECRET not set");
 
     const token = jwt.sign({ userId: user.id }, secret, { expiresIn: "1h" });
 
-    // Set HttpOnly cookie
-    res.setHeader("Set-Cookie", `token=${token}; HttpOnly; Path=/; Max-Age=3600; SameSite=Strict; Secure`);
+    // Cookie works on localhost & production
+    const isProd = process.env.NODE_ENV === "production";
+    res.setHeader(
+      "Set-Cookie",
+      `token=${token}; HttpOnly; Path=/; Max-Age=3600; SameSite=Lax; ${isProd ? "Secure" : ""}`
+    );
 
-    // Send minimal response
-    res.status(200).json({ ok: true });
+    return res.status(200).json({ ok: true });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: "Server error" });
+    return res.status(500).json({ error: "Server error" });
   }
 }
