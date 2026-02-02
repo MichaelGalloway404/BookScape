@@ -1,5 +1,10 @@
-// /api/books.js
 import { Pool } from "pg";
+
+const userId = Number(req.headers["x-user-id"]);
+
+if (!userId || Number.isNaN(userId)) {
+  return res.status(401).json({ error: "Unauthorized" });
+}
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,

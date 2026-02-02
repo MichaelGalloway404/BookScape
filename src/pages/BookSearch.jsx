@@ -60,7 +60,7 @@ export default function BookSearch() {
           // Safely grab the first ISBN if it exists
           // Optional chaining (?.) prevents runtime errors
           // If no ISBN exists, store null
-          isbn: doc.isbn?.[0] || "null"
+          isbn: doc.isbn?.[0] ?? null
         }));
 
       // Update React state with the formatted book results
@@ -94,16 +94,24 @@ export default function BookSearch() {
   // save a book to our user db
   async function saveBook(book) {
     try {
-      const userId = localStorage.getItem("userId"); // or token later
+      const userRes = await fetch("/api/currentUser", {
+        credentials: "include",
+      });
+
+      const user = await userRes.json();
+
+      if (!userRes.ok) {
+        throw new Error("Not logged in");
+      }
 
       const res = await fetch("/api/books", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "x-user-id": userId,
+          "x-user-id": user.id,
         },
         body: JSON.stringify({
-          isbn: book.isbn,
+          isbn: book.isbn === "null" ? null : book.isbn,
           cover_id: book.coverUrl.split("/b/id/")[1].split("-")[0],
         }),
       });
@@ -117,9 +125,10 @@ export default function BookSearch() {
       alert("Book saved!");
     } catch (err) {
       console.error(err);
-      alert("Could not save book");
+      alert(err.message);
     }
   }
+
 
 
 
