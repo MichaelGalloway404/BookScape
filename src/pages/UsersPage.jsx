@@ -2,58 +2,49 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function UsersPage() {
-  const [user, setUser] = useState(null);
-  const [books, setBooks] = useState([]);
-  const navigate = useNavigate();
+    const [user, setUser] = useState(null);
+    const navigate = useNavigate();
 
-  useEffect(() => {
-    const loadUserAndBooks = async () => {
-      try {
-        const userRes = await fetch("/api/currentUser", { credentials: "include" });
-        if (!userRes.ok) throw new Error("Not authenticated");
-        const userData = await userRes.json();
-        setUser(userData);
+    useEffect(() => {
+        const loadUser = async () => {
+            try {
+                const res = await fetch("/api/currentUser", {
+                    credentials: "include",
+                });
 
-        const booksRes = await fetch("/api/userBooks", { credentials: "include" });
-        if (!booksRes.ok) throw new Error("Failed to load books");
-        const booksData = await booksRes.json();
-        setBooks(booksData);
-      } catch (err) {
-        console.error(err);
-        navigate("/login");
-      }
-    };
-    loadUserAndBooks();
-  }, [navigate]);
+                const data = await res.json();
 
-  if (!user) return <p>Loading user...</p>;
+                if (!res.ok) {
+                    throw new Error(data.error || "Not authenticated");
+                }
 
-  return (
-    <>
-      <h1>Users Page</h1>
-      <p><strong>ID:</strong> {user.id}</p>
-      <p><strong>Username:</strong> {user.username}</p>
-      <button onClick={() => navigate("/search")}>Search for a book</button>
+                setUser(data);
+            } catch (err) {
+                console.error(err);
+                navigate("/login");
+            }
+        };
 
-      <h2>Your Books</h2>
-      {books.length === 0 ? (
-        <p>No saved books yet.</p>
-      ) : (
-        <div style={{ display: "flex", flexWrap: "wrap", gap: "16px" }}>
-          {books.map(book => (
-            <div key={book.id} style={{ width: "150px" }}>
-              <img
-                src={`https://covers.openlibrary.org/b/id/${book.cover_id}-M.jpg`}
-                alt="Book cover"
-                style={{ width: "100%" }}
-              />
-              <p style={{ fontSize: "12px" }}>ISBN: {book.isbn || "N/A"}</p>
-            </div>
-          ))}
-        </div>
-      )}
-    </>
-  );
+        loadUser();
+    }, [navigate]);
+
+    if (!user) {
+        return <p>Loading user...</p>;
+    }
+
+    return (
+        <>
+            <h1>Users Page</h1>
+            <p><strong>ID:</strong> {user.id}</p>
+            <p><strong>Username:</strong> {user.username}</p>
+            <button onClick={() => navigate("/second")}>
+                Back to userPage
+            </button>
+            <button onClick={() => navigate("/search")}>
+                Search for a book
+            </button>
+        </>
+    );
 }
 
 export default UsersPage;

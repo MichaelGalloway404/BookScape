@@ -1,27 +1,14 @@
-import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 
 function ProtectedRoute({ children }) {
-  const [isAuth, setIsAuth] = useState(null); // null = loading
+  const token = localStorage.getItem("token");
 
-  useEffect(() => {
-    const checkAuth = async () => {
-      try {
-        const res = await fetch("/api/currentUser", {
-          credentials: "include",
-        });
-        setIsAuth(res.ok);
-      } catch (err) {
-        console.error(err);
-        setIsAuth(false);
-      }
-    };
-    checkAuth();
-  }, []);
+  // If no token, user is not authenticated
+  if (!token) {
+    return <Navigate to="/login" replace />;
+  }
 
-  if (isAuth === null) return <p>Loading...</p>;
-  if (!isAuth) return <Navigate to="/login" replace />;
-
+  // Token exists → allow access
   return children;
 }
 
