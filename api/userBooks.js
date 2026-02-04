@@ -1,6 +1,7 @@
 router.post("/api/user-books", async (req, res) => {
   const { isbn, cover_id } = req.body;
   const userId = req.user.id; 
+  console.log(req.user);
 
   try {
     await pool.query(
