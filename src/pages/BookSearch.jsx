@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import styles from "./BookSearch.module.css"
 import { useNavigate } from "react-router-dom";
@@ -119,7 +119,7 @@ export default function BookSearch() {
   if (!user) {
         return <p>Loading user...</p>;
     }
-    
+
   return (
     <>
       {/* show who is searching */}
