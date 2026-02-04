@@ -11,11 +11,35 @@ export default function BookSearch() {
   const [author, setAuthor] = useState("");
   const [results, setResults] = useState([]);
   const [page, setPage] = useState(0);
+  const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
   // const isbn = "9780439554930";
   // const coverSize = "M";
   // const coverUrl = `https://covers.openlibrary.org/b/isbn/${isbn}-${coverSize}.jpg`;
+
+  useEffect(() => {
+    const loadUser = async () => {
+      try {
+        const res = await fetch("/api/currentUser", {
+          credentials: "include",
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          throw new Error(data.error || "Not authenticated");
+        }
+
+        setUser(data);
+      } catch (err) {
+        console.error(err);
+        navigate("/login");
+      }
+    };
+
+    loadUser();
+  }, [navigate]);
 
   async function searchForBooks() {
     // The URLSearchParams interface defines utility methods to work with the query string of a URL.
@@ -92,8 +116,15 @@ export default function BookSearch() {
   }
 
 
+  if (!user) {
+        return <p>Loading user...</p>;
+    }
+    
   return (
     <>
+      {/* show who is searching */}
+      <p><strong>ID:</strong> {user.id}</p>
+      <p><strong>Username:</strong> {user.username}</p>
       {/* testing out css modules */}
       <h2>Search Books</h2>
 
