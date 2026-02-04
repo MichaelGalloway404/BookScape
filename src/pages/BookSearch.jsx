@@ -41,6 +41,30 @@ export default function BookSearch() {
     loadUser();
   }, [navigate]);
 
+  // add a book
+  async function addBook(book) {
+    try {
+      await axios.post(
+        "/api/user-books",
+        {
+          isbn: book.isbn === "null" ? null : book.isbn,
+          cover_id: book.coverUrl.split("/b/id/")[1].split("-")[0],
+        },
+        { withCredentials: true }
+      );
+
+      alert("Book added");
+    } catch (err) {
+      if (err.response?.status === 409) {
+        alert("Book already added");
+      } else {
+        console.error(err);
+        alert("Failed to add book");
+      }
+    }
+  }
+
+
   async function searchForBooks() {
     // The URLSearchParams interface defines utility methods to work with the query string of a URL.
     // URLSearchParams objects are iterable
@@ -117,8 +141,8 @@ export default function BookSearch() {
 
 
   if (!user) {
-        return <p>Loading user...</p>;
-    }
+    return <p>Loading user...</p>;
+  }
 
   return (
     <>
@@ -189,6 +213,12 @@ export default function BookSearch() {
               <p className={styles.bookInfo} >
                 ISBN: {book.isbn}
               </p>
+              {/* add a book to user db */}
+              <button
+                onClick={() => addBook(book)}
+              >
+                Add
+              </button>
             </li>
           ))}
         </ul>
