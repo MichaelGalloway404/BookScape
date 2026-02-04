@@ -45,7 +45,7 @@ export default function BookSearch() {
   async function addBook(book) {
     try {
       await axios.post(
-        "/api/user-books",
+        "/api/userBooks",
         {
           isbn: book.isbn === "null" ? null : book.isbn,
           cover_id: book.coverUrl.split("/b/id/")[1].split("-")[0],
@@ -76,8 +76,8 @@ export default function BookSearch() {
     params.append("fields", "cover_i,title,author_name,isbn");
     params.append("limit", "20");
 
-    console.log(params);
-    console.log(params.toString());
+    // console.log(params);
+    // console.log(params.toString());
 
     try {
       // params.toString() converts URLSearchParams into a query string
