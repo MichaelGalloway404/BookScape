@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 function UsersPage() {
     const [user, setUser] = useState(null);
     const [books, setBooks] = useState([]);
+    const [editMode, setEditMode] = useState(false);
+
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -78,6 +80,17 @@ function UsersPage() {
             <h1>Users Page</h1>
             <p><strong>ID:</strong> {user.id}</p>
             <p><strong>Username:</strong> {user.username}</p>
+            <button
+                onClick={() => setEditMode(prev => !prev)}
+                style={{
+                    position: "absolute",
+                    top: "1rem",
+                    right: "1rem",
+                }}
+            >
+                {editMode ? "Done" : "Edit"}
+            </button>
+
 
             {books.length === 0 ? (
                 <p>No books added yet.</p>
@@ -90,9 +103,18 @@ function UsersPage() {
                                 alt="Book cover"
                             />
                             <p>ISBN: {book.isbn}</p>
-                            <button onClick={() => deleteBook(book)}>
-                                Remove
-                            </button>
+                            {editMode && (
+                                <button
+                                    onClick={() => deleteBook(book)}
+                                    style={{
+                                        position: "absolute",
+                                        top: "0.25rem",
+                                        right: "0.25rem",
+                                    }}
+                                >
+                                    X
+                                </button>
+                            )}
                         </li>
                     ))}
                 </ul>
