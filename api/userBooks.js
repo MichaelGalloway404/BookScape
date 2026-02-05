@@ -36,7 +36,7 @@ export default async function handler(req, res) {
         }
     }
 
-    // POST: add book (already working)
+    // POST: add book 
     if (req.method === "POST") {
         const { isbn, cover_id } = req.body;
 
@@ -59,6 +59,29 @@ export default async function handler(req, res) {
             return res.status(500).json({ error: "Database error" });
         }
     }
+
+    // POST: remove book 
+    if (req.method === "DELETE") {
+        const { isbn, cover_id } = req.body;
+
+        try {
+            await pool.query(
+                `
+      DELETE FROM user_books
+      WHERE user_id = $1
+        AND isbn = $2
+        AND cover_id = $3
+      `,
+                [decoded.userId, isbn, cover_id]
+            );
+
+            return res.status(200).json({ success: true });
+        } catch (err) {
+            console.error(err);
+            return res.status(500).json({ error: "Database error" });
+        }
+    }
+
 
     return res.status(405).json({ error: "Method not allowed" });
 }
