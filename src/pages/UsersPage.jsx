@@ -80,7 +80,16 @@ function UsersPage() {
             <h1>Users Page</h1>
             <p><strong>ID:</strong> {user.id}</p>
             <p><strong>Username:</strong> {user.username}</p>
-
+            <button
+                onClick={() => setEditMode(prev => !prev)}
+                style={{
+                    position: "absolute",
+                    top: "1rem",
+                    right: "1rem",
+                }}
+            >
+                {editMode ? "Done" : "Edit"}
+            </button>
 
 
             {books.length === 0 ? (
@@ -94,24 +103,10 @@ function UsersPage() {
                                 alt="Book cover"
                             />
                             <p>ISBN: {book.isbn}</p>
-                            <button
-                                onClick={() => setEditMode(prev => !prev)}
-                                style={{
-                                    position: "absolute",
-                                    top: "1rem",
-                                    right: "1rem",
-                                }}
-                            >
-                                {editMode ? "Done" : "Edit"}
-                            </button>
                             {editMode && (
                                 <button
                                     onClick={() => deleteBook(book)}
-                                    style={{
-                                        position: "absolute",
-                                        top: "0.25rem",
-                                        right: "0.25rem",
-                                    }}
+
                                 >
                                     X
                                 </button>
