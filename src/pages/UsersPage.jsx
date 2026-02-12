@@ -130,6 +130,7 @@ function UsersPage() {
                 {editMode ? "Done" : "Edit"}
             </button>
 
+            {editMode === true ?<h4>Edit book order by dragging and dropping</h4>:<></>}
 
             {books.length === 0 ? (
                 <p>No books added yet.</p>
