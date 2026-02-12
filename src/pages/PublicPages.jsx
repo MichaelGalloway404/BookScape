@@ -10,9 +10,23 @@ function PublicPage() {
   useEffect(() => {
     if (!person) return;
 
-    // If book_order_json exists, create an array of book objects with ISBNs in order
-    if (Array.isArray(person.book_order_json) && person.book_order_json.length > 0) {
-      const orderedBooks = person.book_order_json.map(isbn => ({ isbn }));
+    // If books are already included from API, use them
+    if (Array.isArray(person.books) && person.books.length > 0) {
+      let orderedBooks = person.books;
+
+      // Respect book_order_json if present
+      if (Array.isArray(person.book_order_json) && person.book_order_json.length > 0) {
+        const orderMap = new Map(person.book_order_json.map((isbn, index) => [isbn, index]));
+        orderedBooks = person.books.slice().sort((a, b) => {
+          const aIndex = orderMap.get(a.isbn);
+          const bIndex = orderMap.get(b.isbn);
+          if (aIndex !== undefined && bIndex !== undefined) return aIndex - bIndex;
+          if (aIndex !== undefined) return -1;
+          if (bIndex !== undefined) return 1;
+          return 0;
+        });
+      }
+
       setBooks(orderedBooks);
     } else {
       setBooks([]); // fallback if no books
@@ -20,14 +34,13 @@ function PublicPage() {
   }, [person]);
 
   if (!person) {
-    return <p>No user data provided.</p>;
+    return <p>No user selected.</p>;
   }
 
   return (
     <div>
       <h1>Public Page for {person.username}</h1>
       <p><strong>ID:</strong> {person.id}</p>
-      <p><strong>Username:</strong> {person.username}</p>
 
       <h2>Books</h2>
       {books.length === 0 ? (
@@ -37,7 +50,7 @@ function PublicPage() {
           {books.map((book, i) => (
             <li key={i} style={{ listStyle: "none" }}>
               <img
-                src={`https://covers.openlibrary.org/b/isbn/${book.isbn}-M.jpg`}
+                src={`https://covers.openlibrary.org/b/id/${book.cover_id}-M.jpg`}
                 alt={`Book ${book.isbn}`}
               />
               <p>ISBN: {book.isbn}</p>

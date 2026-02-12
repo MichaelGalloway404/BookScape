@@ -177,7 +177,7 @@ function UsersPage() {
             {editMode === true ?
                 <h1>User {user.username}'s Page</h1>
                 :
-                <h1>User {user.username}'s Page <strong>Public: {profilePublic ? "True" : "False"}</strong></h1>
+                <h1>User {user.username}'s Page <strong>Public: {profilePublic ? "False" : "True"}</strong></h1>
             }
             {editMode && (
                 <>

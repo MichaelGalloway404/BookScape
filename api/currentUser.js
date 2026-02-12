@@ -30,7 +30,7 @@ export default async function handler(req, res) {
     }
   }
 
-  // POST: profile needs
+  // POST: profile edit needs
   if (req.method === "POST") {
     const { bookOrderPref, privateStatus } = req.body; // privateStatus expected as true/false
 
