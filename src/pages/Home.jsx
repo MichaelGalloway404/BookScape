@@ -2,46 +2,46 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 function Home() {
-    const [user, setUser] = useState(null);
+    const [users, setUsers] = useState([]);
     const navigate = useNavigate();
+
     useEffect(() => {
-        const loadUser = async () => {
+        const loadUsers = async () => {
+            try {
+                const res = await fetch("/api/publicUsers", { method: "GET" });
+                const data = await res.json();
 
-            const res = await fetch("/api/publicUsers", {
-                method: "GET",
-            });
+                if (!res.ok) throw new Error(data.error || "Failed to fetch users");
 
-            const data = await res.json();
-
-            if (!res.ok) {
-                throw new Error(data.error);
+                setUsers(data);
+            } catch (err) {
+                console.error(err);
             }
-
-            setUser(data);
         };
-        loadUser();
+
+        loadUsers();
     }, []);
 
     return (
         <div>
-
             <h1>Home Page</h1>
-            <ul style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
-                {user.map((person, i) => (
-                    <li key={i} style={{ listStyle: "none" }}>
-                        {/* some ugly debug info, delete later */}
-                        <p><strong>Debug ID:</strong> {person.id}</p>
-                        <p><strong>Debug Username:</strong> {person.username}</p>
-                        <p><strong>Debug Book Order:</strong> {person.book_order_json}</p>
-                    </li>
-                ))}
-            </ul >
-            <button onClick={() => navigate("/login")}>
-                Login
-            </button>
-            <button onClick={() => navigate("/signUp")}>
-                Sign Up
-            </button>
+
+            {users.length === 0 ? (
+                <p>No users found.</p>
+            ) : (
+                <ul style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+                    {users.map((person, i) => (
+                        <li key={i} style={{ listStyle: "none" }}>
+                            <p><strong>ID:</strong> {person.id}</p>
+                            <p><strong>Username:</strong> {person.username}</p>
+                            <p><strong>Book Order:</strong> {JSON.stringify(person.book_order_json)}</p>
+                        </li>
+                    ))}
+                </ul>
+            )}
+
+            <button onClick={() => navigate("/login")}>Login</button>
+            <button onClick={() => navigate("/signUp")}>Sign Up</button>
         </div>
     );
 }
