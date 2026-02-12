@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 function UsersPage() {
@@ -39,6 +39,32 @@ function UsersPage() {
 
         loadUser();
     }, [navigate]);
+
+    const dragItem = useRef(null);
+    const dragOverItem = useRef(null);
+
+    const handleDragStart = (index) => {
+        dragItem.current = index;
+    };
+
+    const handleDragEnter = (index) => {
+        dragOverItem.current = index;
+    };
+
+    const handleDragEnd = () => {
+        if (dragItem.current === null || dragOverItem.current === null) return;
+
+        const listCopy = [...items];
+        const draggedItemContent = listCopy[dragItem.current];
+
+        listCopy.splice(dragItem.current, 1);
+        listCopy.splice(dragOverItem.current, 0, draggedItemContent);
+
+        dragItem.current = null;
+        dragOverItem.current = null;
+
+        setBooks(listCopy);
+    };
 
     async function deleteBook(book) {
         try {
@@ -97,7 +123,13 @@ function UsersPage() {
             ) : (
                 <ul style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
                     {books.map((book, i) => (
-                        <li key={i} style={{ listStyle: "none" }}>
+                        <li key={i} style={{ listStyle: "none" }}
+                            draggable
+                            onDragStart={() => handleDragStart(i)}
+                            onDragEnter={() => handleDragEnter(i)}
+                            onDragEnd={handleDragEnd}
+                            onDragOver={(e) => e.preventDefault()}
+                        >
                             <img
                                 src={`https://covers.openlibrary.org/b/id/${book.cover_id}-M.jpg`}
                                 alt="Book cover"
@@ -113,8 +145,9 @@ function UsersPage() {
                             )}
                         </li>
                     ))}
-                </ul>
-            )}
+                </ul >
+            )
+            }
             <button onClick={() => navigate("/search")}>
                 Search for a book
             </button>
