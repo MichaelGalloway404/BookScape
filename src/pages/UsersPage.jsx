@@ -54,7 +54,7 @@ function UsersPage() {
     const handleDragEnd = () => {
         if (dragItem.current === null || dragOverItem.current === null) return;
 
-        const listCopy = [...items];
+        const listCopy = [...books];
         const draggedItemContent = listCopy[dragItem.current];
 
         listCopy.splice(dragItem.current, 1);
