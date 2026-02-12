@@ -4,7 +4,7 @@ const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
 });
 
-// API for simple user auth (protected)
+// API for simple user auth
 export default async function handler(req, res) {
   // Example: simple auth using header token
   const userId = req.headers["x-user-id"];

@@ -21,10 +21,9 @@ export default async function handler(req, res) {
         try {
             const result = await pool.query(
                 `
-        SELECT isbn, cover_id, created_at
+        SELECT isbn, cover_id
         FROM user_books
         WHERE user_id = $1
-        ORDER BY created_at DESC
         `,
                 [decoded.userId]
             );
