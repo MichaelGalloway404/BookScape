@@ -108,8 +108,8 @@ function UsersPage() {
         }
     }
 
-    async function saveBookOrder(bookOder) {
-        const isbns = bookOder.map(book => book.isbn);
+    async function saveBookOrder(bookOrder) {
+        const isbns = bookOrder.map(book => book.isbn);
         try {
             await axios.post(
                 "/api/users",
@@ -149,14 +149,15 @@ function UsersPage() {
                     right: "1rem",
                 }}
             >
-                {editMode && (
-                    // Save button
-                    <button
-                        onClick={() => saveBookOrder(books)}
-                    > Save </button>
-                )}
                 {editMode ? "Done" : "Edit"}
             </button>
+
+            {editMode && (
+                // Save button
+                <button
+                    onClick={() => saveBookOrder(books)}
+                > Save </button>
+            )}
 
             {editMode === true ? <h4>Edit book order by dragging and dropping</h4> : <></>}
 
