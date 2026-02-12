@@ -54,7 +54,7 @@ function UsersPage() {
                     });
                 }
                 // check if this user has a private account in DB
-                setProfilePublic(user.private);
+                setProfilePublic(data.private);
                 setBooks(orderedBooks);
             } catch (err) {
                 console.error(err);
