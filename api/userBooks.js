@@ -5,17 +5,10 @@ const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 
 export default async function handler(req, res) {
     const token = req.cookies?.token;
-    if (!token) {
-        return res.status(401).json({ error: "No token" });
-    }
+    if (!token) return res.status(401).json({ error: "No token" });
 
-    let decoded;
-    try {
-        decoded = jwt.verify(token, process.env.JWT_SECRET);
-    } catch (err) {
-        return res.status(401).json({ error: "Invalid or expired token" });
-    }
-
+    let decoded = jwt.verify(token, process.env.JWT_SECRET);
+    
     // GET: return user's books
     if (req.method === "GET") {
         try {
@@ -80,7 +73,6 @@ export default async function handler(req, res) {
             return res.status(500).json({ error: "Database error" });
         }
     }
-
 
     return res.status(405).json({ error: "Method not allowed" });
 }
