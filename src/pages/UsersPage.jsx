@@ -148,7 +148,7 @@ function UsersPage() {
     }
 
     function togglePublic(){
-        setProfilePublic = !profilePublic;
+        setProfilePublic(!profilePublic);
     }
 
     if (!user) {
