@@ -12,6 +12,7 @@ function UsersPage() {
         const loadUser = async () => {
             try {
                 const res = await fetch("/api/currentUser", {
+                    method: "GET",
                     credentials: "include",
                 });
 
@@ -106,6 +107,23 @@ function UsersPage() {
         }
     }
 
+    async function saveBookOrder(bookOder) {
+        try {
+            await axios.post(
+                "/api/users",
+                {
+                    bookOrderPref: bookOder
+                },
+                { withCredentials: true }
+            );
+
+            alert("Book Order Saved!");
+        } catch (err) {
+            console.error(err);
+            alert("Failed to Save!");
+        }
+    }
+
 
     if (!user) {
         return <p>Loading user...</p>;
@@ -129,10 +147,16 @@ function UsersPage() {
                     right: "1rem",
                 }}
             >
+                {editMode && (
+                    // Save button
+                    <button
+                        onClick={() => saveBookOrder(books)}
+                    > Save </button>
+                )}
                 {editMode ? "Done" : "Edit"}
             </button>
 
-            {editMode === true ?<h4>Edit book order by dragging and dropping</h4>:<></>}
+            {editMode === true ? <h4>Edit book order by dragging and dropping</h4> : <></>}
 
             {books.length === 0 ? (
                 <p>No books added yet.</p>
