@@ -40,29 +40,38 @@ function UsersPage() {
         loadUser();
     }, [navigate]);
 
+    // Item being dragged
     const dragItem = useRef(null);
+    // DragOverItem will hold the index of the item currently being dragged over
     const dragOverItem = useRef(null);
-
     const handleDragStart = (index) => {
+        // Store the index of the dragged item in the ref
         dragItem.current = index;
     };
-
     const handleDragEnter = (index) => {
+        // Store the index of the item being hovered over
         dragOverItem.current = index;
     };
 
+    // book has been dropped
     const handleDragEnd = () => {
-        if (dragItem.current === null || dragOverItem.current === null) return;
-
+        // If either ref is null, something went wrong, and only allow if in edit mode
+        if (dragItem.current === null || dragOverItem.current === null || !editMode) return;
+        // Shallow copy of existing book order
         const listCopy = [...books];
+        // Save the content of the dragged item
         const draggedItemContent = listCopy[dragItem.current];
 
+        // Remove the dragged item from its original position
         listCopy.splice(dragItem.current, 1);
+        // Insert the dragged item into the new position
         listCopy.splice(dragOverItem.current, 0, draggedItemContent);
 
+        // Reset refs
         dragItem.current = null;
         dragOverItem.current = null;
 
+        // Update state with new order and trigger UI re-render
         setBooks(listCopy);
     };
 
@@ -103,9 +112,13 @@ function UsersPage() {
 
     return (
         <>
-            <h1>Users Page</h1>
-            <p><strong>ID:</strong> {user.id}</p>
-            <p><strong>Username:</strong> {user.username}</p>
+            <h1>User {user.username}'s Page</h1>
+
+            {/* some ugly debug info, delete later */}
+            <p><strong>Debug ID:</strong> {user.id}</p>
+            <p><strong>Debug Username:</strong> {user.username}</p>
+
+            {/* Edit button for toggling user pref */}
             <button
                 onClick={() => setEditMode(prev => !prev)}
                 style={{
@@ -124,11 +137,11 @@ function UsersPage() {
                 <ul style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
                     {books.map((book, i) => (
                         <li key={i} style={{ listStyle: "none" }}
-                            draggable
-                            onDragStart={() => handleDragStart(i)}
-                            onDragEnter={() => handleDragEnter(i)}
-                            onDragEnd={handleDragEnd}
-                            onDragOver={(e) => e.preventDefault()}
+                            draggable // Enables drag behavior
+                            onDragStart={() => handleDragStart(i)} // hold on to item being dragged
+                            onDragEnter={() => handleDragEnter(i)} // hold on to who we are hovering over
+                            onDragEnd={handleDragEnd} // now re-order books
+                            onDragOver={(e) => e.preventDefault()} // req for most browsers
                         >
                             <img
                                 src={`https://covers.openlibrary.org/b/id/${book.cover_id}-M.jpg`}
@@ -136,12 +149,10 @@ function UsersPage() {
                             />
                             <p>ISBN: {book.isbn}</p>
                             {editMode && (
+                                // delete button
                                 <button
                                     onClick={() => deleteBook(book)}
-
-                                >
-                                    X
-                                </button>
+                                > Delete </button>
                             )}
                         </li>
                     ))}
