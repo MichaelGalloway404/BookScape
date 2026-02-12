@@ -132,7 +132,7 @@ function UsersPage() {
     async function saveBookOrder(bookOrder) {
         const isbns = bookOrder.map(book => String(book.isbn));
         try {
-            const res = await axios.post(
+            await axios.post(
                 "/api/currentUser",
                 { bookOrderPref: isbns },
                 { withCredentials: true }
@@ -147,7 +147,7 @@ function UsersPage() {
     async function togglePublic(){
         setProfilePublic(!profilePublic);
         try {
-            const res = await axios.post(
+            await axios.post(
                 "/api/currentUser",
                 { privateStatus: profilePublic},
                 { withCredentials: true }
