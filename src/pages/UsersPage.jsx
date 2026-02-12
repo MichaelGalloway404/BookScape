@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 function UsersPage() {
     const [user, setUser] = useState(null);
-    const [profilePublic, setProfilePublic] = useState(false);
+    const [profilePublic, setProfilePrivate] = useState(false);
     const [books, setBooks] = useState([]);
     const [editMode, setEditMode] = useState(false);
 
@@ -54,7 +54,7 @@ function UsersPage() {
                     });
                 }
                 // check if this user has a private account in DB
-                setProfilePublic(data.private);
+                setProfilePrivate(data.private);
                 setBooks(orderedBooks);
             } catch (err) {
                 console.error(err);
@@ -155,11 +155,15 @@ function UsersPage() {
         }
     }
 
+    // make profile visible
     function setPublic() {
-        setProfilePublic(true);
+        // set db variable is profile private to false
+        setProfilePrivate(false);
     }
+    // make profile invisible to others
     function setPrivate() {
-        setProfilePublic(false);
+        // set db variable is profile private to true
+        setProfilePrivate(true);
     }
 
     if (!user) {
