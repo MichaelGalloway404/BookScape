@@ -109,8 +109,6 @@ function UsersPage() {
     }
 
     async function saveBookOrder(bookOrder) {
-        if (!Array.isArray(bookOrder)) return;
-
         const isbns = bookOrder.map(book => String(book.isbn));
         console.log("Saving ISBNs:", isbns);
 
@@ -127,6 +125,7 @@ function UsersPage() {
             alert("Failed to Save!");
         }
     }
+
 
 
 

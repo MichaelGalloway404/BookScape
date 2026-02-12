@@ -8,7 +8,6 @@ export default async function handler(req, res) {
   if (!token) return res.status(401).json({ error: "No token" });
 
   let decoded;
-
   try {
     decoded = jwt.verify(token, process.env.JWT_SECRET);
   } catch (err) {
@@ -16,18 +15,14 @@ export default async function handler(req, res) {
     return res.status(401).json({ error: "Invalid or expired token" });
   }
 
-  // GET: user info id, username, book_order
+  // GET: user info
   if (req.method === "GET") {
     try {
       const result = await pool.query(
-        "SELECT id, username, book_order FROM users WHERE id = $1",
+        "SELECT id, username, book_order_json FROM users WHERE id = $1",
         [decoded.userId]
       );
-
-      if (!result.rows.length) {
-        return res.status(401).json({ error: "Invalid user" });
-      }
-
+      if (!result.rows.length) return res.status(401).json({ error: "Invalid user" });
       return res.status(200).json(result.rows[0]);
     } catch (err) {
       console.error(err);
@@ -35,7 +30,7 @@ export default async function handler(req, res) {
     }
   }
 
-  // POST: update book order preference
+  // POST: update book order
   if (req.method === "POST") {
     const { bookOrderPref } = req.body;
 
@@ -43,13 +38,12 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: "bookOrderPref must be an array" });
     }
 
-    // Force strings to preserve leading zeros
     const cleanedIsbns = bookOrderPref.map(String);
 
     try {
       await pool.query(
-        `UPDATE users SET book_order = $1::text[] WHERE id = $2`,
-        [cleanedIsbns, decoded.userId]
+        `UPDATE users SET book_order_json = $1 WHERE id = $2`,
+        [JSON.stringify(cleanedIsbns), decoded.userId]
       );
       return res.status(201).json({ success: true });
     } catch (err) {
