@@ -27,3 +27,6 @@ TABLE user_books (
   
 ALTER TABLE users  
 ADD COLUMN book_order_json JSONB DEFAULT '[]';  
+
+ALTER TABLE users
+ADD COLUMN private BOOLEAN DEFAULT TRUE;
