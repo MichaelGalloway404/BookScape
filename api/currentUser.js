@@ -19,7 +19,7 @@ export default async function handler(req, res) {
   if (req.method === "GET") {
     try {
       const result = await pool.query(
-        "SELECT id, username, book_order_json FROM users WHERE id = $1",
+        "SELECT id, username, book_order_json, private FROM users WHERE id = $1",
         [decoded.userId]
       );
       if (!result.rows.length) return res.status(401).json({ error: "Invalid user" });
