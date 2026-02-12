@@ -130,7 +130,17 @@ function UsersPage() {
         }
     }
 
-    async function saveBookOrder(bookOrder) {
+    async function saveSettings(bookOrder) {
+        try {
+            await axios.post(
+                "/api/currentUser",
+                { privateStatus: profilePublic },
+                { withCredentials: true }
+            );
+        } catch (err) {
+            console.error("Axios error:", err.response?.data || err);
+            alert("Failed to Set");
+        }
         const isbns = bookOrder.map(book => String(book.isbn));
         try {
             await axios.post(
@@ -145,18 +155,11 @@ function UsersPage() {
         }
     }
 
-    async function togglePublic(){
-        setProfilePublic(!profilePublic);
-        try {
-            await axios.post(
-                "/api/currentUser",
-                { privateStatus: profilePublic},
-                { withCredentials: true }
-            );
-        } catch (err) {
-            console.error("Axios error:", err.response?.data || err);
-            alert("Failed to Set");
-        }
+    function setPublic() {
+        setProfilePublic(true);
+    }
+    function setPrivate() {
+        setProfilePublic(false);
     }
 
     if (!user) {
@@ -165,16 +168,22 @@ function UsersPage() {
 
     return (
         <>
-            {editMode === true ? 
-                <h1>User {user.username}'s Page</h1> 
-                    : 
+            {editMode === true ?
+                <h1>User {user.username}'s Page</h1>
+                :
                 <h1>User {user.username}'s Page <strong>Public: {profilePublic ? "True" : "False"}</strong></h1>
-                }
+            }
             {editMode && (
-                // Public/Private button
-                <button
-                    onClick={() => togglePublic()}
-                > Public {profilePublic ? "True" : "False"} </button>
+                <>
+                {/* Public button */}
+                    <button
+                        onClick={() => setPublic()}
+                    > Make profile public  </button>
+                {/* Private button */}
+                    <button
+                        onClick={() => setPrivate()}
+                    > Make profile private </button>
+                </>
             )}
 
             {/* some ugly debug info, delete later */}
@@ -197,7 +206,7 @@ function UsersPage() {
             {editMode && (
                 // Save button
                 <button
-                    onClick={() => saveBookOrder(books)}
+                    onClick={() => saveSettings(books)}
                 > Save </button>
             )}
 
