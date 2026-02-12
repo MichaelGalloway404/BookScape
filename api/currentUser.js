@@ -41,14 +41,14 @@ export default async function handler(req, res) {
     alert(req.body);
 
     try {
+
+      const pgArray = `{${bookOrderPref.map(s => s.replace(/"/g, '\\"')).join(",")}}`;
+
       await pool.query(
-        `
-        UPDATE users
-        SET book_order = $1
-        WHERE id = $2
-        `,
-        [bookOrderPref, decoded.userId]
+        `UPDATE users SET book_order = $1 WHERE id = $2`,
+        [pgArray, decoded.userId]
       );
+
 
       return res.status(201).json({ success: true });
     } catch (err) {
