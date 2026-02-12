@@ -7,7 +7,7 @@ export default async function handler(req, res) {
     if (req.method === "GET") {
         try {
             const result = await pool.query(
-                "SELECT username, book_order_json FROM users WHERE private = TRUE"
+                "SELECT username, book_order_json FROM users WHERE private = FALSE"
             );
 
             // Return all rows, not just the first one

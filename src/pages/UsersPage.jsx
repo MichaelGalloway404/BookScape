@@ -131,15 +131,12 @@ function UsersPage() {
 
     async function saveBookOrder(bookOrder) {
         const isbns = bookOrder.map(book => String(book.isbn));
-        console.log("Saving ISBNs:", isbns);
-
         try {
             const res = await axios.post(
                 "/api/currentUser",
                 { bookOrderPref: isbns },
                 { withCredentials: true }
             );
-            console.log("Response:", res.data);
             alert("Book Order Saved!");
         } catch (err) {
             console.error("Axios error:", err.response?.data || err);
@@ -147,8 +144,18 @@ function UsersPage() {
         }
     }
 
-    function togglePublic(){
+    async function togglePublic(){
         setProfilePublic(!profilePublic);
+        try {
+            const res = await axios.post(
+                "/api/currentUser",
+                { privateStatus: profilePublic},
+                { withCredentials: true }
+            );
+        } catch (err) {
+            console.error("Axios error:", err.response?.data || err);
+            alert("Failed to Set");
+        }
     }
 
     if (!user) {

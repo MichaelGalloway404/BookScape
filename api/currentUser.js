@@ -30,27 +30,44 @@ export default async function handler(req, res) {
     }
   }
 
-  // POST: update book order
+  // POST: profile needs
   if (req.method === "POST") {
-    const { bookOrderPref } = req.body;
-
-    if (!Array.isArray(bookOrderPref)) {
-      return res.status(400).json({ error: "bookOrderPref must be an array" });
-    }
-
-    const cleanedIsbns = bookOrderPref.map(String);
+    const { bookOrderPref, privateStatus } = req.body; // privateStatus expected as true/false
 
     try {
-      await pool.query(
-        `UPDATE users SET book_order_json = $1 WHERE id = $2`,
-        [JSON.stringify(cleanedIsbns), decoded.userId]
-      );
-      return res.status(201).json({ success: true });
+      if (bookOrderPref) {
+        // Update book order
+        if (!Array.isArray(bookOrderPref)) {
+          return res.status(400).json({ error: "bookOrderPref must be an array" });
+        }
+        const cleanedIsbns = bookOrderPref.map(String);
+        await pool.query(
+          `UPDATE users SET book_order_json = $1 WHERE id = $2`,
+          [JSON.stringify(cleanedIsbns), decoded.userId]
+        );
+        return res.status(201).json({ success: true, updated: "book_order" });
+      }
+
+      if (privateStatus !== undefined) {
+        // Update private flag
+        if (typeof privateStatus !== "boolean") {
+          return res.status(400).json({ error: "privateStatus must be boolean" });
+        }
+        await pool.query(
+          `UPDATE users SET private = $1 WHERE id = $2`,
+          [privateStatus, decoded.userId]
+        );
+        return res.status(201).json({ success: true, updated: "private" });
+      }
+
+      // If neither provided
+      return res.status(400).json({ error: "No valid fields to update" });
     } catch (err) {
       console.error("Database error:", err);
       return res.status(500).json({ error: "Database error" });
     }
   }
+
 
   return res.status(405).json({ error: "Method not allowed" });
 }
