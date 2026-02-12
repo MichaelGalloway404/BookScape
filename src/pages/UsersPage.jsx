@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 function UsersPage() {
     const [user, setUser] = useState(null);
+    const [profilePublic, setProfilePublic] = useState(false);
     const [books, setBooks] = useState([]);
     const [editMode, setEditMode] = useState(false);
 
@@ -146,6 +147,9 @@ function UsersPage() {
         }
     }
 
+    function togglePublic(){
+        setProfilePublic = !profilePublic;
+    }
 
     if (!user) {
         return <p>Loading user...</p>;
@@ -153,7 +157,17 @@ function UsersPage() {
 
     return (
         <>
-            <h1>User {user.username}'s Page</h1>
+            {editMode === true ? 
+                <h1>User {user.username}'s Page</h1> 
+                    : 
+                <h1>User {user.username}'s Page <strong>Public: {profilePublic}</strong></h1>
+                }
+            {editMode && (
+                // Public/Private button
+                <button
+                    onClick={() => togglePublic()}
+                > Public {profilePublic} </button>
+            )}
 
             {/* some ugly debug info, delete later */}
             <p><strong>Debug ID:</strong> {user.id}</p>
