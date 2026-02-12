@@ -38,21 +38,22 @@ export default async function handler(req, res) {
   // POST: update book order preference
   if (req.method === "POST") {
     const { bookOrderPref } = req.body;
-    alert(req.body);
+
+    if (!Array.isArray(bookOrderPref)) {
+      return res.status(400).json({ error: "bookOrderPref must be an array" });
+    }
+
+    // Force strings to preserve leading zeros
+    const cleanedIsbns = bookOrderPref.map(String);
 
     try {
-
-      const pgArray = `{${bookOrderPref.map(s => s.replace(/"/g, '\\"')).join(",")}}`;
-
       await pool.query(
-        `UPDATE users SET book_order = $1 WHERE id = $2`,
-        [pgArray, decoded.userId]
+        `UPDATE users SET book_order = $1::text[] WHERE id = $2`,
+        [cleanedIsbns, decoded.userId]
       );
-
-
       return res.status(201).json({ success: true });
     } catch (err) {
-      console.error(err);
+      console.error("Database error:", err);
       return res.status(500).json({ error: "Database error" });
     }
   }

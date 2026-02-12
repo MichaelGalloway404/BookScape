@@ -109,25 +109,25 @@ function UsersPage() {
     }
 
     async function saveBookOrder(bookOrder) {
-        // const isbns = bookOrder.map(book => book.isbn);
+        if (!Array.isArray(bookOrder)) return;
+
         const isbns = bookOrder.map(book => String(book.isbn));
-        console.log(isbns);
-        alert(isbns);
+        console.log("Saving ISBNs:", isbns);
+
         try {
-            await axios.post(
+            const res = await axios.post(
                 "/api/users",
-                {
-                    bookOrderPref: isbns
-                },
+                { bookOrderPref: isbns },
                 { withCredentials: true }
             );
-
+            console.log("Response:", res.data);
             alert("Book Order Saved!");
         } catch (err) {
-            console.error(err);
+            console.error("Axios error:", err.response?.data || err);
             alert("Failed to Save!");
         }
     }
+
 
 
     if (!user) {
