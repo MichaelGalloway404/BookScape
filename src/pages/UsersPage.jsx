@@ -109,7 +109,8 @@ function UsersPage() {
     }
 
     async function saveBookOrder(bookOrder) {
-        const isbns = bookOrder.map(book => book.isbn);
+        // const isbns = bookOrder.map(book => book.isbn);
+        const isbns = bookOrder.map(book => String(book.isbn));
         alert(isbns);
         try {
             await axios.post(
