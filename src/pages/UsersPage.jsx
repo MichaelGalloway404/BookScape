@@ -114,7 +114,7 @@ function UsersPage() {
 
         try {
             const res = await axios.post(
-                "/api/users",
+                "/api/currentUser",
                 { bookOrderPref: isbns },
                 { withCredentials: true }
             );
@@ -125,8 +125,6 @@ function UsersPage() {
             alert("Failed to Save!");
         }
     }
-
-
 
 
     if (!user) {
