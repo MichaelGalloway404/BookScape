@@ -1,4 +1,5 @@
-import { useEffect, useState, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 function Home() {
     const [user, setUser] = useState(null);
