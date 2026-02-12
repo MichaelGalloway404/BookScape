@@ -158,7 +158,7 @@ function UsersPage() {
             {/* some ugly debug info, delete later */}
             <p><strong>Debug ID:</strong> {user.id}</p>
             <p><strong>Debug Username:</strong> {user.username}</p>
-            <p><strong>Debug Book Order:</strong> {user.book_order}</p>
+            <p><strong>Debug Book Order:</strong> {user.book_order_json}</p>
 
             {/* Edit button for toggling user pref */}
             <button
