@@ -109,12 +109,12 @@ function UsersPage() {
     }
 
     async function saveBookOrder(bookOder) {
-        alert(bookOder);
+        const isbns = bookOder.map(book => book.isbn);
         try {
             await axios.post(
                 "/api/users",
                 {
-                    bookOrderPref: bookOder
+                    bookOrderPref: isbns
                 },
                 { withCredentials: true }
             );
