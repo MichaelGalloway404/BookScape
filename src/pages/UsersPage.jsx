@@ -160,13 +160,13 @@ function UsersPage() {
             {editMode === true ? 
                 <h1>User {user.username}'s Page</h1> 
                     : 
-                <h1>User {user.username}'s Page <strong>Public: {profilePublic}</strong></h1>
+                <h1>User {user.username}'s Page <strong>Public: {profilePublic ? "True" : "False"}</strong></h1>
                 }
             {editMode && (
                 // Public/Private button
                 <button
                     onClick={() => togglePublic()}
-                > Public {profilePublic} </button>
+                > Public {profilePublic ? "True" : "False"} </button>
             )}
 
             {/* some ugly debug info, delete later */}
