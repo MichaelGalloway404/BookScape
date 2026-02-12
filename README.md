@@ -24,6 +24,6 @@ TABLE user_books (
   CONSTRAINT unique_user_book  
     UNIQUE (user_id, isbn)  
 );  
-    
+  
 ALTER TABLE users  
-ADD COLUMN book_order TEXT[] DEFAULT '{}';  
+ADD COLUMN book_order_json JSONB DEFAULT '[]';  
