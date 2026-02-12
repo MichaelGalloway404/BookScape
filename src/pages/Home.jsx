@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 function Home() {
     const [user, setUser] = useState(null);
-    const [books, setBooks] = useState([]);
+    // const [books, setBooks] = useState([]);
     const navigate = useNavigate();
     useEffect(() => {
         const loadUser = async () => {
