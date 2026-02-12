@@ -24,6 +24,7 @@ function UsersPage() {
                 setUser(data);
                 // get books
                 const booksRes = await fetch("/api/userBooks", {
+                    method: "GET",
                     credentials: "include",
                 });
 
