@@ -15,9 +15,7 @@ TABLE user_books (
   user_id INTEGER NOT NULL,  
   isbn TEXT,  
   cover_id TEXT,  
-  
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,  
-  
+    
   CONSTRAINT fk_user  
     FOREIGN KEY (user_id)  
     REFERENCES users(id)  
