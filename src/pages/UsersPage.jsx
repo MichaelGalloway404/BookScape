@@ -159,13 +159,13 @@ function UsersPage() {
     function setPublic() {
         // set db variable is profile private to false
         setProfilePrivate(false);
-        alert("profile is now public!");
+        alert("profile is set public, don't forget to save!");
     }
     // make profile invisible to others
     function setPrivate() {
         // set db variable is profile private to true
         setProfilePrivate(true);
-        alert("profile is now private");
+        alert("profile is set private, don't forget to save!");
     }
 
     if (!user) {
