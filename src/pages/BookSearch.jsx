@@ -66,26 +66,48 @@ export default function BookSearch() {
 
 
   async function searchForBooks() {
-    // The URLSearchParams interface defines utility methods to work with the query string of a URL.
-    // URLSearchParams objects are iterable
-    const params = new URLSearchParams();
-  
-    if (isbn) {
+    try {
+      // ---------- ISBN DIRECT LOOKUP ----------
+      if (isbn.trim()) {
+
+        const cleanIsbn = isbn.trim();
+        const coverSize = "M";
+
+        const coverUrl = `https://covers.openlibrary.org/b/isbn/${cleanIsbn}-${coverSize}.jpg`;
+
+        // Create a fake "result" object so UI still works
+        const bookResult = [{
+          title: "Unknown Title",
+          author: "Unknown Author",
+          coverUrl,
+          isbn: cleanIsbn
+        }];
+
+        setResults(bookResult);
+        setPage(0);
+        return;
+      }
+
+      // The URLSearchParams interface defines utility methods to work with the query string of a URL.
+      // URLSearchParams objects are iterable
+      const params = new URLSearchParams();
+
       // If ISBN is provided, search ONLY by ISBN (most precise)
       params.append("isbn", isbn);
-    } else {
+
       // Otherwise use title/author search
       if (title) params.append("title", title);   // add title to query if user typed it
       if (author) params.append("author", author);// add auther to query if user typed it
-    }
-
-    // Ask Open Library to include isbn explicitly
-    params.append("fields", "cover_i,title,author_name,isbn");
-    params.append("limit", "20");
 
 
+      // Ask Open Library to include isbn explicitly
+      params.append("fields", "cover_i,title,author_name,isbn");
+      params.append("limit", "20");
 
-    try {
+
+
+
+
       // params.toString() converts URLSearchParams into a query string
       const res = await axios.get(
         `https://openlibrary.org/search.json?${params.toString()}`
