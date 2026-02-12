@@ -10,37 +10,41 @@ function PublicPage() {
   useEffect(() => {
     if (!person) return;
 
-    // If books are already included from API, use them
-    if (Array.isArray(person.books) && person.books.length > 0) {
-      let orderedBooks = person.books;
+    const loadBooks = async () => {
+      try {
+        const res = await fetch(`/api/publicUserBooks?userId=${person.id}`);
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || "Failed to fetch books");
 
-      // Respect book_order_json if present
-      if (Array.isArray(person.book_order_json) && person.book_order_json.length > 0) {
-        const orderMap = new Map(person.book_order_json.map((isbn, index) => [isbn, index]));
-        orderedBooks = person.books.slice().sort((a, b) => {
-          const aIndex = orderMap.get(a.isbn);
-          const bIndex = orderMap.get(b.isbn);
-          if (aIndex !== undefined && bIndex !== undefined) return aIndex - bIndex;
-          if (aIndex !== undefined) return -1;
-          if (bIndex !== undefined) return 1;
-          return 0;
-        });
+        let orderedBooks = data;
+
+        // respect book_order_json
+        if (Array.isArray(person.book_order_json) && person.book_order_json.length > 0) {
+          const orderMap = new Map(person.book_order_json.map((isbn, index) => [isbn, index]));
+          orderedBooks = data.slice().sort((a, b) => {
+            const aIndex = orderMap.get(a.isbn);
+            const bIndex = orderMap.get(b.isbn);
+            if (aIndex !== undefined && bIndex !== undefined) return aIndex - bIndex;
+            if (aIndex !== undefined) return -1;
+            if (bIndex !== undefined) return 1;
+            return 0;
+          });
+        }
+
+        setBooks(orderedBooks);
+      } catch (err) {
+        console.error(err);
       }
+    };
 
-      setBooks(orderedBooks);
-    } else {
-      setBooks([]); // fallback if no books
-    }
+    loadBooks();
   }, [person]);
 
-  if (!person) {
-    return <p>No user selected.</p>;
-  }
+  if (!person) return <p>No user selected.</p>;
 
   return (
     <div>
       <h1>Public Page for {person.username}</h1>
-      <p><strong>ID:</strong> {person.id}</p>
 
       <h2>Books</h2>
       {books.length === 0 ? (

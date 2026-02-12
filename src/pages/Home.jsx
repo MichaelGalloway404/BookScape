@@ -32,10 +32,6 @@ function Home() {
                 <ul style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
                     {users.map((person, i) => (
                         <li key={i} style={{ listStyle: "none" }}>
-                            {/* <button onClick={() => navigate("/publicPage")}><p><strong>Username:</strong> {person.username}</p></button>
-                            <p><strong>ID:</strong> {person.id}</p>
-                            <p><strong>Username:</strong> {person.username}</p>
-                            <p><strong>Book Order:</strong> {JSON.stringify(person.book_order_json)}</p> */}
                             <button
                                 onClick={() =>
                                     navigate("/publicPage", {

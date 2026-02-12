@@ -3,13 +3,20 @@ import { Pool } from "pg";
 const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 
 export default async function handler(req, res) {
+  const { userId } = req.query; // expect /api/userBooks?userId=123
+
+  if (!userId) {
+    return res.status(400).json({ error: "Missing userId" });
+  }
+
   if (req.method === "GET") {
     try {
       const result = await pool.query(
-        "SELECT id, username, book_order_json FROM users WHERE private = FALSE"
+        "SELECT isbn, cover_id FROM user_books WHERE user_id = $1",
+        [userId]
       );
 
-      return res.status(200).json(result.rows); // just the users
+      return res.status(200).json(result.rows);
     } catch (err) {
       console.error(err);
       return res.status(500).json({ error: "Database error" });
