@@ -38,6 +38,7 @@ export default async function handler(req, res) {
   // POST: update book order preference
   if (req.method === "POST") {
     const { bookOrderPref } = req.body;
+    alert(req.body);
 
     try {
       await pool.query(
