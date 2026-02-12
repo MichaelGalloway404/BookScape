@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 const BOOKS_PER_PAGE = 10;
 
 export default function BookSearch() {
-  // use state vars as to not rerender if needed
+  const [isbn, setIsbn] = useState("");
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [results, setResults] = useState([]);
@@ -69,15 +69,21 @@ export default function BookSearch() {
     // The URLSearchParams interface defines utility methods to work with the query string of a URL.
     // URLSearchParams objects are iterable
     const params = new URLSearchParams();
-    if (title) params.append("title", title);   // add title to query if user typed it
-    if (author) params.append("author", author);// add auther to query if user typed it
+  
+    if (isbn) {
+      // If ISBN is provided, search ONLY by ISBN (most precise)
+      params.append("isbn", isbn);
+    } else {
+      // Otherwise use title/author search
+      if (title) params.append("title", title);   // add title to query if user typed it
+      if (author) params.append("author", author);// add auther to query if user typed it
+    }
 
     // Ask Open Library to include isbn explicitly
     params.append("fields", "cover_i,title,author_name,isbn");
     params.append("limit", "20");
 
-    // console.log(params);
-    // console.log(params.toString());
+
 
     try {
       // params.toString() converts URLSearchParams into a query string
@@ -173,6 +179,13 @@ export default function BookSearch() {
         // Update the author state on every keystroke
         onChange={e => setAuthor(e.target.value)}
       />
+      {/* ISBN field */}
+      <input
+        placeholder="ISBN"
+        value={isbn}
+        onChange={e => setIsbn(e.target.value)}
+      />
+
 
       {/* Button that triggers the Open Library search */}
       <button
