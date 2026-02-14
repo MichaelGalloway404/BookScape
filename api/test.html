@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <title>Simple Book Search</title>
+
+    <style>
+        body {
+            font-family: sans-serif;
+            padding: 20px;
+            max-width: 600px;
+            margin: auto;
+        }
+
+        input {
+            padding: 10px;
+            width: 70%;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 10px;
+            cursor: pointer;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+        }
+
+        #result {
+            margin-top: 20px;
+            line-height: 1.6;
+            border-top: 1px solid #eee;
+            padding-top: 10px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <h2>Wikipedia Book Brief</h2>
+
+    <input type="text" id="bookInput" placeholder="Enter book title (e.g., The Great Gatsby)">
+
+    <button onclick="getBookDescription()">Search</button>
+
+
+    <div id="result">
+
+        <p>Type a book name above to see its description.</p>
+
+    </div>
+
+
+    <script>
+        async function getBookDescription() {
+            const bookTitle = document.getElementById('bookInput').value.trim();
+            const resultDiv = document.getElementById('result');
+
+            if (!bookTitle) return;
+
+            resultDiv.innerHTML = "Searching...";
+
+            // Replace spaces with underscores
+            const formattedTitle = encodeURIComponent(bookTitle.replace(/ /g, '_'));
+
+            // Correct Wikipedia API URL
+            const url = `https://en.wikipedia.org/api/rest_v1/page/summary/${formattedTitle}`;
+
+            try {
+                const response = await fetch(url);
+
+                if (!response.ok) throw new Error("Book not found");
+
+                const data = await response.json();
+
+                resultDiv.innerHTML = `
+            <h3>${data.title}</h3>
+            <p>${data.extract}</p>
+            <a href="${data.content_urls.desktop.page}" target="_blank">
+                Read more on Wikipedia
+            </a>
+        `;
+            } catch (error) {
+                resultDiv.innerHTML =
+                    `<p style="color:red;">Error: Could not find that book. Try checking the spelling.</p>`;
+            }
+        }
+    </script>
+
+</body>
+
+</html>

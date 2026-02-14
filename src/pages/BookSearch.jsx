@@ -68,7 +68,7 @@ export default function BookSearch() {
   async function searchForBooks() {
     try {
       // ---------- ISBN DIRECT LOOKUP ----------
-      if (isbn.trim()) {
+      if (isbn.trim() && !title.trim() && !author.trim()) {
 
         const cleanIsbn = isbn.trim();
         const coverSize = "M";
@@ -93,7 +93,10 @@ export default function BookSearch() {
       const params = new URLSearchParams();
 
       // If ISBN is provided, search ONLY by ISBN (most precise)
-      params.append("isbn", isbn);
+      if (isbn.trim()) {
+        params.append("isbn", isbn.trim());
+      }
+
 
       // Otherwise use title/author search
       if (title) params.append("title", title);   // add title to query if user typed it
