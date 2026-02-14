@@ -64,21 +64,44 @@ export default function BookSearch() {
     }
   }
 
+  async function getAuthorNames(authorsArray) {
+    try {
+      const names = await Promise.all(
+        authorsArray.map(async (a) => {
+          const res = await axios.get(
+            `https://openlibrary.org${a.key}.json`
+          );
+          return res.data.name;
+        })
+      );
+
+      return names.join(", ");
+    } catch {
+      return "Unknown Author";
+    }
+  }
+
 
   async function searchForBooks() {
     try {
       // ---------- ISBN DIRECT LOOKUP ----------
       if (isbn.trim() && !title.trim() && !author.trim()) {
-
         const cleanIsbn = isbn.trim();
-        const coverSize = "M";
 
+        const coverSize = "M";
         const coverUrl = `https://covers.openlibrary.org/b/isbn/${cleanIsbn}-${coverSize}.jpg`;
 
-        // Create a fake "result" object so UI still works
+        const res = await axios.get(
+          `https://openlibrary.org/isbn/${cleanIsbn}.json`
+        );
+
+        const data = res.data;
+
         const bookResult = [{
-          title: "Unknown Title",
-          author: "Unknown Author",
+          title: data.title || "Unknown Title",
+          author: (data.authors?.length)
+            ? await getAuthorNames(data.authors)
+            : "Unknown Author",
           coverUrl,
           isbn: cleanIsbn
         }];
@@ -87,6 +110,7 @@ export default function BookSearch() {
         setPage(0);
         return;
       }
+
 
       // The URLSearchParams interface defines utility methods to work with the query string of a URL.
       // URLSearchParams objects are iterable
