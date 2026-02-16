@@ -1,4 +1,4 @@
-import style from './SiteInfoFooter.module.css'
+import styles from './SiteInfoFooter.module.css'
 import { useNavigate } from "react-router-dom";
 
 function SiteInfoFooter(props) {
@@ -10,7 +10,7 @@ function SiteInfoFooter(props) {
 
   return (
     <>
-      <button className={style.homeBtn} onClick={() => navigate("/")}> Return Home </button>
+      <button className={`${styles.buttonClass} ${styles.homeBtn}`} onClick={() => navigate("/")}> Return Home </button>
       {/*testing common prop usage  */}
       <p className={style.footerInfo}>Today is: {day} the {date}, {year}</p>
     </>
