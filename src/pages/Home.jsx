@@ -27,7 +27,7 @@ function Home() {
             <h1>Home Page</h1>
 
             {users.length === 0 ? (
-                <p>No users found.</p>
+                <p>Loading Users...</p>
             ) : (
                 <ul style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
                     {users.map((person, i) => (
