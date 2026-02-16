@@ -1,18 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Welcome Home</title>
-  <style>
-    /* * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    } */
-
-    body {
+body {
       min-height: 100vh;
       background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
       display: flex;
@@ -46,7 +32,7 @@
       letter-spacing: 1px;
     }
 
-    .nav-buttons {
+    .navButtons {
       display: flex;
       gap: 12px;
       flex-wrap: wrap;
@@ -84,19 +70,19 @@
       margin-top: 20px;
     }
 
-    .profiles-title {
+    .profilesTitle {
       font-size: 1.4rem;
       margin-bottom: 18px;
       opacity: 0.9;
     }
 
-    .profiles-grid {
+    .profilesGrid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
       gap: 16px;
     }
 
-    .profile-btn {
+    .profileBtn {
       padding: 18px;
       border-radius: 18px;
       background: rgba(255,255,255,0.1);
@@ -110,16 +96,16 @@
       justify-content: center;
     }
 
-    .home-btn {
+    /* .homeBtn {
       padding: 14px 28px;
       font-size: 1rem;
       background: linear-gradient(135deg, #43cea2, #185a9d);
       font-weight: 600;
     }
 
-    .home-btn:hover {
+    .homeBtn:hover {
       background: linear-gradient(135deg, #5be3b7, #2b6bbd);
-    }
+    } */
 
     @media (max-width: 600px) {
       .title {
@@ -129,37 +115,3 @@
         padding: 25px;
       }
     }
-  </style>
-</head>
-<body>
-  <div class="container">
-
-    <header>
-      <div class="title"> Book Scape</div>
-
-      <div class="nav-buttons">
-        <button class="primary buttonClass">Login</button>
-        <button class="buttonClass">Sign Up</button>
-      </div>
-    </header>
-
-    <section class="profiles-section">
-      <div class="profiles-title">Public Profiles</div>
-
-      <div class="profiles-grid">
-        <button class="profile-btn buttonClass"> User One</button>
-        <button class="profile-btn buttonClass"> User Two</button>
-        <button class="profile-btn buttonClass"> User Three</button>
-        <button class="profile-btn buttonClass"> User Four</button>
-        <button class="profile-btn buttonClass"> User Five</button>
-        <button class="profile-btn buttonClass"> User Six</button>
-      </div>
-    </section>
-
-    <footer>
-      <button class="home-btn buttonClass"> Return Home</button>
-    </footer>
-
-  </div>
-</body>
-</html>

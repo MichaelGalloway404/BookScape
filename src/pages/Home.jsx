@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import styles from "./Home.modules.css"
 
 function Home() {
     const [users, setUsers] = useState([]);
@@ -23,16 +24,16 @@ function Home() {
     }, []);
 
     return (
-        <div>
-            <h1>Home Page</h1>
+        <div className={styles.container}>
+            <h1 className={styles.title}>Book Scape</h1>
 
             {users.length === 0 ? (
                 <p>Loading Users...</p>
             ) : (
                 <ul style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
                     {users.map((person, i) => (
-                        <li key={i} style={{ listStyle: "none" }}>
-                            <button
+                        <li className={styles.profilesGrid} key={i}>
+                            <button className={`${styles.buttonClass} ${styles.profileBtn}`}
                                 onClick={() =>
                                     navigate("/publicPage", {
                                         state: { user: person } // pass the whole person object
@@ -46,9 +47,10 @@ function Home() {
                     ))}
                 </ul>
             )}
-
-            <button onClick={() => navigate("/login")}>Login</button>
-            <button onClick={() => navigate("/signUp")}>Sign Up</button>
+            <div className={styles.navButtons}>
+            <button className={`${styles.buttonClass} ${styles.primary}`} onClick={() => navigate("/login")}>Login</button>
+            <button className={styles.buttonClass} onClick={() => navigate("/signUp")}>Sign Up</button>
+            </div>
         </div>
     );
 }
