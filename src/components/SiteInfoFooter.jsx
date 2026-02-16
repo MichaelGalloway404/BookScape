@@ -10,7 +10,7 @@ function SiteInfoFooter(props) {
 
   return (
     <>
-      <button onClick={() => navigate("/")}> Return Home </button>
+      <button className={style.homeBtn} onClick={() => navigate("/")}> Return Home </button>
       {/*testing common prop usage  */}
       <p className={style.footerInfo}>Today is: {day} the {date}, {year}</p>
     </>

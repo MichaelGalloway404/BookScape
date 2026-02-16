@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import style from './LoginPage.module.css'
+import SiteInfoFooter from '../components/SiteInfoFooter';
 
 // authenticate and loggin a user
 function LoginPage() {
@@ -74,6 +75,7 @@ function LoginPage() {
                     </div>
                 </div>
             </div>
+            <SiteInfoFooter/>
         </>
     );
 }

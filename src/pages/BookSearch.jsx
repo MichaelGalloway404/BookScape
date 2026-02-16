@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import styles from "./BookSearch.module.css"
 import { useNavigate } from "react-router-dom";
+import SiteInfoFooter from '../components/SiteInfoFooter';
 
 const BOOKS_PER_PAGE = 10;
 
@@ -301,6 +302,7 @@ export default function BookSearch() {
       <button onClick={() => navigate("/second")}>
         Back to userPage
       </button>
+      <SiteInfoFooter/>
     </>
   );
 

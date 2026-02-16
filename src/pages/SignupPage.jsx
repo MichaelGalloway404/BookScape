@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import style from "./SignupPage.module.css";
+import SiteInfoFooter from '../components/SiteInfoFooter';
 
 function SignupPage() {
   const navigate = useNavigate();
@@ -74,6 +75,7 @@ function SignupPage() {
           <span onClick={() => navigate("/login")}>Sign in</span>
         </p>
       </div>
+      <SiteInfoFooter/>
     </div>
   );
 }

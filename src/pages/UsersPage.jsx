@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import SiteInfoFooter from '../components/SiteInfoFooter';
 
 function UsersPage() {
     const [user, setUser] = useState(null);
@@ -249,6 +250,7 @@ function UsersPage() {
             <button onClick={() => navigate("/search")}>
                 Search for a book
             </button>
+            <SiteInfoFooter/>
         </>
     );
 }

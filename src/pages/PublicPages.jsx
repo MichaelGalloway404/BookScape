@@ -1,5 +1,6 @@
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
+import SiteInfoFooter from '../components/SiteInfoFooter';
 
 function PublicPage() {
   const location = useLocation();
@@ -43,7 +44,7 @@ function PublicPage() {
   if (!person) return <p>No user selected.</p>;
 
   return (
-    <div>
+    <>
       <h1>Public Page for {person.username}</h1>
 
       <h2>Books</h2>
@@ -62,7 +63,8 @@ function PublicPage() {
           ))}
         </ul>
       )}
-    </div>
+      <SiteInfoFooter/>
+    </>
   );
 }
 

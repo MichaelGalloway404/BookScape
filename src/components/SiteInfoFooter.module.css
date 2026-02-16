@@ -1,4 +1,4 @@
-.footerInfo{
+.footerInfo {
   bottom: 0;
   right: 0;
   width: 100%;
@@ -6,4 +6,15 @@
   display: flex;
   justify-content: flex-end;
   padding: 1rem;
+}
+
+.homeBtn {
+  padding: 14px 28px;
+  font-size: 1rem;
+  background: linear-gradient(135deg, #43cea2, #185a9d);
+  font-weight: 600;
+}
+
+.homeBtn:hover {
+  background: linear-gradient(135deg, #5be3b7, #2b6bbd);
 }
