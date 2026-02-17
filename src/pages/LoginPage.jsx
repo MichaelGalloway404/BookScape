@@ -72,8 +72,9 @@ function LoginPage() {
                     </form>
 
                 </div>
+                <SiteInfoFooter/>
             </div>
-            <SiteInfoFooter/>
+            
         </>
     );
 }
