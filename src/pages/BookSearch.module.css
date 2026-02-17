@@ -69,10 +69,3 @@
 .pagination button:hover {
   background: #444;
 }
-
-
-
-* {
-  min-width: 0;
-  margin: 5px;
-}
