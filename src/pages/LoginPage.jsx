@@ -71,8 +71,6 @@ function LoginPage() {
                         </button>
                     </form>
 
-                    <div className={style.footerText}> im footer
-                    </div>
                 </div>
             </div>
             <SiteInfoFooter/>
