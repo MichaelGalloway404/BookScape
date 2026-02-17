@@ -2,31 +2,114 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
+  width: 100%;
+  padding: 1rem;
 }
 
+/* Card */
 .signupCard {
-  width: 350px;
-  padding: 2rem;
-  border-radius: 10px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 420px;
+  padding: 2.5rem;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+  text-align: center;
 }
 
+/* Headings */
+.signupCard h1 {
+  margin-bottom: 0.5rem;
+  color: white;
+  font-size: 2rem;
+  letter-spacing: 0.5px;
+}
+
+.signupCard p {
+  margin-bottom: 2rem;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.95rem;
+}
+
+/* Inputs */
 .inputGroup {
-  margin-bottom: 1rem;
+  text-align: left;
+  margin-bottom: 1.5rem;
 }
 
+.inputGroup label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.inputGroup input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.08);
+  color: white;
+  font-size: 1rem;
+  backdrop-filter: blur(6px);
+  transition: all 0.2s ease;
+}
+
+.inputGroup input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.inputGroup input:focus {
+  outline: none;
+  border-color: #ffb347;
+  box-shadow: 0 0 0 3px rgba(255, 179, 71, 0.25);
+}
+
+/* Button */
 .signupButton {
   width: 100%;
-  padding: 0.75rem;
+  padding: 0.85rem;
+  border: none;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #ff7a18, #ffb347);
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
 }
 
+.signupButton:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, #ff8c33, #ffc266);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+}
+
+/* Error Text */
 .errorText {
-  color: red;
+  color: #ff6b6b;
   margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+/* Footer */
+.footerText {
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.75);
 }
 
 .footerText span {
-  color: blue;
+  color: #ffb347;
   cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.footerText span:hover {
+  color: #ffc266;
+  text-decoration: underline;
 }
