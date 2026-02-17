@@ -70,10 +70,10 @@ function LoginPage() {
                             Sign In
                         </button>
                     </form>
-                    <SiteInfoFooter/>
+                    
                 </div>
             </div>
-            
+            <SiteInfoFooter/>
         </>
     );
 }

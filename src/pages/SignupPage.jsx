@@ -74,8 +74,8 @@ function SignupPage() {
           Already have an account?{" "}
           <span onClick={() => navigate("/login")}>Sign in</span>
         </p>
+        <SiteInfoFooter/>
       </div>
-      <SiteInfoFooter/>
     </div>
   );
 }
