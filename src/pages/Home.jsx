@@ -50,6 +50,7 @@ function Home() {
             <div className={styles.navButtons}>
             <button className={`${styles.buttonClass} ${styles.primary}`} onClick={() => navigate("/login")}>Login</button>
             <button className={styles.buttonClass} onClick={() => navigate("/signUp")}>Sign Up</button>
+            <button className={styles.buttonClass} onClick={() => navigate("/colorTester")}>color Tester Page</button>
             </div>
         </div>
     );
