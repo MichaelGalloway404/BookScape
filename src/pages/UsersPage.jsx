@@ -224,6 +224,13 @@ function UsersPage() {
                 <p>No books added yet.</p>
             ) : (
                 <ul style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+                    {editMode && (
+                    <input
+                        type="color"
+                        value={bgColor}
+                        onChange={(e) => setBgColor(e.target.value)}
+                    />)}
+                    
                     {books.map((book, i) => (
                         <div style={{
                             backgroundColor: bgColor,
@@ -251,14 +258,7 @@ function UsersPage() {
                                     > Delete </button>
                                 )}
                             </li>
-                            {/* test color */}
-                            <input
-                                type="color"
-                                value={bgColor}
-                                onChange={(e) => setBgColor(e.target.value)}
-                                // className={styles.colorInput}
-                            />
-                            {/*  */}
+
                         </div>
                     ))}
                 </ul >
