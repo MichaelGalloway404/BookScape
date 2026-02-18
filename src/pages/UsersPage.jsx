@@ -182,11 +182,11 @@ function UsersPage() {
             }
             {editMode && (
                 <>
-                {/* Public button */}
+                    {/* Public button */}
                     <button
                         onClick={() => setPublic()}
                     > Make profile public  </button>
-                {/* Private button */}
+                    {/* Private button */}
                     <button
                         onClick={() => setPrivate()}
                     > Make profile private </button>
@@ -224,25 +224,27 @@ function UsersPage() {
             ) : (
                 <ul style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
                     {books.map((book, i) => (
-                        <li key={i} style={{ listStyle: "none" }}
-                            draggable // Enables drag behavior
-                            onDragStart={() => handleDragStart(i)} // hold on to item being dragged
-                            onDragEnter={() => handleDragEnter(i)} // hold on to who we are hovering over
-                            onDragEnd={handleDragEnd} // now re-order books
-                            onDragOver={(e) => e.preventDefault()} // req for most browsers
-                        >
-                            <img
-                                src={`https://covers.openlibrary.org/b/id/${book.cover_id}-M.jpg`}
-                                alt="Book cover"
-                            />
-                            <p>ISBN: {book.isbn}</p>
-                            {editMode && (
-                                // delete button
-                                <button
-                                    onClick={() => deleteBook(book)}
-                                > Delete </button>
-                            )}
-                        </li>
+                        <div style={{ backgroundColor:"blue", padding:"5px" }}>
+                            <li key={i} style={{ listStyle: "none" }}
+                                draggable // Enables drag behavior
+                                onDragStart={() => handleDragStart(i)} // hold on to item being dragged
+                                onDragEnter={() => handleDragEnter(i)} // hold on to who we are hovering over
+                                onDragEnd={handleDragEnd} // now re-order books
+                                onDragOver={(e) => e.preventDefault()} // req for most browsers
+                            >
+                                <img
+                                    src={`https://covers.openlibrary.org/b/id/${book.cover_id}-M.jpg`}
+                                    alt="Book cover"
+                                />
+                                <p>ISBN: {book.isbn}</p>
+                                {editMode && (
+                                    // delete button
+                                    <button
+                                        onClick={() => deleteBook(book)}
+                                    > Delete </button>
+                                )}
+                            </li>
+                        </div>
                     ))}
                 </ul >
             )
@@ -250,7 +252,7 @@ function UsersPage() {
             <button onClick={() => navigate("/search")}>
                 Search for a book
             </button>
-            <SiteInfoFooter/>
+            <SiteInfoFooter />
         </>
     );
 }
