@@ -53,6 +53,12 @@ function PublicPage() {
       ) : (
         <ul style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
           {books.map((book, i) => (
+            <div style={{ 
+                            backgroundColor: "blue", 
+                            padding: "5px", 
+                            border: "2px solid black",
+                            borderRadius: "8px" }}>
+
             <li key={i} style={{ listStyle: "none" }}>
               <img
                 src={`https://covers.openlibrary.org/b/id/${book.cover_id}-M.jpg`}
@@ -60,6 +66,7 @@ function PublicPage() {
               />
               <p>ISBN: {book.isbn}</p>
             </li>
+            </div>
           ))}
         </ul>
       )}

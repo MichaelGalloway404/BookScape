@@ -224,7 +224,12 @@ function UsersPage() {
             ) : (
                 <ul style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
                     {books.map((book, i) => (
-                        <div style={{ backgroundColor:"blue", padding:"5px" }}>
+                        <div style={{ 
+                            backgroundColor: "blue", 
+                            padding: "5px", 
+                            border: "2px solid black",
+                            borderRadius: "8px" }}>
+
                             <li key={i} style={{ listStyle: "none" }}
                                 draggable // Enables drag behavior
                                 onDragStart={() => handleDragStart(i)} // hold on to item being dragged
