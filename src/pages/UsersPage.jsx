@@ -8,6 +8,7 @@ function UsersPage() {
     const [profilePublic, setProfilePrivate] = useState(false);
     const [books, setBooks] = useState([]);
     const [editMode, setEditMode] = useState(false);
+    const [bgColor, setBgColor] = useState("#1523be");
 
     const navigate = useNavigate();
 
@@ -224,11 +225,12 @@ function UsersPage() {
             ) : (
                 <ul style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
                     {books.map((book, i) => (
-                        <div style={{ 
-                            backgroundColor: "blue", 
-                            padding: "5px", 
+                        <div style={{
+                            backgroundColor: bgColor,
+                            padding: "5px",
                             border: "2px solid black",
-                            borderRadius: "8px" }}>
+                            borderRadius: "8px"
+                        }}>
 
                             <li key={i} style={{ listStyle: "none" }}
                                 draggable // Enables drag behavior
@@ -249,6 +251,14 @@ function UsersPage() {
                                     > Delete </button>
                                 )}
                             </li>
+                            {/* test color */}
+                            <input
+                                type="color"
+                                value={bgColor}
+                                onChange={(e) => setBgColor(e.target.value)}
+                                className={styles.colorInput}
+                            />
+                            {/*  */}
                         </div>
                     ))}
                 </ul >
