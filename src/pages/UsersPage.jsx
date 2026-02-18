@@ -256,7 +256,7 @@ function UsersPage() {
                                 type="color"
                                 value={bgColor}
                                 onChange={(e) => setBgColor(e.target.value)}
-                                className={styles.colorInput}
+                                // className={styles.colorInput}
                             />
                             {/*  */}
                         </div>
