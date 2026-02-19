@@ -2,7 +2,10 @@ import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import SiteInfoFooter from '../components/SiteInfoFooter';
+import ProfilePrivacyControls from "../components/ProfilePrivacyControls";
 import BookStyleControls from "../components/BookStyleControls";
+import BookList from "../components/BookList";
+
 
 
 function UsersPage() {
@@ -180,30 +183,16 @@ function UsersPage() {
 
     return (
         <>
-            {editMode === true ?
-                <h1>User {user.username}'s Page</h1>
-                :
-                <h1>User {user.username}'s Page <strong>Public: {profilePublic ? "False" : "True"}</strong></h1>
-            }
+            <h1>User {user.username}'s Page</h1>
+
             {editMode && (
-                <>
-                    {/* Public button */}
-                    <button
-                        onClick={() => setPublic()}
-                    > Make profile public  </button>
-                    {/* Private button */}
-                    <button
-                        onClick={() => setPrivate()}
-                    > Make profile private </button>
-                </>
+                <ProfilePrivacyControls
+                    profilePrivate={profilePublic}
+                    setPublic={setPublic}
+                    setPrivate={setPrivate}
+                />
             )}
 
-            {/* some ugly debug info, delete later */}
-            <p><strong>Debug ID:</strong> {user.id}</p>
-            <p><strong>Debug Username:</strong> {user.username}</p>
-            <p><strong>Debug Book Order:</strong> {user.book_order_json}</p>
-
-            {/* Edit button for toggling user pref */}
             <button
                 onClick={() => setEditMode(prev => !prev)}
                 style={{
@@ -216,65 +205,42 @@ function UsersPage() {
             </button>
 
             {editMode && (
-                // Save button
-                <button
-                    onClick={() => saveSettings(books)}
-                > Save </button>
+                <>
+                    <button onClick={() => saveSettings(books)}>
+                        Save
+                    </button>
+
+                    <h4>Edit book order by dragging and dropping</h4>
+
+                    <BookStyleControls
+                        bgColor={bgColor}
+                        borderColor={borderColor}
+                        borderSize={borderSize}
+                        setBgColor={setBgColor}
+                        setBorderColor={setBorderColor}
+                        setBorderSize={setBorderSize}
+                    />
+                </>
             )}
 
-            {editMode === true ? <h4>Edit book order by dragging and dropping</h4> : <></>}
+            <BookList
+                books={books}
+                editMode={editMode}
+                bgColor={bgColor}
+                borderColor={borderColor}
+                borderSize={borderSize}
+                handleDragStart={handleDragStart}
+                handleDragEnter={handleDragEnter}
+                handleDragEnd={handleDragEnd}
+                deleteBook={deleteBook}
+            />
 
-            {books.length === 0 ? (
-                <p>No books added yet.</p>
-            ) : (
-                <ul style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
-                    {editMode && (
-                        <BookStyleControls
-                            bgColor={bgColor}
-                            borderColor={borderColor}
-                            borderSize={borderSize}
-                            setBgColor={setBgColor}
-                            setBorderColor={setBorderColor}
-                            setBorderSize={setBorderSize}
-                        />
-                    )}
-                    {books.map((book, i) => (
-                        <div style={{
-                            backgroundColor: bgColor,
-                            padding: "5px",
-                            border: `${borderSize}px solid ${borderColor}`,
-                            borderRadius: "8px"
-                        }}>
-
-                            <li key={i} style={{ listStyle: "none" }}
-                                draggable // Enables drag behavior
-                                onDragStart={() => handleDragStart(i)} // hold on to item being dragged
-                                onDragEnter={() => handleDragEnter(i)} // hold on to who we are hovering over
-                                onDragEnd={handleDragEnd} // now re-order books
-                                onDragOver={(e) => e.preventDefault()} // req for most browsers
-                            >
-                                <img
-                                    src={`https://covers.openlibrary.org/b/id/${book.cover_id}-M.jpg`}
-                                    alt="Book cover"
-                                />
-                                <p>ISBN: {book.isbn}</p>
-                                {editMode && (
-                                    // delete button
-                                    <button
-                                        onClick={() => deleteBook(book)}
-                                    > Delete </button>
-                                )}
-                            </li>
-
-                        </div>
-                    ))}
-                </ul >
-            )
-            }
             <button onClick={() => navigate("/search")}>
                 Search for a book
             </button>
+
             <SiteInfoFooter />
+
         </>
     );
 }
