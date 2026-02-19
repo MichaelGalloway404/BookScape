@@ -251,8 +251,7 @@ function UsersPage() {
                         <div style={{
                             backgroundColor: bgColor,
                             padding: "5px",
-                            border: "2px solid black",
-                            borderBlockWidth: borderSize,
+                            border: `${borderSize} solid black`,
                             borderRadius: "8px"
                         }}>
 
