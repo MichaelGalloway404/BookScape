@@ -9,6 +9,7 @@ function UsersPage() {
     const [books, setBooks] = useState([]);
     const [editMode, setEditMode] = useState(false);
     const [bgColor, setBgColor] = useState("#1523be");
+    const [borderSize, setborderSize] = useState("2px");
 
     const navigate = useNavigate();
 
@@ -225,17 +226,33 @@ function UsersPage() {
             ) : (
                 <ul style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
                     {editMode && (
-                    <input
-                        type="color"
-                        value={bgColor}
-                        onChange={(e) => setBgColor(e.target.value)}
-                    />)}
-                    
+                        <input
+                            type="color"
+                            value={bgColor}
+                            onChange={(e) => setBgColor(e.target.value)}
+                        />)}
+                    <select
+                        value={borderSize}
+                        onChange={(e) => setborderSize(e.target.value)}
+                    >
+                        <option value="1px">1px</option>
+                        <option value="2px">2px</option>
+                        <option value="3px">3px</option>
+                        <option value="4px">4px</option>
+                        <option value="5px">5px</option>
+                        <option value="6px">6px</option>
+                        <option value="7px">7px</option>
+                        <option value="8px">8px</option>
+                        <option value="9px">9px</option>
+                        <option value="10px">10px</option>
+                    </select>
+
                     {books.map((book, i) => (
                         <div style={{
                             backgroundColor: bgColor,
                             padding: "5px",
                             border: "2px solid black",
+                            borderBlockWidth: borderSize,
                             borderRadius: "8px"
                         }}>
 
