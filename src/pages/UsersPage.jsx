@@ -21,7 +21,16 @@ function UsersPage() {
     const navigate = useNavigate();
 
     useEffect(() => {
+        // save the original background
+        const originalBackground = document.body.style.background;
+
+        // apply the page background
         document.body.style.background = pageBckColor;
+
+        // cleanup function runs when the component unmounts
+        return () => {
+            document.body.style.background = originalBackground;
+        };
     }, [pageBckColor]);
 
 
