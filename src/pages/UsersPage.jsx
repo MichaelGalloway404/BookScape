@@ -2,6 +2,8 @@ import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import SiteInfoFooter from '../components/SiteInfoFooter';
+import BookStyleControls from "../components/BookStyleControls";
+
 
 function UsersPage() {
     const [user, setUser] = useState(null);
@@ -227,26 +229,15 @@ function UsersPage() {
             ) : (
                 <ul style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
                     {editMode && (
-                        <>
-                            <input
-                                type="color"
-                                value={bgColor}
-                                onChange={(e) => setBgColor(e.target.value)}
-                            />
-                            <input style={{ height:"20px", width:"50px" }}
-                                type="number"
-                                min="1"
-                                placeholder="1"
-                                onChange={(e) => setBorderSize(Number(e.target.value))}
-                            />
-                            <input
-                                type="color"
-                                value={borderColor}
-                                onChange={(e) => setBorderColor(e.target.value)}
-                            />
-                        </>
+                        <BookStyleControls
+                            bgColor={bgColor}
+                            borderColor={borderColor}
+                            borderSize={borderSize}
+                            setBgColor={setBgColor}
+                            setBorderColor={setBorderColor}
+                            setBorderSize={setBorderSize}
+                        />
                     )}
-
                     {books.map((book, i) => (
                         <div style={{
                             backgroundColor: bgColor,
