@@ -9,6 +9,7 @@ function UsersPage() {
     const [books, setBooks] = useState([]);
     const [editMode, setEditMode] = useState(false);
     const [bgColor, setBgColor] = useState("#1523be");
+    const [borderColor, setBorderColor] = useState("#181b44");
     const [borderSize, setBorderSize] = useState("2");
 
     const navigate = useNavigate();
@@ -238,6 +239,11 @@ function UsersPage() {
                                 placeholder="1"
                                 onChange={(e) => setBorderSize(Number(e.target.value))}
                             />
+                            <input
+                                type="color"
+                                value={borderColor}
+                                onChange={(e) => setBorderColor(e.target.value)}
+                            />
                         </>
                     )}
 
@@ -245,7 +251,7 @@ function UsersPage() {
                         <div style={{
                             backgroundColor: bgColor,
                             padding: "5px",
-                            border: `${borderSize}px solid black`,
+                            border: `${borderSize}px solid ${borderColor}`,
                             borderRadius: "8px"
                         }}>
 
