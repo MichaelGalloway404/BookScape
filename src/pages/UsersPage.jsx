@@ -232,10 +232,10 @@ function UsersPage() {
                                 value={bgColor}
                                 onChange={(e) => setBgColor(e.target.value)}
                             />
-                            <input
+                            <input style={{ height:"20px", width:"50px" }}
                                 type="number"
                                 min="1"
-                                placeholder="Custom"
+                                placeholder="1"
                                 onChange={(e) => setBorderSize(Number(e.target.value))}
                             />
                         </>
