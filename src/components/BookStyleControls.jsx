@@ -1,9 +1,11 @@
 function BookStyleControls({
   bgColor,
   borderColor,
+  pageBckColor,
   borderSize,
   setBgColor,
   setBorderColor,
+  setPageBckColor,
   setBorderSize
 }) {
   return (
