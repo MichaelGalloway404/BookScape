@@ -182,7 +182,7 @@ function UsersPage() {
     }
 
     return (
-        <>
+        <div style={{width:"100%",height:"100%", backgroundColor:"wheat"}}>
             <h1>User {user.username}'s Page</h1>
 
             {editMode && (
@@ -241,7 +241,7 @@ function UsersPage() {
 
             <SiteInfoFooter />
 
-        </>
+        </div>
     );
 }
 
