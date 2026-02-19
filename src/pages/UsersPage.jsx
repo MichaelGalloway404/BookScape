@@ -16,8 +16,18 @@ function UsersPage() {
     const [bgColor, setBgColor] = useState("#1523be");
     const [borderColor, setBorderColor] = useState("#181b44");
     const [borderSize, setBorderSize] = useState("2");
+    const [pageBckColor, setPageBckColor] = useState("wheat");
 
     const navigate = useNavigate();
+
+    useEffect(() => {
+        document.body.style.backgroundColor = "wheat";
+
+        return () => {
+            document.body.style.backgroundColor = "";
+        };
+    }, []);
+
 
     useEffect(() => {
         const loadUser = async () => {
@@ -182,7 +192,7 @@ function UsersPage() {
     }
 
     return (
-        <div style={{width:"100%",height:"100%", backgroundColor:"wheat"}}>
+        <>
             <h1>User {user.username}'s Page</h1>
 
             {editMode && (
@@ -215,8 +225,10 @@ function UsersPage() {
                     <BookStyleControls
                         bgColor={bgColor}
                         borderColor={borderColor}
+                        pageBckColor={pageBckColor}
                         borderSize={borderSize}
                         setBgColor={setBgColor}
+                        setPageBckColor={setPageBckColor}
                         setBorderColor={setBorderColor}
                         setBorderSize={setBorderSize}
                     />
@@ -241,7 +253,7 @@ function UsersPage() {
 
             <SiteInfoFooter />
 
-        </div>
+        </>
     );
 }
 

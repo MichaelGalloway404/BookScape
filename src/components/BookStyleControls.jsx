@@ -27,6 +27,11 @@ function BookStyleControls({
         value={borderColor}
         onChange={(e) => setBorderColor(e.target.value)}
       />
+      <input
+        type="color"
+        value={pageBckColor}
+        onChange={(e) => setPageBckColor(e.target.value)}
+      />
     </div>
   );
 }
