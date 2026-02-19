@@ -22,11 +22,7 @@ function UsersPage() {
 
     useEffect(() => {
         document.body.style.backgroundColor = pageBckColor;
-
-        return () => {
-            document.body.style.backgroundColor = "";
-        };
-    }, []);
+    }, [pageBckColor]);
 
 
     useEffect(() => {
