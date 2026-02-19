@@ -21,7 +21,7 @@ function UsersPage() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        document.body.style.backgroundColor = pageBckColor;
+        document.body.style.background = pageBckColor;
     }, [pageBckColor]);
 
 
