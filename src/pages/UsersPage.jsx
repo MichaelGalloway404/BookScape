@@ -20,6 +20,7 @@ function UsersPage() {
 
     const navigate = useNavigate();
 
+    // will load color for background from user settings later
     useEffect(() => {
         // save the original background
         const originalBackground = document.body.style.background;
@@ -32,8 +33,6 @@ function UsersPage() {
             document.body.style.background = originalBackground;
         };
     }, [pageBckColor]);
-
-    // 
 
     useEffect(() => {
         const loadUser = async () => {
@@ -201,6 +200,7 @@ function UsersPage() {
         <>
             <h1>User {user.username}'s Page</h1>
 
+            {/* user profile controls */}
             {editMode && (
                 <ProfilePrivacyControls
                     profilePrivate={profilePublic}
@@ -227,7 +227,7 @@ function UsersPage() {
                     </button>
 
                     <h4>Edit book order by dragging and dropping</h4>
-
+                    {/* component to handle all user styles related to all book cards */}
                     <BookStyleControls
                         bgColor={bgColor}
                         borderColor={borderColor}
@@ -241,6 +241,7 @@ function UsersPage() {
                 </>
             )}
 
+            {/* component for listing out users books */}
             <BookList
                 books={books}
                 editMode={editMode}
@@ -253,12 +254,12 @@ function UsersPage() {
                 deleteBook={deleteBook}
             />
 
+            {/* search for book button */}
             <button onClick={() => navigate("/search")}>
                 Search for a book
             </button>
 
             <SiteInfoFooter />
-
         </>
     );
 }
