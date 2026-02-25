@@ -259,14 +259,19 @@ function UsersPage() {
                                 placeholder="1"
                                 onChange={(e) => setBorderSize(Number(e.target.value))}
                             />
+                            <input
+                                type="color"
+                                value={borderColor}
+                                onChange={(e) => setBorderColor(e.target.value)}
+                            />
                         </>
-                    )}
+                            )}
 
                     {books.map((book, i) => (
                         <div style={{
                             backgroundColor: bgColor,
                             padding: "5px",
-                            border: `${borderSize}px solid black`,
+                            border: `${borderSize}px solid ${borderColor}`,
                             borderRadius: "8px"
                         }}>
 
