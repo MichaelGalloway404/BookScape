@@ -33,7 +33,7 @@ function DraggableBookCard({
         />
 
         <p>ISBN: {book.isbn}</p>
-        <p>Title: {book.title}</p>
+        <p>Title: {book}</p>
 
         {editMode && (
           <button onClick={() => deleteBook(book)}>
