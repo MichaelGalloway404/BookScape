@@ -20,19 +20,19 @@ function UsersPage() {
 
     const navigate = useNavigate();
 
-    // will load color for background from user settings later
-    useEffect(() => {
-        // save the original background
-        const originalBackground = document.body.style.background;
+    // // will load color for background from user settings later
+    // useEffect(() => {
+    //     // save the original background
+    //     const originalBackground = document.body.style.background;
 
-        // apply the page background
-        document.body.style.background = pageBckColor;
+    //     // apply the page background
+    //     document.body.style.background = pageBckColor;
 
-        // cleanup function runs when the component unmounts
-        return () => {
-            document.body.style.background = originalBackground;
-        };
-    }, [pageBckColor]);
+    //     // cleanup function runs when the component unmounts
+    //     return () => {
+    //         document.body.style.background = originalBackground;
+    //     };
+    // }, [pageBckColor]);
 
     useEffect(() => {
         const loadUser = async () => {
