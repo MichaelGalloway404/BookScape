@@ -2,9 +2,9 @@ import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import SiteInfoFooter from '../components/SiteInfoFooter';
-import ProfilePrivacyControls from "../components/ProfilePrivacyControls";
-import BookStyleControls from "../components/BookStyleControls";
-import BookList from "../components/BookList";
+// import ProfilePrivacyControls from "../components/ProfilePrivacyControls";
+// import BookStyleControls from "../components/BookStyleControls";
+// import BookList from "../components/BookList";
 
 
 
@@ -16,7 +16,7 @@ function UsersPage() {
     const [bgColor, setBgColor] = useState("#1523be");
     const [borderColor, setBorderColor] = useState("#181b44");
     const [borderSize, setBorderSize] = useState("2");
-    const [pageBckColor, setPageBckColor] = useState("wheat");
+    // const [pageBckColor, setPageBckColor] = useState("wheat");
 
     const navigate = useNavigate();
 
@@ -287,6 +287,7 @@ function UsersPage() {
                                     alt="Book cover"
                                 />
                                 <p>ISBN: {book.isbn}</p>
+                                <p>title: {book.title}</p>
                                 {editMode && (
                                     // delete button
                                     <button
