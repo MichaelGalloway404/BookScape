@@ -14,7 +14,7 @@ export default async function handler(req, res) {
         try {
             const result = await pool.query(
                 `
-        SELECT isbn, cover_id
+        SELECT isbn, cover_id, title, author
         FROM user_books
         WHERE user_id = $1
         `,
