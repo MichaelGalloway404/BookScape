@@ -198,17 +198,30 @@ function UsersPage() {
 
     return (
         <>
-            <h1>User {user.username}'s Page</h1>
-
-            {/* user profile controls */}
+            {editMode === true ?
+                <h1>User {user.username}'s Page</h1>
+                :
+                <h1>User {user.username}'s Page <strong>Public: {profilePublic ? "False" : "True"}</strong></h1>
+            }
             {editMode && (
-                <ProfilePrivacyControls
-                    profilePrivate={profilePublic}
-                    setPublic={setPublic}
-                    setPrivate={setPrivate}
-                />
+                <>
+                    {/* Public button */}
+                    <button
+                        onClick={() => setPublic()}
+                    > Make profile public  </button>
+                    {/* Private button */}
+                    <button
+                        onClick={() => setPrivate()}
+                    > Make profile private </button>
+                </>
             )}
 
+            {/* some ugly debug info, delete later */}
+            <p><strong>Debug ID:</strong> {user.id}</p>
+            <p><strong>Debug Username:</strong> {user.username}</p>
+            <p><strong>Debug Book Order:</strong> {user.book_order_json}</p>
+
+            {/* Edit button for toggling user pref */}
             <button
                 onClick={() => setEditMode(prev => !prev)}
                 style={{
@@ -221,44 +234,70 @@ function UsersPage() {
             </button>
 
             {editMode && (
-                <>
-                    <button onClick={() => saveSettings(books)}>
-                        Save
-                    </button>
-
-                    <h4>Edit book order by dragging and dropping</h4>
-                    {/* component to handle all user styles related to all book cards */}
-                    <BookStyleControls
-                        bgColor={bgColor}
-                        borderColor={borderColor}
-                        pageBckColor={pageBckColor}
-                        borderSize={borderSize}
-                        setBgColor={setBgColor}
-                        setPageBckColor={setPageBckColor}
-                        setBorderColor={setBorderColor}
-                        setBorderSize={setBorderSize}
-                    />
-                </>
+                // Save button
+                <button
+                    onClick={() => saveSettings(books)}
+                > Save </button>
             )}
 
-            {/* component for listing out users books */}
-            <BookList
-                books={books}
-                editMode={editMode}
-                bgColor={bgColor}
-                borderColor={borderColor}
-                borderSize={borderSize}
-                handleDragStart={handleDragStart}
-                handleDragEnter={handleDragEnter}
-                handleDragEnd={handleDragEnd}
-                deleteBook={deleteBook}
-            />
+            {editMode === true ? <h4>Edit book order by dragging and dropping</h4> : <></>}
 
-            {/* search for book button */}
+            {books.length === 0 ? (
+                <p>No books added yet.</p>
+            ) : (
+                <ul style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+                    {editMode && (
+                        <>
+                            <input
+                                type="color"
+                                value={bgColor}
+                                onChange={(e) => setBgColor(e.target.value)}
+                            />
+                            <input style={{ height:"20px", width:"50px" }}
+                                type="number"
+                                min="1"
+                                placeholder="1"
+                                onChange={(e) => setBorderSize(Number(e.target.value))}
+                            />
+                        </>
+                    )}
+
+                    {books.map((book, i) => (
+                        <div style={{
+                            backgroundColor: bgColor,
+                            padding: "5px",
+                            border: `${borderSize}px solid black`,
+                            borderRadius: "8px"
+                        }}>
+
+                            <li key={i} style={{ listStyle: "none" }}
+                                draggable // Enables drag behavior
+                                onDragStart={() => handleDragStart(i)} // hold on to item being dragged
+                                onDragEnter={() => handleDragEnter(i)} // hold on to who we are hovering over
+                                onDragEnd={handleDragEnd} // now re-order books
+                                onDragOver={(e) => e.preventDefault()} // req for most browsers
+                            >
+                                <img
+                                    src={`https://covers.openlibrary.org/b/id/${book.cover_id}-M.jpg`}
+                                    alt="Book cover"
+                                />
+                                <p>ISBN: {book.isbn}</p>
+                                {editMode && (
+                                    // delete button
+                                    <button
+                                        onClick={() => deleteBook(book)}
+                                    > Delete </button>
+                                )}
+                            </li>
+
+                        </div>
+                    ))}
+                </ul >
+            )
+            }
             <button onClick={() => navigate("/search")}>
                 Search for a book
             </button>
-
             <SiteInfoFooter />
         </>
     );
