@@ -10,6 +10,7 @@ function DraggableBookCard({
   handleDragEnd,
   deleteBook
 }) {
+  console.log(book);
   return (
     <div
       style={{
@@ -34,7 +35,9 @@ function DraggableBookCard({
 
         <p>ISBN: {book.isbn}</p>
         <p> Author: {book.author} </p>
-        <p> <h5><strong>{book.title}</strong></h5></p>
+        <p style={{ fontWeight: "bold", fontSize: "1.1rem" }}>
+          {book.title}
+        </p>
 
         {editMode && (
           <button onClick={() => deleteBook(book)}>
