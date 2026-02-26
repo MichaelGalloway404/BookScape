@@ -105,6 +105,7 @@
 .addButton{
   background: linear-gradient(135deg, #ffffff, #aeaeae);
   padding: 10px;
+  color: #000000;
 }
 .addButton:hover{
   background: linear-gradient(135deg, #ffffff, #6e6d6d);
