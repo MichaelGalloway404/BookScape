@@ -6,8 +6,6 @@ function BookList({
   handleDragStart,
   handleDragEnter,
   handleDragEnd,
-  pageBckColor,
-  setPageBckColor,
   deleteBook
 }) {
   const [bgColor, setBgColor] = useState("#1523be");
