@@ -24,30 +24,35 @@ function BookList({
     <>
       {editMode && (
         <div style={{ display: "flex", gap: "0.5rem" }}>
+          <p>BookCard Color</p>
           <input
             type="color"
             value={bgColor}
             onChange={(e) => setBgColor(e.target.value)}
-          >BookCard Color</input>
+          />
 
+          <p>Border Size</p>
           <input
             style={{ height: "20px", width: "50px" }}
             type="number"
             min="0"
             value={borderSize}
             onChange={(e) => setBorderSize(Number(e.target.value))}
-          >Border Size</input>
+          />
 
+          <p>BookCard Border Color</p>
           <input
             type="color"
             value={borderColor}
             onChange={(e) => setBorderColor(e.target.value)}
-          >BookCard Border Color</input>
+          />
+
+          <p>Page Background Color</p>
           <input
             type="color"
             value={pageBckColor}
             onChange={(e) => setPageBckColor(e.target.value)}
-          >Page Background Color</input>
+          />
         </div>
       )}
       <ul style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
