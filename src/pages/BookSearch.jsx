@@ -210,7 +210,7 @@ export default function BookSearch() {
       {/* testing out css modules */}
       <h2>Search Books</h2>
 
-      <div className="inputBox">
+      <div className={styles.inputBox}>
         {/* Title input field */}
         <input
           placeholder="Title"

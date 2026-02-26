@@ -71,7 +71,7 @@
 }
 
 .inputBox{
-  display: block;
+  display: grid;
   background-color: antiquewhite;
 }
 
