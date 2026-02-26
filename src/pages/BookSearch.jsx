@@ -280,7 +280,7 @@ export default function BookSearch() {
                 ISBN: {book.isbn}
               </p>
               {/* add a book to user db */}
-              <button className={`${styles.buttonClass}`}
+              <button className={`${styles.buttonClass} ${styles.addButton}`}
                 onClick={() => addBook(book)}
               >
                 Add
