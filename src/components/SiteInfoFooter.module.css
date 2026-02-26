@@ -32,6 +32,7 @@
   font-size: 1rem;
   background: linear-gradient(135deg, #43cea2, #185a9d);
   font-weight: 600;
+  margin: 5px;
 }
 
 .homeBtn:hover {

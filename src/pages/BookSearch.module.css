@@ -93,6 +93,7 @@
   background: linear-gradient(135deg, #43cea2, #185a9d);
   color: white;
   backdrop-filter: blur(8px);
+  margin: 5px;
 }
 
 .buttonClass:hover {

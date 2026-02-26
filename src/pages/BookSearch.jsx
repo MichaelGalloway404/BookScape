@@ -212,7 +212,7 @@ export default function BookSearch() {
 
       <div className={styles.inputBox}>
         {/* Title input field */}
-        <input
+        <input className={`${styles.textInput}`}
           placeholder="Title"
 
           // Value comes from React state
@@ -222,8 +222,8 @@ export default function BookSearch() {
           onChange={e => setTitle(e.target.value)}
         />
 
-        {/* Author input field */}
-        <input
+        {/* Author input field */} 
+        <input className={`${styles.textInput}`}
           placeholder="Author"
 
           // Author state
@@ -233,7 +233,7 @@ export default function BookSearch() {
           onChange={e => setAuthor(e.target.value)}
         />
         {/* ISBN field */}
-        <input
+        <input className={`${styles.textInput}`}
           placeholder="ISBN"
           value={isbn}
           onChange={e => setIsbn(e.target.value)}
