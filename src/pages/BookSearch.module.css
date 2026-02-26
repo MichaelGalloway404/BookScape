@@ -103,11 +103,9 @@
 }
 
 .addButton{
-  font-size: 0.65rem;
-  background-color: #5be3b7;
-  padding: 0px;
+  background: linear-gradient(135deg, #ffffff, #aeaeae);
+  padding: 10px;
 }
 .addButton:hover{
-  font-size: 0.65rem;
-  background-color: #47b18f;
+  background: linear-gradient(135deg, #ffffff, #6e6d6d);
 }
