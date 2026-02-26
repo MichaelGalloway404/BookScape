@@ -69,3 +69,26 @@
 .pagination button:hover {
   background: #444;
 }
+
+.inputBox{
+  display: block;
+  background-color: antiquewhite;
+}
+
+.buttonClass {
+  border: none;
+  padding: 12px 22px;
+  border-radius: 999px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  backdrop-filter: blur(8px);
+}
+
+.buttonClass:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+}

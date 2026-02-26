@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import SiteInfoFooter from '../components/SiteInfoFooter';
 import ProfilePrivacyControls from "../components/ProfilePrivacyControls";
 import BookList from "../components/BookList";
+import styles from "./BookSearch.module.css"
 
 
 
@@ -227,7 +228,7 @@ function UsersPage() {
             />
 
             {/* search for book button */}
-            <button onClick={() => navigate("/search")}>
+            <button className={`${styles.buttonClass}`} onClick={() => navigate("/search")}>
                 Search for a book
             </button>
 

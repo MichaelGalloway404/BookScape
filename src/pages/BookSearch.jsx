@@ -210,37 +210,38 @@ export default function BookSearch() {
       {/* testing out css modules */}
       <h2>Search Books</h2>
 
-      {/* Title input field */}
-      <input
-        placeholder="Title"
+      <div className="inputBox">
+        {/* Title input field */}
+        <input
+          placeholder="Title"
 
-        // Value comes from React state
-        value={title}
+          // Value comes from React state
+          value={title}
 
-        // Update the title state whenever the user types
-        onChange={e => setTitle(e.target.value)}
-      />
+          // Update the title state whenever the user types
+          onChange={e => setTitle(e.target.value)}
+        />
 
-      {/* Author input field */}
-      <input
-        placeholder="Author"
+        {/* Author input field */}
+        <input
+          placeholder="Author"
 
-        // Author state
-        value={author}
+          // Author state
+          value={author}
 
-        // Update the author state on every keystroke
-        onChange={e => setAuthor(e.target.value)}
-      />
-      {/* ISBN field */}
-      <input
-        placeholder="ISBN"
-        value={isbn}
-        onChange={e => setIsbn(e.target.value)}
-      />
-
+          // Update the author state on every keystroke
+          onChange={e => setAuthor(e.target.value)}
+        />
+        {/* ISBN field */}
+        <input
+          placeholder="ISBN"
+          value={isbn}
+          onChange={e => setIsbn(e.target.value)}
+        />
+      </div>
 
       {/* Button that triggers the Open Library search */}
-      <button
+      <button className={`${styles.buttonClass}`}
         // When clicked, runs the async search function
         onClick={searchForBooks}
       >
@@ -279,7 +280,7 @@ export default function BookSearch() {
                 ISBN: {book.isbn}
               </p>
               {/* add a book to user db */}
-              <button
+              <button className={`${styles.buttonClass}`}
                 onClick={() => addBook(book)}
               >
                 Add
@@ -301,10 +302,10 @@ export default function BookSearch() {
           <button onClick={nextPage}>Next</button>
         </div>
       )}
-      <button onClick={() => navigate("/second")}>
+      <button className={`${styles.buttonClass}`} onClick={() => navigate("/second")}>
         Back to userPage
       </button>
-      <SiteInfoFooter/>
+      <SiteInfoFooter />
     </>
   );
 
