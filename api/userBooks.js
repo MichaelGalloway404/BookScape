@@ -30,7 +30,7 @@ export default async function handler(req, res) {
 
     // POST: add book 
     if (req.method === "POST") {
-        const { isbn, cover_id } = req.body;
+        const { isbn, cover_id, title, author } = req.body;
 
         try {
             await pool.query(
@@ -38,7 +38,7 @@ export default async function handler(req, res) {
         INSERT INTO user_books (user_id, isbn, cover_id, title, author)
         VALUES ($1, $2, $3, $4, $5)
         `,
-                [decoded.userId, isbn, cover_id]
+                [decoded.userId, isbn, cover_id, title, author]
             );
 
             return res.status(201).json({ success: true });
