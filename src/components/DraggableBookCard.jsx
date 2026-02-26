@@ -35,6 +35,7 @@ function DraggableBookCard({
 
         <p>ISBN: {book.isbn}</p>
         <p> Author: {book.author} </p>
+        <p> Title: {book.title} </p>
         <p style={{ fontWeight: "bold", fontSize: "1.1rem" }}>
           {book.title}
         </p>

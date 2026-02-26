@@ -50,6 +50,8 @@ export default function BookSearch() {
         {
           isbn: book.isbn === "null" ? null : book.isbn,
           cover_id: book.coverUrl.split("/b/id/")[1].split("-")[0],
+          title: book.title,
+          author: book.author,
         },
         { withCredentials: true }
       );
