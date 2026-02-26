@@ -28,26 +28,26 @@ function BookList({
             type="color"
             value={bgColor}
             onChange={(e) => setBgColor(e.target.value)}
-          />
+          >BookCard Color</input>
 
           <input
             style={{ height: "20px", width: "50px" }}
             type="number"
-            min="1"
+            min="0"
             value={borderSize}
             onChange={(e) => setBorderSize(Number(e.target.value))}
-          />
+          >Border Size</input>
 
           <input
             type="color"
             value={borderColor}
             onChange={(e) => setBorderColor(e.target.value)}
-          />
+          >BookCard Border Color</input>
           <input
             type="color"
             value={pageBckColor}
             onChange={(e) => setPageBckColor(e.target.value)}
-          />
+          >Page Background Color</input>
         </div>
       )}
       <ul style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
