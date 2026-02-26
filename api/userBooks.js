@@ -35,8 +35,8 @@ export default async function handler(req, res) {
         try {
             await pool.query(
                 `
-        INSERT INTO user_books (user_id, isbn, cover_id)
-        VALUES ($1, $2, $3)
+        INSERT INTO user_books (user_id, isbn, cover_id, title, author)
+        VALUES ($1, $2, $3, $4, $5)
         `,
                 [decoded.userId, isbn, cover_id]
             );
