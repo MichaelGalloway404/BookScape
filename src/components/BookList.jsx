@@ -3,19 +3,33 @@ import DraggableBookCard from "./DraggableBookCard";
 function BookList({
   books,
   editMode,
-  bgColor,
-  borderColor,
-  borderSize,
   handleDragStart,
   handleDragEnter,
   handleDragEnd,
   pageBckColor,
-  setBgColor,
-  setBorderColor,
   setPageBckColor,
-  setBorderSize,
   deleteBook
 }) {
+  const [bgColor, setBgColor] = useState("#1523be");
+  const [borderColor, setBorderColor] = useState("#181b44");
+  const [borderSize, setBorderSize] = useState("2");
+  const [pageBckColor, setPageBckColor] = useState("wheat");
+
+  // will load color for background from user settings later
+      useEffect(() => {
+          // save the original background
+          const originalBackground = document.body.style.background;
+  
+          // apply the page background
+          document.body.style.background = pageBckColor;
+  
+          // cleanup function runs when the component unmounts
+          return () => {
+              document.body.style.background = originalBackground;
+          };
+      }, [pageBckColor]);
+
+
   if (books.length === 0) {
     return <p>No books added yet.</p>;
   }

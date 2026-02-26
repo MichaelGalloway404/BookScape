@@ -3,7 +3,6 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import SiteInfoFooter from '../components/SiteInfoFooter';
 import ProfilePrivacyControls from "../components/ProfilePrivacyControls";
-// import BookStyleControls from "../components/BookStyleControls";
 import BookList from "../components/BookList";
 
 
@@ -13,26 +12,13 @@ function UsersPage() {
     const [profilePublic, setProfilePrivate] = useState(false);
     const [books, setBooks] = useState([]);
     const [editMode, setEditMode] = useState(false);
-    const [bgColor, setBgColor] = useState("#1523be");
-    const [borderColor, setBorderColor] = useState("#181b44");
-    const [borderSize, setBorderSize] = useState("2");
-    const [pageBckColor, setPageBckColor] = useState("wheat");
+    
+    
+    
 
     const navigate = useNavigate();
 
-    // will load color for background from user settings later
-    useEffect(() => {
-        // save the original background
-        const originalBackground = document.body.style.background;
-
-        // apply the page background
-        document.body.style.background = pageBckColor;
-
-        // cleanup function runs when the component unmounts
-        return () => {
-            document.body.style.background = originalBackground;
-        };
-    }, [pageBckColor]);
+    
 
     useEffect(() => {
         const loadUser = async () => {
@@ -227,17 +213,6 @@ function UsersPage() {
                     </button>
 
                     <h4>Edit book order by dragging and dropping</h4>
-                    {/* component to handle all user styles related to all book cards */}
-                    {/* <BookStyleControls
-                        bgColor={bgColor}
-                        borderColor={borderColor}
-                        pageBckColor={pageBckColor}
-                        borderSize={borderSize}
-                        setBgColor={setBgColor}
-                        setPageBckColor={setPageBckColor}
-                        setBorderColor={setBorderColor}
-                        setBorderSize={setBorderSize}
-                    /> */}
                 </>
             )}
 
@@ -245,18 +220,10 @@ function UsersPage() {
             <BookList
                 books={books}
                 editMode={editMode}
-                bgColor={bgColor}
-                pageBckColor={pageBckColor}
-                borderColor={borderColor}
-                borderSize={borderSize}
                 handleDragStart={handleDragStart}
                 handleDragEnter={handleDragEnter}
                 handleDragEnd={handleDragEnd}
                 deleteBook={deleteBook}
-                setBgColor={setBgColor}
-                setPageBckColor={setPageBckColor}
-                setBorderColor={setBorderColor}
-                setBorderSize={setBorderSize}
             />
 
             {/* search for book button */}
