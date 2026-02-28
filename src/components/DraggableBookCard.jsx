@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 function DraggableBookCard({
   book,
@@ -13,10 +13,22 @@ function DraggableBookCard({
   deleteBook
 }) {
 
+  const [summary, setSummary] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [expanded, setExpanded] = useState(false);
+
   async function fetchWikiSummary() {
+    // Toggle closed if already open
+    if (expanded) {
+      setExpanded(false);
+      return;
+    }
+
+    setLoading(true);
+
     try {
       const searchQuery = encodeURIComponent(
-        `${book.title} ${book.author || ""} novel`
+        `${book.title} ${book.author || ""}`
       );
 
       const searchUrl =
@@ -25,9 +37,10 @@ function DraggableBookCard({
       const searchResponse = await fetch(searchUrl);
       const searchData = await searchResponse.json();
 
-      // If no search results → open generic Wikipedia search
       if (!searchData.query.search.length) {
-        openWikiSearch();
+        setSummary("No Wikipedia page found.");
+        setExpanded(true);
+        setLoading(false);
         return;
       }
 
@@ -39,39 +52,36 @@ function DraggableBookCard({
 
       const summaryResponse = await fetch(summaryUrl);
 
-      // If summary fails → open generic search
       if (!summaryResponse.ok) {
-        openWikiSearch();
+        setSummary("Could not retrieve summary.");
+        setExpanded(true);
+        setLoading(false);
         return;
       }
 
       const data = await summaryResponse.json();
 
-      alert(`${data.title}\n\n${data.extract}`);
+      setSummary(data.extract);
+      setExpanded(true);
 
     } catch (error) {
-      openWikiSearch();
+      setSummary("Error fetching Wikipedia summary.");
+      setExpanded(true);
     }
+
+    setLoading(false);
   }
 
-  function openWikiSearch() {
-    const wikiSearchUrl =
-      `https://en.wikipedia.org/wiki/Special:Search?search=${encodeURIComponent(
-        `${book.title} ${book.author || ""}`
-      )}`;
-
-    window.open(wikiSearchUrl, "_blank");
-  }
-
-  // ✅ JSX must be returned from component — not from fetch function
   return (
     <div
       style={{
         backgroundColor: bgColor,
-        padding: "5px",
+        padding: "10px",
         border: `${borderSize}px solid ${borderColor}`,
         borderRadius: "8px",
-        cursor: "pointer"
+        cursor: "pointer",
+        marginBottom: "10px",
+        transition: "all 0.2s ease"
       }}
       onClick={!editMode ? fetchWikiSummary : undefined}
     >
@@ -86,18 +96,43 @@ function DraggableBookCard({
         <img
           src={`https://covers.openlibrary.org/b/id/${book.cover_id}-M.jpg`}
           alt="Book cover"
+          style={{ width: "100px", marginBottom: "8px" }}
         />
 
-        <p>ISBN: {book.isbn}</p>
+        <p><strong>{book.title}</strong></p>
         <p>Author: {book.author}</p>
-        <p style={{ fontWeight: "bold", fontSize: "1.1rem" }}>
-          {book.title}
-        </p>
+        <p>ISBN: {book.isbn}</p>
 
         {editMode && (
-          <button onClick={() => deleteBook(book)}>
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              deleteBook(book);
+            }}
+          >
             Delete
           </button>
+        )}
+
+        {loading && (
+          <p style={{ fontStyle: "italic" }}>
+            Loading summary...
+          </p>
+        )}
+
+        {expanded && summary && (
+          <div
+            style={{
+              marginTop: "10px",
+              padding: "10px",
+              backgroundColor: "#f4f4f4",
+              borderRadius: "6px",
+              fontSize: "0.9rem",
+              lineHeight: "1.4"
+            }}
+          >
+            {summary}
+          </div>
         )}
       </li>
     </div>
