@@ -1,3 +1,5 @@
+import React from "react";
+
 function DraggableBookCard({
   book,
   index,
@@ -10,15 +12,53 @@ function DraggableBookCard({
   handleDragEnd,
   deleteBook
 }) {
-  console.log(book);
+
+  async function fetchWikiSummary() {
+    try {
+      const searchQuery = encodeURIComponent(
+        `${book.title} ${book.author || ""} novel`
+      );
+
+      const searchUrl = `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${searchQuery}&format=json&origin=*`;
+
+      const searchResponse = await fetch(searchUrl);
+      const searchData = await searchResponse.json();
+
+      if (!searchData.query.search.length) {
+        alert("No Wikipedia page found.");
+        return;
+      }
+
+      const bestTitle = searchData.query.search[0].title.replace(/ /g, "_");
+
+      const summaryUrl = `https://en.wikipedia.org/api/rest_v1/page/summary/${bestTitle}`;
+      const summaryResponse = await fetch(summaryUrl);
+
+      if (!summaryResponse.ok) {
+        alert("Could not retrieve summary.");
+        return;
+      }
+
+      const data = await summaryResponse.json();
+
+      alert(`${data.title}\n\n${data.extract}`);
+
+    } catch (error) {
+      alert("Error fetching Wikipedia summary.");
+      console.error(error);
+    }
+  }
+
   return (
     <div
       style={{
         backgroundColor: bgColor,
         padding: "5px",
         border: `${borderSize}px solid ${borderColor}`,
-        borderRadius: "8px"
+        borderRadius: "8px",
+        cursor: "pointer"
       }}
+      onClick={!editMode ? fetchWikiSummary : undefined}
     >
       <li
         style={{ listStyle: "none" }}
@@ -34,8 +74,7 @@ function DraggableBookCard({
         />
 
         <p>ISBN: {book.isbn}</p>
-        <p> Author: {book.author} </p>
-        <p> Title: {book.title} </p>
+        <p>Author: {book.author}</p>
         <p style={{ fontWeight: "bold", fontSize: "1.1rem" }}>
           {book.title}
         </p>

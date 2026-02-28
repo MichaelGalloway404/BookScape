@@ -19,7 +19,7 @@ function App() {
       <Route path="/signUp" element={<SignupPage />} />
       <Route path="/publicPage" element={<PublicPages />} />
 
-      <Route path="/second" element={
+      <Route path="/userPage_Protected" element={
           <ProtectedRoute>
             <UsersPage />
           </ProtectedRoute>

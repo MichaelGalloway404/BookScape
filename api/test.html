@@ -1,11 +1,7 @@
 <!DOCTYPE html>
-
 <html>
-
 <head>
-
-    <title>Simple Book Search</title>
-
+    <title>Wikipedia Book Brief</title>
     <style>
         body {
             font-family: sans-serif;
@@ -19,6 +15,7 @@
             width: 70%;
             border: 1px solid #ccc;
             border-radius: 4px;
+            margin-bottom: 10px;
         }
 
         button {
@@ -37,61 +34,72 @@
             padding-top: 10px;
         }
     </style>
-
 </head>
 
 <body>
 
     <h2>Wikipedia Book Brief</h2>
 
-    <input type="text" id="bookInput" placeholder="Enter book title (e.g., The Great Gatsby)">
-
+    <input type="text" id="bookInput" placeholder="Enter book title">
+    <input type="text" id="authorInput" placeholder="Enter author (optional)">
     <button onclick="getBookDescription()">Search</button>
 
-
     <div id="result">
-
         <p>Type a book name above to see its description.</p>
-
     </div>
 
+<script>
+async function getBookDescription() {
+    const bookTitle = document.getElementById('bookInput').value.trim();
+    const author = document.getElementById('authorInput').value.trim();
+    const resultDiv = document.getElementById('result');
 
-    <script>
-        async function getBookDescription() {
-            const bookTitle = document.getElementById('bookInput').value.trim();
-            const resultDiv = document.getElementById('result');
+    if (!bookTitle) return;
 
-            if (!bookTitle) return;
+    resultDiv.innerHTML = "Searching...";
 
-            resultDiv.innerHTML = "Searching...";
+    try {
+        // Search query improves accuracy
+        const searchQuery = encodeURIComponent(
+            author
+                ? `${bookTitle} ${author} novel`
+                : `${bookTitle} novel`
+        );
 
-            // Replace spaces with underscores
-            const formattedTitle = encodeURIComponent(bookTitle.replace(/ /g, '_'));
+        const searchUrl = `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${searchQuery}&format=json&origin=*`;
 
-            // Correct Wikipedia API URL
-            const url = `https://en.wikipedia.org/api/rest_v1/page/summary/${formattedTitle}`;
+        const searchResponse = await fetch(searchUrl);
+        const searchData = await searchResponse.json();
 
-            try {
-                const response = await fetch(url);
+        if (!searchData.query.search.length) {
+            throw new Error("No results found");
+        }
 
-                if (!response.ok) throw new Error("Book not found");
+        const bestTitle = searchData.query.search[0].title.replace(/ /g, '_');
 
-                const data = await response.json();
+        const summaryUrl = `https://en.wikipedia.org/api/rest_v1/page/summary/${bestTitle}`;
+        const summaryResponse = await fetch(summaryUrl);
 
-                resultDiv.innerHTML = `
+        if (!summaryResponse.ok) {
+            throw new Error("Summary not found");
+        }
+
+        const data = await summaryResponse.json();
+
+        resultDiv.innerHTML = `
             <h3>${data.title}</h3>
             <p>${data.extract}</p>
             <a href="${data.content_urls.desktop.page}" target="_blank">
                 Read more on Wikipedia
             </a>
         `;
-            } catch (error) {
-                resultDiv.innerHTML =
-                    `<p style="color:red;">Error: Could not find that book. Try checking the spelling.</p>`;
-            }
-        }
-    </script>
+
+    } catch (error) {
+        resultDiv.innerHTML =
+            `<p style="color:red;">Error: Could not find that book.</p>`;
+    }
+}
+</script>
 
 </body>
-
 </html>

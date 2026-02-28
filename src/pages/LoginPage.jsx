@@ -33,7 +33,7 @@ function LoginPage() {
             // store JWT
             localStorage.setItem("token", data.token);
 
-            navigate("/second");
+            navigate("/userPage_Protected");
         } catch (err) {
             alert("Login failed");
         }
