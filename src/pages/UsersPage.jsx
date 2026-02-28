@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import SiteInfoFooter from '../components/SiteInfoFooter';
@@ -6,20 +6,13 @@ import ProfilePrivacyControls from "../components/ProfilePrivacyControls";
 import BookList from "../components/BookList";
 import styles from "./BookSearch.module.css"
 
-
-
 function UsersPage() {
     const [user, setUser] = useState(null);
     const [profilePublic, setProfilePrivate] = useState(false);
     const [books, setBooks] = useState([]);
     const [editMode, setEditMode] = useState(false);
-    
-    
-    
 
     const navigate = useNavigate();
-
-    
 
     useEffect(() => {
         const loadUser = async () => {
@@ -76,40 +69,40 @@ function UsersPage() {
         loadUser();
     }, [navigate]);
 
-    // Item being dragged
-    const dragItem = useRef(null);
-    // DragOverItem will hold the index of the item currently being dragged over
-    const dragOverItem = useRef(null);
-    const handleDragStart = (index) => {
-        // Store the index of the dragged item in the ref
-        dragItem.current = index;
-    };
-    const handleDragEnter = (index) => {
-        // Store the index of the item being hovered over
-        dragOverItem.current = index;
-    };
+    // // Item being dragged
+    // const dragItem = useRef(null);
+    // // DragOverItem will hold the index of the item currently being dragged over
+    // const dragOverItem = useRef(null);
+    // const handleDragStart = (index) => {
+    //     // Store the index of the dragged item in the ref
+    //     dragItem.current = index;
+    // };
+    // const handleDragEnter = (index) => {
+    //     // Store the index of the item being hovered over
+    //     dragOverItem.current = index;
+    // };
 
-    // book has been dropped
-    const handleDragEnd = () => {
-        // If either ref is null, something went wrong, and only allow if in edit mode
-        if (dragItem.current === null || dragOverItem.current === null || !editMode) return;
-        // Shallow copy of existing book order
-        const listCopy = [...books];
-        // Save the content of the dragged item
-        const draggedItemContent = listCopy[dragItem.current];
+    // // book has been dropped
+    // const handleDragEnd = () => {
+    //     // If either ref is null, something went wrong, and only allow if in edit mode
+    //     if (dragItem.current === null || dragOverItem.current === null || !editMode) return;
+    //     // Shallow copy of existing book order
+    //     const listCopy = [...books];
+    //     // Save the content of the dragged item
+    //     const draggedItemContent = listCopy[dragItem.current];
 
-        // Remove the dragged item from its original position
-        listCopy.splice(dragItem.current, 1);
-        // Insert the dragged item into the new position
-        listCopy.splice(dragOverItem.current, 0, draggedItemContent);
+    //     // Remove the dragged item from its original position
+    //     listCopy.splice(dragItem.current, 1);
+    //     // Insert the dragged item into the new position
+    //     listCopy.splice(dragOverItem.current, 0, draggedItemContent);
 
-        // Reset refs
-        dragItem.current = null;
-        dragOverItem.current = null;
+    //     // Reset refs
+    //     dragItem.current = null;
+    //     dragOverItem.current = null;
 
-        // Update state with new order and trigger UI re-render
-        setBooks(listCopy);
-    };
+    //     // Update state with new order and trigger UI re-render
+    //     setBooks(listCopy);
+    // };
 
     async function deleteBook(book) {
         try {
@@ -137,7 +130,6 @@ function UsersPage() {
             );
         } catch (err) {
             console.error(err);
-            alert("Could not remove book");
         }
     }
 
@@ -221,10 +213,11 @@ function UsersPage() {
             <BookList
                 books={books}
                 editMode={editMode}
-                handleDragStart={handleDragStart}
-                handleDragEnter={handleDragEnter}
-                handleDragEnd={handleDragEnd}
+                // handleDragStart={handleDragStart}
+                // handleDragEnter={handleDragEnter}
+                // handleDragEnd={handleDragEnd}
                 deleteBook={deleteBook}
+                setBooks={setBooks}
             />
 
             {/* search for book button */}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 
 function DraggableBookCard({
   book,
@@ -7,10 +7,11 @@ function DraggableBookCard({
   bgColor,
   borderColor,
   borderSize,
-  handleDragStart,
-  handleDragEnter,
-  handleDragEnd,
-  deleteBook
+  // handleDragStart,
+  // handleDragEnter,
+  // handleDragEnd,
+  deleteBook,
+  setBooks
 }) {
 
   const [summary, setSummary] = useState(null);
@@ -71,6 +72,40 @@ function DraggableBookCard({
 
     setLoading(false);
   }
+  // Item being dragged
+    const dragItem = useRef(null);
+    // DragOverItem will hold the index of the item currently being dragged over
+    const dragOverItem = useRef(null);
+    const handleDragStart = (index) => {
+        // Store the index of the dragged item in the ref
+        dragItem.current = index;
+    };
+    const handleDragEnter = (index) => {
+        // Store the index of the item being hovered over
+        dragOverItem.current = index;
+    };
+
+    // book has been dropped
+    const handleDragEnd = () => {
+        // If either ref is null, something went wrong, and only allow if in edit mode
+        if (dragItem.current === null || dragOverItem.current === null || !editMode) return;
+        // Shallow copy of existing book order
+        const listCopy = [...books];
+        // Save the content of the dragged item
+        const draggedItemContent = listCopy[dragItem.current];
+
+        // Remove the dragged item from its original position
+        listCopy.splice(dragItem.current, 1);
+        // Insert the dragged item into the new position
+        listCopy.splice(dragOverItem.current, 0, draggedItemContent);
+
+        // Reset refs
+        dragItem.current = null;
+        dragOverItem.current = null;
+
+        // Update state with new order and trigger UI re-render
+        setBooks(listCopy);
+    };
 
   return (
     <div
