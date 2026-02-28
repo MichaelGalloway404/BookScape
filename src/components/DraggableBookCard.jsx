@@ -73,7 +73,7 @@ function DraggableBookCard({
   }
 
   return (
-    <div
+    <div 
       style={{
         backgroundColor: bgColor,
         padding: "10px",
@@ -81,12 +81,13 @@ function DraggableBookCard({
         borderRadius: "8px",
         cursor: "pointer",
         marginBottom: "10px",
-        transition: "all 0.2s ease"
+        transition: "all 0.2s ease",
+        maxWidth: "30%"
       }}
       onClick={!editMode ? fetchWikiSummary : undefined}
     >
       <li
-        style={{ listStyle: "none", maxWidth: "30%"}}
+        style={{ listStyle: "none"}}
         draggable={editMode}
         onDragStart={() => handleDragStart(index)}
         onDragEnter={() => handleDragEnter(index)}
