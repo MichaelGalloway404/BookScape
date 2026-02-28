@@ -33,7 +33,7 @@ function BookList({
     if (settings?.bookCard) {
       setBgColor(settings.bookCard.bgColor || "#1523be");
       setBorderColor(settings.bookCard.borderColor || "#181b44");
-      setBorderSize(settings.bookCard.borderSize || "2");
+      setBorderSize(settings.bookCard.borderSize || "0");
       setPageBckColor(settings.bookCard.pageBckColor || "wheat");
     }
   }, [settings]);
