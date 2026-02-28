@@ -302,7 +302,7 @@ export default function BookSearch() {
           <button onClick={nextPage}>Next</button>
         </div>
       )}
-      <button className={`${styles.buttonClass}`} onClick={() => navigate("/second")}>
+      <button className={`${styles.buttonClass}`} onClick={() => navigate("/userPage_Protected")}>
         Back to userPage
       </button>
       <SiteInfoFooter />
