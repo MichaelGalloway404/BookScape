@@ -97,11 +97,13 @@ function DraggableBookCard({
         <img
           src={`https://covers.openlibrary.org/b/id/${book.cover_id}-M.jpg`}
           alt="Book cover"
-          style={{ width: "100px", marginBottom: "8px" }}
+          style={{ 
+            // width: "100px", 
+            marginBottom: "8px" }}
         />
 
-        <p><strong>{book.title}</strong></p>
-        <p>Author: {book.author}</p>
+        <p style={{maxWidth: "30%"}}><strong>{book.title}</strong></p>
+        <p style={{maxWidth: "30%"}}>Author: {book.author}</p>
 
         {editMode && (
           <button
