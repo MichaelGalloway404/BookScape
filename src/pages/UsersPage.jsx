@@ -11,10 +11,12 @@ function UsersPage() {
     const [profilePublic, setProfilePrivate] = useState(false);
     const [books, setBooks] = useState([]);
     const [editMode, setEditMode] = useState(false);
+    const [settings, setSettings] = useState({});
 
     const navigate = useNavigate();
 
     useEffect(() => {
+        // GET CURRENT USERS BOOKS
         const loadUser = async () => {
             try {
                 const res = await fetch("/api/currentUser", {
@@ -29,7 +31,7 @@ function UsersPage() {
                 }
 
                 setUser(data);
-                // get books
+                // get books from database
                 const booksRes = await fetch("/api/userBooks", {
                     method: "GET",
                     credentials: "include",
@@ -39,8 +41,9 @@ function UsersPage() {
                 if (booksRes.ok) {
                     setBooks(booksData);
                 }
+                // if user has save a preferred ordering of their books apply it
                 let orderedBooks = booksData;
-                // If book_order_json exists and is non-empty, sort books
+                // If book_order_json exists sort books to users preferred order
                 if (Array.isArray(data.book_order_json) && data.book_order_json.length > 0) {
                     const orderMap = new Map(data.book_order_json.map((isbn, index) => [isbn, index]));
                     orderedBooks = booksData.slice().sort((a, b) => {
@@ -69,41 +72,7 @@ function UsersPage() {
         loadUser();
     }, [navigate]);
 
-    // // Item being dragged
-    // const dragItem = useRef(null);
-    // // DragOverItem will hold the index of the item currently being dragged over
-    // const dragOverItem = useRef(null);
-    // const handleDragStart = (index) => {
-    //     // Store the index of the dragged item in the ref
-    //     dragItem.current = index;
-    // };
-    // const handleDragEnter = (index) => {
-    //     // Store the index of the item being hovered over
-    //     dragOverItem.current = index;
-    // };
-
-    // // book has been dropped
-    // const handleDragEnd = () => {
-    //     // If either ref is null, something went wrong, and only allow if in edit mode
-    //     if (dragItem.current === null || dragOverItem.current === null || !editMode) return;
-    //     // Shallow copy of existing book order
-    //     const listCopy = [...books];
-    //     // Save the content of the dragged item
-    //     const draggedItemContent = listCopy[dragItem.current];
-
-    //     // Remove the dragged item from its original position
-    //     listCopy.splice(dragItem.current, 1);
-    //     // Insert the dragged item into the new position
-    //     listCopy.splice(dragOverItem.current, 0, draggedItemContent);
-
-    //     // Reset refs
-    //     dragItem.current = null;
-    //     dragOverItem.current = null;
-
-    //     // Update state with new order and trigger UI re-render
-    //     setBooks(listCopy);
-    // };
-
+    // DELETE A BOOK
     async function deleteBook(book) {
         try {
             const res = await fetch("/api/userBooks", {
@@ -133,7 +102,9 @@ function UsersPage() {
         }
     }
 
+    // SAVE USER'S SETTINGS
     async function saveSettings(bookOrder) {
+        // save user's profile a s public/private
         try {
             await axios.post(
                 "/api/currentUser",
@@ -144,6 +115,7 @@ function UsersPage() {
             console.error("Axios error:", err.response?.data || err);
             alert("Failed to Set");
         }
+        // save user's preferred book order
         const isbns = bookOrder.map(book => String(book.isbn));
         try {
             await axios.post(
@@ -158,13 +130,13 @@ function UsersPage() {
         }
     }
 
-    // make profile visible
+    // make profile PUBLIC to others
     function setPublic() {
         // set db variable is profile private to false
         setProfilePrivate(false);
         alert("profile is set public, don't forget to save!");
     }
-    // make profile invisible to others
+    // make profile PRIVATE to others
     function setPrivate() {
         // set db variable is profile private to true
         setProfilePrivate(true);
@@ -179,7 +151,7 @@ function UsersPage() {
         <>
             <h1>User {user.username}'s Page</h1>
 
-            {/* user profile controls */}
+            {/* user profile public/private controls */}
             {editMode && (
                 <ProfilePrivacyControls
                     profilePrivate={profilePublic}
@@ -188,6 +160,7 @@ function UsersPage() {
                 />
             )}
 
+            {/* EDIT MODE BUTTON */}
             <button
                 onClick={() => setEditMode(prev => !prev)}
                 style={{
@@ -199,6 +172,7 @@ function UsersPage() {
                 {editMode ? "Done" : "Edit"}
             </button>
 
+            {/* SAVE SETTINGS BUTTON */}
             {editMode && (
                 <>
                     <button onClick={() => saveSettings(books)}>
@@ -209,21 +183,22 @@ function UsersPage() {
                 </>
             )}
 
-            {/* component for listing out users books */}
+            {/* component for listing out users books and deleting books*/}
             <BookList
                 books={books}
                 editMode={editMode}
-                // handleDragStart={handleDragStart}
-                // handleDragEnter={handleDragEnter}
-                // handleDragEnd={handleDragEnd}
+                settings={settings}
                 deleteBook={deleteBook}
                 setBooks={setBooks}
+                setSettings={setSettings}
             />
 
             {/* search for book button */}
             <button className={`${styles.buttonClass}`} onClick={() => navigate("/search")}>
                 Search for a book
             </button>
+
+            <p>settings: {JSON.stringify(settings, null, 2)}</p>
 
             <SiteInfoFooter />
         </>
