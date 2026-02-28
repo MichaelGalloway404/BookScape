@@ -125,7 +125,7 @@ function DraggableBookCard({
             style={{
               marginTop: "10px",
               padding: "10px",
-              backgroundColor: "#f4f4f4",
+              backgroundColor: "#000000",
               borderRadius: "6px",
               fontSize: "0.9rem",
               lineHeight: "1.4"
