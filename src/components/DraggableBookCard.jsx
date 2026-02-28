@@ -86,7 +86,7 @@ function DraggableBookCard({
       onClick={!editMode ? fetchWikiSummary : undefined}
     >
       <li
-        style={{ listStyle: "none" }}
+        style={{ listStyle: "none", maxWidth: "30%"}}
         draggable={editMode}
         onDragStart={() => handleDragStart(index)}
         onDragEnter={() => handleDragEnter(index)}
