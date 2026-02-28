@@ -7,12 +7,48 @@ function BookList({
   handleDragStart,
   handleDragEnter,
   handleDragEnd,
-  deleteBook
+  deleteBook,
+  setBooks
 }) {
   const [bgColor, setBgColor] = useState("#1523be");
   const [borderColor, setBorderColor] = useState("#181b44");
   const [borderSize, setBorderSize] = useState("2");
   const [pageBckColor, setPageBckColor] = useState("wheat");
+
+  // Item being dragged
+    const dragItem = useRef(null);
+    // DragOverItem will hold the index of the item currently being dragged over
+    const dragOverItem = useRef(null);
+    const handleDragStart = (index) => {
+        // Store the index of the dragged item in the ref
+        dragItem.current = index;
+    };
+    const handleDragEnter = (index) => {
+        // Store the index of the item being hovered over
+        dragOverItem.current = index;
+    };
+
+    // book has been dropped
+    const handleDragEnd = () => {
+        // If either ref is null, something went wrong, and only allow if in edit mode
+        if (dragItem.current === null || dragOverItem.current === null || !editMode) return;
+        // Shallow copy of existing book order
+        const listCopy = [...books];
+        // Save the content of the dragged item
+        const draggedItemContent = listCopy[dragItem.current];
+
+        // Remove the dragged item from its original position
+        listCopy.splice(dragItem.current, 1);
+        // Insert the dragged item into the new position
+        listCopy.splice(dragOverItem.current, 0, draggedItemContent);
+
+        // Reset refs
+        dragItem.current = null;
+        dragOverItem.current = null;
+
+        // Update state with new order and trigger UI re-render
+        setBooks(listCopy);
+    };
 
   // will load color for background from user settings later
       useEffect(() => {
