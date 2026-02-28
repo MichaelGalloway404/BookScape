@@ -101,7 +101,7 @@ function DraggableBookCard({
 
         <p><strong>{book.title}</strong></p>
         <p>Author: {book.author}</p>
-        <p>ISBN: {book.isbn}</p>
+        {/* <p>ISBN: {book.isbn}</p> */}
 
         {editMode && (
           <button
