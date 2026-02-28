@@ -25,7 +25,11 @@ function DraggableBookCard({
       const searchData = await searchResponse.json();
 
       if (!searchData.query.search.length) {
-        alert("No Wikipedia page found.");
+        const wikiSearchUrl = `https://en.wikipedia.org/wiki/Special:Search?search=${encodeURIComponent(
+          `${book.title} ${book.author || ""}`
+        )}`;
+
+        window.open(wikiSearchUrl, "_blank");
         return;
       }
 
@@ -35,7 +39,11 @@ function DraggableBookCard({
       const summaryResponse = await fetch(summaryUrl);
 
       if (!summaryResponse.ok) {
-        alert("Could not retrieve summary.");
+        const wikiSearchUrl = `https://en.wikipedia.org/wiki/Special:Search?search=${encodeURIComponent(
+          `${book.title} ${book.author || ""}`
+        )}`;
+
+        window.open(wikiSearchUrl, "_blank");
         return;
       }
 
@@ -44,49 +52,52 @@ function DraggableBookCard({
       alert(`${data.title}\n\n${data.extract}`);
 
     } catch (error) {
-      alert("Error fetching Wikipedia summary.");
-      console.error(error);
+      const wikiSearchUrl = `https://en.wikipedia.org/wiki/Special:Search?search=${encodeURIComponent(
+        `${book.title} ${book.author || ""}`
+      )}`;
+
+      window.open(wikiSearchUrl, "_blank");
     }
-  }
 
-  return (
-    <div
-      style={{
-        backgroundColor: bgColor,
-        padding: "5px",
-        border: `${borderSize}px solid ${borderColor}`,
-        borderRadius: "8px",
-        cursor: "pointer"
-      }}
-      onClick={!editMode ? fetchWikiSummary : undefined}
-    >
-      <li
-        style={{ listStyle: "none" }}
-        draggable={editMode}
-        onDragStart={() => handleDragStart(index)}
-        onDragEnter={() => handleDragEnter(index)}
-        onDragEnd={handleDragEnd}
-        onDragOver={(e) => e.preventDefault()}
+    return (
+      <div
+        style={{
+          backgroundColor: bgColor,
+          padding: "5px",
+          border: `${borderSize}px solid ${borderColor}`,
+          borderRadius: "8px",
+          cursor: "pointer"
+        }}
+        onClick={!editMode ? fetchWikiSummary : undefined}
       >
-        <img
-          src={`https://covers.openlibrary.org/b/id/${book.cover_id}-M.jpg`}
-          alt="Book cover"
-        />
+        <li
+          style={{ listStyle: "none" }}
+          draggable={editMode}
+          onDragStart={() => handleDragStart(index)}
+          onDragEnter={() => handleDragEnter(index)}
+          onDragEnd={handleDragEnd}
+          onDragOver={(e) => e.preventDefault()}
+        >
+          <img
+            src={`https://covers.openlibrary.org/b/id/${book.cover_id}-M.jpg`}
+            alt="Book cover"
+          />
 
-        <p>ISBN: {book.isbn}</p>
-        <p>Author: {book.author}</p>
-        <p style={{ fontWeight: "bold", fontSize: "1.1rem" }}>
-          {book.title}
-        </p>
+          <p>ISBN: {book.isbn}</p>
+          <p>Author: {book.author}</p>
+          <p style={{ fontWeight: "bold", fontSize: "1.1rem" }}>
+            {book.title}
+          </p>
 
-        {editMode && (
-          <button onClick={() => deleteBook(book)}>
-            Delete
-          </button>
-        )}
-      </li>
-    </div>
-  );
+          {editMode && (
+            <button onClick={() => deleteBook(book)}>
+              Delete
+            </button>
+          )}
+        </li>
+      </div>
+    );
+  }
 }
 
-export default DraggableBookCard;
+  export default DraggableBookCard;
