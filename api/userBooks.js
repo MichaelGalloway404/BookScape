@@ -14,10 +14,10 @@ export default async function handler(req, res) {
         try {
             const result = await pool.query(
                 `
-        SELECT isbn, cover_id, title, author
-        FROM user_books
-        WHERE user_id = $1
-        `,
+                SELECT isbn, cover_id, title, author
+                FROM user_books
+                WHERE user_id = $1
+                `,
                 [decoded.userId]
             );
 
@@ -35,9 +35,9 @@ export default async function handler(req, res) {
         try {
             await pool.query(
                 `
-        INSERT INTO user_books (user_id, isbn, cover_id, title, author)
-        VALUES ($1, $2, $3, $4, $5)
-        `,
+                INSERT INTO user_books (user_id, isbn, cover_id, title, author)
+                VALUES ($1, $2, $3, $4, $5)
+                `,
                 [decoded.userId, isbn, cover_id, title, author]
             );
 
@@ -59,11 +59,11 @@ export default async function handler(req, res) {
         try {
             await pool.query(
                 `
-      DELETE FROM user_books
-      WHERE user_id = $1
-        AND isbn = $2
-        AND cover_id = $3
-      `,
+                DELETE FROM user_books
+                WHERE user_id = $1
+                    AND isbn = $2
+                    AND cover_id = $3
+                `,
                 [decoded.userId, isbn, cover_id]
             );
 

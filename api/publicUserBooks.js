@@ -3,7 +3,7 @@ import { Pool } from "pg";
 const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 
 export default async function handler(req, res) {
-  const { userId } = req.query; // expect /api/userBooks?userId=123
+  const { userId } = req.query; 
 
   if (!userId) {
     return res.status(400).json({ error: "Missing userId" });
