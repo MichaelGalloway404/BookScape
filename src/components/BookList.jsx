@@ -4,9 +4,9 @@ import DraggableBookCard from "./DraggableBookCard";
 function BookList({
   books,
   editMode,
-  handleDragStart,
-  handleDragEnter,
-  handleDragEnd,
+  // handleDragStart,
+  // handleDragEnter,
+  // handleDragEnd,
   deleteBook,
   setBooks
 }) {
