@@ -223,3 +223,4 @@ export const  fonts = [
     "Vollkorn",
     "Zeyada"
 ];
+export default fonts;
