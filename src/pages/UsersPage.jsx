@@ -132,7 +132,8 @@ function UsersPage() {
         try {
             await axios.post(
                 "/api/userSettings",
-                { settings: settings }
+                { settings: settings },
+                { withCredentials: true }
             );
             alert("Profile Settings Saved!");
         } catch (err) {
