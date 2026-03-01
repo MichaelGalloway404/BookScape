@@ -139,10 +139,9 @@ function UsersPage() {
                 { bookOrderPref: isbns },
                 { withCredentials: true }
             );
-            alert("Book Order Saved!");
         } catch (err) {
             console.error("Axios error:", err.response?.data || err);
-            alert("Failed to Save!");
+            alert("Failed to book order!");
         }
         // save user's settings
         try {
