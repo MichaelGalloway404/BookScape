@@ -70,8 +70,7 @@ function UsersPage() {
                 const userSettingsData = await userSettingsRes.json();
 
                 if (userSettingsRes.ok) {
-                    // SET USER SETTINGS
-                    setSettings(userSettingsData || {});
+                    setSettings(userSettingsData || {}); // stores all keys from DB
                 }
 
                 // SET PROFILE VISIBILITY

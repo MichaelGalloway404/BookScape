@@ -21,7 +21,13 @@ export default async function handler(req, res) {
         `SELECT settings FROM user_settings WHERE user_id = $1`,
         [decoded.userId]
       );
-      return res.status(200).json(result.rows[0] || { settings: [] });
+
+      if (result.rows.length === 0) {
+        return res.status(200).json({}); // no settings yet
+      }
+
+      // Return the entire JSON stored in the 'settings' column
+      return res.status(200).json(result.rows[0].settings);
     } catch (err) {
       console.error(err);
       return res.status(500).json({ error: "Database error" });
@@ -30,19 +36,20 @@ export default async function handler(req, res) {
 
   // POST: add/update settings
   if (req.method === "POST") {
-    const { settings } = req.body;
+    const settings = req.body; // accept full JSON
 
-    if (!settings) return res.status(400).json({ error: "No settings provided" });
+    if (!settings || Object.keys(settings).length === 0) {
+      return res.status(400).json({ error: "No settings provided" });
+    }
 
     try {
-      // insert or update
       await pool.query(
         `
-        INSERT INTO user_settings (user_id, settings)
-        VALUES ($1, $2)
-        ON CONFLICT (user_id)
-        DO UPDATE SET settings = EXCLUDED.settings
-        `,
+      INSERT INTO user_settings (user_id, settings)
+      VALUES ($1, $2)
+      ON CONFLICT (user_id)
+      DO UPDATE SET settings = EXCLUDED.settings
+      `,
         [decoded.userId, settings]
       );
 
