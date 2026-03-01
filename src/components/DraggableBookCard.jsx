@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 function DraggableBookCard({
   book,
@@ -16,6 +16,8 @@ function DraggableBookCard({
   const [summary, setSummary] = useState(null);
   const [loading, setLoading] = useState(false);
   const [expanded, setExpanded] = useState(false);
+
+  const popupRef = useRef(null);
 
   async function fetchWikiSummary() {
     // Toggle closed if already open
@@ -72,8 +74,26 @@ function DraggableBookCard({
     setLoading(false);
   }
 
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (popupRef.current && !popupRef.current.contains(event.target)) {
+        setExpanded(false);
+      }
+    }
+
+    if (editing) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [expanded]);
+
   return (
-    <div 
+    <div
       style={{
         backgroundColor: bgColor,
         padding: "10px",
@@ -87,19 +107,21 @@ function DraggableBookCard({
       onClick={!editMode ? fetchWikiSummary : undefined}
     >
       <li
-        style={{ listStyle: "none", width:"150px"}}
+        style={{ listStyle: "none", width: "150px" }}
         draggable={editMode}
         onDragStart={() => handleDragStart(index)}
         onDragEnter={() => handleDragEnter(index)}
         onDragEnd={handleDragEnd}
         onDragOver={(e) => e.preventDefault()}
+        onClick={() => { if (!expanded) setExpanded(true); }}
       >
         <img
           src={`https://covers.openlibrary.org/b/id/${book.cover_id}-M.jpg`}
           alt="Book cover"
-          style={{ 
-            width: "100px", 
-            marginBottom: "8px" }}
+          style={{
+            width: "100px",
+            marginBottom: "8px"
+          }}
         />
 
         <p ><strong>{book.title}</strong></p>
@@ -117,21 +139,24 @@ function DraggableBookCard({
         )}
 
         {loading && (
-          <p style={{ fontStyle: "italic"}}>
+          <p style={{ fontStyle: "italic" }}>
             Loading summary...
           </p>
         )}
 
         {expanded && summary && (
           <div
+            ref={popupRef}
             style={{
-              marginTop: "10px",
-              padding: "10px",
-              backgroundColor: "#000000",
-              borderRadius: "6px",
-              fontSize: "0.9rem",
-              lineHeight: "1.4",
-              color: "white"
+              position: "absolute",
+              background: "white",
+              padding: "1rem",
+              borderRadius: "8px",
+              boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+              display: "flex",
+              flexDirection: "column",
+              gap: "0.5rem",
+              zIndex: 1000,
             }}
           >
             {summary}
