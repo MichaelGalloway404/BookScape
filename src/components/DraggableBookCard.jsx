@@ -157,6 +157,7 @@ function DraggableBookCard({
               flexDirection: "column",
               gap: "0.5rem",
               zIndex: 1000,
+              maxWidth: "300px",
             }}
           >
             {summary}
