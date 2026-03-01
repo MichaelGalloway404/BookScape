@@ -9,10 +9,10 @@ function BookList({
   setBooks,
   setSettings
 }) {
-  const [bgColor, setBgColor] = useState("#1523be");
-  const [borderColor, setBorderColor] = useState("#181b44");
+  const [bgColor, setBgColor] = useState("black");
+  const [borderColor, setBorderColor] = useState("black");
   const [borderSize, setBorderSize] = useState("2");
-  const [pageBckColor, setPageBckColor] = useState("wheat");
+  const [pageBckColor, setPageBckColor] = useState("black");
 
   // add any changes to settings the user makes
   useEffect(() => {
@@ -31,10 +31,10 @@ function BookList({
   // default settings setup
   useEffect(() => {
     if (settings?.bookCard) {
-      setBgColor(settings.bookCard.bgColor || "#1523be");
-      setBorderColor(settings.bookCard.borderColor || "#181b44");
-      setBorderSize(settings.bookCard.borderSize || "0");
-      setPageBckColor(settings.bookCard.pageBckColor || "wheat");
+      setBgColor(settings.bookCard.bgColor);
+      setBorderColor(settings.bookCard.borderColor);
+      setBorderSize(settings.bookCard.borderSize);
+      setPageBckColor(settings.bookCard.pageBckColor);
     }
   }, [settings]);
 

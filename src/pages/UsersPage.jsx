@@ -7,8 +7,6 @@ import BookList from "../components/BookList";
 import styles from "./BookSearch.module.css"
 
 function UsersPage() {
-    const [loading, setLoading] = useState(true);
-
     const [user, setUser] = useState(null);
     const [profilePublic, setProfilePrivate] = useState(false);
     const [books, setBooks] = useState([]);
@@ -80,12 +78,8 @@ function UsersPage() {
 
                 // SET BOOK ORDERING
                 setBooks(orderedBooks);
-
-                // DONE LOADING PAGE
-                setLoading(false);
             } catch (err) {
                 console.error(err);
-                setLoading(false);
                 navigate("/login");
             }
         };
@@ -176,9 +170,8 @@ function UsersPage() {
         alert("profile is set private, don't forget to save!");
     }
 
-
-    if (loading || !user) {
-        return <p>Loading user data...</p>;
+    if (!user) {
+        return <p>Loading user...</p>;
     }
 
     return (
