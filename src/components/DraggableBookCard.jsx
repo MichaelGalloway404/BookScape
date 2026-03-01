@@ -117,7 +117,7 @@ function DraggableBookCard({
         )}
 
         {loading && (
-          <p style={{ fontStyle: "italic", color: "white"}}>
+          <p style={{ fontStyle: "italic"}}>
             Loading summary...
           </p>
         )}
@@ -130,7 +130,8 @@ function DraggableBookCard({
               backgroundColor: "#000000",
               borderRadius: "6px",
               fontSize: "0.9rem",
-              lineHeight: "1.4"
+              lineHeight: "1.4",
+              color: "white"
             }}
           >
             {summary}

@@ -71,9 +71,7 @@ function UserBio({ editMode, settings, setSettings }) {
                     maxWidth: "fit-content",
                     cursor: editMode ? "pointer" : "default",
                 }}
-                onClick={() => {
-                    if (editMode) setEditing(true);
-                }}
+                onClick={() => { if (editMode) setEditing(true); }}
             >
                 {bioInfo}
             </p>
@@ -94,16 +92,19 @@ function UserBio({ editMode, settings, setSettings }) {
                         zIndex: 1000,
                     }}
                 >
+                    {/* BACKGROUNND COLOR OF BIO */}
                     <input
                         type="color"
                         value={bgColor}
                         onChange={(e) => setBgColor(e.target.value)}
                     />
+                    {/* FONT FAMILY */}
                     <input
                         style={{ fontFamily, maxWidth: "fit-content" }}
                         value={bioInfo}
                         onChange={(e) => setBioInfo(e.target.value)}
                     />
+                    {/* FONT CHOICE */}
                     <label>
                         Choose font:
                         <select
