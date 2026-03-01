@@ -42,7 +42,8 @@ function UserBio({ editMode, settings, setSettings }) {
             {!editMode && (
                 <p style={{
                     fontFamily,
-                    background: bgColor
+                    background: bgColor,
+                    maxWidth: "fit-content"
                 }}>{bioInfo}</p>
             )}
             {editMode && (
@@ -53,7 +54,7 @@ function UserBio({ editMode, settings, setSettings }) {
                         onChange={(e) => setBgColor(e.target.value)}
                     />
                     <input
-                        style={{ fontFamily, maxWidth: "50%" }}
+                        style={{ fontFamily, maxWidth: "fit-content" }}
                         value={bioInfo}
                         onChange={(e) => setBioInfo(e.target.value)}
                     />
