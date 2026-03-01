@@ -225,7 +225,7 @@ function UsersPage() {
                 Search for a book
             </button>
 
-            <p>settings: {JSON.stringify(settings, null, 2)}</p>
+            {/* <p>settings: {JSON.stringify(settings, null, 2)}</p> */}
 
             <SiteInfoFooter />
         </>
