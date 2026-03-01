@@ -13,30 +13,35 @@ function BookList({
   const [borderColor, setBorderColor] = useState("#181b44");
   const [borderSize, setBorderSize] = useState("2");
   const [pageBckColor, setPageBckColor] = useState("wheat");
+  const hasLoadedSettings = useRef(false);
 
   // add any changes to settings the user makes
   useEffect(() => {
-    setSettings(prev => ({
-      ...prev,
-      bookCard: {
-        ...prev.bookCard,
-        bgColor,
-        borderColor,
-        borderSize,
-        pageBckColor,
-      },
-    }));
-  }, [bgColor, borderColor, borderSize, pageBckColor, setSettings]);
+  if (!hasLoadedSettings.current) return;
+
+  setSettings(prev => ({
+    ...prev,
+    bookCard: {
+      ...prev.bookCard,
+      bgColor,
+      borderColor,
+      borderSize,
+      pageBckColor,
+    },
+  }));
+}, [bgColor, borderColor, borderSize, pageBckColor, setSettings]);
 
   // default settings setup
   useEffect(() => {
-    if (settings?.bookCard) {
-      setBgColor(settings.bookCard.bgColor || "#1523be");
-      setBorderColor(settings.bookCard.borderColor || "#181b44");
-      setBorderSize(settings.bookCard.borderSize || "0");
-      setPageBckColor(settings.bookCard.pageBckColor || "wheat");
-    }
-  }, [settings]);
+  if (settings?.bookCard) {
+    setBgColor(settings.bookCard.bgColor ?? "#1523be");
+    setBorderColor(settings.bookCard.borderColor ?? "#181b44");
+    setBorderSize(settings.bookCard.borderSize ?? 2);
+    setPageBckColor(settings.bookCard.pageBckColor ?? "wheat");
+
+    hasLoadedSettings.current = true;
+  }
+}, [settings]);
 
   // Item being dragged
   const dragItem = useRef(null);
