@@ -16,7 +16,7 @@ function UserBio({ editMode, settings, setSettings }) {
     // Check for DataBase saved settings
     useEffect(() => {
         if (settings?.userBio) {
-            setBioInfo(settings.userBio.bgColor);
+            setBioInfo(settings.userBio.bioInfo);
         }
     }, [settings]);
 
