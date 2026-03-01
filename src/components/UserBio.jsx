@@ -1,9 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
-function UserBio({ editMode, settings, setSettings }) {
+function UserBio({ settings, setSettings }) {
     const [bioInfo, setBioInfo] = useState("About me...");
     const [fontFamily, setFontFamily] = useState("Arial");
     const [bgColor, setBgColor] = useState("white");
+    const [editing, setEditing] = useState(false); // local edit mode
+
+    const popupRef = useRef(null);
 
     const fonts = [
         "Arial",
@@ -26,7 +29,7 @@ function UserBio({ editMode, settings, setSettings }) {
                 bgColor,
             },
         }));
-    }, [bioInfo, fontFamily, setSettings, bgColor]);
+    }, [bioInfo, fontFamily, bgColor, setSettings]);
 
     // Load saved settings from DB
     useEffect(() => {
@@ -37,17 +40,58 @@ function UserBio({ editMode, settings, setSettings }) {
         }
     }, [settings]);
 
+    // Close popup if click outside
+    useEffect(() => {
+        function handleClickOutside(event) {
+            if (popupRef.current && !popupRef.current.contains(event.target)) {
+                setEditing(false);
+            }
+        }
+
+        if (editing) {
+            document.addEventListener("mousedown", handleClickOutside);
+        } else {
+            document.removeEventListener("mousedown", handleClickOutside);
+        }
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [editing]);
+
     return (
         <>
-            {!editMode && (
-                <p style={{
+            {/* Bio display: click to edit */}
+            <p
+                style={{
                     fontFamily,
                     background: bgColor,
-                    maxWidth: "fit-content"
-                }}>{bioInfo}</p>
-            )}
-            {/* {editMode && (
-                <>
+                    padding: "0.2rem 0.4rem",
+                    borderRadius: "4px",
+                    maxWidth: "fit-content",
+                    cursor: "pointer",
+                }}
+                onClick={() => setEditing(true)}
+            >
+                {bioInfo}
+            </p>
+
+            {/* Edit popup */}
+            {editing && (
+                <div
+                    ref={popupRef}
+                    style={{
+                        position: "absolute",
+                        background: "white",
+                        padding: "1rem",
+                        borderRadius: "8px",
+                        boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: "0.5rem",
+                        zIndex: 1000,
+                    }}
+                >
                     <input
                         type="color"
                         value={bgColor}
@@ -65,64 +109,12 @@ function UserBio({ editMode, settings, setSettings }) {
                             onChange={(e) => setFontFamily(e.target.value)}
                         >
                             {fonts.map((f) => (
-                                <option key={f} value={f}>{f}</option>
+                                <option key={f} value={f}>
+                                    {f}
+                                </option>
                             ))}
                         </select>
                     </label>
-                </>
-            )} */}
-            {editMode && (
-                <div
-                    style={{
-                        position: "fixed",
-                        top: 0,
-                        left: 0,
-                        width: "100vw",
-                        height: "100vh",
-                        background: "rgba(0,0,0,0.5)",
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        zIndex: 9999,
-                    }}
-                >
-                    <div
-                        style={{
-                            background: "white",
-                            padding: "1rem",
-                            borderRadius: "8px",
-                            display: "flex",
-                            flexDirection: "column",
-                            gap: "0.5rem",
-                            minWidth: "300px",
-                        }}
-                        onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
-                    >
-                        <h3>Edit Bio</h3>
-                        <input
-                            type="color"
-                            value={bgColor}
-                            onChange={(e) => setBgColor(e.target.value)}
-                        />
-                        <input
-                            style={{ fontFamily }}
-                            value={bioInfo}
-                            onChange={(e) => setBioInfo(e.target.value)}
-                        />
-                        <label>
-                            Choose font:
-                            <select
-                                value={fontFamily}
-                                onChange={(e) => setFontFamily(e.target.value)}
-                            >
-                                {fonts.map((f) => (
-                                    <option key={f} value={f}>
-                                        {f}
-                                    </option>
-                                ))}
-                            </select>
-                        </label>
-                    </div>
                 </div>
             )}
         </>
