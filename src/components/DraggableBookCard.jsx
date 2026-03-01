@@ -98,7 +98,7 @@ function DraggableBookCard({
           src={`https://covers.openlibrary.org/b/id/${book.cover_id}-M.jpg`}
           alt="Book cover"
           style={{ 
-            // width: "100px", 
+            width: "100px", 
             marginBottom: "8px" }}
         />
 

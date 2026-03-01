@@ -9,10 +9,10 @@ function BookList({
   setBooks,
   setSettings
 }) {
-  const [bgColor, setBgColor] = useState("black");
-  const [borderColor, setBorderColor] = useState("black");
+  const [bgColor, setBgColor] = useState("white");
+  const [borderColor, setBorderColor] = useState("white");
   const [borderSize, setBorderSize] = useState("2");
-  const [pageBckColor, setPageBckColor] = useState("black");
+  const [pageBckColor, setPageBckColor] = useState("white");
 
   // add any changes to settings the user makes
   useEffect(() => {
