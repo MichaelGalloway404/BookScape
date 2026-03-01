@@ -3,7 +3,9 @@ function UserBio({editMode}){
     const [bio,setBio] = useState("About me...");
     return(
         <>
-            <p>{bio}</p>
+            {!editMode && (
+                <p>{bio}</p>
+            )}
             {editMode && (
                 <input 
                     value={bio}
