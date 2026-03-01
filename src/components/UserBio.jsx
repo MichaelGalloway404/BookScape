@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-function UserBio({ editMode, settings, setSettings, setEditMode }) {
+function UserBio({ editMode, settings, setSettings }) {
     const [bioInfo, setBioInfo] = useState("About me...");
     const [fontFamily, setFontFamily] = useState("Arial");
     const [bgColor, setBgColor] = useState("white");
@@ -39,6 +39,38 @@ function UserBio({ editMode, settings, setSettings, setEditMode }) {
 
     return (
         <>
+            {!editMode && (
+                <p style={{
+                    fontFamily,
+                    background: bgColor,
+                    maxWidth: "fit-content"
+                }}>{bioInfo}</p>
+            )}
+            {/* {editMode && (
+                <>
+                    <input
+                        type="color"
+                        value={bgColor}
+                        onChange={(e) => setBgColor(e.target.value)}
+                    />
+                    <input
+                        style={{ fontFamily, maxWidth: "fit-content" }}
+                        value={bioInfo}
+                        onChange={(e) => setBioInfo(e.target.value)}
+                    />
+                    <label>
+                        Choose font:
+                        <select
+                            value={fontFamily}
+                            onChange={(e) => setFontFamily(e.target.value)}
+                        >
+                            {fonts.map((f) => (
+                                <option key={f} value={f}>{f}</option>
+                            ))}
+                        </select>
+                    </label>
+                </>
+            )} */}
             {editMode && (
                 <div
                     style={{
@@ -53,7 +85,6 @@ function UserBio({ editMode, settings, setSettings, setEditMode }) {
                         alignItems: "center",
                         zIndex: 9999,
                     }}
-                    onClick={() => setEditMode(false)} // close when clicking outside
                 >
                     <div
                         style={{
@@ -91,7 +122,6 @@ function UserBio({ editMode, settings, setSettings, setEditMode }) {
                                 ))}
                             </select>
                         </label>
-                        <button onClick={() => setEditMode(false)}>Close</button>
                     </div>
                 </div>
             )}
