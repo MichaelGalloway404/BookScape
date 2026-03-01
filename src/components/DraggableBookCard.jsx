@@ -87,7 +87,7 @@ function DraggableBookCard({
       onClick={!editMode ? fetchWikiSummary : undefined}
     >
       <li
-        style={{ listStyle: "none"}}
+        style={{ listStyle: "none", width:"150px"}}
         draggable={editMode}
         onDragStart={() => handleDragStart(index)}
         onDragEnter={() => handleDragEnter(index)}
@@ -102,8 +102,8 @@ function DraggableBookCard({
             marginBottom: "8px" }}
         />
 
-        <p style={{maxWidth: "200px"}}><strong>{book.title}</strong></p>
-        <p style={{maxWidth: "200px"}}>Author: {book.author}</p>
+        <p ><strong>{book.title}</strong></p>
+        <p >Author: {book.author}</p>
 
         {editMode && (
           <button
