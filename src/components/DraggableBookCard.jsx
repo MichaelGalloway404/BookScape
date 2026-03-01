@@ -14,7 +14,7 @@ function DraggableBookCard({
 }) {
 
   const [summary, setSummary] = useState(null);
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
   const [expanded, setExpanded] = useState(false);
 
   const popupRef = useRef(null);
@@ -26,7 +26,7 @@ function DraggableBookCard({
       return;
     }
 
-    setLoading(true);
+    // setLoading(true);
 
     try {
       const searchQuery = encodeURIComponent(
@@ -42,7 +42,7 @@ function DraggableBookCard({
       if (!searchData.query.search.length) {
         setSummary("No Wikipedia page found.");
         setExpanded(true);
-        setLoading(false);
+        // setLoading(false);
         return;
       }
 
@@ -57,7 +57,7 @@ function DraggableBookCard({
       if (!summaryResponse.ok) {
         setSummary("Could not retrieve summary.");
         setExpanded(true);
-        setLoading(false);
+        // setLoading(false);
         return;
       }
 
@@ -71,7 +71,7 @@ function DraggableBookCard({
       setExpanded(true);
     }
 
-    setLoading(false);
+    // setLoading(false);
   }
 
   useEffect(() => {
