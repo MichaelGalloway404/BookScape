@@ -157,11 +157,11 @@ function DraggableBookCard({
           </button>
         )}
 
-        {loading && (
+        {/* {loading && (
           <p style={{ fontStyle: "italic" }}>
             Loading summary...
           </p>
-        )}
+        )} */}
       </li>
     </div>
   );
