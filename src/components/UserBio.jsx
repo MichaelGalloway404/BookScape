@@ -1,10 +1,10 @@
 import { useEffect, useState, useRef } from "react";
 
-function UserBio({ settings, setSettings }) {
+function UserBio({ editMode, settings, setSettings }) {
     const [bioInfo, setBioInfo] = useState("About me...");
     const [fontFamily, setFontFamily] = useState("Arial");
     const [bgColor, setBgColor] = useState("white");
-    const [editing, setEditing] = useState(false); // local edit mode
+    const [editing, setEditing] = useState(false); // local popup mode
 
     const popupRef = useRef(null);
 
@@ -61,7 +61,7 @@ function UserBio({ settings, setSettings }) {
 
     return (
         <>
-            {/* Bio display: click to edit */}
+            {/* Bio display */}
             <p
                 style={{
                     fontFamily,
@@ -69,15 +69,17 @@ function UserBio({ settings, setSettings }) {
                     padding: "0.2rem 0.4rem",
                     borderRadius: "4px",
                     maxWidth: "fit-content",
-                    cursor: "pointer",
+                    cursor: editMode ? "pointer" : "default",
                 }}
-                onClick={() => setEditing(true)}
+                onClick={() => {
+                    if (editMode) setEditing(true);
+                }}
             >
                 {bioInfo}
             </p>
 
             {/* Edit popup */}
-            {editing && (
+            {editing && editMode && (
                 <div
                     ref={popupRef}
                     style={{
