@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 
 function UserBio({ editMode, settings, setSettings }) {
     const [bioInfo, setBioInfo] = useState("About me...");
-    const [fontFamily, setFontFamily] = useState("Arial"); // default font
+    const [fontFamily, setFontFamily] = useState("Arial");
+    const [bgColor, setBgColor] = useState("white");
 
     const fonts = [
         "Arial",
@@ -22,27 +23,37 @@ function UserBio({ editMode, settings, setSettings }) {
                 ...prev.userBio,
                 bioInfo,
                 fontFamily,
+                bgColor,
             },
         }));
-    }, [bioInfo, fontFamily, setSettings]);
+    }, [bioInfo, fontFamily, setSettings, bgColor]);
 
     // Load saved settings from DB
     useEffect(() => {
         if (settings?.userBio) {
             setBioInfo(settings.userBio.bioInfo || "About me...");
             setFontFamily(settings.userBio.fontFamily || "Arial");
+            setBgColor(settings.userBio.bgColor || "white");
         }
     }, [settings]);
 
     return (
         <>
             {!editMode && (
-                <p style={{ fontFamily }}>{bioInfo}</p>
+                <p style={{
+                    fontFamily,
+                    background: bgColor
+                }}>{bioInfo}</p>
             )}
             {editMode && (
-                <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+                <>
                     <input
-                        style={{ fontFamily }}
+                        type="color"
+                        value={bgColor}
+                        onChange={(e) => setBgColor(e.target.value)}
+                    />
+                    <input
+                        style={{ fontFamily, maxWidth: "50%" }}
                         value={bioInfo}
                         onChange={(e) => setBioInfo(e.target.value)}
                     />
@@ -57,7 +68,7 @@ function UserBio({ editMode, settings, setSettings }) {
                             ))}
                         </select>
                     </label>
-                </div>
+                </>
             )}
         </>
     );
