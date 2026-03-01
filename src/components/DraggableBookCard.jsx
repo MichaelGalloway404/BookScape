@@ -144,7 +144,7 @@ function DraggableBookCard({
           </p>
         )}
 
-        {expanded && summary && (
+        {!editMode && expanded && summary && (
           <div
             ref={popupRef}
             style={{
