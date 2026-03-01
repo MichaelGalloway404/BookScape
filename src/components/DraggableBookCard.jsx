@@ -14,7 +14,6 @@ function DraggableBookCard({
 }) {
 
   const [summary, setSummary] = useState(null);
-  // const [loading, setLoading] = useState(false);
   const [expanded, setExpanded] = useState(false);
 
   const popupRef = useRef(null);
@@ -26,7 +25,6 @@ function DraggableBookCard({
       return;
     }
 
-    // setLoading(true);
 
     try {
       const searchQuery = encodeURIComponent(
@@ -40,9 +38,8 @@ function DraggableBookCard({
       const searchData = await searchResponse.json();
 
       if (!searchData.query.search.length) {
-        setSummary("No Wikipedia page found.");
+        setSummary("So no info avalible");
         setExpanded(true);
-        // setLoading(false);
         return;
       }
 
@@ -57,7 +54,6 @@ function DraggableBookCard({
       if (!summaryResponse.ok) {
         setSummary("Could not retrieve summary.");
         setExpanded(true);
-        // setLoading(false);
         return;
       }
 
@@ -71,7 +67,6 @@ function DraggableBookCard({
       setExpanded(true);
     }
 
-    // setLoading(false);
   }
 
   useEffect(() => {
@@ -156,12 +151,6 @@ function DraggableBookCard({
             Delete
           </button>
         )}
-
-        {/* {loading && (
-          <p style={{ fontStyle: "italic" }}>
-            Loading summary...
-          </p>
-        )} */}
       </li>
     </div>
   );
