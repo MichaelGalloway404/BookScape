@@ -1,4 +1,4 @@
-const fonts = [
+export const  fonts = [
 
     // ========================
     // Web Safe Fonts
