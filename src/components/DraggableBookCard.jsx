@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 function DraggableBookCard({
   book,
@@ -81,7 +81,7 @@ function DraggableBookCard({
       }
     }
 
-    if (editing) {
+    if (expanded) {
       document.addEventListener("mousedown", handleClickOutside);
     } else {
       document.removeEventListener("mousedown", handleClickOutside);
