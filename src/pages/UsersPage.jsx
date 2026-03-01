@@ -62,7 +62,6 @@ function UsersPage() {
                     });
                 }
                 // GET USER SETTINGS
-                // GET USER SETTINGS
                 const userSettingsRes = await fetch("/api/userSettings", {
                     method: "GET",
                     credentials: "include",
@@ -149,7 +148,7 @@ function UsersPage() {
         try {
             await axios.post(
                 "/api/userSettings",
-                { settings: settings },
+                settings,
                 { withCredentials: true }
             );
             alert("Profile Settings Saved!");
