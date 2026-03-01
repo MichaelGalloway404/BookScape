@@ -179,7 +179,11 @@ function UsersPage() {
         <>
             <h1>User {user.username}'s Page</h1>
             {/* display users bio and edits */}
-            <UserBio editMode={editMode}/>
+            <UserBio 
+                editMode={editMode}
+                settings={settings}
+                setSettings={setSettings}
+            />
 
             {/* user profile public/private controls */}
             {editMode && (

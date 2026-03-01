@@ -1,15 +1,34 @@
-import { useState } from "react";
-function UserBio({editMode}){
-    const [bio,setBio] = useState("About me...");
-    return(
+import { useEffect, useState } from "react";
+function UserBio({ editMode, settings, setSettings }) {
+    const [bioInfo, setBioInfo] = useState("About me...");
+
+    // add any changes to settings the user makes
+    useEffect(() => {
+        setSettings(prev => ({
+            ...prev,
+            userBio: {
+                ...prev.userBio,
+                bioInfo,
+            },
+        }));
+    }, [bioInfo, setSettings]);
+
+    // Check for DataBase saved settings
+    useEffect(() => {
+        if (settings?.userBio) {
+            setBioInfo(settings.userBio.bgColor);
+        }
+    }, [settings]);
+
+    return (
         <>
             {!editMode && (
-                <p>{bio}</p>
+                <p>{bioInfo}</p>
             )}
             {editMode && (
-                <input 
-                    value={bio}
-                    onChange={(e) => setBio(e.target.value)}
+                <input
+                    value={bioInfo}
+                    onChange={(e) => setBioInfo(e.target.value)}
                 />
             )}
         </>

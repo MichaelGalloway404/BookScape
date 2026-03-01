@@ -28,7 +28,7 @@ function BookList({
     }));
   }, [bgColor, borderColor, borderSize, pageBckColor, setSettings]);
 
-  // default settings setup
+  // Check for DataBase saved settings
   useEffect(() => {
     if (settings?.bookCard) {
       setBgColor(settings.bookCard.bgColor);
