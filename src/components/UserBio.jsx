@@ -42,6 +42,7 @@ function UserBio({ editMode, settings, setSettings }) {
             {editMode && (
                 <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
                     <input
+                        style={{ fontFamily }}
                         value={bioInfo}
                         onChange={(e) => setBioInfo(e.target.value)}
                     />
