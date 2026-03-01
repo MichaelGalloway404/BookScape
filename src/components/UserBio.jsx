@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from "react";
+import fonts from "../styles/fonts"
 
 function UserBio({ editMode, settings, setSettings }) {
     const [bioInfo, setBioInfo] = useState("About me...");
@@ -7,16 +8,6 @@ function UserBio({ editMode, settings, setSettings }) {
     const [editing, setEditing] = useState(false); // local popup mode
 
     const popupRef = useRef(null);
-
-    const fonts = [
-        "Arial",
-        "Verdana",
-        "Tahoma",
-        "Times New Roman",
-        "Georgia",
-        "Courier New",
-        "Lucida Console",
-    ];
 
     // Update settings whenever bio text or font changes
     useEffect(() => {
