@@ -182,6 +182,7 @@ function UsersPage() {
                 editMode={editMode}
                 settings={settings}
                 setSettings={setSettings}
+                setEditMode={setEditMode}
             />
 
             {/* user profile public/private controls */}
