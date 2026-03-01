@@ -16,9 +16,10 @@ function UsersPage() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        // GET CURRENT USERS BOOKS
+        // LOAD CURRENT USER
         const loadUser = async () => {
             try {
+                // GET USER AUTH
                 const res = await fetch("/api/currentUser", {
                     method: "GET",
                     credentials: "include",
@@ -31,7 +32,7 @@ function UsersPage() {
                 }
 
                 setUser(data);
-                // get books from database
+                // GET CURRENT USERS BOOKS
                 const booksRes = await fetch("/api/userBooks", {
                     method: "GET",
                     credentials: "include",
@@ -60,8 +61,18 @@ function UsersPage() {
                         return 0;
                     });
                 }
-                // check if this user has a private account in DB
+                // GET USER SETTINGS
+                const userSettings = await fetch("/api/userSettings",{
+                    method: "GET",
+                    credentials: "include",
+                });
+                // SET USER SETTINGS
+                setSettings(userSettings);
+
+                // SET PROFILE VISIBILITY
                 setProfilePrivate(data.private);
+
+                // SET BOOK ORDERING
                 setBooks(orderedBooks);
             } catch (err) {
                 console.error(err);
