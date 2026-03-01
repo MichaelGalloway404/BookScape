@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import SiteInfoFooter from '../components/SiteInfoFooter';
 import ProfilePrivacyControls from "../components/ProfilePrivacyControls";
 import BookList from "../components/BookList";
+import UserBio from "../components/UserBio";
 import styles from "./BookSearch.module.css"
 
 function UsersPage() {
@@ -177,6 +178,8 @@ function UsersPage() {
     return (
         <>
             <h1>User {user.username}'s Page</h1>
+            {/* display users bio and edits */}
+            <UserBio editMode={editMode}/>
 
             {/* user profile public/private controls */}
             {editMode && (
