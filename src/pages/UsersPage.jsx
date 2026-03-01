@@ -62,12 +62,18 @@ function UsersPage() {
                     });
                 }
                 // GET USER SETTINGS
-                const userSettings = await fetch("/api/userSettings",{
+                // GET USER SETTINGS
+                const userSettingsRes = await fetch("/api/userSettings", {
                     method: "GET",
                     credentials: "include",
                 });
-                // SET USER SETTINGS
-                setSettings(userSettings);
+
+                const userSettingsData = await userSettingsRes.json();
+
+                if (userSettingsRes.ok) {
+                    // SET USER SETTINGS
+                    setSettings(userSettingsData || {});
+                }
 
                 // SET PROFILE VISIBILITY
                 setProfilePrivate(data.private);
