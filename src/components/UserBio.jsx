@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-function UserBio({ editMode, settings, setSettings }) {
+function UserBio({ editMode, settings, setSettings, setEditMode }) {
     const [bioInfo, setBioInfo] = useState("About me...");
     const [fontFamily, setFontFamily] = useState("Arial");
     const [bgColor, setBgColor] = useState("white");
