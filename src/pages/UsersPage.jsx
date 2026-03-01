@@ -85,6 +85,7 @@ function UsersPage() {
                 setLoading(false);
             } catch (err) {
                 console.error(err);
+                setLoading(false);
                 navigate("/login");
             }
         };
@@ -177,7 +178,7 @@ function UsersPage() {
 
 
     if (loading || !user) {
-        return null; // render nothing
+        return <p>Loading user data...</p>;
     }
 
     return (
