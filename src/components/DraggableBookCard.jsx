@@ -106,6 +106,25 @@ function DraggableBookCard({
       }}
       onClick={!editMode ? fetchWikiSummary : undefined}
     >
+      {!editMode && expanded && summary && (
+          <div
+            ref={popupRef}
+            style={{
+              position: "absolute",
+              background: "white",
+              padding: "1rem",
+              borderRadius: "8px",
+              boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+              display: "flex",
+              flexDirection: "column",
+              gap: "0.5rem",
+              zIndex: 1000,
+              maxWidth: "300px",
+            }}
+          >
+            {summary}
+          </div>
+        )}
       <li
         style={{ listStyle: "none", width: "150px" }}
         draggable={editMode}
@@ -142,26 +161,6 @@ function DraggableBookCard({
           <p style={{ fontStyle: "italic" }}>
             Loading summary...
           </p>
-        )}
-
-        {!editMode && expanded && summary && (
-          <div
-            ref={popupRef}
-            style={{
-              position: "absolute",
-              background: "white",
-              padding: "1rem",
-              borderRadius: "8px",
-              boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
-              display: "flex",
-              flexDirection: "column",
-              gap: "0.5rem",
-              zIndex: 1000,
-              maxWidth: "300px",
-            }}
-          >
-            {summary}
-          </div>
         )}
       </li>
     </div>
