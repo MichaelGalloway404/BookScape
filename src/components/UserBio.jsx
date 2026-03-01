@@ -5,7 +5,10 @@ function UserBio({editMode}){
         <>
             <p>{bio}</p>
             {editMode && (
-                <input onChange={(e) => setBio(e.target.value)}/>
+                <input 
+                    value={bio}
+                    onChange={(e) => setBio(e.target.value)}
+                />
             )}
         </>
     );
