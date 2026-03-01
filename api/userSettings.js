@@ -18,10 +18,10 @@ export default async function handler(req, res) {
   if (req.method === "GET") {
     try {
       const result = await pool.query(
-        `SELECT book_card FROM user_settings WHERE user_id = $1`,
+        `SELECT settings FROM user_settings WHERE user_id = $1`,
         [decoded.userId]
       );
-      return res.status(200).json(result.rows[0] || { book_card: [] });
+      return res.status(200).json(result.rows[0] || { settings: [] });
     } catch (err) {
       console.error(err);
       return res.status(500).json({ error: "Database error" });
@@ -30,20 +30,20 @@ export default async function handler(req, res) {
 
   // POST: add/update settings
   if (req.method === "POST") {
-    const { book_card } = req.body;
+    const { settings } = req.body;
 
-    if (!book_card) return res.status(400).json({ error: "No book_card provided" });
+    if (!settings) return res.status(400).json({ error: "No settings provided" });
 
     try {
       // insert or update
       await pool.query(
         `
-        INSERT INTO user_settings (user_id, book_card)
+        INSERT INTO user_settings (user_id, settings)
         VALUES ($1, $2)
         ON CONFLICT (user_id)
-        DO UPDATE SET book_card = EXCLUDED.book_card
+        DO UPDATE SET settings = EXCLUDED.settings
         `,
-        [decoded.userId, book_card]
+        [decoded.userId, settings]
       );
 
       return res.status(201).json({ success: true });

@@ -128,6 +128,17 @@ function UsersPage() {
             console.error("Axios error:", err.response?.data || err);
             alert("Failed to Save!");
         }
+        // save user's settings
+        try {
+            await axios.post(
+                "/api/userSettings",
+                { settings: settings }
+            );
+            alert("Profile Settings Saved!");
+        } catch (err) {
+            console.error("Axios error:", err.response?.data || err);
+            alert("Failed to Save!");
+        }
     }
 
     // make profile PUBLIC to others
