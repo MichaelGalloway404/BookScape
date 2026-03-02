@@ -5,6 +5,7 @@ import SiteInfoFooter from '../components/SiteInfoFooter';
 import ProfilePrivacyControls from "../components/ProfilePrivacyControls";
 import BookList from "../components/BookList";
 import UserBio from "../components/UserBio";
+import UserPageTitle from "../components/UserPageTitle";
 import styles from "./BookSearch.module.css"
 
 function UsersPage() {
@@ -176,7 +177,15 @@ function UsersPage() {
 
     return (
         <>
-            <h1>User {user.username}'s Page</h1>
+            {/* Users chosen title */}
+            {/* <h1>User {user.username}'s Page</h1> */}
+            <UserPageTitle 
+                titlePlaceHolder={user.username}
+                editMode={editMode}
+                settings={settings}
+                setSettings={setSettings}
+            />
+
             {/* display users bio and edits */}
             <UserBio 
                 editMode={editMode}
