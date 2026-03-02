@@ -6,25 +6,8 @@ function UserBio({ editMode, settings, setSettings }) {
     const [fontFamily, setFontFamily] = useState("Arial");
     const [bgColor, setBgColor] = useState("white");
     const [editing, setEditing] = useState(false);
-    const [availableFonts, setAvailableFonts] = useState([]);
 
     const popupRef = useRef(null);
-
-    function filterAvailableFonts(fontList) {
-        return fontList.filter(font =>
-            document.fonts.check(`16px "${font}"`)
-        );
-    }
-
-    useEffect(() => {
-        async function detectFonts() {
-            await document.fonts.ready; // wait for any web fonts
-            const filtered = filterAvailableFonts(fonts);
-            setAvailableFonts(filtered);
-        }
-
-        detectFonts();
-    }, []);
 
     // Update settings whenever bio text or font changes
     useEffect(() => {
@@ -119,7 +102,7 @@ function UserBio({ editMode, settings, setSettings }) {
                             value={fontFamily}
                             onChange={(e) => setFontFamily(e.target.value)}
                         >
-                            {availableFonts.map((f) => (
+                            {fonts.map((f) => (
                                 <option key={f} value={f}>
                                     {f}
                                 </option>
