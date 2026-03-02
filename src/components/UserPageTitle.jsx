@@ -6,7 +6,7 @@ function UserPageTitle({ editMode, settings, setSettings, titlePlaceHolder }) {
     const [text, setText] = useState(titlePlaceHolder);
     const [fontFamily, setFontFamily] = useState("Arial");
     const [bgColor, setBgColor] = useState("white");
-    const [fontSize, setFontSize] = useState(12);
+    const [fontSize, setFontSize] = useState(40);
     const [editing, setEditing] = useState(false);
 
     const popupRef = useRef(null);
@@ -85,7 +85,7 @@ function UserPageTitle({ editMode, settings, setSettings, titlePlaceHolder }) {
                         fontFamily,
                         fontSize,
                         bgColor,
-                        text,
+                        text:"Page Title",
                     }}
                     setters={{
                         setFontFamily,
