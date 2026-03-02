@@ -85,7 +85,7 @@ function UserPageTitle({ editMode, settings, setSettings, titlePlaceHolder }) {
                         fontFamily,
                         fontSize,
                         bgColor,
-                        text:"Page Title",
+                        text,
                     }}
                     setters={{
                         setFontFamily,
