@@ -1,10 +1,12 @@
 import { useEffect, useState, useRef } from "react";
-import fonts from "../styles/fonts"
+import EditablePopup from "./EditablePopup"
+
 
 function UserPageTitle({ editMode, settings, setSettings, titlePlaceHolder }) {
-    const [titleText, setTitleText] = useState(titlePlaceHolder);
+    const [text, setText] = useState(titlePlaceHolder);
     const [fontFamily, setFontFamily] = useState("Arial");
     const [bgColor, setBgColor] = useState("white");
+    const [fontSize, setFontSize] = useState(12);
     const [editing, setEditing] = useState(false);
 
     const popupRef = useRef(null);
@@ -15,17 +17,17 @@ function UserPageTitle({ editMode, settings, setSettings, titlePlaceHolder }) {
             ...prev,
             userPageTitle: {
                 ...prev.userPageTitle,
-                titleText,
+                text,
                 fontFamily,
                 bgColor,
             },
         }));
-    }, [titleText, fontFamily, bgColor, setSettings]);
+    }, [text, fontFamily, bgColor, setSettings]);
 
     // Load saved settings from DB
     useEffect(() => {
         if (settings?.userPageTitle) {
-            setTitleText(settings.userPageTitle.titleText);
+            setText(settings.userPageTitle.text);
             setFontFamily(settings.userPageTitle.fontFamily);
             setBgColor(settings.userPageTitle.bgColor);
         }
@@ -60,56 +62,38 @@ function UserPageTitle({ editMode, settings, setSettings, titlePlaceHolder }) {
                     padding: "0.2rem 0.4rem",
                     borderRadius: "4px",
                     maxWidth: "fit-content",
+                    fontSize: fontSize+"px",
                     cursor: editMode ? "pointer" : "default",
                 }}
                 onClick={() => { if (editMode) setEditing(true); }}
             >
-                {titleText}
+                {text}
             </h1>
 
             {/* Edit popup */}
             {editing && editMode && (
-                <div
-                    ref={popupRef}
-                    style={{
-                        position: "absolute",
-                        background: "white",
-                        padding: "1rem",
-                        borderRadius: "8px",
-                        boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
-                        display: "flex",
-                        flexDirection: "column",
-                        gap: "0.5rem",
-                        zIndex: 1000,
+                <EditablePopup
+                    setEditing={setEditing}
+                    popupRef={popupRef}
+                    features={{
+                        bgColor: true,
+                        text: true,
+                        fontFamily: true,
+                        fontSize: true,
                     }}
-                >
-                    {/* BACKGROUNND COLOR OF BIO */}
-                    <input
-                        type="color"
-                        value={bgColor}
-                        onChange={(e) => setBgColor(e.target.value)}
-                    />
-                    {/* FONT FAMILY */}
-                    <input
-                        style={{ fontFamily, maxWidth: "fit-content" }}
-                        value={titleText}
-                        onChange={(e) => setTitleText(e.target.value)}
-                    />
-                    {/* FONT CHOICE */}
-                    <label>
-                        Choose font:
-                        <select
-                            value={fontFamily}
-                            onChange={(e) => setFontFamily(e.target.value)}
-                        >
-                            {fonts.map((f) => (
-                                <option key={f} value={f}>
-                                    {f}
-                                </option>
-                            ))}
-                        </select>
-                    </label>
-                </div>
+                    values={{
+                        fontFamily,
+                        fontSize,
+                        bgColor,
+                        text,
+                    }}
+                    setters={{
+                        setFontFamily,
+                        setFontSize,
+                        setBgColor,
+                        setText
+                    }}
+                />
             )}
         </>
     );

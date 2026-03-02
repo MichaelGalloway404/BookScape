@@ -1,9 +1,10 @@
+import fonts from "../styles/fonts"
+
 function EditablePopup({
     popupRef,
     features,      // controls what shows up
     values,        // current values
     setters,       // setter functions
-    fonts
 }) {
     return (
         <div

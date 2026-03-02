@@ -1,5 +1,4 @@
 import { useEffect, useState, useRef } from "react";
-import fonts from "../styles/fonts"
 import EditablePopup from "./EditablePopup"
 
 function UserBio({ editMode, settings, setSettings }) {
@@ -73,7 +72,6 @@ function UserBio({ editMode, settings, setSettings }) {
                 <EditablePopup
                     setEditing={setEditing}
                     popupRef={popupRef}
-                    fonts={fonts}
                     features={{
                         bgColor: true,
                         text: true,
