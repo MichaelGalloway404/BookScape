@@ -56,7 +56,7 @@ function UserPageTitle({ editMode, settings, setSettings, titlePlaceHolder }) {
         <>
             {/* Bio display */}
             <h1
-                className={editMode ? "hover:shadow-lg transition-shadow duration-200" : ""}
+                className={`hoverText ${editMode ? "editable" : ""}`}
                 style={{
                     fontFamily,
                     background: bgColor,
