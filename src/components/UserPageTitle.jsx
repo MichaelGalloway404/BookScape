@@ -62,7 +62,9 @@ function UserPageTitle({ editMode, settings, setSettings, titlePlaceHolder }) {
                     background: bgColor,
                     padding: "0.2rem 0.4rem",
                     borderRadius: "4px",
-                    maxWidth: editMode ? "200px" : "fit-content",
+                    maxWidth: "fit-content",
+                    minWidth: editMode ? "200px" : "fit-content",
+                    minHeight: editMode ? "200px" : "fit-content",
                     fontSize: fontSize+"px",
                     cursor: editMode ? "pointer" : "default",
                 }}
