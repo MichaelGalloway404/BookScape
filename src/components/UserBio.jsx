@@ -1,8 +1,9 @@
 import { useEffect, useState, useRef } from "react";
 import fonts from "../styles/fonts"
+import EditablePopup from "./EditablePopup"
 
 function UserBio({ editMode, settings, setSettings }) {
-    const [bioInfo, setBioInfo] = useState("About me...");
+    const [text, setText] = useState("About me...");
     const [fontFamily, setFontFamily] = useState("Arial");
     const [bgColor, setBgColor] = useState("white");
     const [editing, setEditing] = useState(false);
@@ -15,17 +16,17 @@ function UserBio({ editMode, settings, setSettings }) {
             ...prev,
             userBio: {
                 ...prev.userBio,
-                bioInfo,
+                text,
                 fontFamily,
                 bgColor,
             },
         }));
-    }, [bioInfo, fontFamily, bgColor, setSettings]);
+    }, [text, fontFamily, bgColor, setSettings]);
 
     // Load saved settings from DB
     useEffect(() => {
         if (settings?.userBio) {
-            setBioInfo(settings.userBio.bioInfo || "About me...");
+            setText(settings.userBio.text || "About me...");
             setFontFamily(settings.userBio.fontFamily || "Arial");
             setBgColor(settings.userBio.bgColor || "white");
         }
@@ -64,52 +65,32 @@ function UserBio({ editMode, settings, setSettings }) {
                 }}
                 onClick={() => { if (editMode) setEditing(true); }}
             >
-                {bioInfo}
+                {text}
             </p>
 
             {/* Edit popup */}
             {editing && editMode && (
-                <div
-                    ref={popupRef}
-                    style={{
-                        position: "absolute",
-                        background: "white",
-                        padding: "1rem",
-                        borderRadius: "8px",
-                        boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
-                        display: "flex",
-                        flexDirection: "column",
-                        gap: "0.5rem",
-                        zIndex: 1000,
+                <EditablePopup
+                    setEditing={setEditing}
+                    popupRef={popupRef}
+                    fonts={fonts}
+                    features={{
+                        bgColor: true,
+                        text: true,
+                        fontFamily: true,
+                        fontSize: false,
                     }}
-                >
-                    {/* BACKGROUNND COLOR OF BIO */}
-                    <input
-                        type="color"
-                        value={bgColor}
-                        onChange={(e) => setBgColor(e.target.value)}
-                    />
-                    {/* FONT FAMILY */}
-                    <input
-                        style={{ fontFamily, maxWidth: "fit-content" }}
-                        value={bioInfo}
-                        onChange={(e) => setBioInfo(e.target.value)}
-                    />
-                    {/* FONT CHOICE */}
-                    <label>
-                        Choose font:
-                        <select
-                            value={fontFamily}
-                            onChange={(e) => setFontFamily(e.target.value)}
-                        >
-                            {fonts.map((f) => (
-                                <option key={f} value={f}>
-                                    {f}
-                                </option>
-                            ))}
-                        </select>
-                    </label>
-                </div>
+                    values={{
+                        fontFamily,
+                        bgColor,
+                        text,
+                    }}
+                    setters={{
+                        setFontFamily,
+                        setBgColor,
+                        setText
+                    }}
+                />
             )}
         </>
     );
