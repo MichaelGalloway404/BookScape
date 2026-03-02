@@ -25,7 +25,7 @@ function UserBio({ editMode, settings, setSettings }) {
     // Load saved settings from DB
     useEffect(() => {
         if (settings?.userBio) {
-            setText(settings.userBio.text || "About me...");
+            setText(settings.userBio.text);
             setFontFamily(settings.userBio.fontFamily || "Arial");
             setBgColor(settings.userBio.bgColor || "white");
         }
