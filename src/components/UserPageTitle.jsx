@@ -37,8 +37,6 @@ function UserPageTitle({ editMode, settings, setSettings, titlePlaceHolder }) {
             setFontFamily(settings.userPageTitle.fontFamily || "Arial");
             setBgColor(settings.userPageTitle.bgColor || "white");
             setBgColor2(settings.userPageTitle.bgColor2 || "white");
-            setMarginLeft(settings.userPageTitle.setMarginLeft || 1);
-            setMarginRight(settings.userPageTitle.setMarginRight || 1);
         }
     }, [settings]);
 
