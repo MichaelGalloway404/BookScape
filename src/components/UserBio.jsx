@@ -84,8 +84,8 @@ function UserBio({ editMode, settings, setSettings }) {
                     borderRadius: borderRadius + "px",
                     maxWidth: "fit-content",
                     marginLeft: marginLeft + "px",
-                    minWidth: editMode ? "200px" : "fit-content",
-                    minHeight: editMode ? "100px" : "fit-content",
+                    minWidth: editMode ? "50px" : "fit-content",
+                    minHeight: editMode ? "50px" : "fit-content",
                     fontSize: fontSize + "px",
                     cursor: editMode ? "pointer" : "default",
                 }}
