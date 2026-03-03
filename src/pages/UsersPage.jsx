@@ -16,6 +16,8 @@ function UsersPage() {
     const [editing, setEditing] = useState(false);
     const [settings, setSettings] = useState({});
     const [pageBckColor, setPageBckColor] = useState("#c4ccd5");
+    const [pageBckColor2, setPageBckColor2] = useState("#c4ccd5");
+    const [gradientAngle, setGradientAngle] = useState(135);
 
     const popupRef = useRef(null);
 
@@ -41,17 +43,17 @@ function UsersPage() {
 
     // will load color for background from user settings later
     useEffect(() => {
-        // save the original background
+        // Save original background
         const originalBackground = document.body.style.background;
 
-        // apply the page background
-        document.body.style.background = pageBckColor;
+        // Apply gradient background
+        document.body.style.background = `linear-gradient(${gradientAngle}deg, ${pageBckColor}, ${pageBckColor2})`;
 
-        // cleanup function runs when the component unmounts
+        // Cleanup when component unmounts
         return () => {
             document.body.style.background = originalBackground;
         };
-    }, [pageBckColor]);
+    }, [pageBckColor, pageBckColor2]);
 
     // Close popup if click outside
     useEffect(() => {
@@ -226,7 +228,6 @@ function UsersPage() {
                     controls={{
                         "Page Background Color": [pageBckColor, setPageBckColor],
                         "Profile is Private": [profilePublic, setProfilePrivate],
-
                     }}
                 />
             )}
