@@ -224,8 +224,8 @@ function UsersPage() {
                 <EditablePopup
                     popupRef={popupRef}
                     controls={{
-                        pageBckColor: [pageBckColor, setPageBckColor],
-                        profilePublic: [profilePublic, setProfilePrivate],
+                        "Page Background Color": [pageBckColor, setPageBckColor],
+                        "Profile is Private": [profilePublic, setProfilePrivate],
 
                     }}
                 />
