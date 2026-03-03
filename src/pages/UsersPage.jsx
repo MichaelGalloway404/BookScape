@@ -13,9 +13,62 @@ function UsersPage() {
     const [profilePublic, setProfilePrivate] = useState(false);
     const [books, setBooks] = useState([]);
     const [editMode, setEditMode] = useState(false);
+    const [editing, setEditing] = useState(false);
     const [settings, setSettings] = useState({});
+    const [pageBckColor, setPageBckColor] = useState("#c4ccd5");
 
     const navigate = useNavigate();
+
+    // add any changes to settings the user makes
+    useEffect(() => {
+        setSettings(prev => ({
+            ...prev,
+            mainPage: {
+                ...prev.mainPage,
+                pageBckColor,
+            },
+        }));
+    }, [pageBckColor, setSettings]);
+
+    // Check for DataBase saved settings
+    useEffect(() => {
+        if (settings?.mainPage) {
+            setPageBckColor(settings.mainPage.pageBckColor);
+        }
+    }, [settings]);
+
+    // will load color for background from user settings later
+    useEffect(() => {
+        // save the original background
+        const originalBackground = document.body.style.background;
+
+        // apply the page background
+        document.body.style.background = pageBckColor;
+
+        // cleanup function runs when the component unmounts
+        return () => {
+            document.body.style.background = originalBackground;
+        };
+    }, [pageBckColor]);
+
+    // Close popup if click outside
+    useEffect(() => {
+        function handleClickOutside(event) {
+            if (popupRef.current && !popupRef.current.contains(event.target)) {
+                setEditing(false);
+            }
+        }
+
+        if (editing) {
+            document.addEventListener("mousedown", handleClickOutside);
+        } else {
+            document.removeEventListener("mousedown", handleClickOutside);
+        }
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [editing]);
 
     useEffect(() => {
         // LOAD CURRENT USER
@@ -177,6 +230,16 @@ function UsersPage() {
 
     return (
         <>
+            {/* if in editmode and element has been clicked on */}
+            {editing && editMode && (
+                <EditablePopup
+                    popupRef={popupRef}
+                    controls={{
+                        pageBckColor: [pageBckColor, setPageBckColor],
+
+                    }}
+                />
+            )}
             {/* Users chosen title */}
             {/* <h1>User {user.username}'s Page</h1> */}
             <UserPageTitle

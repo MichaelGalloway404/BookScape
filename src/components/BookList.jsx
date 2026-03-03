@@ -27,10 +27,9 @@ function BookList({
         bgColor,
         borderColor,
         borderSize,
-        pageBckColor,
       },
     }));
-  }, [bgColor, borderColor, borderSize, pageBckColor, setSettings]);
+  }, [bgColor, borderColor, borderSize, setSettings]);
 
   // Check for DataBase saved settings
   useEffect(() => {
@@ -38,7 +37,6 @@ function BookList({
       setBgColor(settings.bookCard.bgColor);
       setBorderColor(settings.bookCard.borderColor);
       setBorderSize(settings.bookCard.borderSize);
-      setPageBckColor(settings.bookCard.pageBckColor);
     }
   }, [settings]);
 
@@ -76,20 +74,6 @@ function BookList({
     // Update state with new order and trigger UI re-render
     setBooks(listCopy);
   };
-
-  // will load color for background from user settings later
-  useEffect(() => {
-    // save the original background
-    const originalBackground = document.body.style.background;
-
-    // apply the page background
-    document.body.style.background = pageBckColor;
-
-    // cleanup function runs when the component unmounts
-    return () => {
-      document.body.style.background = originalBackground;
-    };
-  }, [pageBckColor]);
 
   // Close popup if click outside
     useEffect(() => {
