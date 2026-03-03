@@ -9,7 +9,6 @@ function UserPageTitle({ editMode, settings, setSettings, titlePlaceHolder }) {
     const [bgColor2, setBgColor2] = useState("white");
     const [fontSize, setFontSize] = useState(40);
     const [marginLeft, setMarginLeft] = useState(1);
-    const [marginRight, setMarginRight] = useState(1);
     const [editing, setEditing] = useState(false);
 
     const popupRef = useRef(null);
@@ -25,10 +24,9 @@ function UserPageTitle({ editMode, settings, setSettings, titlePlaceHolder }) {
                 bgColor,
                 bgColor2,
                 marginLeft,
-                marginRight,
             },
         }));
-    }, [text, fontFamily, bgColor, bgColor2, marginLeft, marginRight, setSettings]);
+    }, [text, fontFamily, bgColor, bgColor2, marginLeft, setSettings]);
 
     // Load saved settings from DB
     useEffect(() => {
@@ -71,7 +69,6 @@ function UserPageTitle({ editMode, settings, setSettings, titlePlaceHolder }) {
                     borderRadius: "4px",
                     maxWidth: "fit-content",
                     marginLeft: marginLeft + "px",
-                    marginRight: marginRight + "px",
                     minWidth: editMode ? "200px" : "fit-content",
                     minHeight: editMode ? "200px" : "fit-content",
                     fontSize: fontSize + "px",
@@ -93,7 +90,6 @@ function UserPageTitle({ editMode, settings, setSettings, titlePlaceHolder }) {
                         fontFamily: [fontFamily, setFontFamily],
                         fontSize: [fontSize, setFontSize],
                         marginLeft: [marginLeft, setMarginLeft],
-                        marginRight: [marginRight, setMarginRight],
                     }}
                 />
             )}
