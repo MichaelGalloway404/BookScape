@@ -12,7 +12,8 @@ function BookList({
   const [editing, setEditing] = useState(false);
   const [bgColor, setBgColor] = useState("#c4ccd5");
   const [borderColor, setBorderColor] = useState("#c4ccd5");
-  const [borderSize, setBorderSize] = useState("2");
+  const [borderSize, setBorderSize] = useState(2);
+  const [borderStyle, setBorderStyle] = useState("solid");
   const [summary, setSummary] = useState(null);
   const [expanded, setExpanded] = useState(false);
 
@@ -27,9 +28,10 @@ function BookList({
         bgColor,
         borderColor,
         borderSize,
+        borderStyle,
       },
     }));
-  }, [bgColor, borderColor, borderSize, setSettings]);
+  }, [bgColor, borderColor, borderSize, borderStyle, setSettings]);
 
   // Check for DataBase saved settings
   useEffect(() => {
@@ -37,6 +39,7 @@ function BookList({
       setBgColor(settings.bookCard.bgColor);
       setBorderColor(settings.bookCard.borderColor);
       setBorderSize(settings.bookCard.borderSize);
+      setBorderStyle(settings.bookCard.borderStyle);
     }
   }, [settings]);
 
@@ -192,7 +195,7 @@ function BookList({
             style={{
               backgroundColor: bgColor,
               padding: "10px",
-              border: `${borderSize}px solid ${borderColor}`,
+              border: `${borderSize}px ${borderStyle} ${borderColor}`,
               borderRadius: "8px",
               cursor: "pointer",
               marginBottom: "10px",

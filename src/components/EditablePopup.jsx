@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import fonts from "../styles/fonts";
+import borderTypes from "../styles/borderTypes";
 
 function EditablePopup({ popupRef, controls = {} }) {
 
@@ -112,6 +113,27 @@ function EditablePopup({ popupRef, controls = {} }) {
                                 }
                             >
                                 {fonts.map((f) => (
+                                    <option key={f} value={f}>
+                                        {f}
+                                    </option>
+                                ))}
+                            </select>
+                        </label>
+                    );
+                }
+
+                // BORDER STYLE PICKER
+                if (key === "borderStyle") {
+                    return (
+                        <label key={key}>
+                            Choose Border Style:
+                            <select
+                                value={value}
+                                onChange={(e) =>
+                                    setter(e.target.value)
+                                }
+                            >
+                                {borderTypes.map((f) => (
                                     <option key={f} value={f}>
                                         {f}
                                     </option>
