@@ -1,11 +1,6 @@
-import fonts from "../styles/fonts"
+import fonts from "../styles/fonts";
 
-function EditablePopup({
-    popupRef,
-    features,      // controls what shows up
-    values,        // current values
-    setters,       // setter functions
-}) {
+function EditablePopup({ popupRef, controls = {} }) {
     return (
         <div
             ref={popupRef}
@@ -21,61 +16,70 @@ function EditablePopup({
                 zIndex: 1000,
             }}
         >
-            {/* Background Color */}
-            {features.bgColor && features.bgColor2 && (
-                <>
-                    <input
-                        type="color"
-                        value={values.bgColor}
-                        onChange={(e) => setters.setBgColor(e.target.value)}
-                    />
-                    <input
-                        type="color"
-                        value={values.bgColo2}
-                        onChange={(e) => setters.setBgColor2(e.target.value)}
-                    />
-                </>
-            )}
+            {Object.entries(controls).map(([key, [value, setter]]) => {
 
-            {/* Text Editing */}
-            {features.text && (
-                <input
-                    style={{ fontFamily: values.fontFamily }}
-                    value={values.text}
-                    onChange={(e) => setters.setText(e.target.value)}
-                />
-            )}
+                // COLOR PICKERS
+                if (key.toLowerCase().includes("color")) {
+                    return (
+                        <label key={key}>
+                            {key}
+                            <input
+                                type="color"
+                                value={value}
+                                onChange={(e) => setter(e.target.value)}
+                            />
+                        </label>
+                    );
+                }
 
-            {/* Font Family */}
-            {features.fontFamily && (
-                <label>
-                    Choose font:
-                    <select
-                        value={values.fontFamily}
-                        onChange={(e) =>
-                            setters.setFontFamily(e.target.value)
-                        }
-                    >
-                        {fonts.map((f) => (
-                            <option key={f} value={f}>
-                                {f}
-                            </option>
-                        ))}
-                    </select>
-                </label>
-            )}
+                // FONT FAMILY
+                if (key === "fontFamily") {
+                    return (
+                        <label key={key}>
+                            Choose font:
+                            <select
+                                value={value}
+                                onChange={(e) => setter(e.target.value)}
+                            >
+                                {fonts.map((f) => (
+                                    <option key={f} value={f}>
+                                        {f}
+                                    </option>
+                                ))}
+                            </select>
+                        </label>
+                    );
+                }
 
-            {/* Font Size */}
-            {features.fontSize && (
-                <input
-                    type="number"
-                    value={values.fontSize}
-                    onChange={(e) =>
-                        setters.setFontSize(e.target.value)
-                    }
-                />
-            )}
+                // NUMBERS
+                if (typeof value === "number") {
+                    return (
+                        <label key={key}>
+                            {key}
+                            <input
+                                type="number"
+                                value={value}
+                                onChange={(e) =>
+                                    setter(Number(e.target.value))
+                                }
+                            />
+                        </label>
+                    );
+                }
+
+                // DEFAULT TEXT INPUT
+                return (
+                    <label key={key}>
+                        {key}
+                        <input
+                            value={value}
+                            onChange={(e) => setter(e.target.value)}
+                        />
+                    </label>
+                );
+            })}
         </div>
     );
 }
+
 export default EditablePopup;

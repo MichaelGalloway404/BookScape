@@ -79,28 +79,13 @@ function UserPageTitle({ editMode, settings, setSettings, titlePlaceHolder }) {
             {/* Edit popup */}
             {editing && editMode && (
                 <EditablePopup
-                    setEditing={setEditing}
                     popupRef={popupRef}
-                    features={{
-                        bgColor: true,
-                        bgColor2: true,
-                        text: true,
-                        fontFamily: true,
-                        fontSize: true,
-                    }}
-                    values={{
-                        fontFamily,
-                        fontSize,
-                        bgColor,
-                        bgColor2,
-                        text,
-                    }}
-                    setters={{
-                        setFontFamily,
-                        setFontSize,
-                        setBgColor,
-                        setBgColor2,
-                        setText
+                    controls={{
+                        text: [text, setText],
+                        bgColor: [bgColor, setBgColor],
+                        bgColor2: [bgColor2, setBgColor2],
+                        fontFamily: [fontFamily, setFontFamily],
+                        fontSize: [fontSize, setFontSize],
                     }}
                 />
             )}
