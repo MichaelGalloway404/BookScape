@@ -179,7 +179,7 @@ function UsersPage() {
         <>
             {/* Users chosen title */}
             {/* <h1>User {user.username}'s Page</h1> */}
-            <UserPageTitle 
+            <UserPageTitle
                 titlePlaceHolder={user.username}
                 editMode={editMode}
                 settings={settings}
@@ -187,7 +187,7 @@ function UsersPage() {
             />
 
             {/* display users bio and edits */}
-            <UserBio 
+            <UserBio
                 editMode={editMode}
                 settings={settings}
                 setSettings={setSettings}
@@ -202,6 +202,17 @@ function UsersPage() {
                 />
             )}
 
+            {/* SAVE SETTINGS BUTTON */}
+            {editMode && (
+                <button onClick={() => saveSettings(books)}
+                    style={{
+                        position: "absolute",
+                        top: "1rem",
+                        right: "1rem",
+                    }}>
+                    Save
+                </button>
+            )}
             {/* EDIT MODE BUTTON */}
             <button
                 onClick={() => setEditMode(prev => !prev)}
@@ -213,17 +224,6 @@ function UsersPage() {
             >
                 {editMode ? "Done" : "Edit"}
             </button>
-
-            {/* SAVE SETTINGS BUTTON */}
-            {editMode && (
-                <>
-                    <button onClick={() => saveSettings(books)}>
-                        Save
-                    </button>
-
-                    <h4>Edit book order by dragging and dropping</h4>
-                </>
-            )}
 
             {/* component for listing out users books and deleting books*/}
             <BookList
