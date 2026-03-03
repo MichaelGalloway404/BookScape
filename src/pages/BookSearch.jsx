@@ -251,58 +251,57 @@ export default function BookSearch() {
       {visibleBooks.length > 0 && (
         /* List container for search results */
         <ul className={styles.bookCoverGrid}>
-
           {/* Loop over the results array and render one <li> per book */}
-          {visibleBooks.map((book, i) =>
-            book.isbn != null && (
-              <li className={styles.bookCard} key={i}>
-                <img
-                  className={styles.coverImage}
-                  src={book.coverUrl}
-                  alt={book.title}
-                />
+          {visibleBooks
+            .filter(book => book.isbn)
+            .map((book, i) => (
+                <li className={styles.bookCard} key={i}>
+                  <img
+                    className={styles.coverImage}
+                    src={book.coverUrl}
+                    alt={book.title}
+                  />
 
-                <p className={styles.bookInfo}>
-                  <h5><strong>{book.title}</strong></h5>
-                </p>
+                  <p className={styles.bookInfo}>
+                    <h5><strong>{book.title}</strong></h5>
+                  </p>
 
-                <p className={styles.bookInfo}>
-                  Author: {book.author}
-                </p>
+                  <p className={styles.bookInfo}>
+                    Author: {book.author}
+                  </p>
 
-                <p className={styles.bookInfo}>
-                  ISBN: {book.isbn}
-                </p>
+                  <p className={styles.bookInfo}>
+                    ISBN: {book.isbn}
+                  </p>
 
-                <button
-                  className={`${styles.buttonClass} ${styles.addButton}`}
-                  onClick={() => addBook(book)}
-                >
-                  Add
-                </button>
-              </li>
-            )
+                  <button
+                    className={`${styles.buttonClass} ${styles.addButton}`}
+                    onClick={() => addBook(book)}
+                  >
+                    Add
+                  </button>
+                </li>
+                ))}
+              </ul>
+            )}
+
+          {/* Pagination controls */}
+          {results.length > BOOKS_PER_PAGE && (
+            <div className={styles.pagination}>
+              <button onClick={prevPage}>Previous</button>
+
+              <span>
+                Page {page + 1} of {totalPages}
+              </span>
+
+              <button onClick={nextPage}>Next</button>
+            </div>
           )}
-        </ul>
-      )}
-
-      {/* Pagination controls */}
-      {results.length > BOOKS_PER_PAGE && (
-        <div className={styles.pagination}>
-          <button onClick={prevPage}>Previous</button>
-
-          <span>
-            Page {page + 1} of {totalPages}
-          </span>
-
-          <button onClick={nextPage}>Next</button>
-        </div>
-      )}
-      <button className={`${styles.buttonClass}`} onClick={() => navigate("/userPage_Protected")}>
-        Back to userPage
-      </button>
-      <SiteInfoFooter />
-    </>
-  );
+          <button className={`${styles.buttonClass}`} onClick={() => navigate("/userPage_Protected")}>
+            Back to userPage
+          </button>
+          <SiteInfoFooter />
+        </>
+      );
 
 }
