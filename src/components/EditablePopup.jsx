@@ -121,6 +121,27 @@ function EditablePopup({ popupRef, controls = {} }) {
                     );
                 }
 
+                // BOOLEAN (checkbox)
+                if (typeof value === "boolean") {
+                    return (
+                        <label
+                            key={key}
+                            style={{
+                                display: "flex",
+                                alignItems: "center",
+                                gap: "0.5rem",
+                            }}
+                        >
+                            <input
+                                type="checkbox"
+                                checked={value}
+                                onChange={(e) => setter(e.target.checked)}
+                            />
+                            {key}
+                        </label>
+                    );
+                }
+
                 // NUMBERS
                 if (typeof value === "number") {
                     return (

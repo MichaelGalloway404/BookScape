@@ -2,7 +2,6 @@ import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import SiteInfoFooter from '../components/SiteInfoFooter';
-import ProfilePrivacyControls from "../components/ProfilePrivacyControls";
 import BookList from "../components/BookList";
 import UserBio from "../components/UserBio";
 import UserPageTitle from "../components/UserPageTitle";
@@ -239,6 +238,7 @@ function UsersPage() {
                     popupRef={popupRef}
                     controls={{
                         pageBckColor: [pageBckColor, setPageBckColor],
+                        profilePublic: [profilePublic, setProfilePrivate],
 
                     }}
                 />
@@ -258,15 +258,6 @@ function UsersPage() {
                 settings={settings}
                 setSettings={setSettings}
             />
-
-            {/* user profile public/private controls */}
-            {editMode && (
-                <ProfilePrivacyControls
-                    profilePrivate={profilePublic}
-                    setPublic={setPublic}
-                    setPrivate={setPrivate}
-                />
-            )}
 
             {/* PAGE SETTINGS BUTTON */}
             {editMode && (
