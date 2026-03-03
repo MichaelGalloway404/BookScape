@@ -10,6 +10,7 @@ function BookList({
   setBooks,
   setSettings
 }) {
+  const [editing, setEditing] = useState(false);
   const [bgColor, setBgColor] = useState("#c4ccd5");
   const [borderColor, setBorderColor] = useState("#c4ccd5");
   const [borderSize, setBorderSize] = useState("2");
