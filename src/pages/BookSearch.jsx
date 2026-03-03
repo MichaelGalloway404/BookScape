@@ -222,7 +222,7 @@ export default function BookSearch() {
           onChange={e => setTitle(e.target.value)}
         />
 
-        {/* Author input field */} 
+        {/* Author input field */}
         <input className={`${styles.textInput}`}
           placeholder="Author"
 
@@ -248,45 +248,41 @@ export default function BookSearch() {
         Search
       </button>
 
-      {visibleBooks.length > 0 && book?.isbn && (
+      {visibleBooks.length > 0 && (
         /* List container for search results */
         <ul className={styles.bookCoverGrid}>
 
           {/* Loop over the results array and render one <li> per book */}
-          {visibleBooks.map((book, i) => (
-            // Each list items have a unique key for React
-            <li className={styles.bookCard} key={i}>
+          {visibleBooks.map((book, i) =>
+            book.isbn && (
+              <li className={styles.bookCard} key={i}>
+                <img
+                  className={styles.coverImage}
+                  src={book.coverUrl}
+                  alt={book.title}
+                />
 
-              {/* Book cover image */}
-              <img className={styles.coverImage}
-                // URL built from the Open Library cover ID
-                src={book.coverUrl}
+                <p className={styles.bookInfo}>
+                  <h5><strong>{book.title}</strong></h5>
+                </p>
 
-                // screen readers text classic html
-                alt={book.title}
-              />
+                <p className={styles.bookInfo}>
+                  Author: {book.author}
+                </p>
 
-              {/* Book title */}
-              <p className={styles.bookInfo} >
-                <h5><strong>{book.title}</strong></h5>
-              </p>
+                <p className={styles.bookInfo}>
+                  ISBN: {book.isbn}
+                </p>
 
-              {/* Book author */}
-              <p className={styles.bookInfo} >
-                Author: {book.author}
-              </p>
-              {/* Book ISBN */}
-              <p className={styles.bookInfo} >
-                ISBN: {book.isbn}
-              </p>
-              {/* add a book to user db */}
-              <button className={`${styles.buttonClass} ${styles.addButton}`}
-                onClick={() => addBook(book)}
-              >
-                Add
-              </button>
-            </li>
-          ))}
+                <button
+                  className={`${styles.buttonClass} ${styles.addButton}`}
+                  onClick={() => addBook(book)}
+                >
+                  Add
+                </button>
+              </li>
+            )
+          )}
         </ul>
       )}
 
