@@ -57,7 +57,7 @@ function UsersPage() {
         return () => {
             document.body.style.background = originalBackground;
         };
-    }, [pageBckColor, pageBckColor2]);
+    }, [pageBckColor, pageBckColor2, gradientAngle]);
 
     // Close popup if click outside
     useEffect(() => {
@@ -78,6 +78,7 @@ function UsersPage() {
         };
     }, [editing]);
 
+    // loading user info 
     useEffect(() => {
         // LOAD CURRENT USER
         const loadUser = async () => {
