@@ -8,6 +8,7 @@ function UserBio({ editMode, settings, setSettings }) {
     const [bgColor2, setBgColor2] = useState("white");
     const [fontSize, setFontSize] = useState(40);
     const [borderRadius, setBorderRadius] = useState(5);
+    const [padding, setPadding] = useState(5);
     const [marginLeft, setMarginLeft] = useState(1);
     const [editing, setEditing] = useState(false);
 
@@ -26,6 +27,7 @@ function UserBio({ editMode, settings, setSettings }) {
                 bgColor2,
                 marginLeft,
                 borderRadius,
+                padding,
             },
         }));
     }, [text,
@@ -35,6 +37,7 @@ function UserBio({ editMode, settings, setSettings }) {
         marginLeft,
         fontSize,
         borderRadius,
+        padding,
         setSettings]);
 
     // Load saved settings from DB
@@ -46,7 +49,7 @@ function UserBio({ editMode, settings, setSettings }) {
             setBgColor(settings.userBio.bgColor);
             setBgColor2(settings.userBio.bgColor2);
             setMarginLeft(settings.userBio.marginLeft);
-            setBorderRadius(settings.userBio.borderRadius);
+            setPadding(settings.userBio.padding);
         }
     }, [settings]);
 
@@ -77,7 +80,7 @@ function UserBio({ editMode, settings, setSettings }) {
                 style={{
                     fontFamily,
                     background: `linear-gradient(135deg, ${bgColor},${bgColor2})`,
-                    padding: "0.2rem 0.4rem",
+                    padding: padding + "px",
                     borderRadius: borderRadius + "px",
                     maxWidth: "fit-content",
                     marginLeft: marginLeft + "px",
@@ -103,6 +106,7 @@ function UserBio({ editMode, settings, setSettings }) {
                         fontSize: [Number(fontSize), setFontSize],
                         marginLeft: [Number(marginLeft), setMarginLeft],
                         borderRadius: [Number(borderRadius),setBorderRadius],
+                        padding: [Number(padding),setPadding],
                     }}
                 />
             )}

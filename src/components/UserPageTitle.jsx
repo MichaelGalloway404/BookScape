@@ -9,6 +9,7 @@ function UserPageTitle({ editMode, settings, setSettings, titlePlaceHolder }) {
     const [bgColor2, setBgColor2] = useState("white");
     const [fontSize, setFontSize] = useState(40);
     const [borderRadius, setBorderRadius] = useState(5);
+    const [padding, setPadding] = useState(5);
     const [marginLeft, setMarginLeft] = useState(1);
     const [editing, setEditing] = useState(false);
 
@@ -27,6 +28,8 @@ function UserPageTitle({ editMode, settings, setSettings, titlePlaceHolder }) {
                 bgColor2,
                 marginLeft,
                 borderRadius,
+                padding,
+                padding,
             },
         }));
     }, [text,
@@ -48,6 +51,7 @@ function UserPageTitle({ editMode, settings, setSettings, titlePlaceHolder }) {
             setBgColor2(settings.userPageTitle.bgColor2);
             setMarginLeft(settings.userPageTitle.marginLeft);
             setBorderRadius(settings.userPageTitle.borderRadius);
+            setPadding(settings.userPageTitle.padding);
         }
     }, [settings]);
 
@@ -78,7 +82,7 @@ function UserPageTitle({ editMode, settings, setSettings, titlePlaceHolder }) {
                 style={{
                     fontFamily,
                     background: `linear-gradient(135deg, ${bgColor},${bgColor2})`,
-                    padding: "0.2rem 0.4rem",
+                    padding: padding + "px",
                     borderRadius: borderRadius + "px",
                     maxWidth: "fit-content",
                     marginLeft: marginLeft + "px",
@@ -104,6 +108,7 @@ function UserPageTitle({ editMode, settings, setSettings, titlePlaceHolder }) {
                         fontSize: [Number(fontSize), setFontSize],
                         marginLeft: [Number(marginLeft), setMarginLeft],
                         borderRadius: [Number(borderRadius),setBorderRadius],
+                        padding: [Number(padding),setPadding],
                     }}
                 />
             )}
