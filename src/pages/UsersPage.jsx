@@ -7,7 +7,7 @@ import BookList from "../components/BookList";
 import UserBio from "../components/UserBio";
 import UserPageTitle from "../components/UserPageTitle";
 import styles from "./BookSearch.module.css"
-import EditablePopup from "./EditablePopup"
+import EditablePopup from "../components/EditablePopup"
 
 function UsersPage() {
     const [user, setUser] = useState(null);
