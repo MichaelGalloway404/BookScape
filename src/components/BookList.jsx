@@ -185,10 +185,10 @@ function BookList({
       )}
       <ul style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}
         onClick={() => { if (editMode) setEditing(true); }}>
-        {books.map((book) => (
-          //  allows for a book card to be rearranged and for a book wiki API summary
-          // --------------------- Draggable Card ------------------------------------------------------
+        {books.map((book, index) => (
+          // -------------------- Draggable Book Card --------------------------------
           <div
+            key={book.isbn || index}  // always give a unique key
             style={{
               backgroundColor: bgColor,
               padding: "10px",
@@ -197,9 +197,10 @@ function BookList({
               cursor: "pointer",
               marginBottom: "10px",
               transition: "all 0.2s ease",
-              maxWidth: "30%"
+              maxWidth: "30%",
+              position: "relative", // needed for absolute summary popup
             }}
-            onClick={!editMode ? fetchWikiSummary(book) : undefined}
+            onClick={!editMode ? () => fetchWikiSummary(book) : undefined}
           >
             {!editMode && expanded && summary && (
               <div
@@ -215,11 +216,14 @@ function BookList({
                   gap: "0.5rem",
                   zIndex: 1000,
                   maxWidth: "300px",
+                  top: "110%", // place below the card
+                  left: 0,
                 }}
               >
                 {summary}
               </div>
             )}
+
             <li
               style={{ listStyle: "none", width: "150px" }}
               draggable={editMode}
@@ -232,14 +236,11 @@ function BookList({
               <img
                 src={`https://covers.openlibrary.org/b/id/${book.cover_id}-M.jpg`}
                 alt="Book cover"
-                style={{
-                  width: "100px",
-                  marginBottom: "8px"
-                }}
+                style={{ width: "100px", marginBottom: "8px" }}
               />
 
-              <p ><strong>{book.title}</strong></p>
-              <p >Author: {book.author}</p>
+              <p><strong>{book.title}</strong></p>
+              <p>Author: {book.author}</p>
 
               {editMode && (
                 <button
@@ -253,8 +254,9 @@ function BookList({
               )}
             </li>
           </div>
-          // --------------------------------------------------------------------------------------
         ))}
+          // --------------------------------------------------------------------------------------
+
       </ul>
     </>
   );
