@@ -30,9 +30,9 @@ function UserPageTitle({ editMode, settings, setSettings, titlePlaceHolder }) {
     useEffect(() => {
         if (settings?.userPageTitle) {
             setText(settings.userPageTitle.text);
-            setFontFamily(settings.userPageTitle.fontFamily);
-            setBgColor(settings.userPageTitle.bgColor);
-            setBgColor2(settings.userPageTitle.bgColor2);
+            setFontFamily(settings.userBio.fontFamily || "Arial");
+            setBgColor(settings.userBio.bgColor || "white");
+            setBgColor2(settings.userBio.bgColor2 || "white");
         }
     }, [settings]);
 
@@ -62,7 +62,6 @@ function UserPageTitle({ editMode, settings, setSettings, titlePlaceHolder }) {
                 className={`hoverText ${editMode ? "editable" : ""}`}
                 style={{
                     fontFamily,
-                    // background: bgColor,
                     background: `linear-gradient(135deg, ${bgColor},${bgColor2})`,
                     padding: "0.2rem 0.4rem",
                     borderRadius: "4px",

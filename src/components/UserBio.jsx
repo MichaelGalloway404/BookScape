@@ -59,7 +59,6 @@ function UserBio({ editMode, settings, setSettings }) {
             <p
                 style={{
                     fontFamily,
-                    // background: bgColor,
                     background: `linear-gradient(135deg, ${bgColor},${bgColor2})`,
                     padding: "0.2rem 0.4rem",
                     borderRadius: "4px",
