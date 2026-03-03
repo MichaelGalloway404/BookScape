@@ -70,11 +70,11 @@ function UserPageTitle({ editMode, settings, setSettings, titlePlaceHolder }) {
                     padding: "0.2rem 0.4rem",
                     borderRadius: "4px",
                     maxWidth: "fit-content",
-                    marginLeft: marginLeft,
-                    marginRight: marginRight,
+                    marginLeft: marginLeft + "px",
+                    marginRight: marginRight + "px",
                     minWidth: editMode ? "200px" : "fit-content",
                     minHeight: editMode ? "200px" : "fit-content",
-                    fontSize: fontSize+"px",
+                    fontSize: fontSize + "px",
                     cursor: editMode ? "pointer" : "default",
                 }}
                 onClick={() => { if (editMode) setEditing(true); }}
