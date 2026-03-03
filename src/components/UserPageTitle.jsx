@@ -70,7 +70,7 @@ function UserPageTitle({ editMode, settings, setSettings, titlePlaceHolder }) {
                     maxWidth: "fit-content",
                     marginLeft: marginLeft + "px",
                     minWidth: editMode ? "200px" : "fit-content",
-                    minHeight: editMode ? "200px" : "fit-content",
+                    minHeight: editMode ? "100px" : "fit-content",
                     fontSize: fontSize + "px",
                     cursor: editMode ? "pointer" : "default",
                 }}
