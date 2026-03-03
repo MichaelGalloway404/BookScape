@@ -232,7 +232,7 @@ function UsersPage() {
                     popupRef={popupRef}
                     controls={{
                         "Page Background gradient 1": [pageBckColor, setPageBckColor],
-                        "Page Background gradient 1": [pageBckColor2, setPageBckColor2],
+                        "Page Background gradient 2": [pageBckColor2, setPageBckColor2],
                         "Gradient Angle": [gradientAngle,setGradientAngle],
                         "Profile is Private": [profilePublic, setProfilePrivate],
                     }}
