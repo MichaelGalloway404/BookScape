@@ -1,11 +1,62 @@
+import { useState, useRef, useEffect } from "react";
 import fonts from "../styles/fonts";
 
 function EditablePopup({ popupRef, controls = {} }) {
+
+    // Stores popup position
+    const [position, setPosition] = useState({ x: 200, y: 200 });
+
+    // Tracks dragging state
+    const isDragging = useRef(false);
+
+    // Stores mouse offset inside popup when drag starts
+    const dragOffset = useRef({ x: 0, y: 0 });
+
+
+    // Handle mouse move (global so drag feels smooth)
+    useEffect(() => {
+        function handleMouseMove(e) {
+            if (!isDragging.current) return;
+
+            setPosition({
+                x: e.clientX - dragOffset.current.x,
+                y: e.clientY - dragOffset.current.y,
+            });
+        }
+
+        function handleMouseUp() {
+            isDragging.current = false;
+        }
+
+        window.addEventListener("mousemove", handleMouseMove);
+        window.addEventListener("mouseup", handleMouseUp);
+
+        return () => {
+            window.removeEventListener("mousemove", handleMouseMove);
+            window.removeEventListener("mouseup", handleMouseUp);
+        };
+    }, []);
+
+
+    // Start dragging
+    function handleMouseDown(e) {
+        isDragging.current = true;
+
+        // Calculate where inside popup user clicked
+        dragOffset.current = {
+            x: e.clientX - position.x,
+            y: e.clientY - position.y,
+        };
+    }
+
+
     return (
         <div
             ref={popupRef}
             style={{
                 position: "absolute",
+                top: position.y,
+                left: position.x,
                 background: "white",
                 padding: "1rem",
                 borderRadius: "8px",
@@ -14,10 +65,28 @@ function EditablePopup({ popupRef, controls = {} }) {
                 flexDirection: "column",
                 gap: "0.5rem",
                 zIndex: 1000,
+                minWidth: "200px",
             }}
         >
+
+            {/* Drag Handle Header */}
+            <div
+                onMouseDown={handleMouseDown}
+                style={{
+                    cursor: "grab",
+                    fontWeight: "bold",
+                    paddingBottom: "0.5rem",
+                    borderBottom: "1px solid #ddd",
+                    marginBottom: "0.5rem",
+                }}
+            >
+                Drag Me
+            </div>
+
+
             {Object.entries(controls).map(([key, [value, setter]]) => {
-                // COLOR PICKERS
+
+                // COLOR PICKER
                 if (key.toLowerCase().includes("color")) {
                     return (
                         <label key={key}>
@@ -31,14 +100,16 @@ function EditablePopup({ popupRef, controls = {} }) {
                     );
                 }
 
-                // FONT FAMILY
+                // FONT PICKER
                 if (key === "fontFamily") {
                     return (
                         <label key={key}>
                             Choose font:
                             <select
                                 value={value}
-                                onChange={(e) => setter(e.target.value)}
+                                onChange={(e) =>
+                                    setter(e.target.value)
+                                }
                             >
                                 {fonts.map((f) => (
                                     <option key={f} value={f}>
@@ -66,13 +137,15 @@ function EditablePopup({ popupRef, controls = {} }) {
                     );
                 }
 
-                // DEFAULT TEXT INPUT
+                // DEFAULT TEXT
                 return (
                     <label key={key}>
                         {key}
                         <input
                             value={value}
-                            onChange={(e) => setter(e.target.value)}
+                            onChange={(e) =>
+                                setter(e.target.value)
+                            }
                         />
                     </label>
                 );
