@@ -28,9 +28,9 @@ function UserBio({ editMode, settings, setSettings }) {
     useEffect(() => {
         if (settings?.userBio) {
             setText(settings.userBio.text);
-            setFontFamily(settings.userBio.fontFamily || "Arial");
-            setBgColor(settings.userBio.bgColor || "white");
-            setBgColor2(settings.userBio.bgColor2 || "white");
+            setFontFamily(settings.userBio.fontFamily);
+            setBgColor(settings.userBio.bgColor);
+            setBgColor2(settings.userBio.bgColor2);
         }
     }, [settings]);
 

@@ -13,7 +13,7 @@ function UserPageTitle({ editMode, settings, setSettings, titlePlaceHolder }) {
 
     const popupRef = useRef(null);
 
-    // Update settings whenever bio text or font changes
+    // Update settings whenever changes happen
     useEffect(() => {
         setSettings(prev => ({
             ...prev,
@@ -32,9 +32,9 @@ function UserPageTitle({ editMode, settings, setSettings, titlePlaceHolder }) {
     useEffect(() => {
         if (settings?.userPageTitle) {
             setText(settings.userPageTitle.text);
-            setFontFamily(settings.userPageTitle.fontFamily || "Arial");
-            setBgColor(settings.userPageTitle.bgColor || "white");
-            setBgColor2(settings.userPageTitle.bgColor2 || "white");
+            setFontFamily(settings.userPageTitle.fontFamily);
+            setBgColor(settings.userPageTitle.bgColor);
+            setBgColor2(settings.userPageTitle.bgColor2);
         }
     }, [settings]);
 
