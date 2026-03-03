@@ -70,7 +70,7 @@ function UserBio({ editMode, settings, setSettings }) {
                 {text}
             </p>
 
-            {/* Edit popup */}
+            {/* if in editmode and element has been clicked on */}
             {editing && editMode && (
                 <EditablePopup
                     popupRef={popupRef}

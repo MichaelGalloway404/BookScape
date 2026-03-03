@@ -90,6 +90,25 @@ function BookList({
     };
   }, [pageBckColor]);
 
+  // Close popup if click outside
+    useEffect(() => {
+        function handleClickOutside(event) {
+            if (popupRef.current && !popupRef.current.contains(event.target)) {
+                setEditing(false);
+            }
+        }
+
+        if (editing) {
+            document.addEventListener("mousedown", handleClickOutside);
+        } else {
+            document.removeEventListener("mousedown", handleClickOutside);
+        }
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [editing]);
+
 
   if (books.length === 0) {
     return <p>No books added yet.</p>;
@@ -97,7 +116,8 @@ function BookList({
 
   return (
     <>
-      {editMode && (
+      {/* if in editmode and element has been clicked on */}
+      {editing && editMode && (
         <EditablePopup
           popupRef={popupRef}
           controls={{
@@ -108,37 +128,6 @@ function BookList({
             
           }}
         />
-        // <div style={{ display: "flex", gap: "0.5rem" }}>
-        //   <p>BookCard Color</p>
-        //   <input
-        //     type="color"
-        //     value={bgColor}
-        //     onChange={(e) => setBgColor(e.target.value)}
-        //   />
-
-        //   <p>Border Size</p>
-        //   <input
-        //     style={{ height: "20px", width: "50px" }}
-        //     type="number"
-        //     min="0"
-        //     value={borderSize}
-        //     onChange={(e) => setBorderSize(Number(e.target.value))}
-        //   />
-
-        //   <p>BookCard Border Color</p>
-        //   <input
-        //     type="color"
-        //     value={borderColor}
-        //     onChange={(e) => setBorderColor(e.target.value)}
-        //   />
-
-        //   <p>Page Background Color</p>
-        //   <input
-        //     type="color"
-        //     value={pageBckColor}
-        //     onChange={(e) => setPageBckColor(e.target.value)}
-        //   />
-        // </div>
       )}
       <ul style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
         {books.map((book, i) => (

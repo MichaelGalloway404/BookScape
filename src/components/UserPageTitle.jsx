@@ -79,7 +79,7 @@ function UserPageTitle({ editMode, settings, setSettings, titlePlaceHolder }) {
                 {text}
             </h1>
 
-            {/* Edit popup */}
+            {/* if in editmode and element has been clicked on */}
             {editing && editMode && (
                 <EditablePopup
                     popupRef={popupRef}
