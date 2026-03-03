@@ -29,7 +29,6 @@ function UserPageTitle({ editMode, settings, setSettings, titlePlaceHolder }) {
                 marginLeft,
                 borderRadius,
                 padding,
-                padding,
             },
         }));
     }, [text,
@@ -39,6 +38,7 @@ function UserPageTitle({ editMode, settings, setSettings, titlePlaceHolder }) {
         marginLeft,
         fontSize,
         borderRadius,
+        padding,
         setSettings]);
 
     // Load saved settings from DB
