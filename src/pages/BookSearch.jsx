@@ -254,7 +254,7 @@ export default function BookSearch() {
 
           {/* Loop over the results array and render one <li> per book */}
           {visibleBooks.map((book, i) =>
-            book.isbn && (
+            book.isbn != null && (
               <li className={styles.bookCard} key={i}>
                 <img
                   className={styles.coverImage}
