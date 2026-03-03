@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import SiteInfoFooter from '../components/SiteInfoFooter';
@@ -7,6 +7,7 @@ import BookList from "../components/BookList";
 import UserBio from "../components/UserBio";
 import UserPageTitle from "../components/UserPageTitle";
 import styles from "./BookSearch.module.css"
+import EditablePopup from "./EditablePopup"
 
 function UsersPage() {
     const [user, setUser] = useState(null);
@@ -16,6 +17,8 @@ function UsersPage() {
     const [editing, setEditing] = useState(false);
     const [settings, setSettings] = useState({});
     const [pageBckColor, setPageBckColor] = useState("#c4ccd5");
+
+    const popupRef = useRef(null);
 
     const navigate = useNavigate();
 
