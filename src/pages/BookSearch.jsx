@@ -248,7 +248,7 @@ export default function BookSearch() {
         Search
       </button>
 
-      {visibleBooks.length > 0 && (
+      {visibleBooks.length > 0 && book?.isbn && (
         /* List container for search results */
         <ul className={styles.bookCoverGrid}>
 
