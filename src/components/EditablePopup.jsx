@@ -22,12 +22,19 @@ function EditablePopup({
             }}
         >
             {/* Background Color */}
-            {features.bgColor && (
-                <input
-                    type="color"
-                    value={values.bgColor}
-                    onChange={(e) => setters.setBgColor(e.target.value)}
-                />
+            {features.bgColor && features.bgColor2 && (
+                <>
+                    <input
+                        type="color"
+                        value={values.bgColor}
+                        onChange={(e) => setters.setBgColor(e.target.value)}
+                    />
+                    <input
+                        type="color"
+                        value={values.bgColo2}
+                        onChange={(e) => setters.setBgColor2(e.target.value)}
+                    />
+                </>
             )}
 
             {/* Text Editing */}

@@ -5,6 +5,7 @@ function UserBio({ editMode, settings, setSettings }) {
     const [text, setText] = useState("About me...");
     const [fontFamily, setFontFamily] = useState("Arial");
     const [bgColor, setBgColor] = useState("white");
+    const [bgColor2, setBgColor2] = useState("white");
     const [editing, setEditing] = useState(false);
 
     const popupRef = useRef(null);
@@ -18,9 +19,10 @@ function UserBio({ editMode, settings, setSettings }) {
                 text,
                 fontFamily,
                 bgColor,
+                bgColor2,
             },
         }));
-    }, [text, fontFamily, bgColor, setSettings]);
+    }, [text, fontFamily, bgColor, bgColor2, setSettings]);
 
     // Load saved settings from DB
     useEffect(() => {
@@ -28,6 +30,7 @@ function UserBio({ editMode, settings, setSettings }) {
             setText(settings.userBio.text);
             setFontFamily(settings.userBio.fontFamily || "Arial");
             setBgColor(settings.userBio.bgColor || "white");
+            setBgColor2(settings.userBio.bgColor2 || "white");
         }
     }, [settings]);
 
@@ -56,7 +59,8 @@ function UserBio({ editMode, settings, setSettings }) {
             <p
                 style={{
                     fontFamily,
-                    background: bgColor,
+                    // background: bgColor,
+                    background: `linear-gradient(135deg, ${bgColor},${bgColor2})`,
                     padding: "0.2rem 0.4rem",
                     borderRadius: "4px",
                     maxWidth: "fit-content",
@@ -74,6 +78,7 @@ function UserBio({ editMode, settings, setSettings }) {
                     popupRef={popupRef}
                     features={{
                         bgColor: true,
+                        bgColor2: true,
                         text: true,
                         fontFamily: true,
                         fontSize: false,
@@ -81,11 +86,13 @@ function UserBio({ editMode, settings, setSettings }) {
                     values={{
                         fontFamily,
                         bgColor,
+                        bgColor2,
                         text,
                     }}
                     setters={{
                         setFontFamily,
                         setBgColor,
+                        setBgColor2,
                         setText
                     }}
                 />

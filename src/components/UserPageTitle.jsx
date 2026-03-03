@@ -6,6 +6,7 @@ function UserPageTitle({ editMode, settings, setSettings, titlePlaceHolder }) {
     const [text, setText] = useState(titlePlaceHolder);
     const [fontFamily, setFontFamily] = useState("Arial");
     const [bgColor, setBgColor] = useState("white");
+    const [bgColor2, setBgColor2] = useState("white");
     const [fontSize, setFontSize] = useState(40);
     const [editing, setEditing] = useState(false);
 
@@ -20,9 +21,10 @@ function UserPageTitle({ editMode, settings, setSettings, titlePlaceHolder }) {
                 text,
                 fontFamily,
                 bgColor,
+                bgColor2,
             },
         }));
-    }, [text, fontFamily, bgColor, setSettings]);
+    }, [text, fontFamily, bgColor, bgColor2, setSettings]);
 
     // Load saved settings from DB
     useEffect(() => {
@@ -30,6 +32,7 @@ function UserPageTitle({ editMode, settings, setSettings, titlePlaceHolder }) {
             setText(settings.userPageTitle.text);
             setFontFamily(settings.userPageTitle.fontFamily);
             setBgColor(settings.userPageTitle.bgColor);
+            setBgColor2(settings.userPageTitle.bgColor2);
         }
     }, [settings]);
 
@@ -59,7 +62,8 @@ function UserPageTitle({ editMode, settings, setSettings, titlePlaceHolder }) {
                 className={`hoverText ${editMode ? "editable" : ""}`}
                 style={{
                     fontFamily,
-                    background: bgColor,
+                    // background: bgColor,
+                    background: `linear-gradient(135deg, ${bgColor},${bgColor2})`,
                     padding: "0.2rem 0.4rem",
                     borderRadius: "4px",
                     maxWidth: "fit-content",
@@ -80,6 +84,7 @@ function UserPageTitle({ editMode, settings, setSettings, titlePlaceHolder }) {
                     popupRef={popupRef}
                     features={{
                         bgColor: true,
+                        bgColor2: true,
                         text: true,
                         fontFamily: true,
                         fontSize: true,
@@ -88,12 +93,14 @@ function UserPageTitle({ editMode, settings, setSettings, titlePlaceHolder }) {
                         fontFamily,
                         fontSize,
                         bgColor,
+                        bgColor2,
                         text,
                     }}
                     setters={{
                         setFontFamily,
                         setFontSize,
                         setBgColor,
+                        setBgColor2,
                         setText
                     }}
                 />
