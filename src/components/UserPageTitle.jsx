@@ -30,9 +30,9 @@ function UserPageTitle({ editMode, settings, setSettings, titlePlaceHolder }) {
     useEffect(() => {
         if (settings?.userPageTitle) {
             setText(settings.userPageTitle.text);
-            setFontFamily(settings.userBio.fontFamily || "Arial");
-            setBgColor(settings.userBio.bgColor || "white");
-            setBgColor2(settings.userBio.bgColor2 || "white");
+            setFontFamily(settings.userPageTitle.fontFamily || "Arial");
+            setBgColor(settings.userPageTitle.bgColor || "white");
+            setBgColor2(settings.userPageTitle.bgColor2 || "white");
         }
     }, [settings]);
 
