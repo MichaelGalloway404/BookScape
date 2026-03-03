@@ -91,8 +91,8 @@ function UserPageTitle({ editMode, settings, setSettings, titlePlaceHolder }) {
                         bgColor: [bgColor, setBgColor],
                         bgColor2: [bgColor2, setBgColor2],
                         fontFamily: [fontFamily, setFontFamily],
-                        fontSize: [fontSize, setFontSize],
-                        marginLeft: [marginLeft, setMarginLeft],
+                        fontSize: [Number(fontSize), setFontSize],
+                        marginLeft: [Number(marginLeft), setMarginLeft],
                     }}
                 />
             )}

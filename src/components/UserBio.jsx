@@ -63,6 +63,7 @@ function UserBio({ editMode, settings, setSettings }) {
         <>
             {/* Bio display */}
             <p
+                className={`hoverText ${editMode ? "editable" : ""}`}
                 style={{
                     fontFamily,
                     background: `linear-gradient(135deg, ${bgColor},${bgColor2})`,
@@ -89,8 +90,8 @@ function UserBio({ editMode, settings, setSettings }) {
                         bgColor: [bgColor, setBgColor],
                         bgColor2: [bgColor2, setBgColor2],
                         fontFamily: [fontFamily, setFontFamily],
-                        fontSize: [fontSize, setFontSize],
-                        marginLeft: [marginLeft, setMarginLeft],
+                        fontSize: [Number(fontSize), setFontSize],
+                        marginLeft: [Number(marginLeft), setMarginLeft],
                     }}
                 />
             )}
