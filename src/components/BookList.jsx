@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import DraggableBookCard from "./DraggableBookCard";
+import EditablePopup from "./EditablePopup"
 
 function BookList({
   books,
@@ -13,6 +14,8 @@ function BookList({
   const [borderColor, setBorderColor] = useState("#c4ccd5");
   const [borderSize, setBorderSize] = useState("2");
   const [pageBckColor, setPageBckColor] = useState("#c4ccd5");
+
+  const popupRef = useRef(null);
 
   // add any changes to settings the user makes
   useEffect(() => {
