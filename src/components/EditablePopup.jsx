@@ -17,7 +17,6 @@ function EditablePopup({ popupRef, controls = {} }) {
             }}
         >
             {Object.entries(controls).map(([key, [value, setter]]) => {
-
                 // COLOR PICKERS
                 if (key.toLowerCase().includes("color")) {
                     return (
