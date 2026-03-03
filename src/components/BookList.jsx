@@ -183,6 +183,7 @@ function BookList({
             bgColor: [bgColor, setBgColor],
             borderColor: [borderColor, setBorderColor],
             borderSize: [Number(borderSize), setBorderSize],
+            borderStyle: [borderStyle, setBorderStyle],
           }}
         />
       )}
