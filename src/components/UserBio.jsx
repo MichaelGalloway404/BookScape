@@ -7,6 +7,7 @@ function UserBio({ editMode, settings, setSettings }) {
     const [bgColor, setBgColor] = useState("white");
     const [bgColor2, setBgColor2] = useState("white");
     const [fontSize, setFontSize] = useState(40);
+    const [borderRadius, setBorderRadius] = useState(5);
     const [marginLeft, setMarginLeft] = useState(1);
     const [editing, setEditing] = useState(false);
 
@@ -24,9 +25,17 @@ function UserBio({ editMode, settings, setSettings }) {
                 bgColor,
                 bgColor2,
                 marginLeft,
+                borderRadius,
             },
         }));
-    }, [text, fontFamily, bgColor, bgColor2, marginLeft, fontSize, setSettings]);
+    }, [text,
+        fontFamily,
+        bgColor,
+        bgColor2,
+        marginLeft,
+        fontSize,
+        borderRadius,
+        setSettings]);
 
     // Load saved settings from DB
     useEffect(() => {
@@ -37,6 +46,7 @@ function UserBio({ editMode, settings, setSettings }) {
             setBgColor(settings.userBio.bgColor);
             setBgColor2(settings.userBio.bgColor2);
             setMarginLeft(settings.userBio.marginLeft);
+            setBorderRadius(settings.userBio.borderRadius);
         }
     }, [settings]);
 
@@ -68,7 +78,7 @@ function UserBio({ editMode, settings, setSettings }) {
                     fontFamily,
                     background: `linear-gradient(135deg, ${bgColor},${bgColor2})`,
                     padding: "0.2rem 0.4rem",
-                    borderRadius: "4px",
+                    borderRadius: borderRadius + "px",
                     maxWidth: "fit-content",
                     marginLeft: marginLeft + "px",
                     minWidth: editMode ? "200px" : "fit-content",
@@ -92,6 +102,7 @@ function UserBio({ editMode, settings, setSettings }) {
                         fontFamily: [fontFamily, setFontFamily],
                         fontSize: [Number(fontSize), setFontSize],
                         marginLeft: [Number(marginLeft), setMarginLeft],
+                        borderRadius: [Number(borderRadius),setBorderRadius],
                     }}
                 />
             )}

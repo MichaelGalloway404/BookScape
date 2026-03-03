@@ -8,6 +8,7 @@ function UserPageTitle({ editMode, settings, setSettings, titlePlaceHolder }) {
     const [bgColor, setBgColor] = useState("white");
     const [bgColor2, setBgColor2] = useState("white");
     const [fontSize, setFontSize] = useState(40);
+    const [borderRadius, setBorderRadius] = useState(5);
     const [marginLeft, setMarginLeft] = useState(1);
     const [editing, setEditing] = useState(false);
 
@@ -25,9 +26,17 @@ function UserPageTitle({ editMode, settings, setSettings, titlePlaceHolder }) {
                 bgColor,
                 bgColor2,
                 marginLeft,
+                borderRadius,
             },
         }));
-    }, [text, fontFamily, bgColor, bgColor2, marginLeft, fontSize, setSettings]);
+    }, [text,
+        fontFamily,
+        bgColor,
+        bgColor2,
+        marginLeft,
+        fontSize,
+        borderRadius,
+        setSettings]);
 
     // Load saved settings from DB
     useEffect(() => {
@@ -38,6 +47,7 @@ function UserPageTitle({ editMode, settings, setSettings, titlePlaceHolder }) {
             setBgColor(settings.userPageTitle.bgColor);
             setBgColor2(settings.userPageTitle.bgColor2);
             setMarginLeft(settings.userPageTitle.marginLeft);
+            setBorderRadius(settings.userPageTitle.borderRadius);
         }
     }, [settings]);
 
@@ -69,7 +79,7 @@ function UserPageTitle({ editMode, settings, setSettings, titlePlaceHolder }) {
                     fontFamily,
                     background: `linear-gradient(135deg, ${bgColor},${bgColor2})`,
                     padding: "0.2rem 0.4rem",
-                    borderRadius: "4px",
+                    borderRadius: borderRadius + "px",
                     maxWidth: "fit-content",
                     marginLeft: marginLeft + "px",
                     minWidth: editMode ? "200px" : "fit-content",
@@ -93,6 +103,7 @@ function UserPageTitle({ editMode, settings, setSettings, titlePlaceHolder }) {
                         fontFamily: [fontFamily, setFontFamily],
                         fontSize: [Number(fontSize), setFontSize],
                         marginLeft: [Number(marginLeft), setMarginLeft],
+                        borderRadius: [Number(borderRadius),setBorderRadius],
                     }}
                 />
             )}
