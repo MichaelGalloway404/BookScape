@@ -21,20 +21,23 @@ function UserPageTitle({ editMode, settings, setSettings, titlePlaceHolder }) {
                 ...prev.userPageTitle,
                 text,
                 fontFamily,
+                fontSize,
                 bgColor,
                 bgColor2,
                 marginLeft,
             },
         }));
-    }, [text, fontFamily, bgColor, bgColor2, marginLeft, setSettings]);
+    }, [text, fontFamily, bgColor, bgColor2, marginLeft, fontSize, setSettings]);
 
     // Load saved settings from DB
     useEffect(() => {
         if (settings?.userPageTitle) {
             setText(settings.userPageTitle.text);
             setFontFamily(settings.userPageTitle.fontFamily);
+            setFontSize(settings.userPageTitle.fontSize);
             setBgColor(settings.userPageTitle.bgColor);
             setBgColor2(settings.userPageTitle.bgColor2);
+            setMarginLeft(settings.userPageTitle.marginLeft);
         }
     }, [settings]);
 

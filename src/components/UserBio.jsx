@@ -6,6 +6,8 @@ function UserBio({ editMode, settings, setSettings }) {
     const [fontFamily, setFontFamily] = useState("Arial");
     const [bgColor, setBgColor] = useState("white");
     const [bgColor2, setBgColor2] = useState("white");
+    const [fontSize, setFontSize] = useState(40);
+    const [marginLeft, setMarginLeft] = useState(1);
     const [editing, setEditing] = useState(false);
 
     const popupRef = useRef(null);
@@ -18,19 +20,23 @@ function UserBio({ editMode, settings, setSettings }) {
                 ...prev.userBio,
                 text,
                 fontFamily,
+                fontSize,
                 bgColor,
                 bgColor2,
+                marginLeft,
             },
         }));
-    }, [text, fontFamily, bgColor, bgColor2, setSettings]);
+    }, [text, fontFamily, bgColor, bgColor2, marginLeft, fontSize, setSettings]);
 
     // Load saved settings from DB
     useEffect(() => {
         if (settings?.userBio) {
             setText(settings.userBio.text);
             setFontFamily(settings.userBio.fontFamily);
+            setFontSize(settings.userBio.fontSize);
             setBgColor(settings.userBio.bgColor);
             setBgColor2(settings.userBio.bgColor2);
+            setMarginLeft(settings.userBio.marginLeft);
         }
     }, [settings]);
 
@@ -63,6 +69,10 @@ function UserBio({ editMode, settings, setSettings }) {
                     padding: "0.2rem 0.4rem",
                     borderRadius: "4px",
                     maxWidth: "fit-content",
+                    marginLeft: marginLeft + "px",
+                    minWidth: editMode ? "200px" : "fit-content",
+                    minHeight: editMode ? "100px" : "fit-content",
+                    fontSize: fontSize + "px",
                     cursor: editMode ? "pointer" : "default",
                 }}
                 onClick={() => { if (editMode) setEditing(true); }}
@@ -79,6 +89,8 @@ function UserBio({ editMode, settings, setSettings }) {
                         bgColor: [bgColor, setBgColor],
                         bgColor2: [bgColor2, setBgColor2],
                         fontFamily: [fontFamily, setFontFamily],
+                        fontSize: [fontSize, setFontSize],
+                        marginLeft: [marginLeft, setMarginLeft],
                     }}
                 />
             )}
