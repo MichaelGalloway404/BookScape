@@ -130,7 +130,8 @@ function BookList({
           }}
         />
       )}
-      <ul style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+      <ul style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }} 
+          onClick={() => { if (editMode) setEditing(true); }}>
         {books.map((book, i) => (
           //  allows for a book card to be rearranged and for a book wiki API summary
           <DraggableBookCard
