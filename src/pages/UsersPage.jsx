@@ -213,19 +213,6 @@ function UsersPage() {
         }
     }
 
-    // make profile PUBLIC to others
-    function setPublic() {
-        // set db variable is profile private to false
-        setProfilePrivate(false);
-        alert("profile is set public, don't forget to save!");
-    }
-    // make profile PRIVATE to others
-    function setPrivate() {
-        // set db variable is profile private to true
-        setProfilePrivate(true);
-        alert("profile is set private, don't forget to save!");
-    }
-
     if (!user) {
         return <p>Loading user...</p>;
     }
