@@ -30,14 +30,18 @@ function UsersPage() {
             mainPage: {
                 ...prev.mainPage,
                 pageBckColor,
+                pageBckColor2,
+                gradientAngle,
             },
         }));
-    }, [pageBckColor, setSettings]);
+    }, [pageBckColor, pageBckColor2, gradientAngle, setSettings]);
 
     // Check for DataBase saved settings
     useEffect(() => {
         if (settings?.mainPage) {
             setPageBckColor(settings.mainPage.pageBckColor);
+            setPageBckColor2(settings.mainPage.pageBckColor2);
+            setGradientAngle(settings.mainPage.gradientAngle);
         }
     }, [settings]);
 
