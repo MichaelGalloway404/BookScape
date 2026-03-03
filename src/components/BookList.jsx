@@ -14,7 +14,6 @@ function BookList({
   const [bgColor, setBgColor] = useState("#c4ccd5");
   const [borderColor, setBorderColor] = useState("#c4ccd5");
   const [borderSize, setBorderSize] = useState("2");
-  const [pageBckColor, setPageBckColor] = useState("#c4ccd5");
 
   const popupRef = useRef(null);
 
@@ -108,9 +107,7 @@ function BookList({
           controls={{
             bgColor: [bgColor, setBgColor],
             borderColor: [borderColor, setBorderColor],
-            borderSize: [borderSize, setBorderSize],
-            pageBckColor: [pageBckColor, setPageBckColor],
-            
+            borderSize: [borderSize, setBorderSize],            
           }}
         />
       )}

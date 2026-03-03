@@ -268,6 +268,17 @@ function UsersPage() {
                 />
             )}
 
+            {/* PAGE SETTINGS BUTTON */}
+            {editMode && (
+                <button onClick={() => { if (editMode) setEditing(true); }}
+                    style={{
+                        position: "absolute",
+                        top: "6rem",
+                        right: "1rem",
+                    }}>
+                    Click for page settings
+                </button>
+            )}
             {/* SAVE SETTINGS BUTTON */}
             {editMode && (
                 <button onClick={() => saveSettings(books)}
