@@ -1,8 +1,8 @@
 import { useEffect, useState, useRef } from "react";
 import EditablePopup from "./EditablePopup"
 
-function TextComponent({ editMode, settings, setSettings, ComponentName }) {
-    const [text, setText] = useState("Default Page About...");
+function TextComponent({ editMode, settings, setSettings, ComponentName, defaultText }) {
+    const [text, setText] = useState(defaultText);
     const [fontFamily, setFontFamily] = useState("Arial");
     const [fontColor, setFontColor] = useState("white");
     const [bgColor, setBgColor] = useState("white");
