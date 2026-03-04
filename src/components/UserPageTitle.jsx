@@ -113,7 +113,7 @@ function UserPageTitle({ editMode, settings, setSettings, titlePlaceHolder }) {
                         marginLeft: [Number(marginLeft), setMarginLeft],
                         borderRadius: [Number(borderRadius),setBorderRadius],
                         padding: [Number(padding),setPadding],
-                        gradientAngle: [Number(gradientAngle),setGradientAngle],
+                        "gradient test Angle": [Number(gradientAngle),setGradientAngle],
                     }}
                 />
             )}

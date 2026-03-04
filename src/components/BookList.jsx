@@ -19,6 +19,8 @@ function BookList({
   const [borderRadius, setBorderRadius] = useState(5);
   const [borderStyle, setBorderStyle] = useState("solid");
   const [gradientAngle, setGradientAngle] = useState(135);
+  const [padding, setPadding] = useState(10);
+  const [margin, setMargin] = useState(0);
 
   // State for Card Image
   const [cardImgBorderColor, setCardImgBorderColor] = useState("#ffffff")
@@ -46,6 +48,8 @@ function BookList({
         borderStyle,
         borderRadius,
         gradientAngle,
+        padding,
+        margin,
         // Card Image
         cardImgBorderColor,
         cardImgBorderSize,
@@ -65,6 +69,8 @@ function BookList({
     borderStyle,
     borderRadius,
     gradientAngle,
+    padding,
+    margin,
     // Card Image
     cardImgBorderColor,
     cardImgBorderSize,
@@ -86,6 +92,8 @@ function BookList({
       setBorderStyle(settings.bookCard.borderStyle);
       setBorderRadius(settings.bookCard.borderRadius);
       setGradientAngle(settings.bookCard.gradientAngle);
+      setPadding(settings.bookCard.padding);
+      setMargin(settings.bookCard.margin);
       // Card Image
       setCardImgBorderColor(settings.bookCard.cardImgBorderColor);
       setCardImgBorderSize(settings.bookCard.cardImgBorderSize);
@@ -169,6 +177,8 @@ function BookList({
             borderStyle: [borderStyle, setBorderStyle],
             borderRadius: [Number(borderRadius), setBorderRadius],
             gradientAngle: [Number(gradientAngle), setGradientAngle],
+            padding: [Number(padding), setPadding],
+            margin: [Number(margin), setMargin],
             // Card Image
             cardImgBorderColor: [cardImgBorderColor, setCardImgBorderColor],
             cardImgBorderSize: [Number(cardImgBorderSize), setCardImgBorderSize],
@@ -189,10 +199,10 @@ function BookList({
             key={book.isbn || index}  // always give a unique key
             style={{
               background: `linear-gradient(${gradientAngle}deg, ${bgColor},${bgColor2})`,
-              padding: "10px",
+              padding: padding + "px",
+              margin: margin = "px",
               border: `${borderSize}px ${borderStyle} ${borderColor}`,
               borderRadius: borderRadius + "px",
-              marginBottom: "10px",
               maxWidth: "30%",
             }}
           >
