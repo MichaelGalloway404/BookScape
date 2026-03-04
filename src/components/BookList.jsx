@@ -150,15 +150,8 @@ function BookList({
                 style={{ width: "100px", marginBottom: "8px" }}
               />
 
-              {/* <p><strong>{book.title}</strong></p> */}
-              <TextElement
-                saveName={"CardTitleSettings"}
-                textToDisplay={book.title}
-                editMode={editMode}
-                settings={settings}
-                setSettings={setSettings}
-              />
-              <p>Author: {book.author}</p>
+              <p>{book.title}</p>
+              <p>{book.author}</p>
 
               {editMode && (
                 <button
