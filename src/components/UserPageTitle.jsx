@@ -107,7 +107,7 @@ function UserPageTitle({ editMode, settings, setSettings, titlePlaceHolder }) {
                     controls={{
                         "Text": [text, setText],
                         "Background Color 1": [bgColor, setBgColor],
-                        "Background Color 1": [bgColor2, setBgColor2],
+                        "Background Color 2": [bgColor2, setBgColor2],
                         "Font Family": [fontFamily, setFontFamily],
                         "Font Size": [Number(fontSize), setFontSize],
                         "Offet From Left": [Number(marginLeft), setMarginLeft],
