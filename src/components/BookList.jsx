@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import EditablePopup from "./EditablePopup"
+import TextElement from "./TextElement";
 
 function BookList({
   books,
@@ -15,7 +16,6 @@ function BookList({
   const [borderSize, setBorderSize] = useState(2);
   const [borderRadius, setBorderRadius] = useState(5);
   const [borderStyle, setBorderStyle] = useState("solid");
-  const [expanded, setExpanded] = useState(false);
   const popupRef = useRef(null);
 
   // add any changes to settings the user makes
@@ -91,7 +91,6 @@ function BookList({
         setEditing(false);
       }
     }
-
     if (editing) {
       document.addEventListener("mousedown", handleClickOutside);
     } else {
@@ -102,25 +101,6 @@ function BookList({
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [editing]);
-
-  useEffect(() => {
-    function handleClickOutside(event) {
-      if (popupRef.current && !popupRef.current.contains(event.target)) {
-        setExpanded(false);
-      }
-    }
-
-    if (expanded) {
-      document.addEventListener("mousedown", handleClickOutside);
-    } else {
-      document.removeEventListener("mousedown", handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [expanded]);
-
 
   if (books.length === 0) {
     return <p>No books added yet.</p>;
@@ -152,11 +132,8 @@ function BookList({
               padding: "10px",
               border: `${borderSize}px ${borderStyle} ${borderColor}`,
               borderRadius: borderRadius + "px",
-              cursor: "pointer",
               marginBottom: "10px",
-              transition: "all 0.2s ease",
               maxWidth: "30%",
-              // position: "relative", 
             }}
           >
             <li
@@ -166,7 +143,6 @@ function BookList({
               onDragEnter={() => handleDragEnter(index)}
               onDragEnd={handleDragEnd}
               onDragOver={(e) => e.preventDefault()}
-              onClick={() => { if (!expanded) setExpanded(true); }}
             >
               <img
                 src={`https://covers.openlibrary.org/b/id/${book.cover_id}-M.jpg`}
@@ -174,7 +150,14 @@ function BookList({
                 style={{ width: "100px", marginBottom: "8px" }}
               />
 
-              <p><strong>{book.title}</strong></p>
+              {/* <p><strong>{book.title}</strong></p> */}
+              <TextElement
+                saveName={"CardTitleSettings"}
+                textToDisplay={book.title}
+                editMode={editMode}
+                settings={settings}
+                setSettings={setSettings}
+              />
               <p>Author: {book.author}</p>
 
               {editMode && (
