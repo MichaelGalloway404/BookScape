@@ -93,7 +93,7 @@ function EditablePopup({ popupRef, controls = {}, initialPosition }) {
 
             {Object.entries(controls).map(([key, [value, setter]]) => {
 
-                if (key === "brake"){
+                if (key.toLowerCase().includes("brake")){
                     return (
                         <br></br>
                     )
