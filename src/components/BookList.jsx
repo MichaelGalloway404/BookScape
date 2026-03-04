@@ -13,6 +13,7 @@ function BookList({
   const [bgColor, setBgColor] = useState("#c4ccd5");
   const [borderColor, setBorderColor] = useState("#c4ccd5");
   const [borderSize, setBorderSize] = useState(2);
+  const [borderRadius, setBorderRadius] = useState(5);
   const [borderStyle, setBorderStyle] = useState("solid");
   const [summary, setSummary] = useState(null);
   const [expanded, setExpanded] = useState(false);
@@ -29,9 +30,15 @@ function BookList({
         borderColor,
         borderSize,
         borderStyle,
+        borderRadius,
       },
     }));
-  }, [bgColor, borderColor, borderSize, borderStyle, setSettings]);
+  }, [bgColor,
+      borderColor,
+      borderSize,
+      borderStyle,
+      borderRadius,
+      setSettings]);
 
   // Check for DataBase saved settings
   useEffect(() => {
@@ -40,6 +47,7 @@ function BookList({
       setBorderColor(settings.bookCard.borderColor);
       setBorderSize(settings.bookCard.borderSize);
       setBorderStyle(settings.bookCard.borderStyle);
+      setBorderRadius(settings.bookCard.borderRadius);
     }
   }, [settings]);
 
@@ -184,6 +192,7 @@ function BookList({
             borderColor: [borderColor, setBorderColor],
             borderSize: [Number(borderSize), setBorderSize],
             borderStyle: [borderStyle, setBorderStyle],
+            borderRadius: [Number(borderRadius), setBorderRadius],
           }}
         />
       )}
@@ -197,7 +206,7 @@ function BookList({
               backgroundColor: bgColor,
               padding: "10px",
               border: `${borderSize}px ${borderStyle} ${borderColor}`,
-              borderRadius: "8px",
+              borderRadius: borderRadius + "px",
               cursor: "pointer",
               marginBottom: "10px",
               transition: "all 0.2s ease",
@@ -220,7 +229,7 @@ function BookList({
                   gap: "0.5rem",
                   zIndex: 1000,
                   maxWidth: "300px",
-                  top: "110%", // place below the card
+                  top: "110%", 
                   left: 0,
                 }}
               >
@@ -259,7 +268,7 @@ function BookList({
             </li>
           </div>
         ))}
-          {/* // -------------------------------------------------------------------------------------- */}
+        {/* // -------------------------------------------------------------------------------------- */}
       </ul>
     </>
   );

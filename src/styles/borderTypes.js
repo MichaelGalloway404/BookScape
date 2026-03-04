@@ -8,7 +8,5 @@ export const borderTypes = [
     "inset",
     "outset",
     "none",
-    "hidden",
-    "dotted dashed solid double",
 ];
 export default borderTypes;
