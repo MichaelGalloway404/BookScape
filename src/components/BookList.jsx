@@ -194,7 +194,7 @@ function BookList({
         />
       )}
       <ul style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}
-        onClick={() => {
+        onClick={(e) => {
           if (editMode) {
             setPopupPosition({
               x: e.clientX,

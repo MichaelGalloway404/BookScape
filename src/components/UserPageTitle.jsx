@@ -124,7 +124,7 @@ function UserPageTitle({ editMode, settings, setSettings, titlePlaceHolder }) {
                     fontSize: fontSize + "px",
                     cursor: editMode ? "pointer" : "default",
                 }}
-                onClick={() => {
+                onClick={(e) => {
                     if (editMode) {
                         setPopupPosition({
                             x: e.clientX,

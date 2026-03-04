@@ -258,7 +258,7 @@ function UsersPage() {
 
             {/* PAGE SETTINGS BUTTON */}
             {editMode && (
-                <button onClick={() => {
+                <button onClick={(e) => {
                     if (editMode) {
                         setPopupPosition({
                             x: e.clientX,

@@ -123,7 +123,7 @@ function UserBio({ editMode, settings, setSettings }) {
                     fontSize: fontSize + "px",
                     cursor: editMode ? "pointer" : "default",
                 }}
-                onClick={() => {
+                onClick={(e) => {
                     if (editMode) {
                         setPopupPosition({
                             x: e.clientX,
