@@ -93,6 +93,12 @@ function EditablePopup({ popupRef, controls = {}, initialPosition }) {
 
             {Object.entries(controls).map(([key, [value, setter]]) => {
 
+                if (key === "brake"){
+                    return (
+                        <br></br>
+                    )
+                }
+
                 // COLOR PICKER
                 if (key.toLowerCase().includes("color")) {
                     return (
