@@ -50,6 +50,8 @@ function UserBio({ editMode, settings, setSettings }) {
         bgColor2,
         marginLeft,
         marginRight,
+        marginTop,
+        marginBottom,
         fontSize,
         borderColor,
         borderSize,

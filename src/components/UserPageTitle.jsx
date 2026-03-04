@@ -51,6 +51,8 @@ function UserPageTitle({ editMode, settings, setSettings, titlePlaceHolder }) {
         bgColor2,
         marginLeft,
         marginRight,
+        marginTop,
+        marginBottom,
         fontSize,
         borderColor,
         borderSize,
