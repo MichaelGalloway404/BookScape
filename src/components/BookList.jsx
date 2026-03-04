@@ -217,7 +217,7 @@ function BookList({
             }}
           >
             <li
-              style={{ listStyle: "none", width: "150px" }}
+              style={{ listStyle: "none"}}
               draggable={editMode}
               onDragStart={() => handleDragStart(index)}
               onDragEnter={() => handleDragEnter(index)}
