@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import EditablePopup from "./EditablePopup"
 
-function TextComponent({ editMode, settings, setSettings, ComponentName}) {
+function TextComponent({ editMode, settings, setSettings, ComponentName }) {
     const [text, setText] = useState("Default Page About...");
     const [fontFamily, setFontFamily] = useState("Arial");
     const [fontColor, setFontColor] = useState("white");
@@ -64,6 +64,7 @@ function TextComponent({ editMode, settings, setSettings, ComponentName}) {
         padding,
         gradientAngle,
 
+        ComponentName,
         setSettings]);
 
     // Load saved settings from DB
@@ -71,7 +72,7 @@ function TextComponent({ editMode, settings, setSettings, ComponentName}) {
         if (settings?.[ComponentName]) {
             setText(settings[ComponentName].text);
             setFontFamily(settings[ComponentName].fontFamily);
-            setFontColor(settings[ComponentName].fontColor); 
+            setFontColor(settings[ComponentName].fontColor);
             setFontSize(settings[ComponentName].fontSize);
             setBgColor(settings[ComponentName].bgColor);
             setBgColor2(settings[ComponentName].bgColor2);
