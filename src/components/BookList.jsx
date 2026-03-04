@@ -311,7 +311,7 @@ function BookList({
                   }}
                 >{book.author}</p> */}
                 <TextComponent
-                  ComponentName={"cardAuthor"}
+                  ComponentName={"cardAuthor"+index}
                   defaultText={book.author}
                   textMutable={false}
                   editMode={editMode}
