@@ -107,7 +107,7 @@ function EditablePopup({ popupRef, controls = {} }) {
                 }
 
                 // FONT PICKER
-                if (key === "fontFamily") {
+                if (key.toLowerCase().includes("family")) {
                     return (
                         <label key={key}>
                             Choose font:
