@@ -14,6 +14,9 @@ function UserPageTitle({ editMode, settings, setSettings, titlePlaceHolder }) {
     const [borderStyle, setBorderStyle] = useState("solid");
     const [padding, setPadding] = useState(5);
     const [marginLeft, setMarginLeft] = useState(1);
+    const [marginRight, setMarginRight] = useState(0);
+    const [marginTop, setMarginTop] = useState(0);
+    const [marginBottom, setMarginBottom] = useState(0);
     const [editing, setEditing] = useState(false);
     const [gradientAngle, setGradientAngle] = useState(135);
 
@@ -31,6 +34,9 @@ function UserPageTitle({ editMode, settings, setSettings, titlePlaceHolder }) {
                 bgColor,
                 bgColor2,
                 marginLeft,
+                marginRight,
+                marginTop,
+                marginBottom,
                 borderColor,
                 borderSize,
                 borderStyle,
@@ -44,6 +50,7 @@ function UserPageTitle({ editMode, settings, setSettings, titlePlaceHolder }) {
         bgColor,
         bgColor2,
         marginLeft,
+        marginRight,
         fontSize,
         borderColor,
         borderSize,
@@ -62,6 +69,9 @@ function UserPageTitle({ editMode, settings, setSettings, titlePlaceHolder }) {
             setBgColor(settings.userPageTitle.bgColor);
             setBgColor2(settings.userPageTitle.bgColor2);
             setMarginLeft(settings.userPageTitle.marginLeft);
+            setMarginRight(settings.userPageTitle.marginRight);
+            setMarginTop(settings.userPageTitle.marginTop);
+            setMarginBottom(settings.userPageTitle.marginBottom);
             setBorderColor(settings.userPageTitle.borderColor);
             setBorderSize(settings.userPageTitle.borderSize);
             setBorderStyle(settings.userPageTitle.borderStyle);
@@ -103,6 +113,9 @@ function UserPageTitle({ editMode, settings, setSettings, titlePlaceHolder }) {
                     borderRadius: borderRadius + "px",
                     maxWidth: "fit-content",
                     marginLeft: marginLeft + "px",
+                    marginRight: marginRight + "px",
+                    marginTop: marginTop + "px",
+                    marginBottom: marginBottom + "px",
                     minWidth: editMode ? "50px" : "fit-content",
                     minHeight: editMode ? "50px" : "fit-content",
                     fontSize: fontSize + "px",
@@ -124,6 +137,9 @@ function UserPageTitle({ editMode, settings, setSettings, titlePlaceHolder }) {
                         "Font Family": [fontFamily, setFontFamily],
                         "Font Size": [Number(fontSize), setFontSize],
                         "Offset From Left": [Number(marginLeft), setMarginLeft],
+                        "Offset From Right": [Number(marginRight), setMarginRight],
+                        "Offset From Top": [Number(marginTop), setMarginTop],
+                        "Offset From Bottom": [Number(marginBottom), setMarginBottom],
                         "Border Color": [borderColor, setBorderColor],
                         "Border Size": [Number(borderSize), setBorderSize],
                         "Border Style": [borderStyle, setBorderStyle],
