@@ -4,6 +4,7 @@ import EditablePopup from "./EditablePopup"
 function UserBio({ editMode, settings, setSettings }) {
     const [text, setText] = useState("About me...");
     const [fontFamily, setFontFamily] = useState("Arial");
+    const [fontColor, setFontColor] = useState("white");
     const [bgColor, setBgColor] = useState("white");
     const [bgColor2, setBgColor2] = useState("white");
     const [fontSize, setFontSize] = useState(40);
@@ -30,6 +31,7 @@ function UserBio({ editMode, settings, setSettings }) {
                 ...prev.userBio,
                 text,
                 fontFamily,
+                fontColor,
                 fontSize,
                 bgColor,
                 bgColor2,
@@ -47,6 +49,7 @@ function UserBio({ editMode, settings, setSettings }) {
         }));
     }, [text,
         fontFamily,
+        fontColor,
         bgColor,
         bgColor2,
         marginLeft,
@@ -67,6 +70,7 @@ function UserBio({ editMode, settings, setSettings }) {
         if (settings?.userBio) {
             setText(settings.userBio.text);
             setFontFamily(settings.userBio.fontFamily);
+            setFontColor(settings.userBio.fontColor); 
             setFontSize(settings.userBio.fontSize);
             setBgColor(settings.userBio.bgColor);
             setBgColor2(settings.userBio.bgColor2);
@@ -109,6 +113,7 @@ function UserBio({ editMode, settings, setSettings }) {
                 className={`hoverText ${editMode ? "editable" : ""}`}
                 style={{
                     fontFamily,
+                    color: fontColor,
                     background: `linear-gradient(${gradientAngle}deg, ${bgColor},${bgColor2})`,
                     padding: padding + "px",
                     border: `${borderSize}px ${borderStyle} ${borderColor}`,
@@ -146,6 +151,7 @@ function UserBio({ editMode, settings, setSettings }) {
                         "Background Color 1": [bgColor, setBgColor],
                         "Background Color 2": [bgColor2, setBgColor2],
                         "Font Family": [fontFamily, setFontFamily],
+                        "Font Color": [fontColor, setFontColor],
                         "Font Size": [Number(fontSize), setFontSize],
                         "Offset From Left": [Number(marginLeft), setMarginLeft],
                         "Offset From Right": [Number(marginRight), setMarginRight],

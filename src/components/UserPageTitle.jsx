@@ -5,6 +5,7 @@ import EditablePopup from "./EditablePopup"
 function UserPageTitle({ editMode, settings, setSettings, titlePlaceHolder }) {
     const [text, setText] = useState(titlePlaceHolder);
     const [fontFamily, setFontFamily] = useState("Arial");
+    const [fontColor, setFontColor] = useState("white");
     const [bgColor, setBgColor] = useState("white");
     const [bgColor2, setBgColor2] = useState("white");
     const [fontSize, setFontSize] = useState(40);
@@ -31,6 +32,7 @@ function UserPageTitle({ editMode, settings, setSettings, titlePlaceHolder }) {
                 ...prev.userPageTitle,
                 text,
                 fontFamily,
+                fontColor,
                 fontSize,
                 bgColor,
                 bgColor2,
@@ -48,6 +50,7 @@ function UserPageTitle({ editMode, settings, setSettings, titlePlaceHolder }) {
         }));
     }, [text,
         fontFamily,
+        fontColor,
         bgColor,
         bgColor2,
         marginLeft,
@@ -67,7 +70,8 @@ function UserPageTitle({ editMode, settings, setSettings, titlePlaceHolder }) {
     useEffect(() => {
         if (settings?.userPageTitle) {
             setText(settings.userPageTitle.text);
-            setFontFamily(settings.userPageTitle.fontFamily);
+            setFontFamily(settings.userPageTitle.fontFamily); 
+            setFontColor(settings.userPageTitle.fontColor); 
             setFontSize(settings.userPageTitle.fontSize);
             setBgColor(settings.userPageTitle.bgColor);
             setBgColor2(settings.userPageTitle.bgColor2);
@@ -110,6 +114,7 @@ function UserPageTitle({ editMode, settings, setSettings, titlePlaceHolder }) {
                 className={`hoverText ${editMode ? "editable" : ""}`}
                 style={{
                     fontFamily,
+                    color: fontColor,
                     background: `linear-gradient(${gradientAngle}deg, ${bgColor},${bgColor2})`,
                     padding: padding + "px",
                     border: `${borderSize}px ${borderStyle} ${borderColor}`,
@@ -147,6 +152,7 @@ function UserPageTitle({ editMode, settings, setSettings, titlePlaceHolder }) {
                         "Background Color 1": [bgColor, setBgColor],
                         "Background Color 2": [bgColor2, setBgColor2],
                         "Font Family": [fontFamily, setFontFamily],
+                        "Font Color": [fontColor, setFontColor],
                         "Font Size": [Number(fontSize), setFontSize],
                         "Offset From Left": [Number(marginLeft), setMarginLeft],
                         "Offset From Right": [Number(marginRight), setMarginRight],
