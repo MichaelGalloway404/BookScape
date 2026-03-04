@@ -261,8 +261,8 @@ function UsersPage() {
                 <button onClick={(e) => {
                     if (editMode) {
                         setPopupPosition({
-                            x: e.clientX,
-                            y: e.clientY,
+                            x: e.pageX,
+                            y: e.pageY,
                         });
                         setEditing(true);
                     }

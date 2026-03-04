@@ -22,8 +22,8 @@ function EditablePopup({ popupRef, controls = {}, initialPosition }) {
             if (!isDragging.current) return;
 
             setPosition({
-                x: e.clientX - dragOffset.current.x,
-                y: e.clientY - dragOffset.current.y,
+                x: e.pageX - dragOffset.current.x,
+                y: e.pageY - dragOffset.current.y,
             });
         }
 
@@ -47,8 +47,8 @@ function EditablePopup({ popupRef, controls = {}, initialPosition }) {
 
         // Calculate where inside popup user clicked
         dragOffset.current = {
-            x: e.clientX - position.x,
-            y: e.clientY - position.y,
+            x: e.pageX - position.x,
+            y: e.pageY - position.y,
         };
     }
 

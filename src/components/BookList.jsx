@@ -197,8 +197,8 @@ function BookList({
         onClick={(e) => {
           if (editMode) {
             setPopupPosition({
-              x: e.clientX,
-              y: e.clientY,
+              x: e.pageX,
+              y: e.pageY,
             });
             setEditing(true);
           }
