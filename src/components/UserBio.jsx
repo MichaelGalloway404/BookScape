@@ -108,7 +108,7 @@ function UserBio({ editMode, settings, setSettings }) {
                         "Background Color 2": [bgColor2, setBgColor2],
                         "Font Family": [fontFamily, setFontFamily],
                         "Font Size": [Number(fontSize), setFontSize],
-                        "Offet From Left": [Number(marginLeft), setMarginLeft],
+                        "Offset From Left": [Number(marginLeft), setMarginLeft],
                         "Border Radius": [Number(borderRadius),setBorderRadius],
                         "Padding": [Number(padding),setPadding],
                         "Gradient Angle": [Number(gradientAngle),setGradientAngle],

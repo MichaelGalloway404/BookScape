@@ -224,8 +224,10 @@ function BookList({
                 }}
               />
 
-              <p>{book.title}</p>
-              <p>{book.author}</p>
+              <div>
+                <p>{book.title}</p>
+                <p>{book.author}</p>
+              </div>
 
               {editMode && (
                 <button
