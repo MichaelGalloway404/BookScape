@@ -193,11 +193,16 @@ function BookList({
           }}
         />
       )}
-      <ul style={{
-        display: "flex",
-        gap: "1rem",
-        flexWrap: "wrap"
-      }}>
+      <ul style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}
+        onClick={(e) => {
+          if (editMode) {
+            setPopupPosition({
+              x: e.clientX,
+              y: e.clientY,
+            });
+            setEditing(true);
+          }
+        }}>
         {books.map((book, index) => (
           // -------------------- Draggable Book Card --------------------------------
           <div
@@ -218,16 +223,6 @@ function BookList({
               onDragEnter={() => handleDragEnter(index)}
               onDragEnd={handleDragEnd}
               onDragOver={(e) => e.preventDefault()}
-              // OPEN EDIT TAB IF IN EDIT MODE
-              onClick={(e) => {
-                if (editMode) {
-                  setPopupPosition({
-                    x: e.clientX,
-                    y: e.clientY,
-                  });
-                  setEditing(true);
-                }
-              }}
             >
               <img
                 src={`https://covers.openlibrary.org/b/id/${book.cover_id}-M.jpg`}
