@@ -95,7 +95,7 @@ function EditablePopup({ popupRef, controls = {}, initialPosition }) {
 
                 if (key.toLowerCase().includes("brake")){
                     return (
-                        <br></br>
+                        <hr/>
                     )
                 }
 
