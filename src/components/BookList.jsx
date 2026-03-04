@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import EditablePopup from "./EditablePopup"
-import TextComponent from "./TextComponent";
+// import TextComponent from "./TextComponent";
 
 function BookList({
   books,
