@@ -109,6 +109,7 @@ function BookList({
     authorMargin,
     authorPadding,
     authorSize,
+    authorWidth,
 
     setSettings]);
 
