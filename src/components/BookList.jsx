@@ -207,7 +207,11 @@ function BookList({
               <img
                 src={`https://covers.openlibrary.org/b/id/${book.cover_id}-M.jpg`}
                 alt="Book cover"
-                style={{ width: "100px", marginBottom: "8px" }}
+                style={{
+                  width: cardImgWidth + "px",
+                  border: `${cardImgBorderSize}px ${cardImgBorderStyle} ${cardImgBorderColor}`,
+                  borderRadius: cardImgBorderRadius + "px",
+                }}
               />
 
               <p>{book.title}</p>
