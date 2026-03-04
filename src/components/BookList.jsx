@@ -10,11 +10,20 @@ function BookList({
   setSettings
 }) {
   const [editing, setEditing] = useState(false);
+
+  // State for Main div Over Book Card
   const [bgColor, setBgColor] = useState("#c4ccd5");
+  const [bgColor2, setBgColor2] = useState("#c4ccd5");
   const [borderColor, setBorderColor] = useState("#c4ccd5");
   const [borderSize, setBorderSize] = useState(2);
   const [borderRadius, setBorderRadius] = useState(5);
   const [borderStyle, setBorderStyle] = useState("solid");
+  const [gradientAngle, setGradientAngle] = useState(135);
+
+  // State for Card Image
+  // State for Book Title
+  // State for Book Author
+
   const popupRef = useRef(null);
 
   // add any changes to settings the user makes
@@ -23,28 +32,47 @@ function BookList({
       ...prev,
       bookCard: {
         ...prev.bookCard,
+        // Main div Over Book Card
         bgColor,
+        bgColor2,
         borderColor,
         borderSize,
         borderStyle,
         borderRadius,
+        gradientAngle,
+        // Card Image
+        // Book Title
+        // Book Author
       },
     }));
-  }, [bgColor,
+  }, [
+      // Main div Over Book Card
+      bgColor,
+      bgColor2,
       borderColor,
       borderSize,
       borderStyle,
       borderRadius,
+      gradientAngle,
+      // Card Image
+      // Book Title
+      // Book Author
       setSettings]);
 
   // Check for DataBase saved settings
   useEffect(() => {
     if (settings?.bookCard) {
+      // Main div Over Book Card
       setBgColor(settings.bookCard.bgColor);
+      setBgColo2(settings.bookCard.bgColor2);
       setBorderColor(settings.bookCard.borderColor);
       setBorderSize(settings.bookCard.borderSize);
       setBorderStyle(settings.bookCard.borderStyle);
       setBorderRadius(settings.bookCard.borderRadius);
+      setGradientAngle(settings.bookCard.gradientAngle);
+      // Card Image
+      // Book Title
+      // Book Author
     }
   }, [settings]);
 
@@ -112,11 +140,18 @@ function BookList({
         <EditablePopup
           popupRef={popupRef}
           controls={{
+            // Main div Over Book Card
             bgColor: [bgColor, setBgColor],
+            bgColor2: [bgColor2, setBgColor2],
             borderColor: [borderColor, setBorderColor],
             borderSize: [Number(borderSize), setBorderSize],
             borderStyle: [borderStyle, setBorderStyle],
             borderRadius: [Number(borderRadius), setBorderRadius],
+            gradientAngle: [Number(gradientAngle), setGradientAngle],
+            // Card Image
+            // Book Title
+            // Book Author
+            
           }}
         />
       )}
@@ -127,7 +162,7 @@ function BookList({
           <div
             key={book.isbn || index}  // always give a unique key
             style={{
-              backgroundColor: bgColor,
+              background: `linear-gradient(${gradientAngle}deg, ${bgColor},${bgColor2})`,
               padding: "10px",
               border: `${borderSize}px ${borderStyle} ${borderColor}`,
               borderRadius: borderRadius + "px",

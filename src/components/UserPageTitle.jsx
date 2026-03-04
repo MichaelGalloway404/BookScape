@@ -12,6 +12,7 @@ function UserPageTitle({ editMode, settings, setSettings, titlePlaceHolder }) {
     const [padding, setPadding] = useState(5);
     const [marginLeft, setMarginLeft] = useState(1);
     const [editing, setEditing] = useState(false);
+    const [gradientAngle, setGradientAngle] = useState(135);
 
     const popupRef = useRef(null);
 
@@ -29,6 +30,7 @@ function UserPageTitle({ editMode, settings, setSettings, titlePlaceHolder }) {
                 marginLeft,
                 borderRadius,
                 padding,
+                gradientAngle,
             },
         }));
     }, [text,
@@ -39,6 +41,7 @@ function UserPageTitle({ editMode, settings, setSettings, titlePlaceHolder }) {
         fontSize,
         borderRadius,
         padding,
+        gradientAngle,
         setSettings]);
 
     // Load saved settings from DB
@@ -52,6 +55,7 @@ function UserPageTitle({ editMode, settings, setSettings, titlePlaceHolder }) {
             setMarginLeft(settings.userPageTitle.marginLeft);
             setBorderRadius(settings.userPageTitle.borderRadius);
             setPadding(settings.userPageTitle.padding);
+            setGradientAngle(settings.userPageTitle.gradientAngle);
         }
     }, [settings]);
 
@@ -81,7 +85,7 @@ function UserPageTitle({ editMode, settings, setSettings, titlePlaceHolder }) {
                 className={`hoverText ${editMode ? "editable" : ""}`}
                 style={{
                     fontFamily,
-                    background: `linear-gradient(135deg, ${bgColor},${bgColor2})`,
+                    background: `linear-gradient(${gradientAngle}deg, ${bgColor},${bgColor2})`,
                     padding: padding + "px",
                     borderRadius: borderRadius + "px",
                     maxWidth: "fit-content",
@@ -109,6 +113,7 @@ function UserPageTitle({ editMode, settings, setSettings, titlePlaceHolder }) {
                         marginLeft: [Number(marginLeft), setMarginLeft],
                         borderRadius: [Number(borderRadius),setBorderRadius],
                         padding: [Number(padding),setPadding],
+                        gradientAngle: [Number(gradientAngle),setGradientAngle],
                     }}
                 />
             )}

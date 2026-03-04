@@ -11,6 +11,7 @@ function UserBio({ editMode, settings, setSettings }) {
     const [padding, setPadding] = useState(5);
     const [marginLeft, setMarginLeft] = useState(1);
     const [editing, setEditing] = useState(false);
+    const [gradientAngle, setGradientAngle] = useState(135);
 
     const popupRef = useRef(null);
 
@@ -28,6 +29,7 @@ function UserBio({ editMode, settings, setSettings }) {
                 marginLeft,
                 borderRadius,
                 padding,
+                gradientAngle,
             },
         }));
     }, [text,
@@ -38,6 +40,7 @@ function UserBio({ editMode, settings, setSettings }) {
         fontSize,
         borderRadius,
         padding,
+        gradientAngle,
         setSettings]);
 
     // Load saved settings from DB
@@ -50,6 +53,7 @@ function UserBio({ editMode, settings, setSettings }) {
             setBgColor2(settings.userBio.bgColor2);
             setMarginLeft(settings.userBio.marginLeft);
             setPadding(settings.userBio.padding);
+            setGradientAngle(settings.userBio.gradientAngle);
         }
     }, [settings]);
 
@@ -79,7 +83,7 @@ function UserBio({ editMode, settings, setSettings }) {
                 className={`hoverText ${editMode ? "editable" : ""}`}
                 style={{
                     fontFamily,
-                    background: `linear-gradient(135deg, ${bgColor},${bgColor2})`,
+                    background: `linear-gradient(${gradientAngle}deg, ${bgColor},${bgColor2})`,
                     padding: padding + "px",
                     borderRadius: borderRadius + "px",
                     maxWidth: "fit-content",
@@ -107,6 +111,7 @@ function UserBio({ editMode, settings, setSettings }) {
                         marginLeft: [Number(marginLeft), setMarginLeft],
                         borderRadius: [Number(borderRadius),setBorderRadius],
                         padding: [Number(padding),setPadding],
+                        gradientAngle: [Number(gradientAngle),setGradientAngle],
                     }}
                 />
             )}
