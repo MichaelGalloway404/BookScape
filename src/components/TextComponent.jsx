@@ -4,7 +4,7 @@ import EditablePopup from "./EditablePopup"
 function TextComponent({ editMode, settings, setSettings, ComponentName, defaultText }) {
     const [text, setText] = useState(defaultText);
     const [fontFamily, setFontFamily] = useState("Arial");
-    const [fontColor, setFontColor] = useState("white");
+    const [fontColor, setFontColor] = useState("black");
     const [bgColor, setBgColor] = useState("white");
     const [bgColor2, setBgColor2] = useState("white");
     const [fontSize, setFontSize] = useState(40);
