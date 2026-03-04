@@ -301,7 +301,7 @@ function BookList({
                   }}
                 >{book.title}</p>
                 {/* AUTHOR */}
-                {/* <p
+                <p
                   style={{
                     color: authorColor,
                     margin: authorMargin + "px",
@@ -309,15 +309,15 @@ function BookList({
                     fontSize: authorSize + "px",
                     width: authorWidth + "px",
                   }}
-                >{book.author}</p> */}
-                <TextComponent
+                >{book.author}</p>
+                {/* <TextComponent
                   ComponentName={"cardAuthor"+index}
                   defaultText={book.author}
                   textMutable={false}
                   editMode={editMode}
                   settings={settings}
                   setSettings={setSettings}
-                />
+                /> */}
               </div>
 
               {editMode && (
