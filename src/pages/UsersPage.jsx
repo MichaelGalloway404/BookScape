@@ -250,7 +250,7 @@ function UsersPage() {
                 setSettings={setSettings}
             /> */}
             <TextComponent
-                ComponentName={UserPageTitle}
+                ComponentName={"UserPageTitle"}
                 editMode={editMode}
                 settings={settings}
                 setSettings={setSettings}
@@ -263,7 +263,7 @@ function UsersPage() {
                 setSettings={setSettings}
             /> */}
             <TextComponent
-                ComponentName={UserBio}
+                ComponentName={"UserBio"}
                 editMode={editMode}
                 settings={settings}
                 setSettings={setSettings}
