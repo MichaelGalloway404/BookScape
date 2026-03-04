@@ -93,6 +93,7 @@ function EditablePopup({ popupRef, controls = {} }) {
                         <label key={key}>
                             {key}
                             <input
+                                style={{marginLeft: "5px"}}
                                 type="color"
                                 value={value}
                                 onChange={(e) => setter(e.target.value)}
@@ -107,6 +108,7 @@ function EditablePopup({ popupRef, controls = {} }) {
                         <label key={key}>
                             Choose font:
                             <select
+                                style={{marginLeft: "5px"}}
                                 value={value}
                                 onChange={(e) =>
                                     setter(e.target.value)
@@ -128,6 +130,7 @@ function EditablePopup({ popupRef, controls = {} }) {
                         <label key={key}>
                             Choose Border Style:
                             <select
+                                style={{marginLeft: "5px"}}
                                 value={value}
                                 onChange={(e) =>
                                     setter(e.target.value)
@@ -155,6 +158,7 @@ function EditablePopup({ popupRef, controls = {} }) {
                             }}
                         >
                             <input
+                                style={{marginLeft: "5px"}}
                                 type="checkbox"
                                 checked={value}
                                 onChange={(e) => setter(e.target.checked)}
@@ -170,6 +174,7 @@ function EditablePopup({ popupRef, controls = {} }) {
                         <label key={key}>
                             {key}
                             <input
+                                style={{marginLeft: "5px"}}
                                 type="number"
                                 value={value}
                                 onChange={(e) =>
@@ -185,6 +190,7 @@ function EditablePopup({ popupRef, controls = {} }) {
                     <label key={key}>
                         {key}
                         <input
+                            style={{marginLeft: "5px"}}
                             value={value}
                             onChange={(e) =>
                                 setter(e.target.value)
