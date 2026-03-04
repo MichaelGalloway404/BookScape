@@ -3,8 +3,9 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import SiteInfoFooter from '../components/SiteInfoFooter';
 import BookList from "../components/BookList";
-import UserBio from "../components/UserBio";
-import UserPageTitle from "../components/UserPageTitle";
+// import UserBio from "../components/UserBio";
+// import UserPageTitle from "../components/UserPageTitle";
+import TextComponent from "../components/TextComponent";
 import styles from "./BookSearch.module.css"
 import EditablePopup from "../components/EditablePopup"
 
@@ -242,15 +243,27 @@ function UsersPage() {
             )}
             {/* Users chosen title */}
             {/* <h1>User {user.username}'s Page</h1> */}
-            <UserPageTitle
+            {/* <UserPageTitle
                 titlePlaceHolder={user.username}
+                editMode={editMode}
+                settings={settings}
+                setSettings={setSettings}
+            /> */}
+            <TextComponent
+                ComponentName={UserPageTitle}
                 editMode={editMode}
                 settings={settings}
                 setSettings={setSettings}
             />
 
             {/* display users bio and edits */}
-            <UserBio
+            {/* <UserBio
+                editMode={editMode}
+                settings={settings}
+                setSettings={setSettings}
+            /> */}
+            <TextComponent
+                ComponentName={UserBio}
                 editMode={editMode}
                 settings={settings}
                 setSettings={setSettings}

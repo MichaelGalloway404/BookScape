@@ -1,9 +1,8 @@
 import { useEffect, useState, useRef } from "react";
 import EditablePopup from "./EditablePopup"
 
-
-function UserPageTitle({ editMode, settings, setSettings, titlePlaceHolder }) {
-    const [text, setText] = useState(titlePlaceHolder);
+function UserPageTitle({ editMode, settings, setSettings }) {
+    const [text, setText] = useState("Default Page Title...");
     const [fontFamily, setFontFamily] = useState("Arial");
     const [fontColor, setFontColor] = useState("white");
     const [bgColor, setBgColor] = useState("white");

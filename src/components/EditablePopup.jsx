@@ -70,7 +70,7 @@ function EditablePopup({ popupRef, controls = {}, initialPosition }) {
                 zIndex: 1000,
                 minWidth: "200px",
                 // limit height
-                maxHeight: "300px",
+                maxHeight: "500px",
                 // croll when too tall     
                 overflowY: "auto",
             }}
@@ -83,7 +83,7 @@ function EditablePopup({ popupRef, controls = {}, initialPosition }) {
                     cursor: "grab",
                     fontWeight: "bold",
                     paddingBottom: "0.5rem",
-                    borderBottom: "1px solid #ddd",
+                    borderBottom: "1px solid #000000",
                     marginBottom: "0.5rem",
                 }}
             >

@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import EditablePopup from "./EditablePopup"
 
-function UserBio({ editMode, settings, setSettings }) {
+function TextComponent({ editMode, settings, setSettings, ComponentName}) {
     const [text, setText] = useState("Default Page About...");
     const [fontFamily, setFontFamily] = useState("Arial");
     const [fontColor, setFontColor] = useState("white");
@@ -27,8 +27,8 @@ function UserBio({ editMode, settings, setSettings }) {
     useEffect(() => {
         setSettings(prev => ({
             ...prev,
-            userBio: {
-                ...prev.userBio,
+            [ComponentName]: {
+                ...prev[ComponentName],
                 text,
                 fontFamily,
                 fontColor,
@@ -63,29 +63,30 @@ function UserBio({ editMode, settings, setSettings }) {
         borderRadius,
         padding,
         gradientAngle,
+
         setSettings]);
 
     // Load saved settings from DB
     useEffect(() => {
-        if (settings?.userBio) {
-            setText(settings.userBio.text);
-            setFontFamily(settings.userBio.fontFamily);
-            setFontColor(settings.userBio.fontColor); 
-            setFontSize(settings.userBio.fontSize);
-            setBgColor(settings.userBio.bgColor);
-            setBgColor2(settings.userBio.bgColor2);
-            setBorderColor(settings.userBio.borderColor);
-            setBorderSize(settings.userBio.borderSize);
-            setBorderStyle(settings.userBio.borderStyle);
-            setBorderRadius(settings.userBio.borderRadius);
-            setMarginLeft(settings.userBio.marginLeft);
-            setMarginRight(settings.userBio.marginRight);
-            setMarginTop(settings.userBio.marginTop);
-            setMarginBottom(settings.userBio.marginBottom);
-            setPadding(settings.userBio.padding);
-            setGradientAngle(settings.userBio.gradientAngle);
+        if (settings?.[ComponentName]) {
+            setText(settings[ComponentName].text);
+            setFontFamily(settings[ComponentName].fontFamily);
+            setFontColor(settings[ComponentName].fontColor); 
+            setFontSize(settings[ComponentName].fontSize);
+            setBgColor(settings[ComponentName].bgColor);
+            setBgColor2(settings[ComponentName].bgColor2);
+            setBorderColor(settings[ComponentName].borderColor);
+            setBorderSize(settings[ComponentName].borderSize);
+            setBorderStyle(settings[ComponentName].borderStyle);
+            setBorderRadius(settings[ComponentName].borderRadius);
+            setMarginLeft(settings[ComponentName].marginLeft);
+            setMarginRight(settings[ComponentName].marginRight);
+            setMarginTop(settings[ComponentName].marginTop);
+            setMarginBottom(settings[ComponentName].marginBottom);
+            setPadding(settings[ComponentName].padding);
+            setGradientAngle(settings[ComponentName].gradientAngle);
         }
-    }, [settings]);
+    }, [settings, ComponentName]);
 
     // Close popup if click outside
     useEffect(() => {
@@ -170,4 +171,4 @@ function UserBio({ editMode, settings, setSettings }) {
     );
 }
 
-export default UserBio;
+export default TextComponent;
