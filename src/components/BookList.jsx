@@ -23,14 +23,22 @@ function BookList({
   const [margin, setMargin] = useState(0);
 
   // State for Card Image
-  const [cardImgBorderColor, setCardImgBorderColor] = useState("#ffffff")
+  const [cardImgBorderColor, setCardImgBorderColor] = useState("#ffffff");
   const [cardImgBorderSize, setCardImgBorderSize] = useState(2);
   const [cardImgBorderRadius, setCardImgBorderRadius] = useState(5);
   const [cardImgBorderStyle, setCardImgBorderStyle] = useState("solid");
   const [cardImgWidth, setCardImgWidth] = useState(100);
 
   // State for Book Title
+  const [titleColor, setTitleColor] = useState("white");
+  const [titleSize, setTitleSize] = useState(20);
+  const [titlePadding, setTitlePadding] = useState(5);
+  const [titleMargin, setTitleMargin] = useState(0);
   // State for Book Author
+  const [authorColor, setAuthorColor] = useState("white");
+  const [authorSize, setAuthorSize] = useState(20);
+  const [authorPadding, setAuthorPadding] = useState(5);
+  const [authorMargin, setAuthorMargin] = useState(0);
 
   const popupRef = useRef(null);
   const [popupPosition, setPopupPosition] = useState(null);
@@ -58,7 +66,15 @@ function BookList({
         cardImgBorderStyle,
         cardImgWidth,
         // Book Title
+        titleColor,
+        titleMargin,
+        titlePadding,
+        titleSize,
         // Book Author
+        authorColor,
+        authorMargin,
+        authorPadding,
+        authorSize,
       },
     }));
   }, [
@@ -79,7 +95,16 @@ function BookList({
     cardImgBorderStyle,
     cardImgWidth,
     // Book Title
+    titleColor,
+    titleMargin,
+    titlePadding,
+    titleSize,
     // Book Author
+    authorColor,
+    authorMargin,
+    authorPadding,
+    authorSize,
+
     setSettings]);
 
   // Check for DataBase saved settings
@@ -102,7 +127,15 @@ function BookList({
       setCardImgBorderStyle(settings.bookCard.cardImgBorderStyle);
       setCardImgWidth(settings.bookCard.cardImgWidth);
       // Book Title
+      setTitleColor(settings.bookCard.titleColor);
+      setTitleMargin(settings.bookCard.titleMargin);
+      setTitlePadding(settings.bookCard.titlePadding);
+      setTitleSize(settings.bookCard.titleSize);
       // Book Author
+      setAuthorColor(settings.bookCard.authorColor);
+      setAuthorMargin(settings.bookCard.authorMargin);
+      setAuthorPadding(settings.bookCard.authorPadding);
+      setAuthorSize(settings.bookCard.authorSize);
     }
   }, [settings]);
 
@@ -188,7 +221,15 @@ function BookList({
             "Image Border Style": [cardImgBorderStyle, setCardImgBorderStyle],
             "Image Width": [Number(cardImgWidth), setCardImgWidth],
             // Book Title
+            "Book Title Margin": [titleMargin, setTitleMargin],
+            "Book Title Padding": [titlePadding, setTitlePadding],
+            "Book Title Text Size": [titleSize, setTitleSize],
+            "Book Title Color": [titleColor, setTitleColor],
             // Book Author
+            "Book Author Margin": [authorMargin, setAuthorMargin],
+            "Book Author Padding": [authorPadding, setAuthorPadding],
+            "Book Author Text Size": [authorSize, setAuthorSize],
+            "Book Author Color": [authorColor, setAuthorColor],
 
           }}
         />
@@ -217,7 +258,7 @@ function BookList({
             }}
           >
             <li
-              style={{ listStyle: "none"}}
+              style={{ listStyle: "none" }}
               draggable={editMode}
               onDragStart={() => handleDragStart(index)}
               onDragEnter={() => handleDragEnter(index)}
@@ -235,8 +276,24 @@ function BookList({
               />
 
               <div>
-                <p>{book.title}</p>
-                <p>{book.author}</p>
+                {/* TITLE */}
+                <p
+                  style={{
+                    color: titleColor,
+                    margin: titleMargin + "px",
+                    padding: titlePadding + "px",
+                    fontSize: titleSize + "px",
+                  }}
+                >{book.title}</p>
+                {/* AUTHOR */}
+                <p
+                  style={{
+                    color: authorColor,
+                    margin: authorMargin + "px",
+                    padding: authorPadding + "px",
+                    fontSize: authorSize + "px",
+                  }}
+                >{book.author}</p>
               </div>
 
               {editMode && (
