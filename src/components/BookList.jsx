@@ -200,7 +200,7 @@ function BookList({
             style={{
               background: `linear-gradient(${gradientAngle}deg, ${bgColor},${bgColor2})`,
               padding: padding + "px",
-              margin: margin = "px",
+              margin: margin + "px",
               border: `${borderSize}px ${borderStyle} ${borderColor}`,
               borderRadius: borderRadius + "px",
               maxWidth: "30%",
