@@ -231,8 +231,8 @@ function UsersPage() {
                 <EditablePopup
                     popupRef={popupRef}
                     controls={{
-                        pageBckColor: [pageBckColor, setPageBckColor],
-                        pageBckColor2: [pageBckColor2, setPageBckColor2],
+                        "Page Background Color 1": [pageBckColor, setPageBckColor],
+                        "Page Background Color 2": [pageBckColor2, setPageBckColor2],
                         "Gradient Angle": [Number(gradientAngle),setGradientAngle],
                         "Profile is Private": [profilePublic, setProfilePrivate],
                     }}

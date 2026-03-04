@@ -103,15 +103,15 @@ function UserBio({ editMode, settings, setSettings }) {
                 <EditablePopup
                     popupRef={popupRef}
                     controls={{
-                        text: [text, setText],
-                        bgColor: [bgColor, setBgColor],
-                        bgColor2: [bgColor2, setBgColor2],
-                        fontFamily: [fontFamily, setFontFamily],
-                        fontSize: [Number(fontSize), setFontSize],
-                        marginLeft: [Number(marginLeft), setMarginLeft],
-                        borderRadius: [Number(borderRadius),setBorderRadius],
-                        padding: [Number(padding),setPadding],
-                        gradientAngle: [Number(gradientAngle),setGradientAngle],
+                        "Text": [text, setText],
+                        "Background Color 1": [bgColor, setBgColor],
+                        "Background Color 1": [bgColor2, setBgColor2],
+                        "Font Family": [fontFamily, setFontFamily],
+                        "Font Size": [Number(fontSize), setFontSize],
+                        "Offet From Left": [Number(marginLeft), setMarginLeft],
+                        "Border Radius": [Number(borderRadius),setBorderRadius],
+                        "Padding": [Number(padding),setPadding],
+                        "Gradient Angle": [Number(gradientAngle),setGradientAngle],
                     }}
                 />
             )}

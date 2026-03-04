@@ -170,21 +170,21 @@ function BookList({
           popupRef={popupRef}
           controls={{
             // Main div Over Book Card
-            bgColor: [bgColor, setBgColor],
-            bgColor2: [bgColor2, setBgColor2],
-            borderColor: [borderColor, setBorderColor],
-            borderSize: [Number(borderSize), setBorderSize],
-            borderStyle: [borderStyle, setBorderStyle],
-            borderRadius: [Number(borderRadius), setBorderRadius],
-            gradientAngle: [Number(gradientAngle), setGradientAngle],
-            padding: [Number(padding), setPadding],
-            margin: [Number(margin), setMargin],
+            "Card Back Color 1": [bgColor, setBgColor],
+            "Card Back Color 2": [bgColor2, setBgColor2],
+            "Card Border Color": [borderColor, setBorderColor],
+            "Card Border Size": [Number(borderSize), setBorderSize],
+            "Card Border Style": [borderStyle, setBorderStyle],
+            "Card Border Radius": [Number(borderRadius), setBorderRadius],
+            "Card Gradient Angle": [Number(gradientAngle), setGradientAngle],
+            "Card Padding": [Number(padding), setPadding],
+            "Card margin": [Number(margin), setMargin],
             // Card Image
-            cardImgBorderColor: [cardImgBorderColor, setCardImgBorderColor],
-            cardImgBorderSize: [Number(cardImgBorderSize), setCardImgBorderSize],
-            cardImgBorderRadius: [Number(cardImgBorderRadius), setCardImgBorderRadius],
-            cardImgBorderStyle: [cardImgBorderStyle, setCardImgBorderStyle],
-            cardImgWidth: [Number(cardImgWidth), setCardImgWidth],
+            "Image Border Color": [cardImgBorderColor, setCardImgBorderColor],
+            "Image Border Size": [Number(cardImgBorderSize), setCardImgBorderSize],
+            "Image Border Radius": [Number(cardImgBorderRadius), setCardImgBorderRadius],
+            "Image Border Style": [cardImgBorderStyle, setCardImgBorderStyle],
+            "Image Width": [Number(cardImgWidth), setCardImgWidth],
             // Book Title
             // Book Author
 

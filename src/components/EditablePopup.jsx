@@ -123,7 +123,7 @@ function EditablePopup({ popupRef, controls = {} }) {
                 }
 
                 // BORDER STYLE PICKER
-                if (key.toLowerCase().includes("borderstyle")) {
+                if (key.toLowerCase().includes("style")) {
                     return (
                         <label key={key}>
                             Choose Border Style:
