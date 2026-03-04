@@ -171,5 +171,4 @@ function TextComponent({ editMode, settings, setSettings, ComponentName, default
         </>
     );
 }
-
 export default TextComponent;
