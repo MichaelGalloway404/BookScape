@@ -21,6 +21,7 @@ function UserPageTitle({ editMode, settings, setSettings, titlePlaceHolder }) {
     const [gradientAngle, setGradientAngle] = useState(135);
 
     const popupRef = useRef(null);
+    const [popupPosition, setPopupPosition] = useState(null);
 
     // Update settings whenever changes happen
     useEffect(() => {
@@ -123,7 +124,15 @@ function UserPageTitle({ editMode, settings, setSettings, titlePlaceHolder }) {
                     fontSize: fontSize + "px",
                     cursor: editMode ? "pointer" : "default",
                 }}
-                onClick={() => { if (editMode) setEditing(true); }}
+                onClick={() => {
+                    if (editMode) {
+                        setPopupPosition({
+                            x: e.clientX,
+                            y: e.clientY,
+                        });
+                        setEditing(true);
+                    }
+                }}
             >
                 {text}
             </h1>
@@ -132,6 +141,7 @@ function UserPageTitle({ editMode, settings, setSettings, titlePlaceHolder }) {
             {editing && editMode && (
                 <EditablePopup
                     popupRef={popupRef}
+                    initialPosition={popupPosition}
                     controls={{
                         "Text": [text, setText],
                         "Background Color 1": [bgColor, setBgColor],

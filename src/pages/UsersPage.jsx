@@ -20,6 +20,7 @@ function UsersPage() {
     const [gradientAngle, setGradientAngle] = useState(135);
 
     const popupRef = useRef(null);
+    const [popupPosition, setPopupPosition] = useState(null);
 
     const navigate = useNavigate();
 
@@ -230,10 +231,11 @@ function UsersPage() {
             {editing && editMode && (
                 <EditablePopup
                     popupRef={popupRef}
+                    initialPosition={popupPosition}
                     controls={{
                         "Page Background Color 1": [pageBckColor, setPageBckColor],
                         "Page Background Color 2": [pageBckColor2, setPageBckColor2],
-                        "Gradient Angle": [Number(gradientAngle),setGradientAngle],
+                        "Gradient Angle": [Number(gradientAngle), setGradientAngle],
                         "Profile is Private": [profilePublic, setProfilePrivate],
                     }}
                 />
@@ -256,7 +258,15 @@ function UsersPage() {
 
             {/* PAGE SETTINGS BUTTON */}
             {editMode && (
-                <button onClick={() => { if (editMode) setEditing(true); }}
+                <button onClick={() => {
+                    if (editMode) {
+                        setPopupPosition({
+                            x: e.clientX,
+                            y: e.clientY,
+                        });
+                        setEditing(true);
+                    }
+                }}
                     style={{
                         position: "absolute",
                         top: "6rem",

@@ -20,6 +20,7 @@ function UserBio({ editMode, settings, setSettings }) {
     const [gradientAngle, setGradientAngle] = useState(135);
 
     const popupRef = useRef(null);
+    const [popupPosition, setPopupPosition] = useState(null);
 
     // Update settings whenever bio text or font changes
     useEffect(() => {
@@ -122,7 +123,15 @@ function UserBio({ editMode, settings, setSettings }) {
                     fontSize: fontSize + "px",
                     cursor: editMode ? "pointer" : "default",
                 }}
-                onClick={() => { if (editMode) setEditing(true); }}
+                onClick={() => {
+                    if (editMode) {
+                        setPopupPosition({
+                            x: e.clientX,
+                            y: e.clientY,
+                        });
+                        setEditing(true);
+                    }
+                }}
             >
                 {text}
             </p>
@@ -131,6 +140,7 @@ function UserBio({ editMode, settings, setSettings }) {
             {editing && editMode && (
                 <EditablePopup
                     popupRef={popupRef}
+                    initialPosition={popupPosition}
                     controls={{
                         "Text": [text, setText],
                         "Background Color 1": [bgColor, setBgColor],

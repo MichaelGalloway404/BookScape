@@ -2,10 +2,12 @@ import { useState, useRef, useEffect } from "react";
 import fonts from "../styles/fonts";
 import borderTypes from "../styles/borderTypes";
 
-function EditablePopup({ popupRef, controls = {} }) {
+function EditablePopup({ popupRef, controls = {}, initialPosition }) {
 
     // Stores popup position
-    const [position, setPosition] = useState({ x: 200, y: 200 });
+    const [position, setPosition] = useState(
+        initialPosition || { x: 200, y: 200 }
+    );
 
     // Tracks dragging state
     const isDragging = useRef(false);
@@ -70,7 +72,7 @@ function EditablePopup({ popupRef, controls = {} }) {
                 // limit height
                 maxHeight: "300px",
                 // croll when too tall     
-                overflowY: "auto",     
+                overflowY: "auto",
             }}
         >
 
@@ -97,7 +99,7 @@ function EditablePopup({ popupRef, controls = {} }) {
                         <label key={key}>
                             {key}
                             <input
-                                style={{marginLeft: "5px"}}
+                                style={{ marginLeft: "5px" }}
                                 type="color"
                                 value={value}
                                 onChange={(e) => setter(e.target.value)}
@@ -112,7 +114,7 @@ function EditablePopup({ popupRef, controls = {} }) {
                         <label key={key}>
                             Choose font:
                             <select
-                                style={{marginLeft: "5px"}}
+                                style={{ marginLeft: "5px" }}
                                 value={value}
                                 onChange={(e) =>
                                     setter(e.target.value)
@@ -134,7 +136,7 @@ function EditablePopup({ popupRef, controls = {} }) {
                         <label key={key}>
                             Choose Border Style:
                             <select
-                                style={{marginLeft: "5px"}}
+                                style={{ marginLeft: "5px" }}
                                 value={value}
                                 onChange={(e) =>
                                     setter(e.target.value)
@@ -162,7 +164,7 @@ function EditablePopup({ popupRef, controls = {} }) {
                             }}
                         >
                             <input
-                                style={{marginLeft: "5px"}}
+                                style={{ marginLeft: "5px" }}
                                 type="checkbox"
                                 checked={value}
                                 onChange={(e) => setter(e.target.checked)}
@@ -178,7 +180,7 @@ function EditablePopup({ popupRef, controls = {} }) {
                         <label key={key}>
                             {key}
                             <input
-                                style={{marginLeft: "5px"}}
+                                style={{ marginLeft: "5px" }}
                                 type="number"
                                 value={value}
                                 onChange={(e) =>
@@ -194,7 +196,7 @@ function EditablePopup({ popupRef, controls = {} }) {
                     <label key={key}>
                         {key}
                         <input
-                            style={{marginLeft: "5px"}}
+                            style={{ marginLeft: "5px" }}
                             value={value}
                             onChange={(e) =>
                                 setter(e.target.value)

@@ -33,6 +33,7 @@ function BookList({
   // State for Book Author
 
   const popupRef = useRef(null);
+  const [popupPosition, setPopupPosition] = useState(null);
 
   // add any changes to settings the user makes
   useEffect(() => {
@@ -168,6 +169,7 @@ function BookList({
       {editing && editMode && (
         <EditablePopup
           popupRef={popupRef}
+          initialPosition={popupPosition}
           controls={{
             // Main div Over Book Card
             "Card Back Color 1": [bgColor, setBgColor],
@@ -192,7 +194,15 @@ function BookList({
         />
       )}
       <ul style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}
-        onClick={() => { if (editMode) setEditing(true); }}>
+        onClick={() => {
+          if (editMode) {
+            setPopupPosition({
+              x: e.clientX,
+              y: e.clientY,
+            });
+            setEditing(true);
+          }
+        }}>
         {books.map((book, index) => (
           // -------------------- Draggable Book Card --------------------------------
           <div
