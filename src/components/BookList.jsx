@@ -12,7 +12,7 @@ function BookList({
   const [editing, setEditing] = useState(false);
 
   // State for Main div Over Book Card
-  const [bgColor, setBgColor] = useState("#c4ccd5");
+  const [bgColor, setBgColor] = useState("#ffffff");
   const [bgColor2, setBgColor2] = useState("#c4ccd5");
   const [borderColor, setBorderColor] = useState("#c4ccd5");
   const [borderSize, setBorderSize] = useState(2);
@@ -21,6 +21,12 @@ function BookList({
   const [gradientAngle, setGradientAngle] = useState(135);
 
   // State for Card Image
+  const [cardImgBorderColor, setCardImgBorderColor] = useState("#ffffff")
+  const [cardImgBorderSize, setCardImgBorderSize] = useState(2);
+  const [cardImgBorderRadius, setCardImgBorderRadius] = useState(5);
+  const [cardImgBorderStyle, setCardImgBorderStyle] = useState("solid");
+  const [cardImgWidth, setCardImgWidth] = useState(100);
+
   // State for Book Title
   // State for Book Author
 
@@ -41,36 +47,51 @@ function BookList({
         borderRadius,
         gradientAngle,
         // Card Image
+        cardImgBorderColor,
+        cardImgBorderSize,
+        cardImgBorderRadius,
+        cardImgBorderStyle,
+        cardImgWidth,
         // Book Title
         // Book Author
       },
     }));
   }, [
-      // Main div Over Book Card
-      bgColor,
-      bgColor2,
-      borderColor,
-      borderSize,
-      borderStyle,
-      borderRadius,
-      gradientAngle,
-      // Card Image
-      // Book Title
-      // Book Author
-      setSettings]);
+    // Main div Over Book Card
+    bgColor,
+    bgColor2,
+    borderColor,
+    borderSize,
+    borderStyle,
+    borderRadius,
+    gradientAngle,
+    // Card Image
+    cardImgBorderColor,
+    cardImgBorderSize,
+    cardImgBorderRadius,
+    cardImgBorderStyle,
+    cardImgWidth,
+    // Book Title
+    // Book Author
+    setSettings]);
 
   // Check for DataBase saved settings
   useEffect(() => {
     if (settings?.bookCard) {
       // Main div Over Book Card
       setBgColor(settings.bookCard.bgColor);
-      setBgColo2(settings.bookCard.bgColor2);
+      setBgColor2(settings.bookCard.bgColor2);
       setBorderColor(settings.bookCard.borderColor);
       setBorderSize(settings.bookCard.borderSize);
       setBorderStyle(settings.bookCard.borderStyle);
       setBorderRadius(settings.bookCard.borderRadius);
       setGradientAngle(settings.bookCard.gradientAngle);
       // Card Image
+      setCardImgBorderColor(settings.bookCard.cardImgBorderColor);
+      setCardImgBorderSize(settings.bookCard.cardImgBorderSize);
+      setCardImgBorderRadius(settings.bookCard.cardImgBorderRadius);
+      setCardImgBorderStyle(settings.bookCard.cardImgBorderStyle);
+      setCardImgWidth(settings.bookCard.cardImgWidth);
       // Book Title
       // Book Author
     }
@@ -149,9 +170,14 @@ function BookList({
             borderRadius: [Number(borderRadius), setBorderRadius],
             gradientAngle: [Number(gradientAngle), setGradientAngle],
             // Card Image
+            cardImgBorderColor: [cardImgBorderColor, setCardImgBorderColor],
+            cardImgBorderSize: [Number(cardImgBorderSize), setCardImgBorderSize],
+            cardImgBorderRadius: [Number(cardImgBorderRadius), setCardImgBorderRadius],
+            cardImgBorderStyle: [cardImgBorderStyle, setCardImgBorderStyle],
+            cardImgWidth: [Number(cardImgWidth), setCardImgWidth],
             // Book Title
             // Book Author
-            
+
           }}
         />
       )}
