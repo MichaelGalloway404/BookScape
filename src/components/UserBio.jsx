@@ -7,7 +7,10 @@ function UserBio({ editMode, settings, setSettings }) {
     const [bgColor, setBgColor] = useState("white");
     const [bgColor2, setBgColor2] = useState("white");
     const [fontSize, setFontSize] = useState(40);
+    const [borderColor, setBorderColor] = useState("#c4ccd5");
+    const [borderSize, setBorderSize] = useState(2);
     const [borderRadius, setBorderRadius] = useState(5);
+    const [borderStyle, setBorderStyle] = useState("solid");
     const [padding, setPadding] = useState(5);
     const [marginLeft, setMarginLeft] = useState(1);
     const [editing, setEditing] = useState(false);
@@ -27,6 +30,9 @@ function UserBio({ editMode, settings, setSettings }) {
                 bgColor,
                 bgColor2,
                 marginLeft,
+                borderColor,
+                borderSize,
+                borderStyle,
                 borderRadius,
                 padding,
                 gradientAngle,
@@ -38,6 +44,9 @@ function UserBio({ editMode, settings, setSettings }) {
         bgColor2,
         marginLeft,
         fontSize,
+        borderColor,
+        borderSize,
+        borderStyle,
         borderRadius,
         padding,
         gradientAngle,
@@ -51,6 +60,10 @@ function UserBio({ editMode, settings, setSettings }) {
             setFontSize(settings.userBio.fontSize);
             setBgColor(settings.userBio.bgColor);
             setBgColor2(settings.userBio.bgColor2);
+            setBorderColor(settings.userBio.borderColor);
+            setBorderSize(settings.userBio.borderSize);
+            setBorderStyle(settings.userBio.borderStyle);
+            setBorderRadius(settings.userBio.borderRadius);
             setMarginLeft(settings.userBio.marginLeft);
             setPadding(settings.userBio.padding);
             setGradientAngle(settings.userBio.gradientAngle);
@@ -85,6 +98,7 @@ function UserBio({ editMode, settings, setSettings }) {
                     fontFamily,
                     background: `linear-gradient(${gradientAngle}deg, ${bgColor},${bgColor2})`,
                     padding: padding + "px",
+                    border: `${borderSize}px ${borderStyle} ${borderColor}`,
                     borderRadius: borderRadius + "px",
                     maxWidth: "fit-content",
                     marginLeft: marginLeft + "px",
@@ -109,9 +123,12 @@ function UserBio({ editMode, settings, setSettings }) {
                         "Font Family": [fontFamily, setFontFamily],
                         "Font Size": [Number(fontSize), setFontSize],
                         "Offset From Left": [Number(marginLeft), setMarginLeft],
-                        "Border Radius": [Number(borderRadius),setBorderRadius],
-                        "Padding": [Number(padding),setPadding],
-                        "Gradient Angle": [Number(gradientAngle),setGradientAngle],
+                        "Border Color": [borderColor, setBorderColor],
+                        "Border Size": [Number(borderSize), setBorderSize],
+                        "Border Style": [borderStyle, setBorderStyle],
+                        "Border Radius": [Number(borderRadius), setBorderRadius],
+                        "Padding": [Number(padding), setPadding],
+                        "Gradient Angle": [Number(gradientAngle), setGradientAngle],
                     }}
                 />
             )}

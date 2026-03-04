@@ -67,6 +67,10 @@ function EditablePopup({ popupRef, controls = {} }) {
                 gap: "0.5rem",
                 zIndex: 1000,
                 minWidth: "200px",
+                // limit height
+                maxHeight: "300px",
+                // croll when too tall     
+                overflowY: "auto",     
             }}
         >
 
