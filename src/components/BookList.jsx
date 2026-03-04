@@ -143,7 +143,7 @@ function BookList({
       setAuthorMargin(settings.bookCard.authorMargin);
       setAuthorPadding(settings.bookCard.authorPadding);
       setAuthorSize(settings.bookCard.authorSize);
-      setAuthorSize(settings.bookCard.authorWidth);
+      setAuthorWidth(settings.bookCard.authorWidth);
     }
   }, [settings]);
 
