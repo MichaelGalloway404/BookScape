@@ -15,9 +15,7 @@ function BookList({
   const [borderSize, setBorderSize] = useState(2);
   const [borderRadius, setBorderRadius] = useState(5);
   const [borderStyle, setBorderStyle] = useState("solid");
-  const [summary, setSummary] = useState(null);
   const [expanded, setExpanded] = useState(false);
-
   const popupRef = useRef(null);
 
   // add any changes to settings the user makes
@@ -105,59 +103,6 @@ function BookList({
     };
   }, [editing]);
 
-
-  // get wiki API Summary
-  async function fetchWikiSummary(book) {
-    // Toggle closed if already open
-    if (expanded) {
-      setExpanded(false);
-      return;
-    }
-
-
-    try {
-      const searchQuery = encodeURIComponent(
-        `${book.title} ${book.author || ""}`
-      );
-
-      const searchUrl =
-        `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${searchQuery}&format=json&origin=*`;
-
-      const searchResponse = await fetch(searchUrl);
-      const searchData = await searchResponse.json();
-
-      if (!searchData.query.search.length) {
-        setSummary("So no info avalible");
-        setExpanded(true);
-        return;
-      }
-
-      const bestTitle =
-        searchData.query.search[0].title.replace(/ /g, "_");
-
-      const summaryUrl =
-        `https://en.wikipedia.org/api/rest_v1/page/summary/${bestTitle}`;
-
-      const summaryResponse = await fetch(summaryUrl);
-
-      if (!summaryResponse.ok) {
-        setSummary("Could not retrieve summary.");
-        setExpanded(true);
-        return;
-      }
-
-      const data = await summaryResponse.json();
-
-      setSummary(data.extract);
-      setExpanded(true);
-
-    } catch (error) {
-      setSummary("Error fetching Wikipedia summary.");
-      setExpanded(true);
-    }
-
-  }
-
   useEffect(() => {
     function handleClickOutside(event) {
       if (popupRef.current && !popupRef.current.contains(event.target)) {
@@ -211,32 +156,9 @@ function BookList({
               marginBottom: "10px",
               transition: "all 0.2s ease",
               maxWidth: "30%",
-              position: "relative", // needed for absolute summary popup
+              // position: "relative", 
             }}
-            onClick={!editMode ? () => fetchWikiSummary(book) : undefined}
           >
-            {!editMode && expanded && summary && (
-              <div
-                ref={popupRef}
-                style={{
-                  position: "absolute",
-                  background: "white",
-                  padding: "1rem",
-                  borderRadius: "8px",
-                  boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "0.5rem",
-                  zIndex: 1000,
-                  maxWidth: "300px",
-                  top: "110%", 
-                  left: 0,
-                }}
-              >
-                {summary}
-              </div>
-            )}
-
             <li
               style={{ listStyle: "none", width: "150px" }}
               draggable={editMode}
