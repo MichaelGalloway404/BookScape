@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import EditablePopup from "./EditablePopup"
 
-function TextComponent({ editMode, settings, setSettings, ComponentName, defaultText }) {
+function TextComponent({ editMode, settings, setSettings, ComponentName, defaultText, textMutable }) {
     const [text, setText] = useState(defaultText);
     const [fontFamily, setFontFamily] = useState("Arial");
     const [fontColor, setFontColor] = useState("black");
@@ -149,7 +149,8 @@ function TextComponent({ editMode, settings, setSettings, ComponentName, default
                     popupRef={popupRef}
                     initialPosition={popupPosition}
                     controls={{
-                        "Text": [text, setText],
+                        // "Text": [text, setText], 
+                        ...(textMutable && { "Text": [text, setText] }),
                         "Background Color 1": [bgColor, setBgColor],
                         "Background Color 2": [bgColor2, setBgColor2],
                         "Font Family": [fontFamily, setFontFamily],

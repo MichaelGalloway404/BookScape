@@ -252,6 +252,7 @@ function UsersPage() {
             <TextComponent
                 ComponentName={"UserPageTitle"}
                 defaultText={"Make a page Title " + user.username}
+                textMutable={true}
                 editMode={editMode}
                 settings={settings}
                 setSettings={setSettings}
@@ -261,6 +262,7 @@ function UsersPage() {
             <TextComponent
                 ComponentName={"UserBio"}
                 defaultText={"Type your " + user.username + "Bio here..."}
+                textMutable={true}
                 editMode={editMode}
                 settings={settings}
                 setSettings={setSettings}

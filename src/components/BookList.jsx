@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import EditablePopup from "./EditablePopup"
+import TextComponent from "./TextComponent";
 
 function BookList({
   books,
@@ -238,11 +239,11 @@ function BookList({
             "Book Title Width": [Number(titleWidth), setTitleWidth],
             "break3": "place holder",
             // Book Author
-            "Book Author Margin": [Number(authorMargin), setAuthorMargin],
-            "Book Author Padding": [Number(authorPadding), setAuthorPadding],
-            "Book Author Size": [Number(authorSize), setAuthorSize],
-            "Book Author Color": [authorColor, setAuthorColor],
-            "Book Author Width": [Number(authorWidth), setAuthorWidth],
+            // "Book Author Margin": [Number(authorMargin), setAuthorMargin],
+            // "Book Author Padding": [Number(authorPadding), setAuthorPadding],
+            // "Book Author Size": [Number(authorSize), setAuthorSize],
+            // "Book Author Color": [authorColor, setAuthorColor],
+            // "Book Author Width": [Number(authorWidth), setAuthorWidth],
 
           }}
         />
@@ -300,7 +301,7 @@ function BookList({
                   }}
                 >{book.title}</p>
                 {/* AUTHOR */}
-                <p
+                {/* <p
                   style={{
                     color: authorColor,
                     margin: authorMargin + "px",
@@ -308,7 +309,15 @@ function BookList({
                     fontSize: authorSize + "px",
                     width: authorWidth + "px",
                   }}
-                >{book.author}</p>
+                >{book.author}</p> */}
+                <TextComponent
+                  ComponentName={"cardAuthor"}
+                  defaultText={book.author}
+                  textMutable={false}
+                  editMode={editMode}
+                  settings={settings}
+                  setSettings={setSettings}
+                />
               </div>
 
               {editMode && (
