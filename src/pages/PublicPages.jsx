@@ -14,7 +14,6 @@ function PublicPage() {
   const [pageBckColor2, setPageBckColor2] = useState("#c4ccd5");
   const [gradientAngle, setGradientAngle] = useState(135);
 
-  // Load public user data (books + settings)
   useEffect(() => {
     if (!person) return;
 
@@ -55,7 +54,7 @@ function PublicPage() {
     loadPublicData();
   }, [person]);
 
-  // Apply saved page background settings
+  // Apply page background settings
   useEffect(() => {
     if (settings?.mainPage) {
       setPageBckColor(settings.mainPage.pageBckColor || "#c4ccd5");
@@ -77,27 +76,27 @@ function PublicPage() {
 
   return (
     <>
-      {/* PAGE TITLE */}
+      {/* TITLE */}
       <TextComponent
         ComponentName="UserPageTitle"
-        defaultText={`Page Title: ${person.username}`}
+        defaultText={settings.UserPageTitle?.text || `Page Title: ${person.username}`}
         textMutable={false}
         editMode={false}
         settings={settings}
         setSettings={() => { }}
       />
 
-      {/* USER BIO */}
+      {/* BIO */}
       <TextComponent
         ComponentName="UserBio"
-        defaultText={person.bio || `${person.username} hasn't added a bio yet.`}
+        defaultText={settings.UserBio?.text || person.bio || `${person.username} hasn't added a bio yet.`}
         textMutable={false}
         editMode={false}
         settings={settings}
         setSettings={() => { }}
       />
 
-      {/* USER BOOK LIST */}
+      {/* BOOK LIST */}
       {books.length === 0 ? (
         <p>No books added yet.</p>
       ) : (
