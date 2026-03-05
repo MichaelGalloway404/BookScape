@@ -1,11 +1,12 @@
-import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import SiteInfoFooter from "../components/SiteInfoFooter";
 import TextComponent from "../components/TextComponent";
 
-function PublicPage() {
+function PublicPages() {
   const location = useLocation();
   const person = location.state?.user;
+  const navigate = useNavigate();
 
   const [books, setBooks] = useState([]);
   const [settings, setSettings] = useState({});
@@ -13,6 +14,7 @@ function PublicPage() {
   const [pageBckColor2, setPageBckColor2] = useState("#c4ccd5");
   const [gradientAngle, setGradientAngle] = useState(135);
 
+  // Load user books and settings from the database
   useEffect(() => {
     if (!person) return;
 
@@ -23,19 +25,21 @@ function PublicPage() {
         if (!booksRes.ok) throw new Error("Failed to fetch books");
         const booksData = await booksRes.json();
 
+        // Respect saved book order
         let orderedBooks = booksData;
         if (Array.isArray(person.book_order_json) && person.book_order_json.length > 0) {
-          const orderMap = new Map(person.book_order_json.map((isbn, idx) => [isbn, idx]));
+          const orderMap = new Map(
+            person.book_order_json.map((isbn, index) => [isbn, index])
+          );
           orderedBooks = booksData.slice().sort((a, b) => {
-            const aIdx = orderMap.get(a.isbn);
-            const bIdx = orderMap.get(b.isbn);
-            if (aIdx !== undefined && bIdx !== undefined) return aIdx - bIdx;
-            if (aIdx !== undefined) return -1;
-            if (bIdx !== undefined) return 1;
+            const aIndex = orderMap.get(a.isbn);
+            const bIndex = orderMap.get(b.isbn);
+            if (aIndex !== undefined && bIndex !== undefined) return aIndex - bIndex;
+            if (aIndex !== undefined) return -1;
+            if (bIndex !== undefined) return 1;
             return 0;
           });
         }
-
         setBooks(orderedBooks);
 
         // ---------------- GET SETTINGS ----------------
@@ -45,13 +49,14 @@ function PublicPage() {
         setSettings(settingsData || {});
       } catch (err) {
         console.error(err);
+        navigate("/login");
       }
     };
 
     loadPublicData();
-  }, [person]);
+  }, [person, navigate]);
 
-  // Apply page background settings
+  // Apply main page background settings
   useEffect(() => {
     if (settings?.mainPage) {
       setPageBckColor(settings.mainPage.pageBckColor || "#c4ccd5");
@@ -69,50 +74,25 @@ function PublicPage() {
     };
   }, [pageBckColor, pageBckColor2, gradientAngle]);
 
-  if (!person) return <p>No user selected.</p>;
+  if (!person) return <p>Loading user...</p>;
 
-  // ---------------- BOOK CARD STYLING FROM SETTINGS ----------------
-  const bookCardSettings = settings.bookCard || {};
-  const {
-    bgColor = "#ffffff",
-    bgColor2 = "#cccccc",
-    borderSize = 2,
-    borderColor = "#000",
-    borderStyle = "solid",
-    borderRadius = 8,
-    padding = 10,
-    margin = 5,
-    gradientAngle: cardGradient = 135,
-    cardImgWidth = 100,
-    cardImgBorderSize = 2,
-    cardImgBorderColor = "#000",
-    cardImgBorderStyle = "solid",
-    cardImgBorderRadius = 5,
-    titleSize = 16,
-    titleColor = "#000",
-    titlePadding = 5,
-    titleMargin = 2,
-    titleWidth = 100,
-    authorSize = 14,
-    authorColor = "#333",
-    authorPadding = 5,
-    authorMargin = 2,
-    authorWidth = 100,
-  } = bookCardSettings;
+  // Book card settings from DB
+  const bc = settings.bookCard || {};
+  const gradient = bc.gradientAngle || 135;
 
   return (
     <>
-      {/* TITLE */}
+      {/* PAGE TITLE */}
       <TextComponent
         ComponentName="UserPageTitle"
-        defaultText={settings.UserPageTitle?.text || `Page Title: ${person.username}`}
+        defaultText={settings.UserPageTitle?.text || `${person.username}'s Page`}
         textMutable={false}
         editMode={false}
         settings={settings}
         setSettings={() => {}}
       />
 
-      {/* BIO */}
+      {/* USER BIO */}
       <TextComponent
         ComponentName="UserBio"
         defaultText={settings.UserBio?.text || person.bio || `${person.username} hasn't added a bio yet.`}
@@ -122,71 +102,49 @@ function PublicPage() {
         setSettings={() => {}}
       />
 
-      {/* BOOK CARDS */}
+      {/* BOOK LIST */}
       {books.length === 0 ? (
         <p>No books added yet.</p>
       ) : (
-        <ul
-          style={{
-            display: "flex",
-            gap: "1rem",
-            flexWrap: "wrap",
-            padding: 0,
-            margin: 0,
-            listStyle: "none",
-          }}
-        >
-          {books.map((book, idx) => (
-            <li
-              key={book.isbn || idx}
+        <ul style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+          {books.map((book, index) => (
+            <div
+              key={book.isbn || index}
               style={{
-                background: `linear-gradient(${cardGradient}deg, ${bgColor}, ${bgColor2})`,
-                padding: padding,
-                margin: margin,
-                border: `${borderSize}px ${borderStyle} ${borderColor}`,
-                borderRadius: borderRadius,
+                background: `linear-gradient(${gradient}deg, ${bc.bgColor || "#fff"}, ${bc.bgColor2 || "#ccc"})`,
+                padding: (bc.padding || 10) + "px",
+                margin: (bc.margin || 5) + "px",
+                border: `${bc.borderSize || 2}px ${bc.borderStyle || "solid"} ${bc.borderColor || "#000"}`,
+                borderRadius: (bc.borderRadius || 5) + "px",
                 maxWidth: "30%",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
               }}
             >
-              <img
-                src={`https://covers.openlibrary.org/b/id/${book.cover_id}-M.jpg`}
-                alt={book.title}
-                style={{
-                  width: cardImgWidth,
-                  border: `${cardImgBorderSize}px ${cardImgBorderStyle} ${cardImgBorderColor}`,
-                  borderRadius: cardImgBorderRadius,
-                  marginBottom: 5,
-                }}
-              />
-              <p
-                style={{
-                  fontSize: titleSize,
-                  color: titleColor,
-                  padding: titlePadding,
-                  margin: titleMargin,
-                  width: titleWidth,
-                  textAlign: "center",
-                  fontWeight: "bold",
-                }}
-              >
-                {book.title}
-              </p>
-              <p
-                style={{
-                  fontSize: authorSize,
-                  color: authorColor,
-                  padding: authorPadding,
-                  margin: authorMargin,
-                  width: authorWidth,
-                  textAlign: "center",
-                }}
-              >
-                {book.author}
-              </p>
-            </li>
+              <li style={{ listStyle: "none" }}>
+                <img
+                  src={`https://covers.openlibrary.org/b/id/${book.cover_id}-M.jpg`}
+                  alt={book.title}
+                  style={{
+                    width: (bc.cardImgWidth || 100) + "px",
+                    border: `${bc.cardImgBorderSize || 2}px ${bc.cardImgBorderStyle || "solid"} ${bc.cardImgBorderColor || "#000"}`,
+                    borderRadius: (bc.cardImgBorderRadius || 5) + "px",
+                  }}
+                />
+                <p style={{
+                  color: bc.titleColor || "#000",
+                  fontSize: (bc.titleSize || 16) + "px",
+                  margin: (bc.titleMargin || 0) + "px",
+                  padding: (bc.titlePadding || 0) + "px",
+                  width: (bc.titleWidth || "100%") + "px",
+                }}>{book.title}</p>
+                <p style={{
+                  color: bc.authorColor || "#333",
+                  fontSize: (bc.authorSize || 14) + "px",
+                  margin: (bc.authorMargin || 0) + "px",
+                  padding: (bc.authorPadding || 0) + "px",
+                  width: (bc.authorWidth || "100%") + "px",
+                }}>{book.author}</p>
+              </li>
+            </div>
           ))}
         </ul>
       )}
@@ -196,4 +154,4 @@ function PublicPage() {
   );
 }
 
-export default PublicPage;
+export default PublicPages;

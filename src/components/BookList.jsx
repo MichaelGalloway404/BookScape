@@ -1,6 +1,5 @@
 import { useEffect, useState, useRef } from "react";
 import EditablePopup from "./EditablePopup"
-// import TextComponent from "./TextComponent";
 
 function BookList({
   books,
@@ -310,14 +309,6 @@ function BookList({
                     width: authorWidth + "px",
                   }}
                 >{book.author}</p>
-                {/* <TextComponent
-                  ComponentName={"cardAuthor"+index}
-                  defaultText={book.author}
-                  textMutable={false}
-                  editMode={editMode}
-                  settings={settings}
-                  setSettings={setSettings}
-                /> */}
               </div>
 
               {editMode && (
