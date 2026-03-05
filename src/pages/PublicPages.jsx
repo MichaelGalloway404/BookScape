@@ -25,13 +25,23 @@ function PublicPages() {
         if (!booksRes.ok) throw new Error("Failed to fetch books");
         const booksData = await booksRes.json();
 
+        // Normalize title and author
+        const normalizedBooks = booksData.map(b => ({
+          isbn: b.isbn,
+          cover_id: b.cover_id,
+          title: b.title?.main || b.title || "Unknown Title",
+          author: Array.isArray(b.authors)
+            ? b.authors.map(a => a.name).join(", ")
+            : b.author || "Unknown Author"
+        }));
+
         // Respect saved book order
-        let orderedBooks = booksData;
+        let orderedBooks = normalizedBooks;
         if (Array.isArray(person.book_order_json) && person.book_order_json.length > 0) {
           const orderMap = new Map(
             person.book_order_json.map((isbn, index) => [isbn, index])
           );
-          orderedBooks = booksData.slice().sort((a, b) => {
+          orderedBooks = normalizedBooks.slice().sort((a, b) => {
             const aIndex = orderMap.get(a.isbn);
             const bIndex = orderMap.get(b.isbn);
             if (aIndex !== undefined && bIndex !== undefined) return aIndex - bIndex;
@@ -40,6 +50,7 @@ function PublicPages() {
             return 0;
           });
         }
+
         setBooks(orderedBooks);
 
         // ---------------- GET SETTINGS ----------------
@@ -89,7 +100,7 @@ function PublicPages() {
         textMutable={false}
         editMode={false}
         settings={settings}
-        setSettings={() => {}}
+        setSettings={() => { }}
       />
 
       {/* USER BIO */}
@@ -99,7 +110,7 @@ function PublicPages() {
         textMutable={false}
         editMode={false}
         settings={settings}
-        setSettings={() => {}}
+        setSettings={() => { }}
       />
 
       {/* BOOK LIST */}
