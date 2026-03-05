@@ -14,7 +14,7 @@ function PublicPage() {
   const [pageBckColor2, setPageBckColor2] = useState("#c4ccd5");
   const [gradientAngle, setGradientAngle] = useState(135);
 
-  // Load books + settings
+  // Load public user data (books + settings)
   useEffect(() => {
     if (!person) return;
 
@@ -22,39 +22,31 @@ function PublicPage() {
       try {
         // ---------------- GET BOOKS ----------------
         const booksRes = await fetch(`/api/publicUserBooks?userId=${person.id}`);
-        const booksData = await booksRes.json();
         if (!booksRes.ok) throw new Error("Failed to fetch books");
+        const booksData = await booksRes.json();
 
+        // Respect saved book order
         let orderedBooks = booksData;
-
         if (Array.isArray(person.book_order_json) && person.book_order_json.length > 0) {
           const orderMap = new Map(
             person.book_order_json.map((isbn, index) => [isbn, index])
           );
-
           orderedBooks = booksData.slice().sort((a, b) => {
             const aIndex = orderMap.get(a.isbn);
             const bIndex = orderMap.get(b.isbn);
-
             if (aIndex !== undefined && bIndex !== undefined) return aIndex - bIndex;
             if (aIndex !== undefined) return -1;
             if (bIndex !== undefined) return 1;
             return 0;
           });
         }
-
         setBooks(orderedBooks);
 
         // ---------------- GET SETTINGS ----------------
-        const settingsRes = await fetch(
-          `/api/publicUserSettings?userId=${person.id}`
-        );
-
+        const settingsRes = await fetch(`/api/publicUserSettings?userId=${person.id}`);
+        if (!settingsRes.ok) throw new Error("Failed to fetch settings");
         const settingsData = await settingsRes.json();
-
-        if (settingsRes.ok) {
-          setSettings(settingsData || {});
-        }
+        setSettings(settingsData || {});
       } catch (err) {
         console.error(err);
       }
@@ -66,18 +58,16 @@ function PublicPage() {
   // Apply saved page background settings
   useEffect(() => {
     if (settings?.mainPage) {
-      setPageBckColor(settings.mainPage.pageBckColor);
-      setPageBckColor2(settings.mainPage.pageBckColor2);
-      setGradientAngle(settings.mainPage.gradientAngle);
+      setPageBckColor(settings.mainPage.pageBckColor || "#c4ccd5");
+      setPageBckColor2(settings.mainPage.pageBckColor2 || "#c4ccd5");
+      setGradientAngle(settings.mainPage.gradientAngle || 135);
     }
   }, [settings]);
 
   // Apply gradient to body
   useEffect(() => {
     const originalBackground = document.body.style.background;
-
     document.body.style.background = `linear-gradient(${gradientAngle}deg, ${pageBckColor}, ${pageBckColor2})`;
-
     return () => {
       document.body.style.background = originalBackground;
     };
@@ -87,35 +77,39 @@ function PublicPage() {
 
   return (
     <>
-      {/* TITLE */}
+      {/* PAGE TITLE */}
       <TextComponent
-        ComponentName={"UserPageTitle"}
-        defaultText={"Make a page Title " + person.username}
+        ComponentName="UserPageTitle"
+        defaultText={`Page Title: ${person.username}`}
         textMutable={false}
         editMode={false}
         settings={settings}
         setSettings={() => { }}
       />
 
-      {/* BIO */}
+      {/* USER BIO */}
       <TextComponent
-        ComponentName={"UserBio"}
-        defaultText={"Type your " + person.username + "Bio here..."}
+        ComponentName="UserBio"
+        defaultText={person.bio || `${person.username} hasn't added a bio yet.`}
         textMutable={false}
         editMode={false}
         settings={settings}
         setSettings={() => { }}
       />
 
-      {/* BOOK LIST (no edit mode) */}
-      <BookList
-        books={books}
-        editMode={false}
-        settings={settings}
-        deleteBook={() => { }}
-        setBooks={() => { }}
-        setSettings={() => { }}
-      />
+      {/* USER BOOK LIST */}
+      {books.length === 0 ? (
+        <p>No books added yet.</p>
+      ) : (
+        <BookList
+          books={books}
+          editMode={false}
+          settings={settings}
+          deleteBook={() => { }}
+          setBooks={() => { }}
+          setSettings={() => { }}
+        />
+      )}
 
       <SiteInfoFooter />
     </>

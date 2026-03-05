@@ -239,11 +239,11 @@ function BookList({
             "Book Title Width": [Number(titleWidth), setTitleWidth],
             "break3": "place holder",
             // Book Author
-            // "Book Author Margin": [Number(authorMargin), setAuthorMargin],
-            // "Book Author Padding": [Number(authorPadding), setAuthorPadding],
-            // "Book Author Size": [Number(authorSize), setAuthorSize],
-            // "Book Author Color": [authorColor, setAuthorColor],
-            // "Book Author Width": [Number(authorWidth), setAuthorWidth],
+            "Book Author Margin": [Number(authorMargin), setAuthorMargin],
+            "Book Author Padding": [Number(authorPadding), setAuthorPadding],
+            "Book Author Size": [Number(authorSize), setAuthorSize],
+            "Book Author Color": [authorColor, setAuthorColor],
+            "Book Author Width": [Number(authorWidth), setAuthorWidth],
 
           }}
         />
