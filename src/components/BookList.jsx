@@ -308,7 +308,7 @@ function BookList({
         }}>
         {books.map((book, index) => (
           <>
-          // -------------------- Draggable Book Card --------------------------------
+          {/* -------------------- Draggable Book Card -------------------------------- */}
             <div
               key={book.isbn || index}  // always give a unique key
               style={{
