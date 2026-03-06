@@ -229,7 +229,7 @@ function UsersPage() {
             <div style={{ textAlign: "center", marginTop: "50px" }}>
                 <p>Loading page...</p>
                 {/* optional spinner */}
-                <div className={style.spinner}></div>
+                <div className={styles.spinner}></div>
             </div>
         );
     }
