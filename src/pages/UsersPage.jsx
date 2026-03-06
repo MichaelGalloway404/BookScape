@@ -227,7 +227,7 @@ function UsersPage() {
     }
 
     // loading screen
-    if (loading) {
+    if (!user || loading) {
         return (
             <div style={{ textAlign: "center", marginTop: "50px" }}>
                 <p>Loading page...</p>
