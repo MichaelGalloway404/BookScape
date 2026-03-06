@@ -4,9 +4,9 @@ import { useNavigate } from "react-router-dom";
 import SiteInfoFooter from '../components/SiteInfoFooter';
 import BookList from "../components/BookList";
 import TextComponent from "../components/TextComponent";
-import EditablePopup from "../components/EditablePopup";
-import styles from "./BookSearch.module.css";
-// import style from "./UsersPage.module.css";
+import styles from "./BookSearch.module.css"
+import EditablePopup from "../components/EditablePopup"
+import style from "./UsersPage.module.css"
 
 function UsersPage() {
     const [user, setUser] = useState(null);
@@ -14,30 +14,56 @@ function UsersPage() {
     const [books, setBooks] = useState([]);
     const [editMode, setEditMode] = useState(false);
     const [editing, setEditing] = useState(false);
-    const [settings, setSettings] = useState({
-        mainPage: {
-            pageBckColor: "#c4ccd5",
-            pageBckColor2: "#c4ccd5",
-            gradientAngle: 135,
-        }
-    });
+    const [settings, setSettings] = useState({});
+    const [pageBckColor, setPageBckColor] = useState("#c4ccd5");
+    const [pageBckColor2, setPageBckColor2] = useState("#c4ccd5");
+    const [gradientAngle, setGradientAngle] = useState(135);
+
     const popupRef = useRef(null);
     const [popupPosition, setPopupPosition] = useState(null);
-    // const [loading, setLoading] = useState(true);
+
+    const [userLoaded, setUserLoaded] = useState(false);
+    const [settingsLoaded, setSettingsLoaded] = useState(false);
 
     const navigate = useNavigate();
 
-    // Apply gradient background directly from settings
+    // add any changes to settings the user makes
     useEffect(() => {
-        const originalBackground = document.body.style.background;
-        const { pageBckColor, pageBckColor2, gradientAngle } = settings.mainPage;
+        if (!settingsLoaded) return; // only run after settings loaded
+        setSettings(prev => ({
+            ...prev,
+            mainPage: {
+                ...prev.mainPage,
+                pageBckColor,
+                pageBckColor2,
+                gradientAngle,
+            },
+        }));
+    }, [pageBckColor, pageBckColor2, gradientAngle, settingsLoaded]);
 
+    // Check for DataBase saved settings
+    useEffect(() => {
+        if (!settingsLoaded) return; // only after settings loaded
+        if (settings?.mainPage) {
+            setPageBckColor(settings.mainPage.pageBckColor);
+            setPageBckColor2(settings.mainPage.pageBckColor2);
+            setGradientAngle(settings.mainPage.gradientAngle);
+        }
+    }, [settings, settingsLoaded]);
+
+    // will load color for background from user settings later
+    useEffect(() => {
+        // Save original background
+        const originalBackground = document.body.style.background;
+
+        // Apply gradient background
         document.body.style.background = `linear-gradient(${gradientAngle}deg, ${pageBckColor}, ${pageBckColor2})`;
 
+        // Cleanup when component unmounts
         return () => {
             document.body.style.background = originalBackground;
         };
-    }, [settings.mainPage]);
+    }, [pageBckColor, pageBckColor2, gradientAngle]);
 
     // Close popup if click outside
     useEffect(() => {
@@ -47,195 +73,252 @@ function UsersPage() {
             }
         }
 
-        if (editing) document.addEventListener("mousedown", handleClickOutside);
-        else document.removeEventListener("mousedown", handleClickOutside);
+        if (editing) {
+            document.addEventListener("mousedown", handleClickOutside);
+        } else {
+            document.removeEventListener("mousedown", handleClickOutside);
+        }
 
-        return () => document.removeEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
     }, [editing]);
 
-    // Load user info, books, and settings
+    // loading user info 
     useEffect(() => {
+        // LOAD CURRENT USER
         const loadUser = async () => {
             try {
-                // Get authenticated user
+                // GET USER AUTH
                 const res = await fetch("/api/currentUser", {
                     method: "GET",
                     credentials: "include",
                 });
+
                 const data = await res.json();
-                if (!res.ok) throw new Error(data.error || "Not authenticated");
+
+                if (!res.ok) {
+                    throw new Error(data.error || "Not authenticated");
+                }
 
                 setUser(data);
-                setProfilePrivate(data.private);
-
-                // Get user books
+                // GET CURRENT USERS BOOKS
                 const booksRes = await fetch("/api/userBooks", {
                     method: "GET",
                     credentials: "include",
                 });
-                const booksData = await booksRes.json();
-                if (booksRes.ok) setBooks(booksData);
 
-                // Apply user's preferred book order if exists
+                const booksData = await booksRes.json();
+                if (booksRes.ok) {
+                    setBooks(booksData);
+                }
+                // if user has save a preferred ordering of their books apply it
                 let orderedBooks = booksData;
+                // If book_order_json exists sort books to users preferred order
                 if (Array.isArray(data.book_order_json) && data.book_order_json.length > 0) {
                     const orderMap = new Map(data.book_order_json.map((isbn, index) => [isbn, index]));
                     orderedBooks = booksData.slice().sort((a, b) => {
                         const aIndex = orderMap.get(a.isbn);
                         const bIndex = orderMap.get(b.isbn);
+
+                        // If both exist in book_order_json, sort by index
                         if (aIndex !== undefined && bIndex !== undefined) return aIndex - bIndex;
+                        // If only a exists, a comes first
                         if (aIndex !== undefined) return -1;
+                        // If only b exists, b comes first
                         if (bIndex !== undefined) return 1;
+                        // Otherwise maintain original order
                         return 0;
                     });
                 }
-                setBooks(orderedBooks);
-
-                // Load user settings
+                // GET USER SETTINGS
                 const userSettingsRes = await fetch("/api/userSettings", {
                     method: "GET",
                     credentials: "include",
                 });
+
                 const userSettingsData = await userSettingsRes.json();
+
                 if (userSettingsRes.ok) {
-                    const s = userSettingsData || {};
-                    s.mainPage = s.mainPage || {
-                        pageBckColor: "#c4ccd5",
-                        pageBckColor2: "#c4ccd5",
-                        gradientAngle: 135,
-                    };
-                    setSettings(s);
+                    setSettings(userSettingsData || {}); // stores all keys from DB
                 }
 
-                // setLoading(false);
+                // SET PROFILE VISIBILITY
+                setProfilePrivate(data.private);
+
+                // SET BOOK ORDERING
+                setBooks(orderedBooks);
+
+                // Finished loading user data
+                setSettingsLoaded(true);
             } catch (err) {
                 console.error(err);
                 navigate("/login");
             }
         };
-
         loadUser();
     }, [navigate]);
 
-    // Delete a book
+    // DELETE A BOOK
     async function deleteBook(book) {
         try {
             const res = await fetch("/api/userBooks", {
                 method: "DELETE",
-                headers: { "Content-Type": "application/json" },
+                headers: {
+                    "Content-Type": "application/json",
+                },
                 credentials: "include",
-                body: JSON.stringify({ isbn: book.isbn, cover_id: book.cover_id }),
+                body: JSON.stringify({
+                    isbn: book.isbn,
+                    cover_id: book.cover_id,
+                }),
             });
-            if (!res.ok) throw new Error("Failed to delete book");
 
-            setBooks(prev => prev.filter(b => !(b.isbn === book.isbn && b.cover_id === book.cover_id)));
+            if (!res.ok) {
+                throw new Error("Failed to delete book");
+            }
+
+            // remove from UI without refetch
+            setBooks(prev =>
+                prev.filter(
+                    b => !(b.isbn === book.isbn && b.cover_id === book.cover_id)
+                )
+            );
         } catch (err) {
             console.error(err);
         }
     }
 
-    // Save user settings
+    // SAVE USER'S SETTINGS
     async function saveSettings(bookOrder) {
+        // save user's profile a s public/private
         try {
-            await axios.post("/api/currentUser", { privateStatus: profilePublic }, { withCredentials: true });
+            await axios.post(
+                "/api/currentUser",
+                { privateStatus: profilePublic },
+                { withCredentials: true }
+            );
         } catch (err) {
-            console.error(err.response?.data || err);
-            alert("Failed to set profile visibility");
+            console.error("Axios error:", err.response?.data || err);
+            alert("Failed to Set");
         }
-
+        // save user's preferred book order
         const isbns = bookOrder.map(book => String(book.isbn));
         try {
-            await axios.post("/api/currentUser", { bookOrderPref: isbns }, { withCredentials: true });
+            await axios.post(
+                "/api/currentUser",
+                { bookOrderPref: isbns },
+                { withCredentials: true }
+            );
         } catch (err) {
-            console.error(err.response?.data || err);
-            alert("Failed to save book order");
+            console.error("Axios error:", err.response?.data || err);
+            alert("Failed to book order!");
         }
-
+        // save user's settings
         try {
-            await axios.post("/api/userSettings", settings, { withCredentials: true });
-            alert("Profile settings saved!");
+            await axios.post(
+                "/api/userSettings",
+                settings,
+                { withCredentials: true }
+            );
+            alert("Profile Settings Saved!");
         } catch (err) {
-            console.error(err.response?.data || err);
-            alert("Failed to save settings");
+            console.error("Axios error:", err.response?.data || err);
+            alert("Failed to Save!");
         }
     }
 
-    // if (!user || loading) {
-    //     return (
-    //         <div style={{ textAlign: "center", marginTop: "50px" }}>
-    //             <p>Loading page...</p>
-    //             <div className={style.spinner}></div>
-    //         </div>
-    //     );
-    // }
+    // loading screen
+    if (!user || loading) {
+        return (
+            <div style={{ textAlign: "center", marginTop: "50px" }}>
+                <p>Loading page...</p>
+                {/* optional spinner */}
+                <div className={style.spinner}></div>
+            </div>
+        );
+    }
 
     return (
         <>
+            {/* if in editmode and element has been clicked on */}
             {editing && editMode && (
                 <EditablePopup
                     popupRef={popupRef}
                     initialPosition={popupPosition}
                     controls={{
-                        "Page Background Color 1": [settings.mainPage.pageBckColor, val =>
-                            setSettings(prev => ({ ...prev, mainPage: { ...prev.mainPage, pageBckColor: val } }))
-                        ],
-                        "Page Background Color 2": [settings.mainPage.pageBckColor2, val =>
-                            setSettings(prev => ({ ...prev, mainPage: { ...prev.mainPage, pageBckColor2: val } }))
-                        ],
-                        "Gradient Angle": [settings.mainPage.gradientAngle, val =>
-                            setSettings(prev => ({ ...prev, mainPage: { ...prev.mainPage, gradientAngle: val } }))
-                        ],
+                        "Page Background Color 1": [pageBckColor, setPageBckColor],
+                        "Page Background Color 2": [pageBckColor2, setPageBckColor2],
+                        "Gradient Angle": [Number(gradientAngle), setGradientAngle],
                         "Profile is Private": [profilePublic, setProfilePrivate],
                     }}
                 />
             )}
+            {userLoaded && (
+                <>
+                    <TextComponent
+                        ComponentName={"UserPageTitle"}
+                        defaultText={"Make a page Title " + user.username}
+                        textMutable={true}
+                        editMode={editMode}
+                        settings={settings}
+                        setSettings={setSettings}
+                    />
 
-            <TextComponent
-                ComponentName="UserPageTitle"
-                defaultText={`Make a page Title ${user.username}`}
-                textMutable={true}
-                editMode={editMode}
-                settings={settings}
-                setSettings={setSettings}
-            />
+                    <TextComponent
+                        ComponentName={"UserBio"}
+                        defaultText={"Type your " + user.username + "Bio here..."}
+                        textMutable={true}
+                        editMode={editMode}
+                        settings={settings}
+                        setSettings={setSettings}
+                    />
+                </>
+            )}
 
-            <TextComponent
-                ComponentName="UserBio"
-                defaultText={`Type your ${user.username} Bio here...`}
-                textMutable={true}
-                editMode={editMode}
-                settings={settings}
-                setSettings={setSettings}
-            />
-
+            {/* PAGE SETTINGS BUTTON */}
             {editMode && (
-                <button
-                    onClick={(e) => {
-                        setPopupPosition({ x: e.pageX, y: e.pageY });
+                <button onClick={(e) => {
+                    if (editMode) {
+                        setPopupPosition({
+                            x: e.pageX,
+                            y: e.pageY,
+                        });
                         setEditing(true);
-                    }}
-                    style={{ position: "absolute", top: "6rem", right: "1rem" }}
-                >
+                    }
+                }}
+                    style={{
+                        position: "absolute",
+                        top: "6rem",
+                        right: "1rem",
+                    }}>
                     Click for page settings
                 </button>
             )}
-
+            {/* SAVE SETTINGS BUTTON */}
             {editMode && (
-                <button
-                    onClick={() => saveSettings(books)}
-                    style={{ position: "absolute", top: "3rem", right: "1rem" }}
-                >
+                <button onClick={() => saveSettings(books)}
+                    style={{
+                        position: "absolute",
+                        top: "3rem",
+                        right: "1rem",
+                    }}>
                     Save
                 </button>
             )}
-
+            {/* EDIT MODE BUTTON */}
             <button
                 onClick={() => setEditMode(prev => !prev)}
-                style={{ position: "absolute", top: "1rem", right: "1rem" }}
+                style={{
+                    position: "absolute",
+                    top: "1rem",
+                    right: "1rem",
+                }}
             >
                 {editMode ? "Done" : "Edit"}
             </button>
 
+            {/* component for listing out users books and deleting books*/}
             <BookList
                 books={books}
                 editMode={editMode}
@@ -245,7 +328,8 @@ function UsersPage() {
                 setSettings={setSettings}
             />
 
-            <button className={styles.buttonClass} onClick={() => navigate("/search")}>
+            {/* search for book button */}
+            <button className={`${styles.buttonClass}`} onClick={() => navigate("/search")}>
                 Search for a book
             </button>
 
