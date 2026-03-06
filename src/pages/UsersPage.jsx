@@ -280,36 +280,17 @@ function UsersPage() {
                         setEditing(true);
                     }
                 }}
-                    style={{
-                        position: "absolute",
-                        top: "6rem",
-                        right: "1rem",
-                    }}>
+                    className={`${styles.buttonClass}`}>
                     Click for page settings
                 </button>
             )}
             {/* SAVE SETTINGS BUTTON */}
             {editMode && (
                 <button onClick={() => saveSettings(books)}
-                    style={{
-                        position: "absolute",
-                        top: "3rem",
-                        right: "1rem",
-                    }}>
+                    className={`${styles.buttonClass}`}>
                     Save
                 </button>
             )}
-            {/* EDIT MODE BUTTON */}
-            <button
-                onClick={() => setEditMode(prev => !prev)}
-                style={{
-                    position: "absolute",
-                    top: "1rem",
-                    right: "1rem",
-                }}
-            >
-                {editMode ? "Done" : "Edit"}
-            </button>
 
             {/* component for listing out users books and deleting books */}
             <BookList
@@ -321,12 +302,19 @@ function UsersPage() {
                 setSettings={setSettings}
             />
 
-            {/* search for book button */}
+            {/* SEARCH for book button */}
             <button className={`${styles.buttonClass}`} onClick={() => navigate("/search")}>
                 Search for a book
             </button>
-
-            <button className={`${styles.buttonClass} ${styles.homeBtn}`} onClick={() => navigate("/")}> Return Home </button>
+            {/* HOME BUTTON */}
+            <button className={`${styles.buttonClass}`} onClick={() => navigate("/")}> Return Home </button>
+            {/* EDIT MODE BUTTON */}
+            <button
+                onClick={() => setEditMode(prev => !prev)}
+                className={`${styles.buttonClass}`}
+            >
+                {editMode ? "Done" : "Edit"}
+            </button>
         </>
     );
 }
