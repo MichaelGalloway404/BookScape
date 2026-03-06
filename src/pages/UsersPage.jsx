@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import SiteInfoFooter from '../components/SiteInfoFooter';
 import BookList from "../components/BookList";
-import TextComponent from "../components/TextComponent";
+// import TextComponent from "../components/TextComponent";
 import styles from "./BookSearch.module.css"
 import EditablePopup from "../components/EditablePopup"
 import style from "./UsersPage.module.css"
@@ -26,41 +26,41 @@ function UsersPage() {
 
     const navigate = useNavigate();
 
-    // // add any changes to settings the user makes
-    // useEffect(() => {
-    //     setSettings(prev => ({
-    //         ...prev,
-    //         mainPage: {
-    //             ...prev.mainPage,
-    //             pageBckColor,
-    //             pageBckColor2,
-    //             gradientAngle,
-    //         },
-    //     }));
-    // }, [pageBckColor, pageBckColor2, gradientAngle, setSettings]);
+    // add any changes to settings the user makes
+    useEffect(() => {
+        setSettings(prev => ({
+            ...prev,
+            mainPage: {
+                ...prev.mainPage,
+                pageBckColor,
+                pageBckColor2,
+                gradientAngle,
+            },
+        }));
+    }, [pageBckColor, pageBckColor2, gradientAngle, setSettings]);
 
-    // // Check for DataBase saved settings
-    // useEffect(() => {
-    //     if (settings?.mainPage) {
-    //         setPageBckColor(settings.mainPage.pageBckColor);
-    //         setPageBckColor2(settings.mainPage.pageBckColor2);
-    //         setGradientAngle(settings.mainPage.gradientAngle);
-    //     }
-    // }, [settings]);
+    // Check for DataBase saved settings
+    useEffect(() => {
+        if (settings?.mainPage) {
+            setPageBckColor(settings.mainPage.pageBckColor);
+            setPageBckColor2(settings.mainPage.pageBckColor2);
+            setGradientAngle(settings.mainPage.gradientAngle);
+        }
+    }, [settings]);
 
-    // // will load color for background from user settings later
-    // useEffect(() => {
-    //     // Save original background
-    //     const originalBackground = document.body.style.background;
+    // will load color for background from user settings later
+    useEffect(() => {
+        // Save original background
+        const originalBackground = document.body.style.background;
 
-    //     // Apply gradient background
-    //     document.body.style.background = `linear-gradient(${gradientAngle}deg, ${pageBckColor}, ${pageBckColor2})`;
+        // Apply gradient background
+        document.body.style.background = `linear-gradient(${gradientAngle}deg, ${pageBckColor}, ${pageBckColor2})`;
 
-    //     // Cleanup when component unmounts
-    //     return () => {
-    //         document.body.style.background = originalBackground;
-    //     };
-    // }, [pageBckColor, pageBckColor2, gradientAngle]);
+        // Cleanup when component unmounts
+        return () => {
+            document.body.style.background = originalBackground;
+        };
+    }, [pageBckColor, pageBckColor2, gradientAngle]);
 
     // Close popup if click outside
     useEffect(() => {
@@ -252,24 +252,24 @@ function UsersPage() {
                 />
             )}
             {/* Users chosen title */}
-            <TextComponent
+            {/* <TextComponent
                 ComponentName={"UserPageTitle"}
                 defaultText={"Make a page Title " + user.username}
                 textMutable={true}
                 editMode={editMode}
                 settings={settings}
                 setSettings={setSettings}
-            />
+            /> */}
 
             {/* display users bio and edits */}
-            <TextComponent
+            {/* <TextComponent
                 ComponentName={"UserBio"}
                 defaultText={"Type your " + user.username + "Bio here..."}
                 textMutable={true}
                 editMode={editMode}
                 settings={settings}
                 setSettings={setSettings}
-            />
+            /> */}
 
             {/* PAGE SETTINGS BUTTON */}
             {editMode && (
