@@ -145,13 +145,10 @@ function UsersPage() {
 
                 // SET BOOK ORDERING
                 setBooks(orderedBooks);
-
             } catch (err) {
                 console.error(err);
                 navigate("/login");
             }
-            // Finished loading user data
-            setLoading(false);
         };
 
         loadUser();
@@ -319,9 +316,11 @@ function UsersPage() {
                 books={books}
                 editMode={editMode}
                 settings={settings}
+                loading={loading}
                 deleteBook={deleteBook}
                 setBooks={setBooks}
                 setSettings={setSettings}
+                setLoading={setLoading}
             />
 
             {/* search for book button */}
