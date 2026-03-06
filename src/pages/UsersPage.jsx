@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import BookList from "../components/BookList";
 import TextComponent from "../components/TextComponent";
 import EditablePopup from "../components/EditablePopup"
-import style from "./UsersPage.module.css"
+import styles from "./UsersPage.module.css"
 
 function UsersPage() {
     const [user, setUser] = useState(null);
