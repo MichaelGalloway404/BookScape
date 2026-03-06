@@ -22,14 +22,12 @@ function UsersPage() {
     const popupRef = useRef(null);
     const [popupPosition, setPopupPosition] = useState(null);
 
-    const [userLoaded, setUserLoaded] = useState(false);
-    const [settingsLoaded, setSettingsLoaded] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     const navigate = useNavigate();
 
     // add any changes to settings the user makes
     useEffect(() => {
-        if (!settingsLoaded) return; // only run after settings loaded
         setSettings(prev => ({
             ...prev,
             mainPage: {
@@ -39,17 +37,16 @@ function UsersPage() {
                 gradientAngle,
             },
         }));
-    }, [pageBckColor, pageBckColor2, gradientAngle, settingsLoaded]);
+    }, [pageBckColor, pageBckColor2, gradientAngle, setSettings]);
 
-    // // Check for DataBase saved settings
-    // useEffect(() => {
-    //     if (!settingsLoaded) return; // only after settings loaded
-    //     if (settings?.mainPage) {
-    //         setPageBckColor(settings.mainPage.pageBckColor);
-    //         setPageBckColor2(settings.mainPage.pageBckColor2);
-    //         setGradientAngle(settings.mainPage.gradientAngle);
-    //     }
-    // }, [settings, settingsLoaded]);
+    // Check for DataBase saved settings
+    useEffect(() => {
+        if (settings?.mainPage) {
+            setPageBckColor(settings.mainPage.pageBckColor);
+            setPageBckColor2(settings.mainPage.pageBckColor2);
+            setGradientAngle(settings.mainPage.gradientAngle);
+        }
+    }, [settings]);
 
     // will load color for background from user settings later
     useEffect(() => {
@@ -140,15 +137,6 @@ function UsersPage() {
                 const userSettingsData = await userSettingsRes.json();
 
                 if (userSettingsRes.ok) {
-                    const data = userSettingsData || {};
-                    setSettings(data);
-
-                    // Set the colors here once, instead of in a separate useEffect
-                    if (data.mainPage) {
-                        setPageBckColor(data.mainPage.pageBckColor || "#c4ccd5");
-                        setPageBckColor2(data.mainPage.pageBckColor2 || "#c4ccd5");
-                        setGradientAngle(data.mainPage.gradientAngle || 135);
-                    }
                     setSettings(userSettingsData || {}); // stores all keys from DB
                 }
 
@@ -159,13 +147,13 @@ function UsersPage() {
                 setBooks(orderedBooks);
 
                 // Finished loading user data
-                setUserLoaded(true);
-                setSettingsLoaded(true);
+                setLoading(false);
             } catch (err) {
                 console.error(err);
                 navigate("/login");
             }
         };
+
         loadUser();
     }, [navigate]);
 
@@ -238,15 +226,16 @@ function UsersPage() {
         }
     }
 
-    // loading screen
-    if (!user || !userLoaded) {
-        return (
-            <div style={{ textAlign: "center", marginTop: "50px" }}>
-                <p>Loading page...</p>
-                <div className={style.spinner}></div>
-            </div>
-        );
-    }
+    // // loading screen
+    // if (!user || loading) {
+    //     return (
+    //         <div style={{ textAlign: "center", marginTop: "50px" }}>
+    //             <p>Loading page...</p>
+    //             {/* optional spinner */}
+    //             <div className={style.spinner}></div>
+    //         </div>
+    //     );
+    // }
 
     return (
         <>
@@ -263,27 +252,25 @@ function UsersPage() {
                     }}
                 />
             )}
-            {userLoaded && (
-                <>
-                    <TextComponent
-                        ComponentName={"UserPageTitle"}
-                        defaultText={"Make a page Title " + user.username}
-                        textMutable={true}
-                        editMode={editMode}
-                        settings={settings}
-                        setSettings={setSettings}
-                    />
+            {/* Users chosen title */}
+            <TextComponent
+                ComponentName={"UserPageTitle"}
+                defaultText={"Make a page Title " + user.username}
+                textMutable={true}
+                editMode={editMode}
+                settings={settings}
+                setSettings={setSettings}
+            />
 
-                    <TextComponent
-                        ComponentName={"UserBio"}
-                        defaultText={"Type your " + user.username + "Bio here..."}
-                        textMutable={true}
-                        editMode={editMode}
-                        settings={settings}
-                        setSettings={setSettings}
-                    />
-                </>
-            )}
+            {/* display users bio and edits */}
+            <TextComponent
+                ComponentName={"UserBio"}
+                defaultText={"Type your " + user.username + "Bio here..."}
+                textMutable={true}
+                editMode={editMode}
+                settings={settings}
+                setSettings={setSettings}
+            />
 
             {/* PAGE SETTINGS BUTTON */}
             {editMode && (
@@ -341,6 +328,8 @@ function UsersPage() {
             <button className={`${styles.buttonClass}`} onClick={() => navigate("/search")}>
                 Search for a book
             </button>
+
+            {/* <p>settings: {JSON.stringify(settings, null, 2)}</p> */}
 
             <SiteInfoFooter />
         </>
