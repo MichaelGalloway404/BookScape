@@ -157,8 +157,8 @@ function TextComponent({ editMode, settings, setSettings, ComponentName, default
                     marginRight: marginRight + "px",
                     marginTop: marginTop + "px",
                     marginBottom: marginBottom + "px",
-                    minWidth: editMode ? "50px" : "fit-content",
-                    minHeight: editMode ? "50px" : "fit-content",
+                    minWidth: editMode ? "10px" : "fit-content",
+                    minHeight: editMode ? "10px" : "fit-content",
                     fontSize: fontSize + "px",
                     cursor: editMode ? "pointer" : "default",
                 }}
