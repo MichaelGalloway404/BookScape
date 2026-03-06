@@ -156,35 +156,35 @@ function UsersPage() {
         loadUser();
     }, [navigate]);
 
-    // DELETE A BOOK
-    async function deleteBook(book) {
-        try {
-            const res = await fetch("/api/userBooks", {
-                method: "DELETE",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                credentials: "include",
-                body: JSON.stringify({
-                    isbn: book.isbn,
-                    cover_id: book.cover_id,
-                }),
-            });
+    // // DELETE A BOOK
+    // async function deleteBook(book) {
+    //     try {
+    //         const res = await fetch("/api/userBooks", {
+    //             method: "DELETE",
+    //             headers: {
+    //                 "Content-Type": "application/json",
+    //             },
+    //             credentials: "include",
+    //             body: JSON.stringify({
+    //                 isbn: book.isbn,
+    //                 cover_id: book.cover_id,
+    //             }),
+    //         });
 
-            if (!res.ok) {
-                throw new Error("Failed to delete book");
-            }
+    //         if (!res.ok) {
+    //             throw new Error("Failed to delete book");
+    //         }
 
-            // remove from UI without refetch
-            setBooks(prev =>
-                prev.filter(
-                    b => !(b.isbn === book.isbn && b.cover_id === book.cover_id)
-                )
-            );
-        } catch (err) {
-            console.error(err);
-        }
-    }
+    //         // remove from UI without refetch
+    //         setBooks(prev =>
+    //             prev.filter(
+    //                 b => !(b.isbn === book.isbn && b.cover_id === book.cover_id)
+    //             )
+    //         );
+    //     } catch (err) {
+    //         console.error(err);
+    //     }
+    // }
 
     // SAVE USER'S SETTINGS
     async function saveSettings(bookOrder) {
