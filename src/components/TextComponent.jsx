@@ -187,7 +187,7 @@ function TextComponent({ editMode, settings, setSettings, ComponentName, default
                     controls={{
                         // "Text": [text, setText], 
                         ...(textMutable && { "Text": [text, setText] }),
-                        "Hide This element?": [displayOn, setDisplayOn],
+                        "Hide This element? Will still show in edit mode.": [displayOn, setDisplayOn],
                         "Background Color 1": [bgColor, setBgColor],
                         "Background Color 2": [bgColor2, setBgColor2],
                         "Font Family": [fontFamily, setFontFamily],
