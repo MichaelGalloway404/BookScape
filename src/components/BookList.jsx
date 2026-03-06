@@ -327,6 +327,16 @@ function BookList({
               onDragEnd={handleDragEnd}
               onDragOver={(e) => e.preventDefault()}
             >
+              {editMode && (
+                <button style={{ width: "10px", backgroundColor: "red", color: "black" }}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    deleteBook(book);
+                  }}
+                >
+                  X
+                </button>
+              )}
               <img
                 src={`https://covers.openlibrary.org/b/id/${book.cover_id}-M.jpg`}
                 alt="Book cover"
@@ -359,19 +369,7 @@ function BookList({
                   }}
                 >{book.author}</p>
               </div>
-
-
             </li>
-            {editMode && (
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  deleteBook(book);
-                }}
-              >
-                Delete
-              </button>
-            )}
           </div>
         ))}
         {/* // -------------------------------------------------------------------------------------- */}
