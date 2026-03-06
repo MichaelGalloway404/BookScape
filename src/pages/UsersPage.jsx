@@ -146,16 +146,15 @@ function UsersPage() {
                 // SET BOOK ORDERING
                 setBooks(orderedBooks);
 
-                // // Finished loading user data
-                // setLoading(false);
             } catch (err) {
                 console.error(err);
                 navigate("/login");
             }
+            // Finished loading user data
+            setLoading(false);
         };
 
         loadUser();
-        setLoading(false);
     }, [navigate]);
 
     // DELETE A BOOK
