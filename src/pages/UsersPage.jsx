@@ -153,7 +153,6 @@ function UsersPage() {
                 navigate("/login");
             }
         };
-
         loadUser();
     }, [navigate]);
 
@@ -227,7 +226,7 @@ function UsersPage() {
     }
 
     // loading screen
-    if (!user || loading) {
+    if (loading) {
         return (
             <div style={{ textAlign: "center", marginTop: "50px" }}>
                 <p>Loading page...</p>
