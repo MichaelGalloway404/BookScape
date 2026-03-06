@@ -23,7 +23,7 @@ function UsersPage() {
     });
     const popupRef = useRef(null);
     const [popupPosition, setPopupPosition] = useState(null);
-    const [loading, setLoading] = useState(true);
+    // const [loading, setLoading] = useState(true);
 
     const navigate = useNavigate();
 
@@ -107,7 +107,7 @@ function UsersPage() {
                     setSettings(s);
                 }
 
-                setLoading(false);
+                // setLoading(false);
             } catch (err) {
                 console.error(err);
                 navigate("/login");
@@ -160,14 +160,14 @@ function UsersPage() {
         }
     }
 
-    if (!user || loading) {
-        return (
-            <div style={{ textAlign: "center", marginTop: "50px" }}>
-                <p>Loading page...</p>
-                <div className={style.spinner}></div>
-            </div>
-        );
-    }
+    // if (!user || loading) {
+    //     return (
+    //         <div style={{ textAlign: "center", marginTop: "50px" }}>
+    //             <p>Loading page...</p>
+    //             <div className={style.spinner}></div>
+    //         </div>
+    //     );
+    // }
 
     return (
         <>
