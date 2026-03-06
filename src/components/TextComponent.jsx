@@ -123,7 +123,7 @@ function TextComponent({ editMode, settings, setSettings, ComponentName, default
             setMarginBottom(settings[ComponentName].marginBottom);
             setPadding(settings[ComponentName].padding);
             setGradientAngle(settings[ComponentName].gradientAngle);
-            setDisplayOn(settings[ComponentName].displayOn ?? true);
+            setDisplayOn(settings[ComponentName].displayOn);
         }
     }, [settings, ComponentName]);
 
