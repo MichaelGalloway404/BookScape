@@ -62,7 +62,7 @@ function PublicPages() {
         const settingsData = await settingsRes.json();
         setSettings(settingsData || {});
 
-        setLoading(false);   // ← FINISHED LOADING
+        setLoading(false);   // FINISHED LOADING
       } catch (err) {
         console.error(err);
         navigate("/login");

@@ -48,19 +48,19 @@ function UsersPage() {
         }
     }, [settings]);
 
-    // will load color for background from user settings later
-    useEffect(() => {
-        // Save original background
-        const originalBackground = document.body.style.background;
+    // // will load color for background from user settings later
+    // useEffect(() => {
+    //     // Save original background
+    //     const originalBackground = document.body.style.background;
 
-        // Apply gradient background
-        document.body.style.background = `linear-gradient(${gradientAngle}deg, ${pageBckColor}, ${pageBckColor2})`;
+    //     // Apply gradient background
+    //     document.body.style.background = `linear-gradient(${gradientAngle}deg, ${pageBckColor}, ${pageBckColor2})`;
 
-        // Cleanup when component unmounts
-        return () => {
-            document.body.style.background = originalBackground;
-        };
-    }, [pageBckColor, pageBckColor2, gradientAngle]);
+    //     // Cleanup when component unmounts
+    //     return () => {
+    //         document.body.style.background = originalBackground;
+    //     };
+    // }, [pageBckColor, pageBckColor2, gradientAngle]);
 
     // Close popup if click outside
     useEffect(() => {
@@ -146,7 +146,7 @@ function UsersPage() {
                 // SET BOOK ORDERING
                 setBooks(orderedBooks);
 
-                // Finished loading user data
+                // // Finished loading user data
                 setLoading(false);
             } catch (err) {
                 console.error(err);
@@ -228,7 +228,6 @@ function UsersPage() {
 
     // loading screen
     if (!user || loading) {
-        setLoading(false);
         return (
             <div style={{ textAlign: "center", marginTop: "50px" }}>
                 <p>Loading page...</p>
