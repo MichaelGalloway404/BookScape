@@ -328,9 +328,7 @@ function UsersPage() {
                 Search for a book
             </button>
 
-            {/* <p>settings: {JSON.stringify(settings, null, 2)}</p> */}
-
-            <SiteInfoFooter />
+            <button className={`${styles.buttonClass} ${styles.homeBtn}`} onClick={() => navigate("/")}> Return Home </button>
         </>
     );
 }

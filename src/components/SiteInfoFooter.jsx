@@ -2,17 +2,17 @@ import styles from './SiteInfoFooter.module.css'
 import { useNavigate } from "react-router-dom";
 
 function SiteInfoFooter(props) {
-  const today = new Date();
-  const day = today.toLocaleDateString("en-US", { weekday: "long" });
-  const date = today.getDate();
-  const year = today.getFullYear();
+  // const today = new Date();
+  // const day = today.toLocaleDateString("en-US", { weekday: "long" });
+  // const date = today.getDate();
+  // const year = today.getFullYear();
   const navigate = useNavigate();
 
   return (
     <>
       <button className={`${styles.buttonClass} ${styles.homeBtn}`} onClick={() => navigate("/")}> Return Home </button>
       {/*testing common prop usage  */}
-      <p className={styles.footerInfo}>Today is: {day} the {date}, {year}</p>
+      {/* <p className={styles.footerInfo}>Today is: {day} the {date}, {year}</p> */}
     </>
   );
 }
