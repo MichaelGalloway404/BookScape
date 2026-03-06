@@ -280,17 +280,17 @@ function UsersPage() {
             />
 
             {/* SEARCH for book button */}
-            <button style={{className:"buttonClass"}} onClick={() => navigate("/search")}>
+            <button className={`${styles.buttonClass}`} onClick={() => navigate("/search")}>
                 Search for a book
             </button>
 
             {/* HOME BUTTON */}
-            <button style={{className:"buttonClass"}} onClick={() => navigate("/")}> Return Home </button>
+            <button className={`${styles.buttonClass}`} onClick={() => navigate("/")}> Return Home </button>
 
             {/* EDIT MODE BUTTON */}
             <button
                 onClick={() => setEditMode(prev => !prev)}
-                style={{className:"buttonClass"}}
+                className={`${styles.buttonClass}`}
             >
                 {editMode ? "Done" : "Edit"}
             </button>
@@ -306,7 +306,7 @@ function UsersPage() {
                         setEditing(true);
                     }
                 }}
-                    style={{className:"buttonClass"}}>
+                    className={`${styles.buttonClass}`}>
                     Click for page settings
                 </button>
             )}
@@ -314,7 +314,7 @@ function UsersPage() {
             {/* SAVE SETTINGS BUTTON */}
             {editMode && (
                 <button onClick={() => saveSettings(books)}
-                    style={{className:"buttonClass"}}>
+                    className={`${styles.buttonClass}`}>
                     Save
                 </button>
             )}

@@ -90,14 +90,15 @@
   font-size: 0.95rem;
   cursor: pointer;
   transition: all 0.25s ease;
-  background: rgb(89, 89, 89);
+  background: linear-gradient(135deg, #43cea2, #185a9d);
   color: white;
   backdrop-filter: blur(8px);
+  margin: 5px;
 }
 
 .buttonClass:hover {
   transform: translateY(-2px);
-  background: rgb(89, 89, 89);
+  background: linear-gradient(135deg, #5be3b7, #2b6bbd);
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
 }
 
