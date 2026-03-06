@@ -287,7 +287,7 @@ function UsersPage() {
                         top: "6rem",
                         right: "1rem",
                     }}>
-                    Click for page settings
+                    Click for page settings {user}
                 </button>
             )}
             {/* SAVE SETTINGS BUTTON */}
