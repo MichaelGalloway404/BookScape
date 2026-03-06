@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import SiteInfoFooter from "../components/SiteInfoFooter";
 import TextComponent from "../components/TextComponent";
+import style from "./PublicPages.module.css"
 
 function PublicPages() {
   const location = useLocation();
@@ -13,6 +14,8 @@ function PublicPages() {
   const [pageBckColor, setPageBckColor] = useState("#c4ccd5");
   const [pageBckColor2, setPageBckColor2] = useState("#c4ccd5");
   const [gradientAngle, setGradientAngle] = useState(135);
+
+  const [loading, setLoading] = useState(true);
 
   // Load user books and settings from the database
   useEffect(() => {
@@ -58,6 +61,8 @@ function PublicPages() {
         if (!settingsRes.ok) throw new Error("Failed to fetch settings");
         const settingsData = await settingsRes.json();
         setSettings(settingsData || {});
+
+        setLoading(false);   // ← FINISHED LOADING
       } catch (err) {
         console.error(err);
         navigate("/login");
@@ -90,6 +95,17 @@ function PublicPages() {
   // Book card settings from DB
   const bc = settings.bookCard || {};
   const gradient = bc.gradientAngle || 135;
+
+  // loading screen
+  if (!person || loading) {
+    return (
+      <div style={{ textAlign: "center", marginTop: "50px" }}>
+        <p>Loading page...</p>
+        {/* optional spinner */}
+        <div className={style.spinner}></div>
+      </div>
+    );
+  }
 
   return (
     <>
