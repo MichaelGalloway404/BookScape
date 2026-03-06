@@ -2,8 +2,8 @@ import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import SiteInfoFooter from '../components/SiteInfoFooter';
-// import BookList from "../components/BookList";
-// import TextComponent from "../components/TextComponent";
+import BookList from "../components/BookList";
+import TextComponent from "../components/TextComponent";
 import styles from "./BookSearch.module.css"
 import EditablePopup from "../components/EditablePopup"
 import style from "./UsersPage.module.css"
@@ -156,35 +156,35 @@ function UsersPage() {
         loadUser();
     }, [navigate]);
 
-    // // DELETE A BOOK
-    // async function deleteBook(book) {
-    //     try {
-    //         const res = await fetch("/api/userBooks", {
-    //             method: "DELETE",
-    //             headers: {
-    //                 "Content-Type": "application/json",
-    //             },
-    //             credentials: "include",
-    //             body: JSON.stringify({
-    //                 isbn: book.isbn,
-    //                 cover_id: book.cover_id,
-    //             }),
-    //         });
+    // DELETE A BOOK
+    async function deleteBook(book) {
+        try {
+            const res = await fetch("/api/userBooks", {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                credentials: "include",
+                body: JSON.stringify({
+                    isbn: book.isbn,
+                    cover_id: book.cover_id,
+                }),
+            });
 
-    //         if (!res.ok) {
-    //             throw new Error("Failed to delete book");
-    //         }
+            if (!res.ok) {
+                throw new Error("Failed to delete book");
+            }
 
-    //         // remove from UI without refetch
-    //         setBooks(prev =>
-    //             prev.filter(
-    //                 b => !(b.isbn === book.isbn && b.cover_id === book.cover_id)
-    //             )
-    //         );
-    //     } catch (err) {
-    //         console.error(err);
-    //     }
-    // }
+            // remove from UI without refetch
+            setBooks(prev =>
+                prev.filter(
+                    b => !(b.isbn === book.isbn && b.cover_id === book.cover_id)
+                )
+            );
+        } catch (err) {
+            console.error(err);
+        }
+    }
 
     // SAVE USER'S SETTINGS
     async function saveSettings(bookOrder) {
@@ -252,24 +252,25 @@ function UsersPage() {
                 />
             )}
             {/* Users chosen title */}
-            {/* <TextComponent
+            {!loading &&
+                (<TextComponent
                 ComponentName={"UserPageTitle"}
                 defaultText={"Make a page Title " + user.username}
                 textMutable={true}
                 editMode={editMode}
                 settings={settings}
                 setSettings={setSettings}
-            /> */}
+            />)}
 
             {/* display users bio and edits */}
-            {/* <TextComponent
+            {!loading && (<TextComponent
                 ComponentName={"UserBio"}
                 defaultText={"Type your " + user.username + "Bio here..."}
                 textMutable={true}
                 editMode={editMode}
                 settings={settings}
                 setSettings={setSettings}
-            /> */}
+            />)}
 
             {/* PAGE SETTINGS BUTTON */}
             {editMode && (
@@ -314,14 +315,14 @@ function UsersPage() {
             </button>
 
             {/* component for listing out users books and deleting books */}
-            {/* <BookList
+            {!loading && (<BookList
                 books={books}
                 editMode={editMode}
                 settings={settings}
                 deleteBook={deleteBook}
                 setBooks={setBooks}
                 setSettings={setSettings}
-            /> */}
+            />)}
 
             {/* search for book button */}
             <button className={`${styles.buttonClass}`} onClick={() => navigate("/search")}>
