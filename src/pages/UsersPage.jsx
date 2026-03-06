@@ -48,19 +48,19 @@ function UsersPage() {
         }
     }, [settings]);
 
-    // // will load color for background from user settings later
-    // useEffect(() => {
-    //     // Save original background
-    //     const originalBackground = document.body.style.background;
+    // will load color for background from user settings later
+    useEffect(() => {
+        // Save original background
+        const originalBackground = document.body.style.background;
 
-    //     // Apply gradient background
-    //     document.body.style.background = `linear-gradient(${gradientAngle}deg, ${pageBckColor}, ${pageBckColor2})`;
+        // Apply gradient background
+        document.body.style.background = `linear-gradient(${gradientAngle}deg, ${pageBckColor}, ${pageBckColor2})`;
 
-    //     // Cleanup when component unmounts
-    //     return () => {
-    //         document.body.style.background = originalBackground;
-    //     };
-    // }, [pageBckColor, pageBckColor2, gradientAngle]);
+        // Cleanup when component unmounts
+        return () => {
+            document.body.style.background = originalBackground;
+        };
+    }, [pageBckColor, pageBckColor2, gradientAngle]);
 
     // Close popup if click outside
     useEffect(() => {
@@ -147,7 +147,7 @@ function UsersPage() {
                 setBooks(orderedBooks);
 
                 // // Finished loading user data
-                setLoading(false);
+                // setLoading(false);
             } catch (err) {
                 console.error(err);
                 navigate("/login");
@@ -155,6 +155,7 @@ function UsersPage() {
         };
 
         loadUser();
+        setLoading(false);
     }, [navigate]);
 
     // DELETE A BOOK
@@ -328,8 +329,6 @@ function UsersPage() {
             <button className={`${styles.buttonClass}`} onClick={() => navigate("/search")}>
                 Search for a book
             </button>
-
-            {/* <p>settings: {JSON.stringify(settings, null, 2)}</p> */}
 
             <SiteInfoFooter />
         </>
