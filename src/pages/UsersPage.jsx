@@ -48,19 +48,19 @@ function UsersPage() {
     //     }
     // }, [settings]);
 
-    // will load color for background from user settings later
-    useEffect(() => {
-        // Save original background
-        const originalBackground = document.body.style.background;
+    // // will load color for background from user settings later
+    // useEffect(() => {
+    //     // Save original background
+    //     const originalBackground = document.body.style.background;
 
-        // Apply gradient background
-        document.body.style.background = `linear-gradient(${gradientAngle}deg, ${pageBckColor}, ${pageBckColor2})`;
+    //     // Apply gradient background
+    //     document.body.style.background = `linear-gradient(${gradientAngle}deg, ${pageBckColor}, ${pageBckColor2})`;
 
-        // Cleanup when component unmounts
-        return () => {
-            document.body.style.background = originalBackground;
-        };
-    }, [pageBckColor, pageBckColor2, gradientAngle]);
+    //     // Cleanup when component unmounts
+    //     return () => {
+    //         document.body.style.background = originalBackground;
+    //     };
+    // }, [pageBckColor, pageBckColor2, gradientAngle]);
 
     // Close popup if click outside
     useEffect(() => {
