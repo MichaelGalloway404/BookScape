@@ -26,18 +26,18 @@ function UsersPage() {
 
     const navigate = useNavigate();
 
-    // add any changes to settings the user makes
-    useEffect(() => {
-        setSettings(prev => ({
-            ...prev,
-            mainPage: {
-                ...prev.mainPage,
-                pageBckColor,
-                pageBckColor2,
-                gradientAngle,
-            },
-        }));
-    }, [pageBckColor, pageBckColor2, gradientAngle, setSettings]);
+    // // add any changes to settings the user makes
+    // useEffect(() => {
+    //     setSettings(prev => ({
+    //         ...prev,
+    //         mainPage: {
+    //             ...prev.mainPage,
+    //             pageBckColor,
+    //             pageBckColor2,
+    //             gradientAngle,
+    //         },
+    //     }));
+    // }, [pageBckColor, pageBckColor2, gradientAngle, setSettings]);
 
     // // Check for DataBase saved settings
     // useEffect(() => {
