@@ -1,7 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import SiteInfoFooter from '../components/SiteInfoFooter';
 import BookList from "../components/BookList";
 import TextComponent from "../components/TextComponent";
 import styles from "./BookSearch.module.css"
