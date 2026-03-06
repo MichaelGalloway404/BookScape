@@ -150,6 +150,7 @@ function UsersPage() {
                 setBooks(orderedBooks);
 
                 // Finished loading user data
+                setUserLoaded(true);
                 setSettingsLoaded(true);
             } catch (err) {
                 console.error(err);
@@ -229,11 +230,10 @@ function UsersPage() {
     }
 
     // loading screen
-    if (!user || loading) {
+    if (!user || !userLoaded) {
         return (
             <div style={{ textAlign: "center", marginTop: "50px" }}>
                 <p>Loading page...</p>
-                {/* optional spinner */}
                 <div className={style.spinner}></div>
             </div>
         );
