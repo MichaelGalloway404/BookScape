@@ -52,7 +52,7 @@ function TextComponent({ editMode, settings, setSettings, ComponentName, default
         settings?.[ComponentName]?.gradientAngle || 135
     );
     const [displayOn, setDisplayOn] = useState( 
-        settings?.[ComponentName]?.display ?? true
+        settings?.[ComponentName]?.displayOn || true
     );
 
     const popupRef = useRef(null);
