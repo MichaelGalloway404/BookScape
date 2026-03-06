@@ -41,15 +41,15 @@ function UsersPage() {
         }));
     }, [pageBckColor, pageBckColor2, gradientAngle, settingsLoaded]);
 
-    // Check for DataBase saved settings
-    useEffect(() => {
-        if (!settingsLoaded) return; // only after settings loaded
-        if (settings?.mainPage) {
-            setPageBckColor(settings.mainPage.pageBckColor);
-            setPageBckColor2(settings.mainPage.pageBckColor2);
-            setGradientAngle(settings.mainPage.gradientAngle);
-        }
-    }, [settings, settingsLoaded]);
+    // // Check for DataBase saved settings
+    // useEffect(() => {
+    //     if (!settingsLoaded) return; // only after settings loaded
+    //     if (settings?.mainPage) {
+    //         setPageBckColor(settings.mainPage.pageBckColor);
+    //         setPageBckColor2(settings.mainPage.pageBckColor2);
+    //         setGradientAngle(settings.mainPage.gradientAngle);
+    //     }
+    // }, [settings, settingsLoaded]);
 
     // will load color for background from user settings later
     useEffect(() => {
@@ -140,6 +140,15 @@ function UsersPage() {
                 const userSettingsData = await userSettingsRes.json();
 
                 if (userSettingsRes.ok) {
+                    const data = userSettingsData || {};
+                    setSettings(data);
+
+                    // Set the colors here once, instead of in a separate useEffect
+                    if (data.mainPage) {
+                        setPageBckColor(data.mainPage.pageBckColor || "#c4ccd5");
+                        setPageBckColor2(data.mainPage.pageBckColor2 || "#c4ccd5");
+                        setGradientAngle(data.mainPage.gradientAngle || 135);
+                    }
                     setSettings(userSettingsData || {}); // stores all keys from DB
                 }
 
