@@ -46,7 +46,7 @@ function UsersPage() {
             setPageBckColor2(settings.mainPage.pageBckColor2);
             setGradientAngle(settings.mainPage.gradientAngle);
         }
-    }, [settings]);
+    }, [settings, loading]);
 
     // will load color for background from user settings later
     useEffect(() => {
