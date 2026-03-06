@@ -80,6 +80,7 @@ function TextComponent({ editMode, settings, setSettings, ComponentName, default
                 borderRadius,
                 padding,
                 gradientAngle,
+                displayOn,
             },
         }));
     }, [text,
@@ -98,6 +99,7 @@ function TextComponent({ editMode, settings, setSettings, ComponentName, default
         borderRadius,
         padding,
         gradientAngle,
+        displayOn,
 
         ComponentName,
         setSettings]);
@@ -121,6 +123,7 @@ function TextComponent({ editMode, settings, setSettings, ComponentName, default
             setMarginBottom(settings[ComponentName].marginBottom);
             setPadding(settings[ComponentName].padding);
             setGradientAngle(settings[ComponentName].gradientAngle);
+            setDisplayOn(settings[ComponentName].displayOn);
         }
     }, [settings, ComponentName]);
 
