@@ -51,9 +51,9 @@ function TextComponent({ editMode, settings, setSettings, ComponentName, default
     const [gradientAngle, setGradientAngle] = useState(
         settings?.[ComponentName]?.gradientAngle || 135
     );
-    const [displayOn, setDisplayOn] = useState( 
-        settings?.[ComponentName]?.display || true
-    );
+    // const [displayOn, setDisplayOn] = useState( 
+    //     settings?.[ComponentName]?.display || true
+    // );
 
     const popupRef = useRef(null);
     const [popupPosition, setPopupPosition] = useState(null);
@@ -80,7 +80,7 @@ function TextComponent({ editMode, settings, setSettings, ComponentName, default
                 borderRadius,
                 padding,
                 gradientAngle,
-                displayOn,
+                // displayOn,
             },
         }));
     }, [text,
@@ -99,7 +99,7 @@ function TextComponent({ editMode, settings, setSettings, ComponentName, default
         borderRadius,
         padding,
         gradientAngle,
-        displayOn,
+        // displayOn,
 
         ComponentName,
         setSettings]);
@@ -123,7 +123,7 @@ function TextComponent({ editMode, settings, setSettings, ComponentName, default
             setMarginBottom(settings[ComponentName].marginBottom);
             setPadding(settings[ComponentName].padding);
             setGradientAngle(settings[ComponentName].gradientAngle);
-            setDisplayOn(settings[ComponentName].displayOn);
+            // setDisplayOn(settings[ComponentName].displayOn);
         }
     }, [settings, ComponentName]);
 
@@ -152,7 +152,7 @@ function TextComponent({ editMode, settings, setSettings, ComponentName, default
             <p
                 className={`hoverText ${editMode ? "editable" : ""}`}
                 style={{
-                    display: (displayOn || editMode) ? "flex" : "none",
+                    // display: (displayOn || editMode) ? "flex" : "none",
                     fontFamily,
                     color: fontColor,
                     background: `linear-gradient(${gradientAngle}deg, ${bgColor},${bgColor2})`,
@@ -190,7 +190,7 @@ function TextComponent({ editMode, settings, setSettings, ComponentName, default
                     controls={{
                         // "Text": [text, setText], 
                         ...(textMutable && { "Text": [text, setText] }),
-                        "Hide This element? Will still show in edit mode.": [displayOn, setDisplayOn],
+                        // "Hide This element? Will still show in edit mode.": [displayOn, setDisplayOn],
                         "Background Color 1": [bgColor, setBgColor],
                         "Background Color 2": [bgColor2, setBgColor2],
                         "Font Family": [fontFamily, setFontFamily],

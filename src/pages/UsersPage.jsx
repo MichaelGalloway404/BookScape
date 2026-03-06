@@ -24,6 +24,17 @@ function UsersPage() {
 
     const navigate = useNavigate();
 
+    // ensure userQuotes exists in settings
+    useEffect(() => {
+        setSettings(prev => ({
+            ...prev,
+            mainPage: {
+                ...prev.mainPage,
+                userQuotes: prev?.mainPage?.userQuotes || []
+            }
+        }));
+    }, []);
+
     // add any changes to settings the user makes
     useEffect(() => {
         setSettings(prev => ({
@@ -35,26 +46,24 @@ function UsersPage() {
                 gradientAngle,
             },
         }));
-    }, [pageBckColor, pageBckColor2, gradientAngle, setSettings]);
+    }, [pageBckColor, pageBckColor2, gradientAngle]);
 
-    // Check for DataBase saved settings
+    // Check for DB saved settings
     useEffect(() => {
         if (settings?.mainPage) {
-            setPageBckColor(settings.mainPage.pageBckColor);
-            setPageBckColor2(settings.mainPage.pageBckColor2);
-            setGradientAngle(settings.mainPage.gradientAngle);
+            if (settings.mainPage.pageBckColor) setPageBckColor(settings.mainPage.pageBckColor);
+            if (settings.mainPage.pageBckColor2) setPageBckColor2(settings.mainPage.pageBckColor2);
+            if (settings.mainPage.gradientAngle) setGradientAngle(settings.mainPage.gradientAngle);
         }
     }, [settings]);
 
-    // will load color for background from user settings later
+    // apply background gradient
     useEffect(() => {
-        // Save original background
         const originalBackground = document.body.style.background;
 
-        // Apply gradient background
-        document.body.style.background = `linear-gradient(${gradientAngle}deg, ${pageBckColor}, ${pageBckColor2})`;
+        document.body.style.background =
+            `linear-gradient(${gradientAngle}deg, ${pageBckColor}, ${pageBckColor2})`;
 
-        // Cleanup when component unmounts
         return () => {
             document.body.style.background = originalBackground;
         };
@@ -79,12 +88,10 @@ function UsersPage() {
         };
     }, [editing]);
 
-    // loading user info 
+    // load user
     useEffect(() => {
-        // LOAD CURRENT USER
         const loadUser = async () => {
             try {
-                // GET USER AUTH
                 const res = await fetch("/api/currentUser", {
                     method: "GET",
                     credentials: "include",
@@ -97,36 +104,36 @@ function UsersPage() {
                 }
 
                 setUser(data);
-                // GET CURRENT USERS BOOKS
+
                 const booksRes = await fetch("/api/userBooks", {
                     method: "GET",
                     credentials: "include",
                 });
 
                 const booksData = await booksRes.json();
+
                 if (booksRes.ok) {
                     setBooks(booksData);
                 }
-                // if user has save a preferred ordering of their books apply it
+
                 let orderedBooks = booksData;
-                // If book_order_json exists sort books to users preferred order
+
                 if (Array.isArray(data.book_order_json) && data.book_order_json.length > 0) {
-                    const orderMap = new Map(data.book_order_json.map((isbn, index) => [isbn, index]));
+                    const orderMap = new Map(
+                        data.book_order_json.map((isbn, index) => [isbn, index])
+                    );
+
                     orderedBooks = booksData.slice().sort((a, b) => {
                         const aIndex = orderMap.get(a.isbn);
                         const bIndex = orderMap.get(b.isbn);
 
-                        // If both exist in book_order_json, sort by index
                         if (aIndex !== undefined && bIndex !== undefined) return aIndex - bIndex;
-                        // If only a exists, a comes first
                         if (aIndex !== undefined) return -1;
-                        // If only b exists, b comes first
                         if (bIndex !== undefined) return 1;
-                        // Otherwise maintain original order
                         return 0;
                     });
                 }
-                // GET USER SETTINGS
+
                 const userSettingsRes = await fetch("/api/userSettings", {
                     method: "GET",
                     credentials: "include",
@@ -135,33 +142,28 @@ function UsersPage() {
                 const userSettingsData = await userSettingsRes.json();
 
                 if (userSettingsRes.ok) {
-                    setSettings(userSettingsData || {}); // stores all keys from DB
+                    setSettings(userSettingsData || {});
                 }
 
-                // SET PROFILE VISIBILITY
                 setProfilePrivate(data.private);
-
-                // SET BOOK ORDERING
                 setBooks(orderedBooks);
-
-                // Finished loading user data
                 setLoading(false);
+
             } catch (err) {
                 console.error(err);
                 navigate("/login");
             }
         };
+
         loadUser();
     }, [navigate]);
 
-    // DELETE A BOOK
+    // DELETE BOOK
     async function deleteBook(book) {
         try {
             const res = await fetch("/api/userBooks", {
                 method: "DELETE",
-                headers: {
-                    "Content-Type": "application/json",
-                },
+                headers: { "Content-Type": "application/json" },
                 credentials: "include",
                 body: JSON.stringify({
                     isbn: book.isbn,
@@ -169,11 +171,8 @@ function UsersPage() {
                 }),
             });
 
-            if (!res.ok) {
-                throw new Error("Failed to delete book");
-            }
+            if (!res.ok) throw new Error("Failed to delete book");
 
-            // remove from UI without refetch
             setBooks(prev =>
                 prev.filter(
                     b => !(b.isbn === book.isbn && b.cover_id === book.cover_id)
@@ -184,9 +183,25 @@ function UsersPage() {
         }
     }
 
-    // SAVE USER'S SETTINGS
+    // ADD NEW USER QUOTE
+    function addUserQuote() {
+
+        const nextNumber = (settings.mainPage?.userQuotes?.length || 0) + 1;
+
+        const newKey = `UserQuote_${nextNumber}`;
+
+        setSettings(prev => ({
+            ...prev,
+            mainPage: {
+                ...prev.mainPage,
+                userQuotes: [...(prev.mainPage?.userQuotes || []), newKey]
+            }
+        }));
+    }
+
+    // SAVE SETTINGS
     async function saveSettings(bookOrder) {
-        // save user's profile a s public/private
+
         try {
             await axios.post(
                 "/api/currentUser",
@@ -194,11 +209,12 @@ function UsersPage() {
                 { withCredentials: true }
             );
         } catch (err) {
-            console.error("Axios error:", err.response?.data || err);
+            console.error(err);
             alert("Failed to Set");
         }
-        // save user's preferred book order
+
         const isbns = bookOrder.map(book => String(book.isbn));
+
         try {
             await axios.post(
                 "/api/currentUser",
@@ -206,29 +222,28 @@ function UsersPage() {
                 { withCredentials: true }
             );
         } catch (err) {
-            console.error("Axios error:", err.response?.data || err);
+            console.error(err);
             alert("Failed to book order!");
         }
-        // save user's settings
+
         try {
             await axios.post(
                 "/api/userSettings",
                 settings,
                 { withCredentials: true }
             );
+
             alert("Profile Settings Saved!");
         } catch (err) {
-            console.error("Axios error:", err.response?.data || err);
+            console.error(err);
             alert("Failed to Save!");
         }
     }
 
-    // loading screen
     if (loading || !settings) {
         return (
             <div style={{ textAlign: "center", marginTop: "50px" }}>
                 <p>Loading page...</p>
-                {/* optional spinner */}
                 <div className={styles.spinner}></div>
             </div>
         );
@@ -236,7 +251,6 @@ function UsersPage() {
 
     return (
         <>
-            {/* if in editmode and element has been clicked on */}
             {editing && editMode && (
                 <EditablePopup
                     popupRef={popupRef}
@@ -249,7 +263,7 @@ function UsersPage() {
                     }}
                 />
             )}
-            {/* Users chosen title */}
+
             <TextComponent
                 ComponentName={"UserPageTitle"}
                 defaultText={"Make a page Title " + user.username}
@@ -259,17 +273,38 @@ function UsersPage() {
                 setSettings={setSettings}
             />
 
-            {/* display users bio and edits */}
             <TextComponent
                 ComponentName={"UserBio"}
-                defaultText={"Type your " + user.username + "Bio here..."}
+                defaultText={"Type your " + user.username + " Bio here..."}
                 textMutable={true}
                 editMode={editMode}
                 settings={settings}
                 setSettings={setSettings}
             />
 
-            {/* component for listing out users books and deleting books */}
+            {/* USER QUOTES */}
+            {settings?.mainPage?.userQuotes?.map((quoteKey) => (
+                <TextComponent
+                    key={quoteKey}
+                    ComponentName={quoteKey}
+                    defaultText={"Type something"}
+                    textMutable={true}
+                    editMode={editMode}
+                    settings={settings}
+                    setSettings={setSettings}
+                />
+            ))}
+
+            {/* ADD QUOTE BUTTON */}
+            {editMode && (
+                <button
+                    onClick={addUserQuote}
+                    className={styles.buttonClass}
+                >
+                    Add Text Section
+                </button>
+            )}
+
             <BookList
                 books={books}
                 editMode={editMode}
@@ -279,52 +314,47 @@ function UsersPage() {
                 setSettings={setSettings}
             />
 
-            {/* display users bio and edits */}
-            <TextComponent
-                ComponentName={"FaveQuotes"}
-                defaultText={user.username + "Type a quote!"}
-                textMutable={true}
-                editMode={editMode}
-                settings={settings}
-                setSettings={setSettings}
-            />
-            
-            {/* SEARCH for book button */}
-            <button className={`${styles.buttonClass}`} onClick={() => navigate("/search")}>
+            <button
+                className={styles.buttonClass}
+                onClick={() => navigate("/search")}
+            >
                 Search for a book
             </button>
 
-            {/* HOME BUTTON */}
-            <button className={`${styles.buttonClass}`} onClick={() => navigate("/")}> Return Home </button>
+            <button
+                className={styles.buttonClass}
+                onClick={() => navigate("/")}
+            >
+                Return Home
+            </button>
 
-            {/* EDIT MODE BUTTON */}
             <button
                 onClick={() => setEditMode(prev => !prev)}
-                className={`${styles.buttonClass}`}
+                className={styles.buttonClass}
             >
                 {editMode ? "Done" : "Edit"}
             </button>
 
-            {/* PAGE SETTINGS BUTTON */}
             {editMode && (
-                <button onClick={(e) => {
-                    if (editMode) {
+                <button
+                    onClick={(e) => {
                         setPopupPosition({
                             x: e.pageX,
                             y: e.pageY,
                         });
                         setEditing(true);
-                    }
-                }}
-                    className={`${styles.buttonClass}`}>
+                    }}
+                    className={styles.buttonClass}
+                >
                     Click for page settings
                 </button>
             )}
 
-            {/* SAVE SETTINGS BUTTON */}
             {editMode && (
-                <button onClick={() => saveSettings(books)}
-                    className={`${styles.buttonClass}`}>
+                <button
+                    onClick={() => saveSettings(books)}
+                    className={styles.buttonClass}
+                >
                     Save
                 </button>
             )}
