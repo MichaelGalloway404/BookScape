@@ -6,6 +6,7 @@ import BookList from "../components/BookList";
 import TextComponent from "../components/TextComponent";
 import styles from "./BookSearch.module.css"
 import EditablePopup from "../components/EditablePopup"
+import style from "./UsersPage.module.css"
 
 function UsersPage() {
     const [user, setUser] = useState(null);
@@ -20,6 +21,8 @@ function UsersPage() {
 
     const popupRef = useRef(null);
     const [popupPosition, setPopupPosition] = useState(null);
+
+    const [loading, setLoading] = useState(true);
 
     const navigate = useNavigate();
 
@@ -142,6 +145,9 @@ function UsersPage() {
 
                 // SET BOOK ORDERING
                 setBooks(orderedBooks);
+
+                // Finished loading user data
+                setLoading(false);
             } catch (err) {
                 console.error(err);
                 navigate("/login");
@@ -220,8 +226,15 @@ function UsersPage() {
         }
     }
 
-    if (!user) {
-        return <p>Loading user...</p>;
+    // loading screen
+    if (!person || loading) {
+        return (
+            <div style={{ textAlign: "center", marginTop: "50px" }}>
+                <p>Loading page...</p>
+                {/* optional spinner */}
+                <div className={style.spinner}></div>
+            </div>
+        );
     }
 
     return (
