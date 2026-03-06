@@ -6,7 +6,7 @@ import BookList from "../components/BookList";
 import TextComponent from "../components/TextComponent";
 import styles from "./BookSearch.module.css"
 import EditablePopup from "../components/EditablePopup"
-// import style from "./UsersPage.module.css"
+import style from "./UsersPage.module.css"
 
 function UsersPage() {
     const [user, setUser] = useState(null);
@@ -39,14 +39,14 @@ function UsersPage() {
         }));
     }, [pageBckColor, pageBckColor2, gradientAngle, setSettings]);
 
-    // Check for DataBase saved settings
-    useEffect(() => {
-        if (settings?.mainPage) {
-            setPageBckColor(settings.mainPage.pageBckColor);
-            setPageBckColor2(settings.mainPage.pageBckColor2);
-            setGradientAngle(settings.mainPage.gradientAngle);
-        }
-    }, [settings]);
+    // // Check for DataBase saved settings
+    // useEffect(() => {
+    //     if (settings?.mainPage) {
+    //         setPageBckColor(settings.mainPage.pageBckColor);
+    //         setPageBckColor2(settings.mainPage.pageBckColor2);
+    //         setGradientAngle(settings.mainPage.gradientAngle);
+    //     }
+    // }, [settings]);
 
     // will load color for background from user settings later
     useEffect(() => {
@@ -226,16 +226,16 @@ function UsersPage() {
         }
     }
 
-    // // loading screen
-    // if (!user || loading) {
-    //     return (
-    //         <div style={{ textAlign: "center", marginTop: "50px" }}>
-    //             <p>Loading page...</p>
-    //             {/* optional spinner */}
-    //             <div className={style.spinner}></div>
-    //         </div>
-    //     );
-    // }
+    // loading screen
+    if (!user || loading) {
+        return (
+            <div style={{ textAlign: "center", marginTop: "50px" }}>
+                <p>Loading page...</p>
+                {/* optional spinner */}
+                <div className={style.spinner}></div>
+            </div>
+        );
+    }
 
     return (
         <>
