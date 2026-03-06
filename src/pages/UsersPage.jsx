@@ -269,6 +269,32 @@ function UsersPage() {
                 setSettings={setSettings}
             />
 
+            {/* component for listing out users books and deleting books */}
+            <BookList
+                books={books}
+                editMode={editMode}
+                settings={settings}
+                deleteBook={deleteBook}
+                setBooks={setBooks}
+                setSettings={setSettings}
+            />
+
+            {/* SEARCH for book button */}
+            <button className={`${styles.buttonClass}`} onClick={() => navigate("/search")}>
+                Search for a book
+            </button>
+
+            {/* HOME BUTTON */}
+            <button className={`${styles.buttonClass}`} onClick={() => navigate("/")}> Return Home </button>
+
+            {/* EDIT MODE BUTTON */}
+            <button
+                onClick={() => setEditMode(prev => !prev)}
+                className={`${styles.buttonClass}`}
+            >
+                {editMode ? "Done" : "Edit"}
+            </button>
+
             {/* PAGE SETTINGS BUTTON */}
             {editMode && (
                 <button onClick={(e) => {
@@ -284,6 +310,7 @@ function UsersPage() {
                     Click for page settings
                 </button>
             )}
+
             {/* SAVE SETTINGS BUTTON */}
             {editMode && (
                 <button onClick={() => saveSettings(books)}
@@ -291,30 +318,6 @@ function UsersPage() {
                     Save
                 </button>
             )}
-
-            {/* component for listing out users books and deleting books */}
-            <BookList
-                books={books}
-                editMode={editMode}
-                settings={settings}
-                deleteBook={deleteBook}
-                setBooks={setBooks}
-                setSettings={setSettings}
-            />
-
-            {/* SEARCH for book button */}
-            <button className={`${styles.buttonClass}`} onClick={() => navigate("/search")}>
-                Search for a book
-            </button>
-            {/* HOME BUTTON */}
-            <button className={`${styles.buttonClass}`} onClick={() => navigate("/")}> Return Home </button>
-            {/* EDIT MODE BUTTON */}
-            <button
-                onClick={() => setEditMode(prev => !prev)}
-                className={`${styles.buttonClass}`}
-            >
-                {editMode ? "Done" : "Edit"}
-            </button>
         </>
     );
 }
