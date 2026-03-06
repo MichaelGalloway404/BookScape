@@ -2,23 +2,55 @@ import { useEffect, useState, useRef } from "react";
 import EditablePopup from "./EditablePopup"
 
 function TextComponent({ editMode, settings, setSettings, ComponentName, defaultText, textMutable }) {
-    const [text, setText] = useState(defaultText);
-    const [fontFamily, setFontFamily] = useState("Arial");
-    const [fontColor, setFontColor] = useState("black");
-    const [bgColor, setBgColor] = useState("white");
-    const [bgColor2, setBgColor2] = useState("white");
-    const [fontSize, setFontSize] = useState(40);
-    const [borderColor, setBorderColor] = useState("#c4ccd5");
-    const [borderSize, setBorderSize] = useState(2);
-    const [borderRadius, setBorderRadius] = useState(5);
-    const [borderStyle, setBorderStyle] = useState("solid");
-    const [padding, setPadding] = useState(5);
-    const [marginLeft, setMarginLeft] = useState(1);
-    const [marginRight, setMarginRight] = useState(0);
-    const [marginTop, setMarginTop] = useState(0);
-    const [marginBottom, setMarginBottom] = useState(0);
-    const [editing, setEditing] = useState(false);
-    const [gradientAngle, setGradientAngle] = useState(135);
+    const [text, setText] = useState(
+        settings?.[ComponentName]?.text || defaultText
+    );
+    const [fontFamily, setFontFamily] = useState(
+        settings?.[ComponentName]?.fontFamily || "Arial"
+    );
+    const [fontColor, setFontColor] = useState(
+        settings?.[ComponentName]?.fontColor || "black"
+    );
+    const [bgColor, setBgColor] = useState(
+        settings?.[ComponentName]?.bgColor || "white"
+    );
+    const [bgColor2, setBgColor2] = useState(
+        settings?.[ComponentName]?.bgColor2 || "white"
+    );
+    const [fontSize, setFontSize] = useState(
+        settings?.[ComponentName]?.fontSize || 40
+    );
+    const [borderColor, setBorderColor] = useState(
+        settings?.[ComponentName]?.borderColor || "#c4ccd5"
+    );
+    const [borderSize, setBorderSize] = useState(
+        settings?.[ComponentName]?.borderSize || 2
+    );
+    const [borderRadius, setBorderRadius] = useState(
+        settings?.[ComponentName]?.borderRadius || 5
+    );
+    const [borderStyle, setBorderStyle] = useState(
+        settings?.[ComponentName]?.borderStyle || "solid"
+    );
+    const [padding, setPadding] = useState(
+        settings?.[ComponentName]?.padding || 5
+    );
+    const [marginLeft, setMarginLeft] = useState(
+        settings?.[ComponentName]?.marginLeft || 1
+    );
+    const [marginRight, setMarginRight] = useState(
+        settings?.[ComponentName]?.marginRight || 0
+    );
+    const [marginTop, setMarginTop] = useState(
+        settings?.[ComponentName]?.marginTop || 0
+    );
+    const [marginBottom, setMarginBottom] = useState(
+        settings?.[ComponentName]?.marginBottom || 0
+    );
+    const [editing, setEditing] = useState(false); // this can stay as false
+    const [gradientAngle, setGradientAngle] = useState(
+        settings?.[ComponentName]?.gradientAngle || 135
+    );
 
     const popupRef = useRef(null);
     const [popupPosition, setPopupPosition] = useState(null);

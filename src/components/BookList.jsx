@@ -11,36 +11,85 @@ function BookList({
 }) {
   const [editing, setEditing] = useState(false);
 
-  // State for Main div Over Book Card
-  const [bgColor, setBgColor] = useState("#ffffff");
-  const [bgColor2, setBgColor2] = useState("#c4ccd5");
-  const [borderColor, setBorderColor] = useState("#c4ccd5");
-  const [borderSize, setBorderSize] = useState(2);
-  const [borderRadius, setBorderRadius] = useState(5);
-  const [borderStyle, setBorderStyle] = useState("solid");
-  const [gradientAngle, setGradientAngle] = useState(135);
-  const [padding, setPadding] = useState(10);
-  const [margin, setMargin] = useState(0);
+  // ---------------- Main div Over Book Card ----------------
+  const [bgColor, setBgColor] = useState(
+    settings?.bookCard?.bgColor || "#ffffff"
+  );
+  const [bgColor2, setBgColor2] = useState(
+    settings?.bookCard?.bgColor2 || "#c4ccd5"
+  );
+  const [borderColor, setBorderColor] = useState(
+    settings?.bookCard?.borderColor || "#c4ccd5"
+  );
+  const [borderSize, setBorderSize] = useState(
+    settings?.bookCard?.borderSize || 2
+  );
+  const [borderRadius, setBorderRadius] = useState(
+    settings?.bookCard?.borderRadius || 5
+  );
+  const [borderStyle, setBorderStyle] = useState(
+    settings?.bookCard?.borderStyle || "solid"
+  );
+  const [gradientAngle, setGradientAngle] = useState(
+    settings?.bookCard?.gradientAngle || 135
+  );
+  const [padding, setPadding] = useState(
+    settings?.bookCard?.padding || 10
+  );
+  const [margin, setMargin] = useState(
+    settings?.bookCard?.margin || 0
+  );
 
-  // State for Card Image
-  const [cardImgBorderColor, setCardImgBorderColor] = useState("#ffffff");
-  const [cardImgBorderSize, setCardImgBorderSize] = useState(2);
-  const [cardImgBorderRadius, setCardImgBorderRadius] = useState(5);
-  const [cardImgBorderStyle, setCardImgBorderStyle] = useState("solid");
-  const [cardImgWidth, setCardImgWidth] = useState(100);
+  // ---------------- Card Image ----------------
+  const [cardImgBorderColor, setCardImgBorderColor] = useState(
+    settings?.bookCard?.cardImgBorderColor || "#ffffff"
+  );
+  const [cardImgBorderSize, setCardImgBorderSize] = useState(
+    settings?.bookCard?.cardImgBorderSize || 2
+  );
+  const [cardImgBorderRadius, setCardImgBorderRadius] = useState(
+    settings?.bookCard?.cardImgBorderRadius || 5
+  );
+  const [cardImgBorderStyle, setCardImgBorderStyle] = useState(
+    settings?.bookCard?.cardImgBorderStyle || "solid"
+  );
+  const [cardImgWidth, setCardImgWidth] = useState(
+    settings?.bookCard?.cardImgWidth || 100
+  );
 
-  // State for Book Title
-  const [titleColor, setTitleColor] = useState("white");
-  const [titleSize, setTitleSize] = useState(20);
-  const [titlePadding, setTitlePadding] = useState(5);
-  const [titleMargin, setTitleMargin] = useState(0);
-  const [titleWidth, setTitleWidth] = useState(100);
-  // State for Book Author
-  const [authorColor, setAuthorColor] = useState("white");
-  const [authorSize, setAuthorSize] = useState(20);
-  const [authorPadding, setAuthorPadding] = useState(5);
-  const [authorMargin, setAuthorMargin] = useState(0);
-  const [authorWidth, setAuthorWidth] = useState(100);
+  // ---------------- Book Title ----------------
+  const [titleColor, setTitleColor] = useState(
+    settings?.bookCard?.titleColor || "white"
+  );
+  const [titleSize, setTitleSize] = useState(
+    settings?.bookCard?.titleSize || 20
+  );
+  const [titlePadding, setTitlePadding] = useState(
+    settings?.bookCard?.titlePadding || 5
+  );
+  const [titleMargin, setTitleMargin] = useState(
+    settings?.bookCard?.titleMargin || 0
+  );
+  const [titleWidth, setTitleWidth] = useState(
+    settings?.bookCard?.titleWidth || 100
+  );
+
+  // ---------------- Book Author ----------------
+  const [authorColor, setAuthorColor] = useState(
+    settings?.bookCard?.authorColor || "white"
+  );
+  const [authorSize, setAuthorSize] = useState(
+    settings?.bookCard?.authorSize || 20
+  );
+  const [authorPadding, setAuthorPadding] = useState(
+    settings?.bookCard?.authorPadding || 5
+  );
+  const [authorMargin, setAuthorMargin] = useState(
+    settings?.bookCard?.authorMargin || 0
+  );
+  const [authorWidth, setAuthorWidth] = useState(
+    settings?.bookCard?.authorWidth || 100
+  );
 
   const popupRef = useRef(null);
   const [popupPosition, setPopupPosition] = useState(null);
