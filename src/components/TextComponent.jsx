@@ -149,7 +149,7 @@ function TextComponent({ editMode, settings, setSettings, ComponentName, default
             <p
                 className={`hoverText ${editMode ? "editable" : ""}`}
                 style={{
-                    display: displayOn ? "flex" : "none"  ,
+                    display: (displayOn || editMode) ? "flex" : "none",
                     fontFamily,
                     color: fontColor,
                     background: `linear-gradient(${gradientAngle}deg, ${bgColor},${bgColor2})`,
