@@ -307,71 +307,73 @@ function BookList({
           }
         }}>
         {books.map((book, index) => (
+          <>
           // -------------------- Draggable Book Card --------------------------------
-          <div
-            key={book.isbn || index}  // always give a unique key
-            style={{
-              background: `linear-gradient(${gradientAngle}deg, ${bgColor},${bgColor2})`,
-              padding: padding + "px",
-              margin: margin + "px",
-              border: `${borderSize}px ${borderStyle} ${borderColor}`,
-              borderRadius: borderRadius + "px",
-              maxWidth: "30%",
-            }}
-          >
-            <li
-              style={{ listStyle: "none" }}
-              draggable={editMode}
-              onDragStart={() => handleDragStart(index)}
-              onDragEnter={() => handleDragEnter(index)}
-              onDragEnd={handleDragEnd}
-              onDragOver={(e) => e.preventDefault()}
+            <div
+              key={book.isbn || index}  // always give a unique key
+              style={{
+                background: `linear-gradient(${gradientAngle}deg, ${bgColor},${bgColor2})`,
+                padding: padding + "px",
+                margin: margin + "px",
+                border: `${borderSize}px ${borderStyle} ${borderColor}`,
+                borderRadius: borderRadius + "px",
+                maxWidth: "30%",
+              }}
             >
-              <img
-                src={`https://covers.openlibrary.org/b/id/${book.cover_id}-M.jpg`}
-                alt="Book cover"
-                style={{
-                  width: cardImgWidth + "px",
-                  border: `${cardImgBorderSize}px ${cardImgBorderStyle} ${cardImgBorderColor}`,
-                  borderRadius: cardImgBorderRadius + "px",
+              <li
+                style={{ listStyle: "none" }}
+                draggable={editMode}
+                onDragStart={() => handleDragStart(index)}
+                onDragEnter={() => handleDragEnter(index)}
+                onDragEnd={handleDragEnd}
+                onDragOver={(e) => e.preventDefault()}
+              >
+                <img
+                  src={`https://covers.openlibrary.org/b/id/${book.cover_id}-M.jpg`}
+                  alt="Book cover"
+                  style={{
+                    width: cardImgWidth + "px",
+                    border: `${cardImgBorderSize}px ${cardImgBorderStyle} ${cardImgBorderColor}`,
+                    borderRadius: cardImgBorderRadius + "px",
+                  }}
+                />
+
+                <div>
+                  {/* TITLE */}
+                  <p
+                    style={{
+                      color: titleColor,
+                      margin: titleMargin + "px",
+                      padding: titlePadding + "px",
+                      fontSize: titleSize + "px",
+                      width: titleWidth + "px",
+                    }}
+                  >{book.title}</p>
+                  {/* AUTHOR */}
+                  <p
+                    style={{
+                      color: authorColor,
+                      margin: authorMargin + "px",
+                      padding: authorPadding + "px",
+                      fontSize: authorSize + "px",
+                      width: authorWidth + "px",
+                    }}
+                  >{book.author}</p>
+                </div>
+              </li>
+            </div>
+            {editMode && (
+              <button
+              style={{className:"buttonClass"}}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  deleteBook(book);
                 }}
-              />
-
-              <div>
-                {/* TITLE */}
-                <p
-                  style={{
-                    color: titleColor,
-                    margin: titleMargin + "px",
-                    padding: titlePadding + "px",
-                    fontSize: titleSize + "px",
-                    width: titleWidth + "px",
-                  }}
-                >{book.title}</p>
-                {/* AUTHOR */}
-                <p
-                  style={{
-                    color: authorColor,
-                    margin: authorMargin + "px",
-                    padding: authorPadding + "px",
-                    fontSize: authorSize + "px",
-                    width: authorWidth + "px",
-                  }}
-                >{book.author}</p>
-              </div>
-
-              {editMode && (
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    deleteBook(book);
-                  }}
-                >
-                  Delete
-                </button>
-              )}
-            </li>
-          </div>
+              >
+                Delete
+              </button>
+            )}
+          </>
         ))}
         {/* // -------------------------------------------------------------------------------------- */}
       </ul>
