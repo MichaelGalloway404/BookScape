@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import SiteInfoFooter from '../components/SiteInfoFooter';
-import BookList from "../components/BookList";
+// import BookList from "../components/BookList";
 // import TextComponent from "../components/TextComponent";
 import styles from "./BookSearch.module.css"
 import EditablePopup from "../components/EditablePopup"
@@ -313,15 +313,15 @@ function UsersPage() {
                 {editMode ? "Done" : "Edit"}
             </button>
 
-            {/* component for listing out users books and deleting books*/}
-            <BookList
+            {/* component for listing out users books and deleting books */}
+            {/* <BookList
                 books={books}
                 editMode={editMode}
                 settings={settings}
                 deleteBook={deleteBook}
                 setBooks={setBooks}
                 setSettings={setSettings}
-            />
+            /> */}
 
             {/* search for book button */}
             <button className={`${styles.buttonClass}`} onClick={() => navigate("/search")}>
