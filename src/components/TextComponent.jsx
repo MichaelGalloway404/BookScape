@@ -52,7 +52,7 @@ function TextComponent({ editMode, settings, setSettings, ComponentName, default
         settings?.[ComponentName]?.gradientAngle || 135
     );
     const [displayOn, setDisplayOn] = useState( 
-        settings?.[ComponentName]?.displayOn || true
+        settings?.[ComponentName]?.displayOn ?? true
     );
 
     const popupRef = useRef(null);
@@ -123,7 +123,7 @@ function TextComponent({ editMode, settings, setSettings, ComponentName, default
             setMarginBottom(settings[ComponentName].marginBottom);
             setPadding(settings[ComponentName].padding);
             setGradientAngle(settings[ComponentName].gradientAngle);
-            setDisplayOn(settings[ComponentName].displayOn);
+            setDisplayOn(settings[ComponentName].displayOn ?? true);
         }
     }, [settings, ComponentName]);
 
