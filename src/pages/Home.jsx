@@ -28,7 +28,7 @@ function Home() {
             <h1 className={styles.title}>Book Scape</h1>
 
             {users.length === 0 ? (
-                <p>Loading Users...</p>
+                <p style={{color: "white" }}>Loading Users...</p>
             ) : (
                 <ul style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
                     {users.map((person, i) => (
