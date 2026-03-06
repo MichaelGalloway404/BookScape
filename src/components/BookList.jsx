@@ -5,11 +5,9 @@ function BookList({
   books,
   editMode,
   settings,
-  loading,
   deleteBook,
   setBooks,
-  setSettings,
-  setLoading
+  setSettings
 }) {
   const [editing, setEditing] = useState(false);
 
@@ -147,7 +145,6 @@ function BookList({
       setAuthorSize(settings.bookCard.authorSize);
       setAuthorWidth(settings.bookCard.authorWidth);
     }
-    setLoading(false);
   }, [settings]);
 
   // Item being dragged

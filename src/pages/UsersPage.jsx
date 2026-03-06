@@ -41,7 +41,7 @@ function UsersPage() {
 
     // Check for DataBase saved settings
     useEffect(() => {
-        if (settings?.mainPage) {
+        if (settings?.mainPage && loading === false) {
             setPageBckColor(settings.mainPage.pageBckColor);
             setPageBckColor2(settings.mainPage.pageBckColor2);
             setGradientAngle(settings.mainPage.gradientAngle);
@@ -145,6 +145,9 @@ function UsersPage() {
 
                 // SET BOOK ORDERING
                 setBooks(orderedBooks);
+
+                // Finished loading user data
+                setLoading(false);
             } catch (err) {
                 console.error(err);
                 navigate("/login");
@@ -316,11 +319,9 @@ function UsersPage() {
                 books={books}
                 editMode={editMode}
                 settings={settings}
-                loading={loading}
                 deleteBook={deleteBook}
                 setBooks={setBooks}
                 setSettings={setSettings}
-                setLoading={setLoading}
             />
 
             {/* search for book button */}
