@@ -226,7 +226,7 @@ function UsersPage() {
     }
 
     // loading screen
-    if (loading) {
+    if (loading || !settings) {
         return (
             <div style={{ textAlign: "center", marginTop: "50px" }}>
                 <p>Loading page...</p>
@@ -252,25 +252,24 @@ function UsersPage() {
                 />
             )}
             {/* Users chosen title */}
-            {!loading &&
-                (<TextComponent
+            <TextComponent
                 ComponentName={"UserPageTitle"}
                 defaultText={"Make a page Title " + user.username}
                 textMutable={true}
                 editMode={editMode}
                 settings={settings}
                 setSettings={setSettings}
-            />)}
+            />
 
             {/* display users bio and edits */}
-            {!loading && (<TextComponent
+            <TextComponent
                 ComponentName={"UserBio"}
                 defaultText={"Type your " + user.username + "Bio here..."}
                 textMutable={true}
                 editMode={editMode}
                 settings={settings}
                 setSettings={setSettings}
-            />)}
+            />
 
             {/* PAGE SETTINGS BUTTON */}
             {editMode && (
@@ -315,14 +314,14 @@ function UsersPage() {
             </button>
 
             {/* component for listing out users books and deleting books */}
-            {!loading && (<BookList
+            <BookList
                 books={books}
                 editMode={editMode}
                 settings={settings}
                 deleteBook={deleteBook}
                 setBooks={setBooks}
                 setSettings={setSettings}
-            />)}
+            />
 
             {/* search for book button */}
             <button className={`${styles.buttonClass}`} onClick={() => navigate("/search")}>
