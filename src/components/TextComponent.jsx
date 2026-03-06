@@ -47,9 +47,12 @@ function TextComponent({ editMode, settings, setSettings, ComponentName, default
     const [marginBottom, setMarginBottom] = useState(
         settings?.[ComponentName]?.marginBottom || 0
     );
-    const [editing, setEditing] = useState(false); // this can stay as false
+    const [editing, setEditing] = useState(false); 
     const [gradientAngle, setGradientAngle] = useState(
         settings?.[ComponentName]?.gradientAngle || 135
+    );
+    const [displayOn, setDisplayOn] = useState( 
+        settings?.[ComponentName]?.display || true
     );
 
     const popupRef = useRef(null);
@@ -146,6 +149,7 @@ function TextComponent({ editMode, settings, setSettings, ComponentName, default
             <p
                 className={`hoverText ${editMode ? "editable" : ""}`}
                 style={{
+                    display: displayOn ? "flex" : "none"  ,
                     fontFamily,
                     color: fontColor,
                     background: `linear-gradient(${gradientAngle}deg, ${bgColor},${bgColor2})`,
@@ -183,6 +187,7 @@ function TextComponent({ editMode, settings, setSettings, ComponentName, default
                     controls={{
                         // "Text": [text, setText], 
                         ...(textMutable && { "Text": [text, setText] }),
+                        "Hide This element?": [displayOn, setDisplayOn],
                         "Background Color 1": [bgColor, setBgColor],
                         "Background Color 2": [bgColor2, setBgColor2],
                         "Font Family": [fontFamily, setFontFamily],
