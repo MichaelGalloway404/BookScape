@@ -15,26 +15,13 @@
   font-size: 0.95rem;
   cursor: pointer;
   transition: all 0.25s ease;
-  background: rgba(255, 255, 255, 0.15);
+  background: rgb(89, 89, 89);
   color: white;
   backdrop-filter: blur(8px);
 }
 
 .buttonClass:hover {
   transform: translateY(-2px);
-  background: rgba(255, 255, 255, 0.3);
+  background: rgb(89, 89, 89);
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
 }
-
-
-/* .homeBtn {
-  padding: 14px 28px;
-  font-size: 1rem;
-  background: linear-gradient(135deg, #43cea2, #185a9d);
-  font-weight: 600;
-  margin: 5px;
-}
-
-.homeBtn:hover {
-  background: linear-gradient(135deg, #5be3b7, #2b6bbd);
-} */

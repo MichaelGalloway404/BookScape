@@ -110,39 +110,15 @@ function EditablePopup({ popupRef, controls = {}, initialPosition }) {
                 // COLOR PICKER
                 if (key.toLowerCase().includes("color")) {
                     return (
-                        // <label key={key}>
-                        //     {key}
-                        //     <input
-                        //         style={{ marginLeft: "5px" }}
-                        //         type="color"
-                        //         value={value}
-                        //         onChange={(e) => setter(e.target.value)}
-                        //     />
-                        // </label>
-                        <>
-                            <label key={key}>
-                                {key}
-                                <input
-                                    style={{ marginLeft: "5px" }}
-                                    type="color"
-                                    value={value}
-                                    onChange={(e) => setter({ ...value, color: e.target.value })}
-                                />
-                            </label>
-                            <label>
-                                Opacity
-                                <input
-                                    type="range"
-                                    min="0"
-                                    max="1"
-                                    step="0.01"
-                                    value={value.opacity || 1}
-                                    onChange={(e) =>
-                                        setter({ ...value, opacity: parseFloat(e.target.value) })
-                                    }
-                                />
-                            </label>
-                        </>
+                        <label key={key}>
+                            {key}
+                            <input
+                                style={{ marginLeft: "5px" }}
+                                type="color"
+                                value={value}
+                                onChange={(e) => setter(e.target.value)}
+                            />
+                        </label>
                     );
                 }
 
