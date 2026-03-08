@@ -28,10 +28,10 @@ function Home() {
             <h1 className={styles.title}>Book Scape</h1>
 
             {users.length === 0 ? (
-                <>
+                <div style={{ textAlign: "center", margin: "50px" }}>
                     <p style={{ color: "white" }}>Loading Users...</p>
                     <div className={styles.spinner}></div>
-                </>
+                </div>
             ) : (
                 <ul style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
                     {users.map((person, i) => (
