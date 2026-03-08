@@ -175,6 +175,18 @@ function PublicPages() {
           ))}
         </ul>
       )}
+      {/* USER QUOTES */}
+      {settings?.mainPage?.userQuotes?.map((quoteKey) => (
+        <TextComponent
+          key={quoteKey}
+          ComponentName={quoteKey}
+          defaultText="Type something"
+          textMutable={false}
+          editMode={false}
+          settings={settings}
+          setSettings={() => { }}
+        />
+      ))}
 
       <SiteInfoFooter />
     </>
