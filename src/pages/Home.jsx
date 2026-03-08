@@ -28,7 +28,10 @@ function Home() {
             <h1 className={styles.title}>Book Scape</h1>
 
             {users.length === 0 ? (
-                <p style={{color: "white" }}>Loading Users...</p>
+                <>
+                    <p style={{ color: "white" }}>Loading Users...</p>
+                    <div className={styles.spinner}></div>
+                </>
             ) : (
                 <ul style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
                     {users.map((person, i) => (
@@ -48,8 +51,8 @@ function Home() {
                 </ul>
             )}
             <div className={styles.navButtons}>
-            <button className={`${styles.buttonClass} ${styles.primary}`} onClick={() => navigate("/login")}>Login</button>
-            <button className={styles.buttonClass} onClick={() => navigate("/signUp")}>Sign Up</button>
+                <button className={`${styles.buttonClass} ${styles.primary}`} onClick={() => navigate("/login")}>Login</button>
+                <button className={styles.buttonClass} onClick={() => navigate("/signUp")}>Sign Up</button>
             </div>
         </div>
     );
