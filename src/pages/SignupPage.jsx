@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import style from "./SignupPage.module.css";
 import SiteInfoFooter from '../components/SiteInfoFooter';
+import axios from "axios";
 
 function SignupPage() {
   const navigate = useNavigate();
