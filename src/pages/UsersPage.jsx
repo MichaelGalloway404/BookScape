@@ -239,6 +239,20 @@ function UsersPage() {
         }
     }
 
+    // DELETE A USER QUOTE/TEXT
+    function deleteUserQuote(quoteKey) {
+        setSettings(prev => {
+            const newSettings = { ...prev };
+
+            newSettings.mainPage.userQuotes =
+                newSettings.mainPage.userQuotes.filter(q => q !== quoteKey);
+
+            delete newSettings[quoteKey];
+
+            return newSettings;
+        });
+    }
+
     if (loading || !settings) {
         return (
             <div style={{ textAlign: "center", marginTop: "50px" }}>
@@ -281,19 +295,6 @@ function UsersPage() {
                 setSettings={setSettings}
             />
 
-            {/* USER QUOTES */}
-            {settings?.mainPage?.userQuotes?.map((quoteKey) => (
-                <TextComponent
-                    key={quoteKey}
-                    ComponentName={quoteKey}
-                    defaultText={"Type something"}
-                    textMutable={true}
-                    editMode={editMode}
-                    settings={settings}
-                    setSettings={setSettings}
-                />
-            ))}
-
             {/* ADD QUOTE BUTTON */}
             {editMode && (
                 <button
@@ -312,6 +313,29 @@ function UsersPage() {
                 setBooks={setBooks}
                 setSettings={setSettings}
             />
+
+            {/* USER QUOTES */}
+            {settings?.mainPage?.userQuotes?.map((quoteKey) => (
+                <div key={quoteKey}>
+                    <TextComponent
+                        ComponentName={quoteKey}
+                        defaultText={"Type something"}
+                        textMutable={true}
+                        editMode={editMode}
+                        settings={settings}
+                        setSettings={setSettings}
+                    />
+
+                    {editMode && (
+                        <button
+                            onClick={() => deleteUserQuote(quoteKey)}
+                            className={styles.buttonClass}
+                        >
+                            Delete Section
+                        </button>
+                    )}
+                </div>
+            ))}
 
             <button
                 className={styles.buttonClass}
