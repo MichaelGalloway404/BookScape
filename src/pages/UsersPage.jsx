@@ -201,7 +201,6 @@ function UsersPage() {
 
     // SAVE SETTINGS
     async function saveSettings(bookOrder) {
-
         try {
             await axios.post(
                 "/api/currentUser",
