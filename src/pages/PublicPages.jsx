@@ -95,6 +95,7 @@ function PublicPages() {
   // Book card settings from DB
   const bc = settings.bookCard || {};
   const gradient = bc.gradientAngle || 135;
+  const mainPageDiv = settings.mainPage || {};
 
   // loading screen
   if (!person || loading) {
@@ -108,7 +109,17 @@ function PublicPages() {
   }
 
   return (
-    <>
+    <div style={{
+            background: `linear-gradient(${mainPageDiv.mainDivGradientAngle}deg, ${mainPageDiv.mainDivBGColor},${mainPageDiv.mainDivBGColor2})`,
+            padding: mainPageDiv.mainDivPadding + "px",
+            border: `${mainPageDiv.mainDivBorderSize}px ${mainPageDiv.mainDivBorderStyle} ${mainPageDiv.mainDivBorderColor}`,
+            borderRadius: mainPageDiv.mainDivBorderRadius + "px",
+            marginLeft: mainPageDiv.mainDivMarginLeft + "px",
+            marginRight: mainPageDiv.mainDivMarginRight + "px",
+            marginTop: mainPageDiv.mainDivMarginTop + "px",
+            marginBottom: mainPageDiv.mainDivMarginBottom + "px",
+        }}
+        >
       {/* PAGE TITLE */}
       <TextComponent
         ComponentName="UserPageTitle"
@@ -189,7 +200,7 @@ function PublicPages() {
       ))}
 
       <SiteInfoFooter />
-    </>
+    </div>
   );
 }
 
