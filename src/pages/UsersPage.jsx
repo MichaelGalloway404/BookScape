@@ -463,8 +463,8 @@ function UsersPage() {
                         <button
                             onClick={(e) => {
                                 setPopupPosition({
-                                    x: e.pageX+50,
-                                    y: e.pageY+50,
+                                    x: e.pageX+150,
+                                    y: e.pageY,
                                 });
                                 setEditing(true);
                             }}
