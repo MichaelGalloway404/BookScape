@@ -430,6 +430,12 @@ function UsersPage() {
             <button
                 className={styles.buttonClass}
                 onClick={() => navigate("/search")}
+                style={{
+                    position: "fixed",
+                    bottom: "20px",
+                    right: "20px",
+                    zIndex: "1000",
+                }}
             >
                 Search for a book
             </button>
@@ -444,6 +450,12 @@ function UsersPage() {
             <button
                 onClick={() => setEditMode(prev => !prev)}
                 className={styles.buttonClass}
+                style={{
+                    position: "fixed",
+                    bottom: "20px",
+                    right: "20px",
+                    zIndex: "1000",
+                }}
             >
                 {editMode ? "Done" : "Edit"}
             </button>
@@ -464,9 +476,15 @@ function UsersPage() {
             )}
 
             {editMode && (
-                <button
+                <button 
                     onClick={() => saveSettings(books)}
                     className={styles.buttonClass}
+                    style={{
+                    position: "fixed",
+                    bottom: "20px",
+                    right: "20px",
+                    zIndex: "1000",
+                }}
                 >
                     Save
                 </button>
