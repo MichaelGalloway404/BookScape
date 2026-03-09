@@ -446,6 +446,7 @@ function UsersPage() {
                     <button
                         onClick={() => setEditMode(prev => !prev)}
                         className={styles.buttonClass}
+                        style={{backgroundColor: editMode ? "#da5858" : " #63cd8c"}}
                     >
                         {editMode ? "Done" : "Edit"}
                     </button>
