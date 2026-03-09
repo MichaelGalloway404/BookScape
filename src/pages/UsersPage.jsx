@@ -13,6 +13,7 @@ function UsersPage() {
     const [editMode, setEditMode] = useState(false);
     const [editing, setEditing] = useState(false);
     const [settings, setSettings] = useState({});
+    const [menuOpen, setMenuOpen] = useState(false);
 
     // main page settings
     const [pageBckColor, setPageBckColor] = useState("#c4ccd5");
@@ -417,58 +418,72 @@ function UsersPage() {
                 </div>
             ))}
 
+            {/* Hamburger button for user options */}
             <button
-                className={styles.buttonClass}
-                onClick={() => navigate("/search")}
+                className={styles.hamburger}
+                onClick={() => setMenuOpen(prev => !prev)}
             >
-                Search for a book
+                ☰
             </button>
 
-            <button
-                className={styles.buttonClass}
-                onClick={() => navigate("/")}
-            >
-                Return Home
-            </button>
+            {menuOpen && (
+                <div className={styles.dropdown}>
 
-            <button
-                onClick={() => setEditMode(prev => !prev)}
-                className={styles.buttonClass}
-            >
-                {editMode ? "Done" : "Edit"}
-            </button>
+                    <button
+                        className={styles.buttonClass}
+                        onClick={() => navigate("/search")}
+                    >
+                        Search for a book
+                    </button>
 
-            {editMode && (
-                <button
-                    onClick={(e) => {
-                        setPopupPosition({
-                            x: e.pageX,
-                            y: e.pageY,
-                        });
-                        setEditing(true);
-                    }}
-                    className={styles.buttonClass}
-                >
-                    Click for page settings
-                </button>
-            )}
+                    <button
+                        className={styles.buttonClass}
+                        onClick={() => navigate("/")}
+                    >
+                        Return Home
+                    </button>
 
-            {editMode && (
-                <button
-                    onClick={() => saveSettings(books)}
-                    className={styles.buttonClass}
-                >
-                    Save
-                </button>
-            )}
-            {/* ADD QUOTE BUTTON */}
-            {editMode && (
-                <button
-                    onClick={addUserQuote}
-                    className={styles.buttonClass}
-                >
-                    Add Text Section
-                </button>
+                    <button
+                        onClick={() => setEditMode(prev => !prev)}
+                        className={styles.buttonClass}
+                    >
+                        {editMode ? "Done" : "Edit"}
+                    </button>
+
+                    {editMode && (
+                        <button
+                            onClick={(e) => {
+                                setPopupPosition({
+                                    x: e.pageX,
+                                    y: e.pageY,
+                                });
+                                setEditing(true);
+                            }}
+                            className={styles.buttonClass}
+                        >
+                            Click for page settings
+                        </button>
+                    )}
+
+                    {editMode && (
+                        <button
+                            onClick={() => saveSettings(books)}
+                            className={styles.buttonClass}
+                        >
+                            Save
+                        </button>
+                    )}
+
+                    {editMode && (
+                        <button
+                            onClick={addUserQuote}
+                            className={styles.buttonClass}
+                        >
+                            Add Text Section
+                        </button>
+                    )}
+
+                </div>
             )}
         </div>
     );
