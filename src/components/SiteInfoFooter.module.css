@@ -14,7 +14,7 @@
   font-size: 0.95rem;
   cursor: pointer;
   transition: all 0.25s ease;
-  background: linear-gradient(135deg,#a3f469,#ffc266);
+  background: linear-gradient(135deg,#7cc349,#c3f89d);
   color: white;
   backdrop-filter: blur(8px);
   padding: 12px 22px;
@@ -22,6 +22,6 @@
 
 .buttonClass:hover {
   transform: translateY(-2px);
-  background: linear-gradient(135deg,#a3f469,#ffc266);
+  background: linear-gradient(135deg,#7cc349,#c3f89d);
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
 }
