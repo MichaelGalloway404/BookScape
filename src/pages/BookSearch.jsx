@@ -301,12 +301,7 @@ export default function BookSearch() {
         Back to User Page
       </button>
 
-      <button
-        className={styles.buttonClass}
-        onClick={() => navigate("/")}
-      >
-        Return Home
-      </button>
+      <SiteInfoFooter />
 
     </div>
   );
