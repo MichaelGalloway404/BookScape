@@ -10,19 +10,18 @@
 
 .buttonClass {
   border: none;
-  padding-left: 12px;
-  padding-right: 12px;
   border-radius: 999px;
   font-size: 0.95rem;
   cursor: pointer;
   transition: all 0.25s ease;
-  background: rgb(148, 215, 113);
+  background: linear-gradient(135deg,#a3f469,#ffc266);
   color: white;
   backdrop-filter: blur(8px);
+  padding: 12px 22px;
 }
 
 .buttonClass:hover {
   transform: translateY(-2px);
-  background:  rgb(148, 215, 113);
+  background: linear-gradient(135deg,#a3f469,#ffc266);
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
 }
