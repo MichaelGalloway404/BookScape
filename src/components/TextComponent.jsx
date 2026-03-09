@@ -56,7 +56,6 @@ function TextComponent({ editMode, settings, setSettings, ComponentName, default
     );
 
     const popupRef = useRef(null);
-    const [popupPosition, setPopupPosition] = useState(null);
 
     // Update settings whenever changes happen
     useEffect(() => {
@@ -171,10 +170,6 @@ function TextComponent({ editMode, settings, setSettings, ComponentName, default
                 }}
                 onClick={(e) => {
                     if (editMode) {
-                        setPopupPosition({
-                            x: e.pageX,
-                            y: e.pageY,
-                        });
                         setEditing(true);
                     }
                 }}

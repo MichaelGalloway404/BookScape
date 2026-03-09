@@ -92,7 +92,6 @@ function BookList({
   );
 
   const popupRef = useRef(null);
-  const [popupPosition, setPopupPosition] = useState(null);
 
   // add any changes to settings the user makes
   useEffect(() => {
@@ -298,10 +297,6 @@ function BookList({
       <ul style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}
         onClick={(e) => {
           if (editMode) {
-            setPopupPosition({
-              x: e.pageX,
-              y: e.pageY,
-            });
             setEditing(true);
           }
         }}>
