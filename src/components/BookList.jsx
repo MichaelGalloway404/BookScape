@@ -259,7 +259,6 @@ function BookList({
       {editing && editMode && (
         <EditablePopup
           popupRef={popupRef}
-          initialPosition={popupPosition}
           controls={{
             // Main div Over Book Card
             "Card Back Color 1": [bgColor, setBgColor],

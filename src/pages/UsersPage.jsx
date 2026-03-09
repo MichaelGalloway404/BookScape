@@ -339,7 +339,6 @@ function UsersPage() {
             {editing && editMode && (
                 <EditablePopup
                     popupRef={popupRef}
-                    initialPosition={popupPosition}
                     controls={{
                         // body of page settings
                         "Page Background Color 1": [pageBckColor, setPageBckColor],

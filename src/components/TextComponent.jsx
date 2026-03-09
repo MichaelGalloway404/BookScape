@@ -186,7 +186,6 @@ function TextComponent({ editMode, settings, setSettings, ComponentName, default
             {editing && editMode && (
                 <EditablePopup
                     popupRef={popupRef}
-                    initialPosition={popupPosition}
                     controls={{
                         // "Text": [text, setText], 
                         ...(textMutable && { "Text": [text, setText] }),
