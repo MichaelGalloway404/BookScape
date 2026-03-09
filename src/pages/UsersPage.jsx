@@ -34,9 +34,7 @@ function UsersPage() {
     const [mainDivMarginTop, setMainDivMarginTop] = useState(1);
     const [mainDivMarginBottom, setMainDivMarginBottom] = useState(1);
 
-
     const popupRef = useRef(null);
-    const [popupPosition, setPopupPosition] = useState(null);
 
     const [loading, setLoading] = useState(true);
 
