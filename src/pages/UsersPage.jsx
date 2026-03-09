@@ -462,10 +462,6 @@ function UsersPage() {
                     {editMode && (
                         <button
                             onClick={(e) => {
-                                setPopupPosition({
-                                    x: e.pageX+150,
-                                    y: e.pageY,
-                                });
                                 setEditing(true);
                             }}
                             className={styles.buttonClass}

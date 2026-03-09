@@ -2,11 +2,11 @@ import { useState, useRef, useEffect } from "react";
 import fonts from "../styles/fonts";
 import borderTypes from "../styles/borderTypes";
 
-function EditablePopup({ popupRef, controls = {}, initialPosition }) {
+function EditablePopup({ popupRef, controls = {} }) {
 
     // Stores popup position
     const [position, setPosition] = useState(
-        initialPosition || { x: 200, y: 200 }
+        { x: 200, y: 200 }
     );
 
     // Tracks dragging state
@@ -57,23 +57,27 @@ function EditablePopup({ popupRef, controls = {}, initialPosition }) {
         <div
             ref={popupRef}
             style={{
-                position: "absolute",
-                top: position.y,
-                left: position.x,
+                position: "fixed",
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%, -50%)",
+
                 background: "white",
                 padding: "1rem",
                 borderRadius: "8px",
                 boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+
                 display: "flex",
                 flexDirection: "column",
                 gap: "0.5rem",
+
                 zIndex: 1000,
                 minWidth: "200px",
-                // limit height
+
                 maxHeight: "500px",
-                // croll when too tall     
                 overflowY: "auto",
             }}
+
         >
 
             {/* Drag Handle Header */}
