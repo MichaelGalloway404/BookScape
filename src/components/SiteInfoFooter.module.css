@@ -14,14 +14,15 @@
   font-size: 0.95rem;
   cursor: pointer;
   transition: all 0.25s ease;
-  background: linear-gradient(135deg,#7cc349,#c3f89d);
+  background: linear-gradient(135deg,#7cc349,#8ec268);
   color: white;
   backdrop-filter: blur(8px);
   padding: 12px 22px;
+  margin-left: 20px;
 }
 
 .buttonClass:hover {
   transform: translateY(-2px);
-  background: linear-gradient(135deg,#7cc349,#c3f89d);
+  background: linear-gradient(135deg,#7cc349,#8ec268);
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
 }

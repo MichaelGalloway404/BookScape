@@ -410,7 +410,7 @@ function UsersPage() {
                     {editMode && (
                         <button
                             onClick={() => deleteUserQuote(quoteKey)}
-                            className={styles.buttonClass}
+                            style={{ backgroundColor: "#ff2727b5", color: "black", borderRadius:"5px", position: "absolute"}}
                         >
                             Delete Section
                         </button>
@@ -450,28 +450,27 @@ function UsersPage() {
                     >
                         {editMode ? "Done" : "Edit"}
                     </button>
+                    {editMode && (
+                        <button
+                            onClick={() => saveSettings(books)}
+                            className={styles.buttonClass}
+                        >
+                            Save Settings
+                        </button>
+                    )}
 
                     {editMode && (
                         <button
                             onClick={(e) => {
                                 setPopupPosition({
-                                    x: e.pageX,
-                                    y: e.pageY,
+                                    x: e.pageX+50,
+                                    y: e.pageY+50,
                                 });
                                 setEditing(true);
                             }}
                             className={styles.buttonClass}
                         >
                             Click for page settings
-                        </button>
-                    )}
-
-                    {editMode && (
-                        <button
-                            onClick={() => saveSettings(books)}
-                            className={styles.buttonClass}
-                        >
-                            Save
                         </button>
                     )}
 
