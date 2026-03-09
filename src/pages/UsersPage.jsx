@@ -17,6 +17,21 @@ function UsersPage() {
     const [pageBckColor2, setPageBckColor2] = useState("#c4ccd5");
     const [gradientAngle, setGradientAngle] = useState(135);
 
+    // div control
+    const [mainDivGradientAngle, setMainDivGradientAngle] = useState(135);
+    const [mainDivBGColor, setMainDivBGColor] = useState("white");
+    const [mainDivBGColor2, setMainDivBGColor2] = useState("white");
+    const [mainDivPadding, setMainDivPadding] = useState(2);
+    const [mainDivBorderSize, setMainDivBorderSize] = useState(5);
+    const [mainDivBorderStyle, setMainDivBorderStyle] = useState("solid");
+    const [mainDivBorderColor, setMainDivBorderColor] = useState("black");
+    const [mainDivBorderRadius, setMainDivBorderRadius] = useState(5);
+    const [mainDivMarginLeft, setMainDivMarginLeft] = useState(1);
+    const [mainDivMarginRight, setMainDivMarginRight] = useState(1);
+    const [mainDivMarginTop, setMainDivMarginTop] = useState(1);
+    const [mainDivMarginBottom, setMainDivMarginBottom] = useState(1);
+
+
     const popupRef = useRef(null);
     const [popupPosition, setPopupPosition] = useState(null);
 
@@ -44,9 +59,36 @@ function UsersPage() {
                 pageBckColor,
                 pageBckColor2,
                 gradientAngle,
+                mainDivGradientAngle,
+                mainDivBGColor,
+                mainDivBGColor2,
+                mainDivPadding,
+                mainDivBorderSize,
+                mainDivBorderStyle,
+                mainDivBorderColor,
+                mainDivBorderRadius,
+                mainDivMarginLeft,
+                mainDivMarginRight,
+                mainDivMarginTop,
+                mainDivMarginBottom,
             },
         }));
-    }, [pageBckColor, pageBckColor2, gradientAngle]);
+    }, [pageBckColor,
+        pageBckColor2,
+        gradientAngle,
+        mainDivGradientAngle,
+        mainDivBGColor,
+        mainDivBGColor2,
+        mainDivPadding,
+        mainDivBorderSize,
+        mainDivBorderStyle,
+        mainDivBorderColor,
+        mainDivBorderRadius,
+        mainDivMarginLeft,
+        mainDivMarginRight,
+        mainDivMarginTop,
+        mainDivMarginBottom,
+    ]);
 
     // Check for DB saved settings
     useEffect(() => {
@@ -263,16 +305,43 @@ function UsersPage() {
     }
 
     return (
-        <>
+        <div style={{
+            background: `linear-gradient(${mainDivGradientAngle}deg, ${mainDivBGColor},${mainDivBGColor2})`,
+            padding: mainDivPadding + "px",
+            border: `${mainDivBorderSize}px ${mainDivBorderStyle} ${mainDivBorderColor}`,
+            borderRadius: mainDivBorderRadius + "px",
+            marginLeft: mainDivMarginLeft + "px",
+            marginRight: mainDivMarginRight + "px",
+            marginTop: mainDivMarginTop + "px",
+            marginBottom: mainDivMarginBottom + "px",
+        }}
+        >
             {editing && editMode && (
                 <EditablePopup
                     popupRef={popupRef}
                     initialPosition={popupPosition}
                     controls={{
+                        // body of page settings
                         "Page Background Color 1": [pageBckColor, setPageBckColor],
                         "Page Background Color 2": [pageBckColor2, setPageBckColor2],
                         "Gradient Angle": [Number(gradientAngle), setGradientAngle],
                         "Profile is Private": [profilePublic, setProfilePrivate],
+                        "break1": "",
+                        // main div of page settings
+                        "Center of page Background Color 1": [mainDivBGColor, setMainDivBGColor],
+                        "Center of page Background Color 2": [mainDivBGColor2, setMainDivBGColor2],
+                        "Center Page Gradient Angle": [Number(mainDivGradientAngle), setMainDivGradientAngle],
+                        "Center Page Padding": [mainDivPadding, setMainDivPadding],
+                        "break2": "",
+                        "Center Page Border Size": [mainDivBorderSize, setMainDivBorderSize],
+                        "Center Page Border Style": [mainDivBorderStyle, setMainDivBorderStyle],
+                        "Center Page Border Color": [mainDivBorderColor, setMainDivBorderColor],
+                        "Center Page Border Radius": [mainDivBorderRadius, setMainDivBorderRadius],
+                        "break3": "",
+                        "Center Page Margin Left": [mainDivMarginLeft, setMainDivMarginLeft],
+                        "Center Page Margin Right": [mainDivMarginRight, setMainDivMarginRight],
+                        "Center Page Margin Top": [mainDivMarginTop, setMainDivMarginTop],
+                        "Center Page Margin Bottom": [mainDivMarginBottom, setMainDivMarginBottom],
                     }}
                 />
             )}
@@ -381,7 +450,7 @@ function UsersPage() {
                     Save
                 </button>
             )}
-        </>
+        </div>
     );
 }
 
