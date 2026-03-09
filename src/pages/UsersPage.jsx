@@ -13,11 +13,13 @@ function UsersPage() {
     const [editMode, setEditMode] = useState(false);
     const [editing, setEditing] = useState(false);
     const [settings, setSettings] = useState({});
+
+    // main page settings
     const [pageBckColor, setPageBckColor] = useState("#c4ccd5");
     const [pageBckColor2, setPageBckColor2] = useState("#c4ccd5");
     const [gradientAngle, setGradientAngle] = useState(135);
 
-    // div control
+    // div control settings
     const [mainDivGradientAngle, setMainDivGradientAngle] = useState(135);
     const [mainDivBGColor, setMainDivBGColor] = useState("white");
     const [mainDivBGColor2, setMainDivBGColor2] = useState("white");
@@ -56,9 +58,11 @@ function UsersPage() {
             ...prev,
             mainPage: {
                 ...prev.mainPage,
+                // main page
                 pageBckColor,
                 pageBckColor2,
                 gradientAngle,
+                // div control
                 mainDivGradientAngle,
                 mainDivBGColor,
                 mainDivBGColor2,
@@ -73,9 +77,12 @@ function UsersPage() {
                 mainDivMarginBottom,
             },
         }));
-    }, [pageBckColor,
+    }, [
+        // main page
+        pageBckColor,
         pageBckColor2,
         gradientAngle,
+        // div control
         mainDivGradientAngle,
         mainDivBGColor,
         mainDivBGColor2,
@@ -93,9 +100,23 @@ function UsersPage() {
     // Check for DB saved settings
     useEffect(() => {
         if (settings?.mainPage) {
+            // main page
             if (settings.mainPage.pageBckColor) setPageBckColor(settings.mainPage.pageBckColor);
             if (settings.mainPage.pageBckColor2) setPageBckColor2(settings.mainPage.pageBckColor2);
             if (settings.mainPage.gradientAngle) setGradientAngle(settings.mainPage.gradientAngle);
+            // div control
+            if (settings.mainPage.mainDivGradientAngle) setMainDivGradientAngle(settings.mainPage.mainDivGradientAngle);
+            if (settings.mainPage.mainDivBGColor) setMainDivBGColor(settings.mainPage.mainDivBGColor);
+            if (settings.mainPage.mainDivBGColor2) setMainDivBGColor2(settings.mainPage.mainDivBGColor2);
+            if (settings.mainPage.mainDivPadding) setMainDivPadding(settings.mainPage.mainDivPadding);
+            if (settings.mainPage.mainDivBorderSize) setMainDivBorderSize(settings.mainPage.mainDivBorderSize);
+            if (settings.mainPage.mainDivBorderStyle) setMainDivBorderStyle(settings.mainPage.mainDivBorderStyle);
+            if (settings.mainPage.mainDivBorderColor) setMainDivBorderColor(settings.mainPage.mainDivBorderColor);
+            if (settings.mainPage.mainDivBorderRadius) setMainDivBorderRadius(settings.mainPage.mainDivBorderRadius);
+            if (settings.mainPage.mainDivMarginLeft) setMainDivMarginLeft(settings.mainPage.mainDivMarginLeft);
+            if (settings.mainPage.mainDivMarginRight) setMainDivMarginRight(settings.mainPage.mainDivMarginRight);
+            if (settings.mainPage.mainDivMarginTop) setMainDivMarginTop(settings.mainPage.mainDivMarginTop);
+            if (settings.mainPage.mainDivMarginBottom) setMainDivMarginBottom(settings.mainPage.mainDivMarginBottom);
         }
     }, [settings]);
 
