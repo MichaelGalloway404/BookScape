@@ -5,9 +5,10 @@ import borderTypes from "../styles/borderTypes";
 function EditablePopup({ popupRef, controls = {} }) {
 
     // Stores popup position
-    const [position, setPosition] = useState(
-        { x: 200, y: 200 }
-    );
+    const [position, setPosition] = useState({
+        x: window.innerWidth / 2 - 150,
+        y: window.innerHeight / 2 - 200,
+    });
 
     // Tracks dragging state
     const isDragging = useRef(false);
@@ -58,9 +59,8 @@ function EditablePopup({ popupRef, controls = {} }) {
             ref={popupRef}
             style={{
                 position: "fixed",
-                top: "50%",
-                left: "50%",
-                transform: "translate(-50%, -50%)",
+                top: position.y,
+                left: position.x,
 
                 background: "white",
                 padding: "1rem",
@@ -73,11 +73,9 @@ function EditablePopup({ popupRef, controls = {} }) {
 
                 zIndex: 1000,
                 minWidth: "200px",
-
                 maxHeight: "500px",
                 overflowY: "auto",
             }}
-
         >
 
             {/* Drag Handle Header */}
