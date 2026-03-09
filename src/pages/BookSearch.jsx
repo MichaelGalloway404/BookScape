@@ -134,10 +134,6 @@ export default function BookSearch() {
       params.append("fields", "cover_i,title,author_name,isbn");
       params.append("limit", "20");
 
-
-
-
-
       // params.toString() converts URLSearchParams into a query string
       const res = await axios.get(
         `https://openlibrary.org/search.json?${params.toString()}`
@@ -208,11 +204,6 @@ export default function BookSearch() {
       <h1 className={styles.title}>Search Books</h1>
 
       <div className={styles.searchCard}>
-        {/* show who is searching */}
-        <p><strong>ID:</strong> {user.id}</p>
-        <p><strong>Username:</strong> {user.username}</p>
-        {/* testing out css modules */}
-        <h2>Search Books</h2>
 
         <div className={styles.inputBox}>
           {/* Title input field */}
