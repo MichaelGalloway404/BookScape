@@ -137,6 +137,11 @@ export default function BookSearch() {
       params.append("fields", "cover_i,title,author_name,isbn");
       params.append("limit", "100");
 
+      // params.toString() converts URLSearchParams into a query string
+      const res = await axios.get(
+        `https://openlibrary.org/search.json?${params.toString()}`
+      );
+
       // If docs is undefined or null, fall back to an empty array
       const covers = (res.data.docs || [])
 
