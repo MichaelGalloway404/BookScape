@@ -360,13 +360,13 @@ function BookList({
                 >{book.author}</p>
 
                 {editMode && (
-                <button style={{ width: "20px", backgroundColor: "red", color: "black", borderRadius:"5px", position: "absolute"}}
+                <button style={{ backgroundColor: "#ff2727b5", color: "black", borderRadius:"5px", position: "absolute"}}
                   onClick={(e) => {
                     e.stopPropagation();
                     deleteBook(book);
                   }}
                 >
-                  X
+                  Delete
                 </button>
               )}
               </div>
