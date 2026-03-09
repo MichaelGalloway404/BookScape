@@ -109,17 +109,26 @@ function PublicPages() {
   }
 
   return (
-    <div style={{
-            background: `linear-gradient(${mainPageDiv.mainDivGradientAngle}deg, ${mainPageDiv.mainDivBGColor},${mainPageDiv.mainDivBGColor2})`,
-            padding: mainPageDiv.mainDivPadding + "px",
-            border: `${mainPageDiv.mainDivBorderSize}px ${mainPageDiv.mainDivBorderStyle} ${mainPageDiv.mainDivBorderColor}`,
-            borderRadius: mainPageDiv.mainDivBorderRadius + "px",
-            marginLeft: mainPageDiv.mainDivMarginLeft + "px",
-            marginRight: mainPageDiv.mainDivMarginRight + "px",
-            marginTop: mainPageDiv.mainDivMarginTop + "px",
-            marginBottom: mainPageDiv.mainDivMarginBottom + "px",
-        }}
-        >
+    <div
+      style={{
+        background: `linear-gradient(${mainPageDiv.mainDivGradientAngle ?? 135}deg, 
+                ${mainPageDiv.mainDivBGColor ?? "#ffffff"}, 
+                ${mainPageDiv.mainDivBGColor2 ?? "#dddddd"})`,
+
+        padding: (mainPageDiv.mainDivPadding ?? 20) + "px",
+
+        border: `${mainPageDiv.mainDivBorderSize ?? 0}px 
+             ${mainPageDiv.mainDivBorderStyle ?? "solid"} 
+             ${mainPageDiv.mainDivBorderColor ?? "transparent"}`,
+
+        borderRadius: (mainPageDiv.mainDivBorderRadius ?? 12) + "px",
+
+        marginLeft: (mainPageDiv.mainDivMarginLeft ?? 0) + "px",
+        marginRight: (mainPageDiv.mainDivMarginRight ?? 0) + "px",
+        marginTop: (mainPageDiv.mainDivMarginTop ?? 0) + "px",
+        marginBottom: (mainPageDiv.mainDivMarginBottom ?? 0) + "px",
+      }}
+    >
       {/* PAGE TITLE */}
       <TextComponent
         ComponentName="UserPageTitle"
