@@ -37,46 +37,49 @@ function SignupPage() {
   };
 
   return (
-    <div className={style.signupContainer}>
-      <div className={style.signupCard}>
-        <h1>Create Account</h1>
-        <p>Sign up to get started</p>
+    <>
+      <div className={style.signupContainer}>
+        <div className={style.signupCard}>
+          <h1>Create Account</h1>
+          <p>Sign up to get started</p>
 
-        <form onSubmit={signup}>
-          <div className={style.inputGroup}>
-            <label>User Name</label>
-            <input
-              type="text"
-              required
-              value={userName}
-              onChange={(e) => setUserName(e.target.value)}
-            />
-          </div>
+          <form onSubmit={signup}>
+            <div className={style.inputGroup}>
+              <label>User Name</label>
+              <input
+                type="text"
+                required
+                value={userName}
+                onChange={(e) => setUserName(e.target.value)}
+              />
+            </div>
 
-          <div className={style.inputGroup}>
-            <label>Password</label>
-            <input
-              type="password"
-              required
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
+            <div className={style.inputGroup}>
+              <label>Password</label>
+              <input
+                type="password"
+                required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
 
-          {error && <p className={style.errorText}>{error}</p>}
+            {error && <p className={style.errorText}>{error}</p>}
 
-          <button className={style.signupButton} type="submit">
-            Sign Up
-          </button>
-        </form>
+            <button className={style.signupButton} type="submit">
+              Sign Up
+            </button>
+          </form>
 
-        <p className={style.footerText}>
-          Already have an account?{" "}
-          <span onClick={() => navigate("/login")}>Sign in</span>
-        </p>
-        <SiteInfoFooter/>
+          <p className={style.footerText}>
+            Already have an account?{" "}
+            <span onClick={() => navigate("/login")}>Sign in</span>
+          </p>
+
+        </div>
       </div>
-    </div>
+      <SiteInfoFooter />
+    </>
   );
 }
 

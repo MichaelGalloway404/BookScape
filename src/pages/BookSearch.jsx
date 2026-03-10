@@ -202,111 +202,111 @@ export default function BookSearch() {
   }
 
   return (
-    <div className={styles.container}>
+    <>
+      <div className={styles.container}>
 
-      <h1 className={styles.title}>Search Books</h1>
+        <h1 className={styles.title}>Search Books</h1>
 
-      <div className={styles.searchCard}>
+        <div className={styles.searchCard}>
 
-        <div className={styles.inputBox}>
-          {/* Title input field */}
-          <input className={`${styles.textInput}`}
-            placeholder="Title"
+          <div className={styles.inputBox}>
+            {/* Title input field */}
+            <input className={`${styles.textInput}`}
+              placeholder="Title"
 
-            // Value comes from React state
-            value={title}
+              // Value comes from React state
+              value={title}
 
-            // Update the title state whenever the user types
-            onChange={e => setTitle(e.target.value)}
-          />
+              // Update the title state whenever the user types
+              onChange={e => setTitle(e.target.value)}
+            />
 
-          {/* Author input field */}
-          <input className={`${styles.textInput}`}
-            placeholder="Author"
+            {/* Author input field */}
+            <input className={`${styles.textInput}`}
+              placeholder="Author"
 
-            // Author state
-            value={author}
+              // Author state
+              value={author}
 
-            // Update the author state on every keystroke
-            onChange={e => setAuthor(e.target.value)}
-          />
-          {/* ISBN field */}
-          <input className={`${styles.textInput}`}
-            placeholder="ISBN"
-            value={isbn}
-            onChange={e => setIsbn(e.target.value)}
-          />
+              // Update the author state on every keystroke
+              onChange={e => setAuthor(e.target.value)}
+            />
+            {/* ISBN field */}
+            <input className={`${styles.textInput}`}
+              placeholder="ISBN"
+              value={isbn}
+              onChange={e => setIsbn(e.target.value)}
+            />
+          </div>
+
+          {/* Button that triggers the Open Library search */}
+          <button className={`${styles.buttonClass}`}
+            // When clicked, runs the async search function
+            onClick={searchForBooks}
+          >
+            Search
+          </button>
+
+          {visibleBooks.length > 0 && (
+            /* List container for search results */
+            <ul className={styles.bookCoverGrid}>
+              {/* Loop over the results array and render one <li> per book */}
+              {visibleBooks
+                .filter(book => book.isbn)
+                .map((book, i) => (
+                  <li className={styles.bookCard} key={i}>
+                    <img
+                      className={styles.coverImage}
+                      src={book.coverUrl}
+                      alt={book.title}
+                    />
+
+                    <p className={styles.bookInfo}>
+                      <h5><strong>{book.title}</strong></h5>
+                    </p>
+
+                    <p className={styles.bookInfo}>
+                      Author: {book.author}
+                    </p>
+
+                    <p className={styles.bookInfo}>
+                      ISBN: {book.isbn}
+                    </p>
+
+                    <button
+                      className={`${styles.buttonClass} ${styles.addButton}`}
+                      onClick={() => addBook(book)}
+                    >
+                      Add
+                    </button>
+                  </li>
+                ))}
+            </ul>
+          )}
+
+          {/* Pagination controls */}
+          {results.length > BOOKS_PER_PAGE && (
+            <div className={styles.pagination}>
+              <button onClick={prevPage}>Previous</button>
+
+              <span>
+                Page {page + 1} of {totalPages}
+              </span>
+
+              <button onClick={nextPage}>Next</button>
+            </div>
+          )}
         </div>
 
-        {/* Button that triggers the Open Library search */}
-        <button className={`${styles.buttonClass}`}
-          // When clicked, runs the async search function
-          onClick={searchForBooks}
+        <button
+          className={styles.buttonClass}
+          onClick={() => navigate("/userPage_Protected")}
         >
-          Search
+          Back to User Page
         </button>
-
-        {visibleBooks.length > 0 && (
-          /* List container for search results */
-          <ul className={styles.bookCoverGrid}>
-            {/* Loop over the results array and render one <li> per book */}
-            {visibleBooks
-              .filter(book => book.isbn)
-              .map((book, i) => (
-                <li className={styles.bookCard} key={i}>
-                  <img
-                    className={styles.coverImage}
-                    src={book.coverUrl}
-                    alt={book.title}
-                  />
-
-                  <p className={styles.bookInfo}>
-                    <h5><strong>{book.title}</strong></h5>
-                  </p>
-
-                  <p className={styles.bookInfo}>
-                    Author: {book.author}
-                  </p>
-
-                  <p className={styles.bookInfo}>
-                    ISBN: {book.isbn}
-                  </p>
-
-                  <button
-                    className={`${styles.buttonClass} ${styles.addButton}`}
-                    onClick={() => addBook(book)}
-                  >
-                    Add
-                  </button>
-                </li>
-              ))}
-          </ul>
-        )}
-
-        {/* Pagination controls */}
-        {results.length > BOOKS_PER_PAGE && (
-          <div className={styles.pagination}>
-            <button onClick={prevPage}>Previous</button>
-
-            <span>
-              Page {page + 1} of {totalPages}
-            </span>
-
-            <button onClick={nextPage}>Next</button>
-          </div>
-        )}
       </div>
-
-      <button
-        className={styles.buttonClass}
-        onClick={() => navigate("/userPage_Protected")}
-      >
-        Back to User Page
-      </button>
-
       <SiteInfoFooter />
-
-    </div>
+    </>
   );
 
 
