@@ -5,6 +5,7 @@ import BookList from "../components/BookList";
 import TextComponent from "../components/TextComponent";
 import EditablePopup from "../components/EditablePopup"
 import styles from "./UsersPage.module.css"
+import SiteInfoFooter from '../components/SiteInfoFooter';
 
 function UsersPage() {
     const [user, setUser] = useState(null);
@@ -438,14 +439,6 @@ function UsersPage() {
                     </button>
 
                     <button
-                        className={styles.buttonClass}
-                        onClick={() => navigate("/")}
-                        style={{backgroundColor: "#35b2d5"}}
-                    >
-                        Return to Home Page
-                    </button>
-
-                    <button
                         onClick={() => setEditMode(prev => !prev)}
                         className={styles.buttonClass}
                         style={{backgroundColor: editMode ? "#da5858" : " #63cd8c"}}
@@ -468,7 +461,7 @@ function UsersPage() {
                                 setEditing(true);
                             }}
                             className={styles.buttonClass}
-                            style={{backgroundColor: "#595959"}}
+                            style={{backgroundColor: "#2699b8"}}
                         >
                             Click for page settings
                         </button>
@@ -478,7 +471,7 @@ function UsersPage() {
                         <button
                             onClick={addUserQuote}
                             className={styles.buttonClass}
-                            style={{backgroundColor: "#595959"}}
+                            style={{backgroundColor: "#2699b8"}}
                         >
                             Add a New Text Section
                         </button>
@@ -486,6 +479,7 @@ function UsersPage() {
 
                 </div>
             )}
+            <SiteInfoFooter />
         </div>
     );
 }
