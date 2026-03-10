@@ -456,7 +456,7 @@ function UsersPage() {
                         <button
                             onClick={() => saveSettings(books)}
                             className={styles.buttonClass}
-                            style={{backgroundColor: "#ff7d7d"}}
+                            style={{backgroundColor: "#63cd8c"}}
                         >
                             Save Settings { saving && (<div className={styles.spinner}></div>)}
                         </button>
@@ -468,7 +468,7 @@ function UsersPage() {
                                 setEditing(true);
                             }}
                             className={styles.buttonClass}
-                            style={{backgroundColor: "#f0ff4b"}}
+                            style={{backgroundColor: "#595959"}}
                         >
                             Click for page settings
                         </button>
@@ -478,7 +478,7 @@ function UsersPage() {
                         <button
                             onClick={addUserQuote}
                             className={styles.buttonClass}
-                            style={{backgroundColor: "#35b2d5"}}
+                            style={{backgroundColor: "#595959"}}
                         >
                             Add a New Text Section
                         </button>
