@@ -14,6 +14,7 @@ function UsersPage() {
     const [editing, setEditing] = useState(false);
     const [settings, setSettings] = useState({});
     const [menuOpen, setMenuOpen] = useState(false);
+    const [saving, setSaving] = useState(false);
 
     // main page settings
     const [pageBckColor, setPageBckColor] = useState("#c4ccd5");
@@ -263,6 +264,7 @@ function UsersPage() {
 
     // SAVE SETTINGS
     async function saveSettings(bookOrder) {
+        setSaving(true);
         try {
             await axios.post(
                 "/api/currentUser",
@@ -271,7 +273,7 @@ function UsersPage() {
             );
         } catch (err) {
             console.error(err);
-            alert("Failed to Set");
+            // alert("Failed to Set");
         }
 
         const isbns = bookOrder.map(book => String(book.isbn));
@@ -284,7 +286,7 @@ function UsersPage() {
             );
         } catch (err) {
             console.error(err);
-            alert("Failed to book order!");
+            // alert("Failed to book order!");
         }
 
         try {
@@ -294,10 +296,11 @@ function UsersPage() {
                 { withCredentials: true }
             );
 
-            alert("Profile Settings Saved!");
+            // alert("Profile Settings Saved!");
+            setSaving(false);
         } catch (err) {
             console.error(err);
-            alert("Failed to Save!");
+            // alert("Failed to Save!");
         }
     }
 
@@ -452,7 +455,7 @@ function UsersPage() {
                             onClick={() => saveSettings(books)}
                             className={styles.buttonClass}
                         >
-                            Save Settings
+                            Save Settings { saving && (<div className={styles.spinner}></div>)}
                         </button>
                     )}
 
