@@ -62,10 +62,10 @@ function EditablePopup({ popupRef, controls = {} }) {
                 top: position.y,
                 left: position.x,
 
-                background: "white",
+                background: "powderblue",
                 padding: "1rem",
-                borderRadius: "8px",
-                boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+                borderRadius: "20px",
+                boxShadow: "0 4px 12px rgb(0, 0, 0)",
 
                 display: "flex",
                 flexDirection: "column",
