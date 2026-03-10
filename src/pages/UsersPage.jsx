@@ -432,15 +432,17 @@ function UsersPage() {
                     <button
                         className={styles.buttonClass}
                         onClick={() => navigate("/search")}
+                        style={{backgroundColor: "crimson"}}
                     >
-                        Search for a book
+                       <strong>Search for a book</strong> 
                     </button>
 
                     <button
                         className={styles.buttonClass}
                         onClick={() => navigate("/")}
+                        style={{backgroundColor: "#35b2d5"}}
                     >
-                        Return Home
+                        Return to Home Page
                     </button>
 
                     <button
@@ -454,6 +456,7 @@ function UsersPage() {
                         <button
                             onClick={() => saveSettings(books)}
                             className={styles.buttonClass}
+                            style={{backgroundColor: "#ff7d7d"}}
                         >
                             Save Settings { saving && (<div className={styles.spinner}></div>)}
                         </button>
@@ -465,6 +468,7 @@ function UsersPage() {
                                 setEditing(true);
                             }}
                             className={styles.buttonClass}
+                            style={{backgroundColor: "#f0ff4b"}}
                         >
                             Click for page settings
                         </button>
@@ -474,8 +478,9 @@ function UsersPage() {
                         <button
                             onClick={addUserQuote}
                             className={styles.buttonClass}
+                            style={{backgroundColor: "#35b2d5"}}
                         >
-                            Add Text Section
+                            Add a New Text Section
                         </button>
                     )}
 

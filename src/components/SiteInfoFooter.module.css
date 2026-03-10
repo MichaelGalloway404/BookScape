@@ -19,7 +19,8 @@
   backdrop-filter: blur(8px);
   padding: 12px 22px;
   margin-left: 20px;
-  position: absolute;
+  position: fixed;
+  right: 20px;
 }
 
 .buttonClass:hover {
