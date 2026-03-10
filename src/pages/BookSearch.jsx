@@ -247,6 +247,19 @@ export default function BookSearch() {
             Search
           </button>
 
+          {/* Pagination controls TOP */}
+          {results.length > BOOKS_PER_PAGE && (
+            <div className={styles.pagination}>
+              <button onClick={prevPage}>Previous</button>
+
+              <span>
+                Page {page + 1} of {totalPages}
+              </span>
+
+              <button onClick={nextPage}>Next</button>
+            </div>
+          )}
+
           {visibleBooks.length > 0 && (
             /* List container for search results */
             <ul className={styles.bookCoverGrid}>
@@ -284,7 +297,7 @@ export default function BookSearch() {
             </ul>
           )}
 
-          {/* Pagination controls */}
+          {/* Pagination controls BOTTOM */}
           {results.length > BOOKS_PER_PAGE && (
             <div className={styles.pagination}>
               <button onClick={prevPage}>Previous</button>
@@ -308,6 +321,4 @@ export default function BookSearch() {
       <SiteInfoFooter />
     </>
   );
-
-
 }
