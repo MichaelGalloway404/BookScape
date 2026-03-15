@@ -284,3 +284,9 @@ This project was built to explore:
 - PostgreSQL data modeling
 - Dynamic UI customization
 - Integration with external APIs
+
+---
+
+## Author
+
+Michael Galloway
