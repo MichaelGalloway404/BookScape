@@ -77,7 +77,7 @@ function PublicPages() {
     if (settings?.mainPage) {
       setPageBckColor(settings.mainPage.pageBckColor || "#c4ccd5");
       setPageBckColor2(settings.mainPage.pageBckColor2 || "#c4ccd5");
-      setGradientAngle(settings.mainPage.gradientAngle || 135);
+      setGradientAngle(settings.mainPage.gradientAngle || 0);
     }
   }, [settings]);
 
@@ -94,7 +94,7 @@ function PublicPages() {
 
   // Book card settings from DB
   const bc = settings.bookCard || {};
-  const gradient = bc.gradientAngle || 135;
+  const gradient = bc.gradientAngle || 0;
   const mainPageDiv = settings.mainPage || {};
 
   // loading screen
@@ -159,10 +159,10 @@ function PublicPages() {
               key={book.isbn || index}
               style={{
                 background: `linear-gradient(${gradient}deg, ${bc.bgColor || "#fff"}, ${bc.bgColor2 || "#ccc"})`,
-                padding: (bc.padding || 10) + "px",
+                padding: (bc.padding || 0) + "px",
                 margin: (bc.margin || 0) + "px",
-                border: `${bc.borderSize || 2}px ${bc.borderStyle || "solid"} ${bc.borderColor || "#000"}`,
-                borderRadius: (bc.borderRadius || 5) + "px",
+                border: `${bc.borderSize || 0}px ${bc.borderStyle || "solid"} ${bc.borderColor || "#000"}`,
+                borderRadius: (bc.borderRadius || 0) + "px",
                 maxWidth: "30%",
               }}
             >
@@ -171,21 +171,21 @@ function PublicPages() {
                   src={`https://covers.openlibrary.org/b/id/${book.cover_id}-M.jpg`}
                   alt={book.title}
                   style={{
-                    width: (bc.cardImgWidth || 100) + "px",
-                    border: `${bc.cardImgBorderSize || 2}px ${bc.cardImgBorderStyle || "solid"} ${bc.cardImgBorderColor || "#000"}`,
-                    borderRadius: (bc.cardImgBorderRadius || 5) + "px",
+                    width: (bc.cardImgWidth || 0) + "px",
+                    border: `${bc.cardImgBorderSize || 0}px ${bc.cardImgBorderStyle || "solid"} ${bc.cardImgBorderColor || "#000"}`,
+                    borderRadius: (bc.cardImgBorderRadius || 0) + "px",
                   }}
                 />
                 <p style={{
                   color: bc.titleColor || "#000",
-                  fontSize: (bc.titleSize || 16) + "px",
+                  fontSize: (bc.titleSize || 0) + "px",
                   margin: (bc.titleMargin || 0) + "px",
                   padding: (bc.titlePadding || 0) + "px",
                   width: (bc.titleWidth || "100%") + "px",
                 }}>{book.title}</p>
                 <p style={{
                   color: bc.authorColor || "#333",
-                  fontSize: (bc.authorSize || 14) + "px",
+                  fontSize: (bc.authorSize || 0) + "px",
                   margin: (bc.authorMargin || 0) + "px",
                   padding: (bc.authorPadding || 0) + "px",
                   width: (bc.authorWidth || "100%") + "px",
