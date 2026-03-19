@@ -387,15 +387,18 @@ function UsersPage() {
                 setSettings={setSettings}
             />
 
-            <BookList
-                books={books}
-                editMode={editMode}
-                settings={settings}
-                deleteBook={deleteBook}
-                setBooks={setBooks}
-                setSettings={setSettings}
-            />
-
+            <div style={{
+                background: "white",
+            }}>
+                <BookList
+                    books={books}
+                    editMode={editMode}
+                    settings={settings}
+                    deleteBook={deleteBook}
+                    setBooks={setBooks}
+                    setSettings={setSettings}
+                />
+            </div>
             {/* USER QUOTES */}
             {settings?.mainPage?.userQuotes?.map((quoteKey) => (
                 <div key={quoteKey}>
@@ -411,7 +414,7 @@ function UsersPage() {
                     {editMode && (
                         <button
                             onClick={() => deleteUserQuote(quoteKey)}
-                            style={{ backgroundColor: "#ff2727b5", color: "black", borderRadius:"5px", position: "absolute"}}
+                            style={{ backgroundColor: "#ff2727b5", color: "black", borderRadius: "5px", position: "absolute" }}
                         >
                             Delete Section
                         </button>
@@ -433,15 +436,15 @@ function UsersPage() {
                     <button
                         className={styles.buttonClass}
                         onClick={() => navigate("/search")}
-                        style={{backgroundColor: "crimson"}}
+                        style={{ backgroundColor: "crimson" }}
                     >
-                       <strong>Search for a book</strong> 
+                        <strong>Search for a book</strong>
                     </button>
 
                     <button
                         onClick={() => setEditMode(prev => !prev)}
                         className={styles.buttonClass}
-                        style={{backgroundColor: editMode ? "#da5858" : " #63cd8c"}}
+                        style={{ backgroundColor: editMode ? "#da5858" : " #63cd8c" }}
                     >
                         {editMode ? "Done" : "Edit"}
                     </button>
@@ -449,9 +452,9 @@ function UsersPage() {
                         <button
                             onClick={() => saveSettings(books)}
                             className={styles.buttonClass}
-                            style={{backgroundColor: "#63cd8c"}}
+                            style={{ backgroundColor: "#63cd8c" }}
                         >
-                            Save Settings { saving && (<div className={styles.spinner}></div>)}
+                            Save Settings {saving && (<div className={styles.spinner}></div>)}
                         </button>
                     )}
 
@@ -461,7 +464,7 @@ function UsersPage() {
                                 setEditing(true);
                             }}
                             className={styles.buttonClass}
-                            style={{backgroundColor: "#2699b8"}}
+                            style={{ backgroundColor: "#2699b8" }}
                         >
                             Click for page settings
                         </button>
@@ -471,7 +474,7 @@ function UsersPage() {
                         <button
                             onClick={addUserQuote}
                             className={styles.buttonClass}
-                            style={{backgroundColor: "#2699b8"}}
+                            style={{ backgroundColor: "#2699b8" }}
                         >
                             Add a New Text Section
                         </button>
