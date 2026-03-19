@@ -22,22 +22,25 @@ function BookList({
     settings?.bookCard?.borderColor || "#c4ccd5"
   );
   const [borderSize, setBorderSize] = useState(
-    settings?.bookCard?.borderSize || 2
+    settings?.bookCard?.borderSize || 0
   );
   const [borderRadius, setBorderRadius] = useState(
-    settings?.bookCard?.borderRadius || 5
+    settings?.bookCard?.borderRadius || 0
   );
   const [borderStyle, setBorderStyle] = useState(
     settings?.bookCard?.borderStyle || "solid"
   );
   const [gradientAngle, setGradientAngle] = useState(
-    settings?.bookCard?.gradientAngle || 135
+    settings?.bookCard?.gradientAngle || 0
   );
   const [padding, setPadding] = useState(
-    settings?.bookCard?.padding || 10
+    settings?.bookCard?.padding || 0
   );
   const [margin, setMargin] = useState(
     settings?.bookCard?.margin || 0
+  );
+  const [backgroundOn, setBackgroundOn] = useState(
+    settings?.bookCard?.backgroundOn || false
   );
 
   // ---------------- Card Image ----------------
@@ -45,16 +48,16 @@ function BookList({
     settings?.bookCard?.cardImgBorderColor || "#ffffff"
   );
   const [cardImgBorderSize, setCardImgBorderSize] = useState(
-    settings?.bookCard?.cardImgBorderSize || 2
+    settings?.bookCard?.cardImgBorderSize || 0
   );
   const [cardImgBorderRadius, setCardImgBorderRadius] = useState(
-    settings?.bookCard?.cardImgBorderRadius || 5
+    settings?.bookCard?.cardImgBorderRadius || 0
   );
   const [cardImgBorderStyle, setCardImgBorderStyle] = useState(
     settings?.bookCard?.cardImgBorderStyle || "solid"
   );
   const [cardImgWidth, setCardImgWidth] = useState(
-    settings?.bookCard?.cardImgWidth || 100
+    settings?.bookCard?.cardImgWidth || 0
   );
 
   // ---------------- Book Title ----------------
@@ -62,16 +65,16 @@ function BookList({
     settings?.bookCard?.titleColor || "white"
   );
   const [titleSize, setTitleSize] = useState(
-    settings?.bookCard?.titleSize || 20
+    settings?.bookCard?.titleSize || 0
   );
   const [titlePadding, setTitlePadding] = useState(
-    settings?.bookCard?.titlePadding || 5
+    settings?.bookCard?.titlePadding || 0
   );
   const [titleMargin, setTitleMargin] = useState(
     settings?.bookCard?.titleMargin || 0
   );
   const [titleWidth, setTitleWidth] = useState(
-    settings?.bookCard?.titleWidth || 100
+    settings?.bookCard?.titleWidth || 0
   );
 
   // ---------------- Book Author ----------------
@@ -79,16 +82,16 @@ function BookList({
     settings?.bookCard?.authorColor || "white"
   );
   const [authorSize, setAuthorSize] = useState(
-    settings?.bookCard?.authorSize || 20
+    settings?.bookCard?.authorSize || 0
   );
   const [authorPadding, setAuthorPadding] = useState(
-    settings?.bookCard?.authorPadding || 5
+    settings?.bookCard?.authorPadding || 0
   );
   const [authorMargin, setAuthorMargin] = useState(
     settings?.bookCard?.authorMargin || 0
   );
   const [authorWidth, setAuthorWidth] = useState(
-    settings?.bookCard?.authorWidth || 100
+    settings?.bookCard?.authorWidth || 0
   );
 
   const popupRef = useRef(null);
@@ -109,6 +112,7 @@ function BookList({
         gradientAngle,
         padding,
         margin,
+        backgroundOn,
         // Card Image
         cardImgBorderColor,
         cardImgBorderSize,
@@ -140,6 +144,7 @@ function BookList({
     gradientAngle,
     padding,
     margin,
+    backgroundOn,
     // Card Image
     cardImgBorderColor,
     cardImgBorderSize,
@@ -174,6 +179,7 @@ function BookList({
       setGradientAngle(settings.bookCard.gradientAngle);
       setPadding(settings.bookCard.padding);
       setMargin(settings.bookCard.margin);
+      setBackgroundOn(settings.bookCard.backgroundOn);
       // Card Image
       setCardImgBorderColor(settings.bookCard.cardImgBorderColor);
       setCardImgBorderSize(settings.bookCard.cardImgBorderSize);
@@ -260,11 +266,13 @@ function BookList({
           popupRef={popupRef}
           controls={{
             // Main div Over Book Card
+            "Card Back ON/OFF": [backgroundOn, setBackgroundOn],
+            "Card Border Style": [borderStyle, setBorderStyle],
+            "break0": "",
             "Card Back Color 1": [bgColor, setBgColor],
             "Card Back Color 2": [bgColor2, setBgColor2],
             "Card Border Color": [borderColor, setBorderColor],
             "Card Border Size": [Number(borderSize), setBorderSize],
-            "Card Border Style": [borderStyle, setBorderStyle],
             "Card Border Radius": [Number(borderRadius), setBorderRadius],
             "Card Gradient Angle": [Number(gradientAngle), setGradientAngle],
             "Card Padding": [Number(padding), setPadding],
@@ -290,7 +298,6 @@ function BookList({
             "Book Author Size": [Number(authorSize), setAuthorSize],
             "Book Author Color": [authorColor, setAuthorColor],
             "Book Author Width": [Number(authorWidth), setAuthorWidth],
-
           }}
         />
       )}
@@ -305,7 +312,7 @@ function BookList({
           <div
             key={book.isbn || index}  // always give a unique key
             style={{
-              background: `linear-gradient(${gradientAngle}deg, ${bgColor},${bgColor2})`,
+              background: (backgroundOn ? `linear-gradient(${gradientAngle}deg, ${bgColor},${bgColor2})` : "none"),
               padding: padding + "px",
               margin: margin + "px",
               border: `${borderSize}px ${borderStyle} ${borderColor}`,
@@ -354,15 +361,15 @@ function BookList({
                 >{book.author}</p>
 
                 {editMode && (
-                <button style={{ backgroundColor: "#ff2727b5", color: "black", borderRadius:"5px", position: "absolute"}}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    deleteBook(book);
-                  }}
-                >
-                  Delete
-                </button>
-              )}
+                  <button style={{ backgroundColor: "#ff2727b5", color: "black", borderRadius: "5px", position: "absolute" }}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      deleteBook(book);
+                    }}
+                  >
+                    Delete
+                  </button>
+                )}
               </div>
             </li>
           </div>
