@@ -50,6 +50,10 @@ function UsersPage() {
     const [bookListDivMarginRight, setBookListDivMarginRight] = useState(0);
     const [bookListDivMarginTop, setBookListDivMarginTop] = useState(0);
     const [bookListDivMarginBottom, setBookListDivMarginBottom] = useState(0);
+    const [bookListDivPaddingLeft, setBookListDivPaddingLeft] = useState(0);
+    const [bookListDivPaddingRight, setBookListDivPaddingRight] = useState(0);
+    const [bookListDivPaddingTop, setBookListDivPaddingTop] = useState(0);
+    const [bookListDivPaddingBottom, setBookListDivPaddingBottom] = useState(0);
 
 
     const popupRef = useRef(null);
@@ -106,6 +110,10 @@ function UsersPage() {
                 bookListDivMarginRight,
                 bookListDivMarginTop,
                 bookListDivMarginBottom,
+                bookListDivPaddingLeft,
+                bookListDivPaddingRight,
+                bookListDivPaddingTop,
+                bookListDivPaddingBottom,
 
             },
         }));
@@ -141,6 +149,10 @@ function UsersPage() {
         bookListDivMarginRight,
         bookListDivMarginTop,
         bookListDivMarginBottom,
+        bookListDivPaddingLeft,
+        bookListDivPaddingRight,
+        bookListDivPaddingTop,
+        bookListDivPaddingBottom,
     ]);
 
     // Check for DB saved settings
@@ -177,6 +189,11 @@ function UsersPage() {
             if (settings.mainPage.bookListDivMarginRight) setBookListDivMarginRight(settings.mainPage.bookListDivMarginRight);
             if (settings.mainPage.bookListDivMarginTop) setBookListDivMarginTop(settings.mainPage.bookListDivMarginTop);
             if (settings.mainPage.bookListDivMarginBottom) setBookListDivMarginBottom(settings.mainPage.bookListDivMarginBottom);
+
+            if (settings.mainPage.bookListDivPaddingLeft) setBookListDivPaddingLeft(settings.mainPage.bookListDivPaddingLeft);
+            if (settings.mainPage.bookListDivPaddingRight) setBookListDivPaddingRight(settings.mainPage.bookListDivPaddingRight);
+            if (settings.mainPage.bookListDivPaddingTop) setBookListDivPaddingTop(settings.mainPage.bookListDivPaddingTop);
+            if (settings.mainPage.bookListDivPaddingBottom) setBookListDivPaddingBottom(settings.mainPage.bookListDivPaddingBottom);
         }
     }, [settings]);
 
@@ -389,7 +406,7 @@ function UsersPage() {
 
     return (
         <div style={{
-            background: (mainDivBckGrndOn ? `linear-gradient(${mainDivGradientAngle}deg, ${mainDivBGColor},${mainDivBGColor2})` : "none" ),
+            background: (mainDivBckGrndOn ? `linear-gradient(${mainDivGradientAngle}deg, ${mainDivBGColor},${mainDivBGColor2})` : "none"),
             padding: mainDivPadding + "px",
             border: `${mainDivBorderSize}px ${mainDivBorderStyle} ${mainDivBorderColor}`,
             borderRadius: mainDivBorderRadius + "px",
@@ -441,6 +458,11 @@ function UsersPage() {
                         "Book Covers Box Margin Right": [bookListDivMarginRight, setBookListDivMarginRight],
                         "Book Covers Box Margin Top": [bookListDivMarginTop, setBookListDivMarginTop],
                         "Book Covers Box Margin Bottom": [bookListDivMarginBottom, setBookListDivMarginBottom],
+                        "break7": "",
+                        "Book Covers Box Padding Left": [bookListDivPaddingLeft, setBookListDivPaddingLeft],
+                        "Book Covers Box Padding Right": [bookListDivPaddingRight, setBookListDivPaddingRight],
+                        "Book Covers Box Padding Top": [bookListDivPaddingTop, setBookListDivPaddingTop],
+                        "Book Covers Box Padding Bottom": [bookListDivPaddingBottom, setBookListDivPaddingBottom],
                     }}
                 />
             )}
@@ -472,6 +494,10 @@ function UsersPage() {
                 marginRight: bookListDivMarginRight + "px",
                 marginTop: bookListDivMarginTop + "px",
                 marginBottom: bookListDivMarginBottom + "px",
+                paddingLeft: bookListDivPaddingLeft + "px",
+                paddingRight: bookListDivPaddingRight + "px",
+                paddingTop: bookListDivPaddingTop + "px",
+                paddingBottom: bookListDivPaddingBottom + "px",
             }}>
                 <BookList
                     books={books}
