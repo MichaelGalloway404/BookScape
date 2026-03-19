@@ -202,14 +202,14 @@ function BookList({
       setTitlePadding(settings.bookCard.titlePadding);
       setTitleSize(settings.bookCard.titleSize);
       setTitleWidth(settings.bookCard.titleWidth);
-      setTitleFontFamily(settings.bookCard.titleFontFamily);
+      setTitleFontFamily(settings.bookCard.titleFontFamily || "Arial");
       // Book Author
       setAuthorColor(settings.bookCard.authorColor);
       setAuthorMargin(settings.bookCard.authorMargin);
       setAuthorPadding(settings.bookCard.authorPadding);
       setAuthorSize(settings.bookCard.authorSize);
       setAuthorWidth(settings.bookCard.authorWidth);
-      setAuthorFontFamily(settings.bookCard.authorFontFamily);
+      setAuthorFontFamily(settings.bookCard.authorFontFamily || "Arial");
     }
   }, [settings]);
 
@@ -303,7 +303,7 @@ function BookList({
             "Book Title Size": [Number(titleSize), setTitleSize],
             "Book Title Color": [titleColor, setTitleColor],
             "Book Title Width": [Number(titleWidth), setTitleWidth],
-            "Book Title Fount Family": [titleFontFamily, setTitleFontFamily],
+            "Book Title Font Family": [titleFontFamily, setTitleFontFamily],
             "break3": "",
             // Book Author
             "Book Author Margin": [Number(authorMargin), setAuthorMargin],
@@ -311,7 +311,7 @@ function BookList({
             "Book Author Size": [Number(authorSize), setAuthorSize],
             "Book Author Color": [authorColor, setAuthorColor],
             "Book Author Width": [Number(authorWidth), setAuthorWidth],
-            "Book Author Fount Family": [authorFontFamily, setAuthorFontFamily],
+            "Book Author Font Family": [authorFontFamily, setAuthorFontFamily],
           }}
         />
       )}
