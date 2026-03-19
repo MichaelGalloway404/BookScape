@@ -47,11 +47,11 @@ function TextComponent({ editMode, settings, setSettings, ComponentName, default
     const [marginBottom, setMarginBottom] = useState(
         settings?.[ComponentName]?.marginBottom || 0
     );
-    const [editing, setEditing] = useState(false); 
+    const [editing, setEditing] = useState(false);
     const [gradientAngle, setGradientAngle] = useState(
         settings?.[ComponentName]?.gradientAngle || 135
     );
-    const [displayOn, setDisplayOn] = useState( 
+    const [displayOn, setDisplayOn] = useState(
         settings?.[ComponentName]?.displayOn ?? true
     );
     // const [text, setText] = useState(defaultText);
@@ -71,7 +71,7 @@ function TextComponent({ editMode, settings, setSettings, ComponentName, default
     // const [marginBottom, setMarginBottom] = useState(0);
     // const [gradientAngle, setGradientAngle] = useState(135);
     // const [displayOn, setDisplayOn] = useState(true);
-    const [backgroundColorOn,setBackgroundColorOn] = useState(true);
+    const [backgroundColorOn, setBackgroundColorOn] = useState(true);
 
     const popupRef = useRef(null);
 
@@ -231,7 +231,7 @@ function TextComponent({ editMode, settings, setSettings, ComponentName, default
                         // "Text": [text, setText], 
                         ...(textMutable && { "Text": [text, setText] }),
                         "Hide This element? Will still show in edit mode.": [displayOn, setDisplayOn],
-                        "Background Color ON/OFF": [backgroundColorOn, setBackgroundColorOn],
+                        "Background ON/OFF": [backgroundColorOn, setBackgroundColorOn],
                         "Background Color 1": [bgColor, setBgColor],
                         "Background Color 2": [bgColor2, setBgColor2],
                         "Font Family": [fontFamily, setFontFamily],
