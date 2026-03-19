@@ -111,9 +111,13 @@ function PublicPages() {
   return (
     <div
       style={{
-        background: `linear-gradient(${mainPage.mainDivGradientAngle ?? 135}deg, 
+        background: (
+              (mainPage.mainDivBckGrndOn === true || mainPage.mainDivBckGrndOn === "true")
+                ? `linear-gradient(${mainPage.mainDivGradientAngle ?? 0}deg, 
                 ${mainPage.mainDivBGColor ?? "#ffffff"}, 
-                ${mainPage.mainDivBGColor2 ?? "#dddddd"})`,
+                ${mainPage.mainDivBGColor2 ?? "#dddddd"})`
+                : "none"
+            ),
 
         padding: (mainPage.mainDivPadding ?? 0) + "px",
 
