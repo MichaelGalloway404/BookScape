@@ -155,7 +155,7 @@ function PublicPages() {
       ) : (
         <div
           style={{
-            background: (mainPage.bookListDivBckGrndOn ? `linear-gradient(${mainPage.bookListDivGradientAngle ?? 0}deg, ${mainPage.bookListDivBGColor ?? "#ffffff"},${mainPage.bookListDivBGColor2 ?? "#ffffff"})` : "none"),
+            background: ((mainPage.bookListDivBckGrndOn ?? true) ? `linear-gradient(${mainPage.bookListDivGradientAngle ?? 0}deg, ${mainPage.bookListDivBGColor ?? "#ffffff"},${mainPage.bookListDivBGColor2 ?? "#ffffff"})` : "none"),
             border: `${mainPage.bookListDivBorderSize ?? 0}px ${mainPage.bookListDivBorderStyle ?? "none"} ${mainPage.bookListDivBorderColor ?? "#ffffff"}`,
             borderRadius: (mainPage.bookListDivBorderRadius ?? 0) + "px",
             marginLeft: (mainPage.bookListDivMarginLeft ?? 0) + "px",
