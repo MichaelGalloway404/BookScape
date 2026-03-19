@@ -77,7 +77,7 @@ function BookList({
     settings?.bookCard?.titleWidth || 0
   );
   const [titleFontFamily, setTitleFontFamily] = useState(
-    settings?.[ComponentName]?.titleFontFamily || "Arial"
+    settings?.bookCard?.titleFontFamily || "Arial"
   );
 
   // ---------------- Book Author ----------------
@@ -97,7 +97,7 @@ function BookList({
     settings?.bookCard?.authorWidth || 0
   );
   const [authorFontFamily, setAuthorFontFamily] = useState(
-    settings?.[ComponentName]?.authorFontFamily || "Arial"
+    settings?.bookCard?.authorFontFamily || "Arial"
   );
 
   const popupRef = useRef(null);
