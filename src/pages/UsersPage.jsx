@@ -35,6 +35,7 @@ function UsersPage() {
     const [mainDivMarginRight, setMainDivMarginRight] = useState(0);
     const [mainDivMarginTop, setMainDivMarginTop] = useState(0);
     const [mainDivMarginBottom, setMainDivMarginBottom] = useState(0);
+    const [mainDivBckGrndOn, setMainDivBckGrndOn] = useState(true);
 
     // Book List Bounding div
     const [bookListDivGradientAngle, setBookListDivGradientAngle] = useState(0);
@@ -91,6 +92,7 @@ function UsersPage() {
                 mainDivMarginRight,
                 mainDivMarginTop,
                 mainDivMarginBottom,
+                mainDivBckGrndOn,
                 // Book List Bounding div
                 bookListDivGradientAngle,
                 bookListDivBGColor,
@@ -125,6 +127,7 @@ function UsersPage() {
         mainDivMarginRight,
         mainDivMarginTop,
         mainDivMarginBottom,
+        mainDivBckGrndOn,
         // Book List Bounding div
         bookListDivGradientAngle,
         bookListDivBGColor,
@@ -160,6 +163,7 @@ function UsersPage() {
             if (settings.mainPage.mainDivMarginRight) setMainDivMarginRight(settings.mainPage.mainDivMarginRight);
             if (settings.mainPage.mainDivMarginTop) setMainDivMarginTop(settings.mainPage.mainDivMarginTop);
             if (settings.mainPage.mainDivMarginBottom) setMainDivMarginBottom(settings.mainPage.mainDivMarginBottom);
+            if (settings.mainPage.mainDivBckGrndOn) setMainDivBckGrndOn(settings.mainPage.mainDivBckGrndOn);
             // Book List Bounding div
             if (settings.mainPage.bookListDivGradientAngle) setBookListDivGradientAngle(settings.mainPage.bookListDivGradientAngle);
             if (settings.mainPage.bookListDivBGColor) setBookListDivBGColor(settings.mainPage.bookListDivBGColor);
@@ -385,7 +389,7 @@ function UsersPage() {
 
     return (
         <div style={{
-            background: `linear-gradient(${mainDivGradientAngle}deg, ${mainDivBGColor},${mainDivBGColor2})`,
+            background: (mainDivBckGrndOn ? `linear-gradient(${mainDivGradientAngle}deg, ${mainDivBGColor},${mainDivBGColor2})` : "none" ),
             padding: mainDivPadding + "px",
             border: `${mainDivBorderSize}px ${mainDivBorderStyle} ${mainDivBorderColor}`,
             borderRadius: mainDivBorderRadius + "px",
@@ -406,6 +410,7 @@ function UsersPage() {
                         "Profile is Private": [profilePublic, setProfilePrivate],
                         "break1": "",
                         // main div of page settings
+                        "Center of page Background ON/OFF": [mainDivBckGrndOn, setMainDivBckGrndOn],
                         "Center of page Background Color 1": [mainDivBGColor, setMainDivBGColor],
                         "Center of page Background Color 2": [mainDivBGColor2, setMainDivBGColor2],
                         "Center Page Gradient Angle": [Number(mainDivGradientAngle), setMainDivGradientAngle],
