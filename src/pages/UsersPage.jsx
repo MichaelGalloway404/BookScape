@@ -161,18 +161,18 @@ function UsersPage() {
             if (settings.mainPage.mainDivMarginTop) setMainDivMarginTop(settings.mainPage.mainDivMarginTop);
             if (settings.mainPage.mainDivMarginBottom) setMainDivMarginBottom(settings.mainPage.mainDivMarginBottom);
             // Book List Bounding div
-            if (settings.mainPage.bookListDivGradientAngle) setBookListDivGradientAngle(settings.mainPage.mainDivGradientAngle);
-            if (settings.mainPage.bookListDivBGColor) setBookListDivBGColor(settings.mainPage.mainDivBGColor);
-            if (settings.mainPage.bookListDivBGColor2) setBookListDivBGColor2(settings.mainPage.mainDivBGColor2);
-            if (settings.mainPage.bookListDivPadding) setBookListDivPadding(settings.mainPage.mainDivPadding);
-            if (settings.mainPage.bookListDivBorderSize) setBookListDivBorderSize(settings.mainPage.mainDivBorderSize);
-            if (settings.mainPage.bookListDivBorderStyle) setBookListDivBorderStyle(settings.mainPage.mainDivBorderStyle);
-            if (settings.mainPage.bookListDivBorderColor) setBookListDivBorderColor(settings.mainPage.mainDivBorderColor);
-            if (settings.mainPage.bookListDivBorderRadius) setBookListDivBorderRadius(settings.mainPage.mainDivBorderRadius);
-            if (settings.mainPage.bookListDivMarginLeft) setBookListDivMarginLeft(settings.mainPage.mainDivMarginLeft);
-            if (settings.mainPage.bookListDivMarginRight) setBookListDivMarginRight(settings.mainPage.mainDivMarginRight);
-            if (settings.mainPage.bookListDivMarginTop) setBookListDivMarginTop(settings.mainPage.mainDivMarginTop);
-            if (settings.mainPage.bookListDivMarginBottom) setBookListDivMarginBottom(settings.mainPage.mainDivMarginBottom);
+            if (settings.mainPage.bookListDivGradientAngle) setBookListDivGradientAngle(settings.mainPage.bookListDivGradientAngle);
+            if (settings.mainPage.bookListDivBGColor) setBookListDivBGColor(settings.mainPage.bookListDivBGColor);
+            if (settings.mainPage.bookListDivBGColor2) setBookListDivBGColor2(settings.mainPage.bookListDivBGColor2);
+            if (settings.mainPage.bookListDivPadding) setBookListDivPadding(settings.mainPage.bookListDivPadding);
+            if (settings.mainPage.bookListDivBorderSize) setBookListDivBorderSize(settings.mainPage.bookListDivBorderSize);
+            if (settings.mainPage.bookListDivBorderStyle) setBookListDivBorderStyle(settings.mainPage.bookListDivBorderStyle);
+            if (settings.mainPage.bookListDivBorderColor) setBookListDivBorderColor(settings.mainPage.bookListDivBorderColor);
+            if (settings.mainPage.bookListDivBorderRadius) setBookListDivBorderRadius(settings.mainPage.bookListDivBorderRadius);
+            if (settings.mainPage.bookListDivMarginLeft) setBookListDivMarginLeft(settings.mainPage.bookListDivMarginLeft);
+            if (settings.mainPage.bookListDivMarginRight) setBookListDivMarginRight(settings.mainPage.bookListDivMarginRight);
+            if (settings.mainPage.bookListDivMarginTop) setBookListDivMarginTop(settings.mainPage.bookListDivMarginTop);
+            if (settings.mainPage.bookListDivMarginBottom) setBookListDivMarginBottom(settings.mainPage.bookListDivMarginBottom);
         }
     }, [settings]);
 
