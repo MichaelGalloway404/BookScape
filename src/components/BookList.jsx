@@ -76,6 +76,9 @@ function BookList({
   const [titleWidth, setTitleWidth] = useState(
     settings?.bookCard?.titleWidth || 0
   );
+  const [titleFontFamily, setTitleFontFamily] = useState(
+    settings?.[ComponentName]?.titleFontFamily || "Arial"
+  );
 
   // ---------------- Book Author ----------------
   const [authorColor, setAuthorColor] = useState(
@@ -92,6 +95,9 @@ function BookList({
   );
   const [authorWidth, setAuthorWidth] = useState(
     settings?.bookCard?.authorWidth || 0
+  );
+  const [authorFontFamily, setAuthorFontFamily] = useState(
+    settings?.[ComponentName]?.authorFontFamily || "Arial"
   );
 
   const popupRef = useRef(null);
@@ -125,12 +131,14 @@ function BookList({
         titlePadding,
         titleSize,
         titleWidth,
+        titleFontFamily,
         // Book Author
         authorColor,
         authorMargin,
         authorPadding,
         authorSize,
         authorWidth,
+        authorFontFamily,
       },
     }));
   }, [
@@ -157,12 +165,14 @@ function BookList({
     titlePadding,
     titleSize,
     titleWidth,
+    titleFontFamily,
     // Book Author
     authorColor,
     authorMargin,
     authorPadding,
     authorSize,
     authorWidth,
+    authorFontFamily,
 
     setSettings]);
 
@@ -179,7 +189,7 @@ function BookList({
       setGradientAngle(settings.bookCard.gradientAngle);
       setPadding(settings.bookCard.padding);
       setMargin(settings.bookCard.margin);
-      if (settings.bookCard.backgroundOn  !== undefined) setBackgroundOn(settings.bookCard.backgroundOn);
+      if (settings.bookCard.backgroundOn !== undefined) setBackgroundOn(settings.bookCard.backgroundOn);
       // Card Image
       setCardImgBorderColor(settings.bookCard.cardImgBorderColor);
       setCardImgBorderSize(settings.bookCard.cardImgBorderSize);
@@ -192,12 +202,14 @@ function BookList({
       setTitlePadding(settings.bookCard.titlePadding);
       setTitleSize(settings.bookCard.titleSize);
       setTitleWidth(settings.bookCard.titleWidth);
+      setTitleFontFamily(settings.bookCard.titleFontFamily);
       // Book Author
       setAuthorColor(settings.bookCard.authorColor);
       setAuthorMargin(settings.bookCard.authorMargin);
       setAuthorPadding(settings.bookCard.authorPadding);
       setAuthorSize(settings.bookCard.authorSize);
       setAuthorWidth(settings.bookCard.authorWidth);
+      setAuthorFontFamily(settings.bookCard.authorFontFamily);
     }
   }, [settings]);
 
@@ -291,6 +303,7 @@ function BookList({
             "Book Title Size": [Number(titleSize), setTitleSize],
             "Book Title Color": [titleColor, setTitleColor],
             "Book Title Width": [Number(titleWidth), setTitleWidth],
+            "Book Title Fount Family": [titleFontFamily, setTitleFontFamily],
             "break3": "",
             // Book Author
             "Book Author Margin": [Number(authorMargin), setAuthorMargin],
@@ -298,6 +311,7 @@ function BookList({
             "Book Author Size": [Number(authorSize), setAuthorSize],
             "Book Author Color": [authorColor, setAuthorColor],
             "Book Author Width": [Number(authorWidth), setAuthorWidth],
+            "Book Author Fount Family": [authorFontFamily, setAuthorFontFamily],
           }}
         />
       )}
@@ -347,6 +361,7 @@ function BookList({
                     padding: titlePadding + "px",
                     fontSize: titleSize + "px",
                     width: titleWidth + "px",
+                    fontFamily: titleFontFamily,
                   }}
                 >{book.title}</p>
                 {/* AUTHOR */}
@@ -357,6 +372,7 @@ function BookList({
                     padding: authorPadding + "px",
                     fontSize: authorSize + "px",
                     width: authorWidth + "px",
+                    fontFamily: authorFontFamily,
                   }}
                 >{book.author}</p>
 

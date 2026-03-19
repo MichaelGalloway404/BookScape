@@ -211,6 +211,7 @@ function PublicPages() {
                     margin: (bc.titleMargin || 0) + "px",
                     padding: (bc.titlePadding || 0) + "px",
                     width: (bc.titleWidth || "100%") + "px",
+                    fontFamily: (bc.titleFontFamily || "Arial"),
                   }}>{book.title}</p>
                   <p style={{
                     color: bc.authorColor || "#333",
@@ -218,6 +219,7 @@ function PublicPages() {
                     margin: (bc.authorMargin || 0) + "px",
                     padding: (bc.authorPadding || 0) + "px",
                     width: (bc.authorWidth || "100%") + "px",
+                    fontFamily: (bc.authorFontFamily || "Arial"),
                   }}>{book.author}</p>
                 </li>
               </div>
