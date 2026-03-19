@@ -54,24 +54,9 @@ function TextComponent({ editMode, settings, setSettings, ComponentName, default
     const [displayOn, setDisplayOn] = useState(
         settings?.[ComponentName]?.displayOn ?? true
     );
-    // const [text, setText] = useState(defaultText);
-    // const [fontFamily, setFontFamily] = useState("Arial");
-    // const [fontColor, setFontColor] = useState("black");
-    // const [bgColor, setBgColor] = useState("white");
-    // const [bgColor2, setBgColor2] = useState("white");
-    // const [fontSize, setFontSize] = useState(40);
-    // const [borderColor, setBorderColor] = useState("#c4ccd5");
-    // const [borderSize, setBorderSize] = useState(2);
-    // const [borderRadius, setBorderRadius] = useState(5);
-    // const [borderStyle, setBorderStyle] = useState("solid");
-    // const [padding, setPadding] = useState(5);
-    // const [marginLeft, setMarginLeft] = useState(1);
-    // const [marginRight, setMarginRight] = useState(0);
-    // const [marginTop, setMarginTop] = useState(0);
-    // const [marginBottom, setMarginBottom] = useState(0);
-    // const [gradientAngle, setGradientAngle] = useState(135);
-    // const [displayOn, setDisplayOn] = useState(true);
-    const [backgroundColorOn, setBackgroundColorOn] = useState(true);
+    const [backgroundColorOn, setBackgroundColorOn] = useState(
+        settings?.[ComponentName]?.backgroundColorOn ??true
+    );
 
     const popupRef = useRef(null);
 
@@ -124,27 +109,6 @@ function TextComponent({ editMode, settings, setSettings, ComponentName, default
         setSettings]);
 
     // Load saved settings from DB
-    // useEffect(() => {
-    //     if (settings?.[ComponentName]) {
-    //         setText(settings[ComponentName].text);
-    //         setFontFamily(settings[ComponentName].fontFamily);
-    //         setFontColor(settings[ComponentName].fontColor);
-    //         setFontSize(settings[ComponentName].fontSize);
-    //         setBgColor(settings[ComponentName].bgColor);
-    //         setBgColor2(settings[ComponentName].bgColor2);
-    //         setBorderColor(settings[ComponentName].borderColor);
-    //         setBorderSize(settings[ComponentName].borderSize);
-    //         setBorderStyle(settings[ComponentName].borderStyle);
-    //         setBorderRadius(settings[ComponentName].borderRadius);
-    //         setMarginLeft(settings[ComponentName].marginLeft);
-    //         setMarginRight(settings[ComponentName].marginRight);
-    //         setMarginTop(settings[ComponentName].marginTop);
-    //         setMarginBottom(settings[ComponentName].marginBottom);
-    //         setPadding(settings[ComponentName].padding);
-    //         setGradientAngle(settings[ComponentName].gradientAngle);
-    //         setDisplayOn(settings[ComponentName].displayOn ?? true);
-    //     }
-    // }, [settings, ComponentName]);
     useEffect(() => {
         if (settings?.[ComponentName]) {
             const s = settings[ComponentName];
@@ -165,9 +129,7 @@ function TextComponent({ editMode, settings, setSettings, ComponentName, default
             if (s.marginBottom) setMarginBottom(s.marginBottom);
             if (s.padding) setPadding(s.padding);
             if (s.gradientAngle) setGradientAngle(s.gradientAngle);
-            if (s.backgroundColorOn) setBackgroundColorOn(s.backgroundColorOn);
-
-            // boolean fix
+            if (s.backgroundColorOn  !== undefined) setBackgroundColorOn(s.backgroundColorOn);
             if (s.displayOn !== undefined) setDisplayOn(s.displayOn);
         }
     }, [settings, ComponentName]);
@@ -228,7 +190,6 @@ function TextComponent({ editMode, settings, setSettings, ComponentName, default
                 <EditablePopup
                     popupRef={popupRef}
                     controls={{
-                        // "Text": [text, setText], 
                         ...(textMutable && { "Text": [text, setText] }),
                         "Hide This element? Will still show in edit mode.": [displayOn, setDisplayOn],
                         "Background ON/OFF": [backgroundColorOn, setBackgroundColorOn],
