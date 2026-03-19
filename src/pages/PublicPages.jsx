@@ -95,7 +95,7 @@ function PublicPages() {
   // Book card settings from DB
   const bc = settings.bookCard || {};
   const gradient = bc.gradientAngle || 0;
-  const mainPageDiv = settings.mainPage || {};
+  const mainPage = settings.mainPage || {};
 
   // loading screen
   if (!person || loading) {
@@ -111,22 +111,22 @@ function PublicPages() {
   return (
     <div
       style={{
-        background: `linear-gradient(${mainPageDiv.mainDivGradientAngle ?? 135}deg, 
-                ${mainPageDiv.mainDivBGColor ?? "#ffffff"}, 
-                ${mainPageDiv.mainDivBGColor2 ?? "#dddddd"})`,
+        background: `linear-gradient(${mainPage.mainDivGradientAngle ?? 135}deg, 
+                ${mainPage.mainDivBGColor ?? "#ffffff"}, 
+                ${mainPage.mainDivBGColor2 ?? "#dddddd"})`,
 
-        padding: (mainPageDiv.mainDivPadding ?? 0) + "px",
+        padding: (mainPage.mainDivPadding ?? 0) + "px",
 
-        border: `${mainPageDiv.mainDivBorderSize ?? 0}px 
-             ${mainPageDiv.mainDivBorderStyle ?? "solid"} 
-             ${mainPageDiv.mainDivBorderColor ?? "transparent"}`,
+        border: `${mainPage.mainDivBorderSize ?? 0}px 
+             ${mainPage.mainDivBorderStyle ?? "solid"} 
+             ${mainPage.mainDivBorderColor ?? "transparent"}`,
 
-        borderRadius: (mainPageDiv.mainDivBorderRadius ?? 0) + "px",
+        borderRadius: (mainPage.mainDivBorderRadius ?? 0) + "px",
 
-        marginLeft: (mainPageDiv.mainDivMarginLeft ?? 0) + "px",
-        marginRight: (mainPageDiv.mainDivMarginRight ?? 0) + "px",
-        marginTop: (mainPageDiv.mainDivMarginTop ?? 0) + "px",
-        marginBottom: (mainPageDiv.mainDivMarginBottom ?? 0) + "px",
+        marginLeft: (mainPage.mainDivMarginLeft ?? 0) + "px",
+        marginRight: (mainPage.mainDivMarginRight ?? 0) + "px",
+        marginTop: (mainPage.mainDivMarginTop ?? 0) + "px",
+        marginBottom: (mainPage.mainDivMarginBottom ?? 0) + "px",
       }}
     >
       {/* PAGE TITLE */}
@@ -153,47 +153,63 @@ function PublicPages() {
       {books.length === 0 ? (
         <p>No books added yet.</p>
       ) : (
-        <ul style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
-          {books.map((book, index) => (
-            <div
-              key={book.isbn || index}
-              style={{
-                background: `linear-gradient(${gradient}deg, ${bc.bgColor || "#fff"}, ${bc.bgColor2 || "#ccc"})`,
-                padding: (bc.padding || 0) + "px",
-                margin: (bc.margin || 0) + "px",
-                border: `${bc.borderSize || 0}px ${bc.borderStyle || "solid"} ${bc.borderColor || "#000"}`,
-                borderRadius: (bc.borderRadius || 0) + "px",
-                maxWidth: "30%",
-              }}
-            >
-              <li style={{ listStyle: "none" }}>
-                <img
-                  src={`https://covers.openlibrary.org/b/id/${book.cover_id}-M.jpg`}
-                  alt={book.title}
-                  style={{
-                    width: (bc.cardImgWidth || 0) + "px",
-                    border: `${bc.cardImgBorderSize || 0}px ${bc.cardImgBorderStyle || "solid"} ${bc.cardImgBorderColor || "#000"}`,
-                    borderRadius: (bc.cardImgBorderRadius || 0) + "px",
-                  }}
-                />
-                <p style={{
-                  color: bc.titleColor || "#000",
-                  fontSize: (bc.titleSize || 0) + "px",
-                  margin: (bc.titleMargin || 0) + "px",
-                  padding: (bc.titlePadding || 0) + "px",
-                  width: (bc.titleWidth || "100%") + "px",
-                }}>{book.title}</p>
-                <p style={{
-                  color: bc.authorColor || "#333",
-                  fontSize: (bc.authorSize || 0) + "px",
-                  margin: (bc.authorMargin || 0) + "px",
-                  padding: (bc.authorPadding || 0) + "px",
-                  width: (bc.authorWidth || "100%") + "px",
-                }}>{book.author}</p>
-              </li>
-            </div>
-          ))}
-        </ul>
+        <div
+          style={{
+            background: (mainPage.bookListDivBckGrndOn ? `linear-gradient(${mainPage.bookListDivGradientAngle ?? 0}deg, ${mainPage.bookListDivBGColor ?? "#ffffff"},${mainPage.bookListDivBGColor2 ?? "#ffffff"})` : "none"),
+            border: `${mainPage.bookListDivBorderSize ?? 0}px ${mainPage.bookListDivBorderStyle ?? "none"} ${mainPage.bookListDivBorderColor ?? "#ffffff"}`,
+            borderRadius: (mainPage.bookListDivBorderRadius ?? 0) + "px",
+            marginLeft: (mainPage.bookListDivMarginLeft ?? 0) + "px",
+            marginRight: (mainPage.bookListDivMarginRight ?? 0) + "px",
+            marginTop: (mainPage.bookListDivMarginTop ?? 0) + "px",
+            marginBottom: (mainPage.bookListDivMarginBottom ?? 0) + "px",
+            paddingLeft: (mainPage.bookListDivPaddingLeft ?? 0) + "px",
+            paddingRight: (mainPage.bookListDivPaddingRight ?? 0) + "px",
+            paddingTop: (mainPage.bookListDivPaddingTop ?? 0) + "px",
+            paddingBottom: (mainPage.bookListDivPaddingBottom ?? 0) + "px",
+          }}
+        >
+          <ul style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+            {books.map((book, index) => (
+              <div
+                key={book.isbn || index}
+                style={{
+                  background: `linear-gradient(${gradient}deg, ${bc.bgColor || "#fff"}, ${bc.bgColor2 || "#ccc"})`,
+                  padding: (bc.padding || 0) + "px",
+                  margin: (bc.margin || 0) + "px",
+                  border: `${bc.borderSize || 0}px ${bc.borderStyle || "solid"} ${bc.borderColor || "#000"}`,
+                  borderRadius: (bc.borderRadius || 0) + "px",
+                  maxWidth: "30%",
+                }}
+              >
+                <li style={{ listStyle: "none" }}>
+                  <img
+                    src={`https://covers.openlibrary.org/b/id/${book.cover_id}-M.jpg`}
+                    alt={book.title}
+                    style={{
+                      width: (bc.cardImgWidth || 0) + "px",
+                      border: `${bc.cardImgBorderSize || 0}px ${bc.cardImgBorderStyle || "solid"} ${bc.cardImgBorderColor || "#000"}`,
+                      borderRadius: (bc.cardImgBorderRadius || 0) + "px",
+                    }}
+                  />
+                  <p style={{
+                    color: bc.titleColor || "#000",
+                    fontSize: (bc.titleSize || 0) + "px",
+                    margin: (bc.titleMargin || 0) + "px",
+                    padding: (bc.titlePadding || 0) + "px",
+                    width: (bc.titleWidth || "100%") + "px",
+                  }}>{book.title}</p>
+                  <p style={{
+                    color: bc.authorColor || "#333",
+                    fontSize: (bc.authorSize || 0) + "px",
+                    margin: (bc.authorMargin || 0) + "px",
+                    padding: (bc.authorPadding || 0) + "px",
+                    width: (bc.authorWidth || "100%") + "px",
+                  }}>{book.author}</p>
+                </li>
+              </div>
+            ))}
+          </ul>
+        </div>
       )}
       {/* USER QUOTES */}
       {settings?.mainPage?.userQuotes?.map((quoteKey) => (
