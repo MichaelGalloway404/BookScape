@@ -41,7 +41,6 @@ function UsersPage() {
     const [bookListDivGradientAngle, setBookListDivGradientAngle] = useState(0);
     const [bookListDivBGColor, setBookListDivBGColor] = useState("white");
     const [bookListDivBGColor2, setBookListDivBGColor2] = useState("white");
-    const [bookListDivPadding, setBookListDivPadding] = useState(0);
     const [bookListDivBorderSize, setBookListDivBorderSize] = useState(0);
     const [bookListDivBorderStyle, setBookListDivBorderStyle] = useState("solid");
     const [bookListDivBorderColor, setBookListDivBorderColor] = useState("black");
@@ -54,6 +53,7 @@ function UsersPage() {
     const [bookListDivPaddingRight, setBookListDivPaddingRight] = useState(0);
     const [bookListDivPaddingTop, setBookListDivPaddingTop] = useState(0);
     const [bookListDivPaddingBottom, setBookListDivPaddingBottom] = useState(0);
+    const [bookListDivBckGrndOn, setBookListDivBckGrndOn] = useState(true);
 
 
     const popupRef = useRef(null);
@@ -101,7 +101,6 @@ function UsersPage() {
                 bookListDivGradientAngle,
                 bookListDivBGColor,
                 bookListDivBGColor2,
-                bookListDivPadding,
                 bookListDivBorderSize,
                 bookListDivBorderStyle,
                 bookListDivBorderColor,
@@ -114,6 +113,7 @@ function UsersPage() {
                 bookListDivPaddingRight,
                 bookListDivPaddingTop,
                 bookListDivPaddingBottom,
+                bookListDivBckGrndOn,
 
             },
         }));
@@ -140,7 +140,6 @@ function UsersPage() {
         bookListDivGradientAngle,
         bookListDivBGColor,
         bookListDivBGColor2,
-        bookListDivPadding,
         bookListDivBorderSize,
         bookListDivBorderStyle,
         bookListDivBorderColor,
@@ -153,6 +152,7 @@ function UsersPage() {
         bookListDivPaddingRight,
         bookListDivPaddingTop,
         bookListDivPaddingBottom,
+        bookListDivBckGrndOn,
     ]);
 
     // Check for DB saved settings
@@ -180,7 +180,6 @@ function UsersPage() {
             if (settings.mainPage.bookListDivGradientAngle) setBookListDivGradientAngle(settings.mainPage.bookListDivGradientAngle);
             if (settings.mainPage.bookListDivBGColor) setBookListDivBGColor(settings.mainPage.bookListDivBGColor);
             if (settings.mainPage.bookListDivBGColor2) setBookListDivBGColor2(settings.mainPage.bookListDivBGColor2);
-            if (settings.mainPage.bookListDivPadding) setBookListDivPadding(settings.mainPage.bookListDivPadding);
             if (settings.mainPage.bookListDivBorderSize) setBookListDivBorderSize(settings.mainPage.bookListDivBorderSize);
             if (settings.mainPage.bookListDivBorderStyle) setBookListDivBorderStyle(settings.mainPage.bookListDivBorderStyle);
             if (settings.mainPage.bookListDivBorderColor) setBookListDivBorderColor(settings.mainPage.bookListDivBorderColor);
@@ -189,11 +188,11 @@ function UsersPage() {
             if (settings.mainPage.bookListDivMarginRight) setBookListDivMarginRight(settings.mainPage.bookListDivMarginRight);
             if (settings.mainPage.bookListDivMarginTop) setBookListDivMarginTop(settings.mainPage.bookListDivMarginTop);
             if (settings.mainPage.bookListDivMarginBottom) setBookListDivMarginBottom(settings.mainPage.bookListDivMarginBottom);
-
             if (settings.mainPage.bookListDivPaddingLeft) setBookListDivPaddingLeft(settings.mainPage.bookListDivPaddingLeft);
             if (settings.mainPage.bookListDivPaddingRight) setBookListDivPaddingRight(settings.mainPage.bookListDivPaddingRight);
             if (settings.mainPage.bookListDivPaddingTop) setBookListDivPaddingTop(settings.mainPage.bookListDivPaddingTop);
             if (settings.mainPage.bookListDivPaddingBottom) setBookListDivPaddingBottom(settings.mainPage.bookListDivPaddingBottom);
+            if (settings.mainPage.bookListDivBckGrndOn) setBookListDivBckGrndOn(settings.mainPage.bookListDivBckGrndOn);
         }
     }, [settings]);
 
@@ -444,10 +443,10 @@ function UsersPage() {
                         "Center Page Margin Bottom": [mainDivMarginBottom, setMainDivMarginBottom],
                         "break4": "",
                         // Book List Bounding div
+                        "Book Covers Box Background ON/OFF": [bookListDivBckGrndOn, setBookListDivBckGrndOn],
                         "Book Covers Box Background Color 1": [bookListDivBGColor, setBookListDivBGColor],
                         "Book Covers Box Background Color 2": [bookListDivBGColor2, setBookListDivBGColor2],
                         "Book Covers Box Gradient Angle": [Number(bookListDivGradientAngle), setBookListDivGradientAngle],
-                        "Book Covers Box Padding": [bookListDivPadding, setBookListDivPadding],
                         "break5": "",
                         "Book Covers Box Border Size": [bookListDivBorderSize, setBookListDivBorderSize],
                         "Book Covers Box Border Style": [bookListDivBorderStyle, setBookListDivBorderStyle],
@@ -486,8 +485,7 @@ function UsersPage() {
             />
 
             <div style={{
-                background: `linear-gradient(${bookListDivGradientAngle}deg, ${bookListDivBGColor},${bookListDivBGColor2})`,
-                padding: bookListDivPadding + "px",
+                background: (bookListDivBckGrndOn ? `linear-gradient(${bookListDivGradientAngle}deg, ${bookListDivBGColor},${bookListDivBGColor2})` : "none"),
                 border: `${bookListDivBorderSize}px ${bookListDivBorderStyle} ${bookListDivBorderColor}`,
                 borderRadius: bookListDivBorderRadius + "px",
                 marginLeft: bookListDivMarginLeft + "px",
