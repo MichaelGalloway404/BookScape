@@ -13,7 +13,7 @@ function PublicPages() {
   const [settings, setSettings] = useState({});
   const [pageBckColor, setPageBckColor] = useState("#c4ccd5");
   const [pageBckColor2, setPageBckColor2] = useState("#c4ccd5");
-  const [gradientAngle, setGradientAngle] = useState(135);
+  const [gradientAngle, setGradientAngle] = useState(0);
 
   const [loading, setLoading] = useState(true);
 
@@ -115,13 +115,13 @@ function PublicPages() {
                 ${mainPageDiv.mainDivBGColor ?? "#ffffff"}, 
                 ${mainPageDiv.mainDivBGColor2 ?? "#dddddd"})`,
 
-        padding: (mainPageDiv.mainDivPadding ?? 20) + "px",
+        padding: (mainPageDiv.mainDivPadding ?? 0) + "px",
 
         border: `${mainPageDiv.mainDivBorderSize ?? 0}px 
              ${mainPageDiv.mainDivBorderStyle ?? "solid"} 
              ${mainPageDiv.mainDivBorderColor ?? "transparent"}`,
 
-        borderRadius: (mainPageDiv.mainDivBorderRadius ?? 12) + "px",
+        borderRadius: (mainPageDiv.mainDivBorderRadius ?? 0) + "px",
 
         marginLeft: (mainPageDiv.mainDivMarginLeft ?? 0) + "px",
         marginRight: (mainPageDiv.mainDivMarginRight ?? 0) + "px",

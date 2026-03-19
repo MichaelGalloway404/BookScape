@@ -26,7 +26,7 @@ function UsersPage() {
     const [mainDivGradientAngle, setMainDivGradientAngle] = useState(0);
     const [mainDivBGColor, setMainDivBGColor] = useState("white");
     const [mainDivBGColor2, setMainDivBGColor2] = useState("white");
-    const [mainDivPadding, setMainDivPadding] = useState(2);
+    const [mainDivPadding, setMainDivPadding] = useState(0);
     const [mainDivBorderSize, setMainDivBorderSize] = useState(0);
     const [mainDivBorderStyle, setMainDivBorderStyle] = useState("solid");
     const [mainDivBorderColor, setMainDivBorderColor] = useState("black");
@@ -175,7 +175,7 @@ function UsersPage() {
             if (settings.mainPage.mainDivMarginRight) setMainDivMarginRight(settings.mainPage.mainDivMarginRight);
             if (settings.mainPage.mainDivMarginTop) setMainDivMarginTop(settings.mainPage.mainDivMarginTop);
             if (settings.mainPage.mainDivMarginBottom) setMainDivMarginBottom(settings.mainPage.mainDivMarginBottom);
-            if (settings.mainPage.mainDivBckGrndOn) setMainDivBckGrndOn(settings.mainPage.mainDivBckGrndOn);
+            if (settings.mainPage.mainDivBckGrndOn  !== undefined) setMainDivBckGrndOn(settings.mainPage.mainDivBckGrndOn);
             // Book List Bounding div
             if (settings.mainPage.bookListDivGradientAngle) setBookListDivGradientAngle(settings.mainPage.bookListDivGradientAngle);
             if (settings.mainPage.bookListDivBGColor) setBookListDivBGColor(settings.mainPage.bookListDivBGColor);
@@ -192,7 +192,7 @@ function UsersPage() {
             if (settings.mainPage.bookListDivPaddingRight) setBookListDivPaddingRight(settings.mainPage.bookListDivPaddingRight);
             if (settings.mainPage.bookListDivPaddingTop) setBookListDivPaddingTop(settings.mainPage.bookListDivPaddingTop);
             if (settings.mainPage.bookListDivPaddingBottom) setBookListDivPaddingBottom(settings.mainPage.bookListDivPaddingBottom);
-            if (settings.mainPage.bookListDivBckGrndOn) setBookListDivBckGrndOn(settings.mainPage.bookListDivBckGrndOn);
+            if (settings.mainPage.bookListDivBckGrndOn  !== undefined) setBookListDivBckGrndOn(settings.mainPage.bookListDivBckGrndOn);
         }
     }, [settings]);
 

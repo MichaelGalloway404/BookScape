@@ -18,25 +18,25 @@ function TextComponent({ editMode, settings, setSettings, ComponentName, default
         settings?.[ComponentName]?.bgColor2 || "white"
     );
     const [fontSize, setFontSize] = useState(
-        settings?.[ComponentName]?.fontSize || 40
+        settings?.[ComponentName]?.fontSize || 0
     );
     const [borderColor, setBorderColor] = useState(
         settings?.[ComponentName]?.borderColor || "#c4ccd5"
     );
     const [borderSize, setBorderSize] = useState(
-        settings?.[ComponentName]?.borderSize || 2
+        settings?.[ComponentName]?.borderSize || 0
     );
     const [borderRadius, setBorderRadius] = useState(
-        settings?.[ComponentName]?.borderRadius || 5
+        settings?.[ComponentName]?.borderRadius || 0
     );
     const [borderStyle, setBorderStyle] = useState(
         settings?.[ComponentName]?.borderStyle || "solid"
     );
     const [padding, setPadding] = useState(
-        settings?.[ComponentName]?.padding || 5
+        settings?.[ComponentName]?.padding || 0
     );
     const [marginLeft, setMarginLeft] = useState(
-        settings?.[ComponentName]?.marginLeft || 1
+        settings?.[ComponentName]?.marginLeft || 0
     );
     const [marginRight, setMarginRight] = useState(
         settings?.[ComponentName]?.marginRight || 0
@@ -49,13 +49,13 @@ function TextComponent({ editMode, settings, setSettings, ComponentName, default
     );
     const [editing, setEditing] = useState(false);
     const [gradientAngle, setGradientAngle] = useState(
-        settings?.[ComponentName]?.gradientAngle || 135
+        settings?.[ComponentName]?.gradientAngle || 0
     );
     const [displayOn, setDisplayOn] = useState(
         settings?.[ComponentName]?.displayOn ?? true
     );
     const [backgroundColorOn, setBackgroundColorOn] = useState(
-        settings?.[ComponentName]?.backgroundColorOn ??true
+        settings?.[ComponentName]?.backgroundColorOn ?? true
     );
 
     const popupRef = useRef(null);
