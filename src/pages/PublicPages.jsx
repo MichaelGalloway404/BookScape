@@ -156,7 +156,7 @@ function PublicPages() {
         <div
           style={{
             background: (
-              (mainPage.bookListDivBckGrndOn === true)
+              (mainPage.bookListDivBckGrndOn === true || mainPage.bookListDivBckGrndOn === "true")
                 ? `linear-gradient(${mainPage.bookListDivGradientAngle ?? 0}deg, 
                 ${mainPage.bookListDivBGColor ?? "#ffffff"},
                 ${mainPage.bookListDivBGColor2 ?? "#ffffff"})`
