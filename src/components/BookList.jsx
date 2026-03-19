@@ -179,7 +179,7 @@ function BookList({
       setGradientAngle(settings.bookCard.gradientAngle);
       setPadding(settings.bookCard.padding);
       setMargin(settings.bookCard.margin);
-      setBackgroundOn(settings.bookCard.backgroundOn);
+      if (settings.bookCard.backgroundOn  !== undefined) setBackgroundOn(settings.bookCard.backgroundOn);
       // Card Image
       setCardImgBorderColor(settings.bookCard.cardImgBorderColor);
       setCardImgBorderSize(settings.bookCard.cardImgBorderSize);
