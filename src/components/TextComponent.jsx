@@ -47,7 +47,7 @@ function TextComponent({ editMode, settings, setSettings, ComponentName, default
     // const [marginBottom, setMarginBottom] = useState(
     //     settings?.[ComponentName]?.marginBottom || 0
     // );
-    // const [editing, setEditing] = useState(false); 
+    const [editing, setEditing] = useState(false); 
     // const [gradientAngle, setGradientAngle] = useState(
     //     settings?.[ComponentName]?.gradientAngle || 135
     // );
