@@ -160,7 +160,7 @@ function PublicPages() {
               style={{
                 background: `linear-gradient(${gradient}deg, ${bc.bgColor || "#fff"}, ${bc.bgColor2 || "#ccc"})`,
                 padding: (bc.padding || 10) + "px",
-                margin: (bc.margin || 5) + "px",
+                margin: (bc.margin || 0) + "px",
                 border: `${bc.borderSize || 2}px ${bc.borderStyle || "solid"} ${bc.borderColor || "#000"}`,
                 borderRadius: (bc.borderRadius || 5) + "px",
                 maxWidth: "30%",
