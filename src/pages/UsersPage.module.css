@@ -9,6 +9,20 @@
   z-index: 1000;
 }
 
+.pageSettings{
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+  z-index: 1000;
+}
+.addQuote{
+  position: fixed;
+  top: 80px;
+  right: 20px;
+  cursor: pointer;
+  z-index: 1000;
+}
 .dropdown {
   position: fixed;
   top: 60px;

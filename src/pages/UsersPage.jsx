@@ -175,7 +175,7 @@ function UsersPage() {
             if (settings.mainPage.mainDivMarginRight) setMainDivMarginRight(settings.mainPage.mainDivMarginRight);
             if (settings.mainPage.mainDivMarginTop) setMainDivMarginTop(settings.mainPage.mainDivMarginTop);
             if (settings.mainPage.mainDivMarginBottom) setMainDivMarginBottom(settings.mainPage.mainDivMarginBottom);
-            if (settings.mainPage.mainDivBckGrndOn  !== undefined) setMainDivBckGrndOn(settings.mainPage.mainDivBckGrndOn);
+            if (settings.mainPage.mainDivBckGrndOn !== undefined) setMainDivBckGrndOn(settings.mainPage.mainDivBckGrndOn);
             // Book List Bounding div
             if (settings.mainPage.bookListDivGradientAngle) setBookListDivGradientAngle(settings.mainPage.bookListDivGradientAngle);
             if (settings.mainPage.bookListDivBGColor) setBookListDivBGColor(settings.mainPage.bookListDivBGColor);
@@ -192,7 +192,7 @@ function UsersPage() {
             if (settings.mainPage.bookListDivPaddingRight) setBookListDivPaddingRight(settings.mainPage.bookListDivPaddingRight);
             if (settings.mainPage.bookListDivPaddingTop) setBookListDivPaddingTop(settings.mainPage.bookListDivPaddingTop);
             if (settings.mainPage.bookListDivPaddingBottom) setBookListDivPaddingBottom(settings.mainPage.bookListDivPaddingBottom);
-            if (settings.mainPage.bookListDivBckGrndOn  !== undefined) setBookListDivBckGrndOn(settings.mainPage.bookListDivBckGrndOn);
+            if (settings.mainPage.bookListDivBckGrndOn !== undefined) setBookListDivBckGrndOn(settings.mainPage.bookListDivBckGrndOn);
         }
     }, [settings]);
 
@@ -538,6 +538,27 @@ function UsersPage() {
                 ☰
             </button>
 
+            {editMode && (
+                <button
+                    onClick={(e) => {
+                        setEditing(true);
+                    }}
+                    className={`${styles.buttonClass} ${styles.pageSettings}`}
+                    style={{ backgroundColor: "#2699b8" }}
+                >
+                    Click for page settings
+                </button>
+            )}
+            {editMode && (
+                <button
+                    onClick={addUserQuote}
+                    className={`${styles.buttonClass} ${styles.addQuote}`}
+                    style={{ backgroundColor: "#2699b8" }}
+                >
+                    Add a New Text Section
+                </button>
+            )}
+
             {menuOpen && (
                 <div className={styles.dropdown}>
 
@@ -563,28 +584,6 @@ function UsersPage() {
                             style={{ backgroundColor: "#63cd8c" }}
                         >
                             Save Settings {saving && (<div className={styles.spinner}></div>)}
-                        </button>
-                    )}
-
-                    {editMode && (
-                        <button
-                            onClick={(e) => {
-                                setEditing(true);
-                            }}
-                            className={styles.buttonClass}
-                            style={{ backgroundColor: "#2699b8" }}
-                        >
-                            Click for page settings
-                        </button>
-                    )}
-
-                    {editMode && (
-                        <button
-                            onClick={addUserQuote}
-                            className={styles.buttonClass}
-                            style={{ backgroundColor: "#2699b8" }}
-                        >
-                            Add a New Text Section
                         </button>
                     )}
 
