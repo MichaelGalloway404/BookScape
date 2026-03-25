@@ -8,8 +8,13 @@
   cursor: pointer;
   z-index: 1000;
 }
-.hamburger:hover{
-  box-shadow: 0 4px 12px rgb(0, 0, 0);
+
+.hamburger {
+  transition: transform 0.15s ease;
+}
+
+.hamburger:hover {
+  transform: scale(1.1);
 }
 
 .pageSettings{
