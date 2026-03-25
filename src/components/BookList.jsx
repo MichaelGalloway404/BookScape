@@ -316,6 +316,7 @@ function BookList({
         />
       )}
       <ul style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}
+        className={`hoverText ${editMode ? "editable" : ""}`}
         onClick={(e) => {
           if (editMode) {
             setEditing(true);
