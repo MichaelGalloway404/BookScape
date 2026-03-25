@@ -18,7 +18,7 @@ function TextComponent({ editMode, settings, setSettings, ComponentName, default
         settings?.[ComponentName]?.bgColor2 || "white"
     );
     const [fontSize, setFontSize] = useState(
-        settings?.[ComponentName]?.fontSize || 0
+        settings?.[ComponentName]?.fontSize || 12
     );
     const [borderColor, setBorderColor] = useState(
         settings?.[ComponentName]?.borderColor || "#c4ccd5"

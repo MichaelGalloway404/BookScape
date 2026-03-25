@@ -40,7 +40,7 @@ function BookList({
     settings?.bookCard?.margin || 0
   );
   const [backgroundOn, setBackgroundOn] = useState(
-    settings?.bookCard?.backgroundOn || false
+    settings?.bookCard?.backgroundOn || true
   );
 
   // ---------------- Card Image ----------------
