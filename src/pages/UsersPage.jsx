@@ -532,6 +532,7 @@ function UsersPage() {
 
             {/* Hamburger button for user options */}
             <button
+                className={styles.hamburger}
                 onClick={() => setMenuOpen(prev => !prev)}
             >
                 ☰
