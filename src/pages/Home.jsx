@@ -3,12 +3,15 @@ import { useEffect, useState } from "react";
 import styles from "./Home.module.css"
 
 function Home() {
+    // State to store the list of users fetched from the database
     const [users, setUsers] = useState([]);
     const navigate = useNavigate();
 
+    // Fetch public users on component mount
     useEffect(() => {
         const loadUsers = async () => {
             try {
+                // Calls the public API endpoint we annotated earlier
                 const res = await fetch("/api/publicUsers", { method: "GET" });
                 const data = await res.json();
 
@@ -27,29 +30,37 @@ function Home() {
         <div className={styles.container}>
             <h1 className={styles.title}>Book Scape</h1>
 
+            {/* Conditional Rendering: Show a loading spinner until users are loaded */}
             {users.length === 0 ? (
                 <div style={{ textAlign: "center", margin: "50px" }}>
                     <p style={{ color: "white" }}>Loading Users...</p>
                     <div className={styles.spinner}></div>
                 </div>
             ) : (
+                // Displaying user profiles in a flexible grid layout
                 <ul style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
                     {users.map((person, i) => (
                         <li className={styles.profilesGrid} key={i}>
+                            {/* 
+                                Navigation trick: When clicked, we pass the user's data 
+                                (id, username, book_order_json) via React Router "state".
+                                This avoids an extra API call on the next page.
+                            */}
                             <button className={`${styles.buttonClass} ${styles.profileBtn}`}
                                 onClick={() =>
                                     navigate("/publicPage", {
-                                        state: { user: person } // pass the whole person object
+                                        state: { user: person } 
                                     })
                                 }
                             >
                                 <p><strong>Username:</strong> {person.username}</p>
                             </button>
-
                         </li>
                     ))}
                 </ul>
             )}
+            
+            {/* Global navigation for visitors to join or sign in */}
             <div className={styles.navButtons}>
                 <button className={`${styles.buttonClass} ${styles.primary}`} onClick={() => navigate("/login")}>Login</button>
                 <button className={styles.buttonClass} onClick={() => navigate("/signUp")}>Sign Up</button>

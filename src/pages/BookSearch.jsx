@@ -4,22 +4,29 @@ import styles from "./BookSearch.module.css"
 import { useNavigate } from "react-router-dom";
 import SiteInfoFooter from '../components/SiteInfoFooter';
 
+// Constant to manage UI pagination (though currently fetching 100 results from API)
 const BOOKS_PER_PAGE = 10;
 
 export default function BookSearch() {
+  // State for search input fields
   const [isbn, setIsbn] = useState("");
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
+
+  // State for storing search results and pagination index
   const [results, setResults] = useState([]);
   const [page, setPage] = useState(0);
+
+  // State to store logged-in user data
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
+  // On component mount, verify authentication
   useEffect(() => {
     const loadUser = async () => {
       try {
         const res = await fetch("/api/currentUser", {
-          credentials: "include",
+          credentials: "include", // Required to send the HttpOnly JWT cookie
         });
 
         const data = await res.json();
@@ -31,6 +38,7 @@ export default function BookSearch() {
         setUser(data);
       } catch (err) {
         console.error(err);
+        // Redirect to login if token is missing or invalid
         navigate("/login");
       }
     };
@@ -38,18 +46,22 @@ export default function BookSearch() {
     loadUser();
   }, [navigate]);
 
-  // add a book
+  /**
+   * Sends a book to the backend database.
+   * Extracts the unique cover ID from the OpenLibrary URL string.
+   */
   async function addBook(book) {
     try {
       await axios.post(
         "/api/userBooks",
         {
           isbn: book.isbn === "null" ? null : book.isbn,
+          // Parses "https://.../b/id/123-M.jpg" to get "123"
           cover_id: book.coverUrl.split("/b/id/")[1].split("-")[0],
           title: book.title,
           author: book.author,
         },
-        { withCredentials: true }
+        { withCredentials: true } // Ensures the session cookie is sent with the request
       );
 
       alert("Book added");
@@ -63,6 +75,10 @@ export default function BookSearch() {
     }
   }
 
+  /**
+   * Resolves author keys (e.g., /authors/OL123A) into readable names.
+   * Uses Promise.all to fetch multiple authors in parallel.
+   */
   async function getAuthorNames(authorsArray) {
     try {
       const names = await Promise.all(
@@ -80,13 +96,18 @@ export default function BookSearch() {
     }
   }
 
-
+  /**
+   * Primary search logic.
+   * Handles two flows: 
+   * 1. Direct ISBN lookup (fast, single result)
+   * 2. General Query (Title/Author keywords)
+   */
   async function searchForBooks() {
     try {
-      // ---------- ISBN DIRECT LOOKUP ----------
+      // FLOW 1: ISBN DIRECT LOOKUP
+      // If ONLY the ISBN field is filled, bypass the general search API
       if (isbn.trim() && !title.trim() && !author.trim()) {
         const cleanIsbn = isbn.trim();
-
         const coverSize = "M";
         const coverUrl = `https://covers.openlibrary.org/b/isbn/${cleanIsbn}-${coverSize}.jpg`;
 
@@ -110,28 +131,23 @@ export default function BookSearch() {
         return;
       }
 
-
-      // The URLSearchParams interface defines utility methods to work with the query string of a URL.
-      // URLSearchParams objects are iterable
+      // FLOW 2: GENERAL SEARCH
+      // Build query string using URLSearchParams for proper encoding
       const params = new URLSearchParams();
 
       if (isbn.trim()) {
-
-        // Exact ISBN search
         params.append("isbn", isbn.trim());
-
       } else {
-
         const query = `${title} ${author}`.trim();
-
         if (query) {
           params.append("q", query);
         }
-
       }
 
+      // Optimization: request specific fields to reduce payload size
       params.append("fields", "cover_i,title,author_name,isbn");
       params.append("limit", "100");
+
 
       // params.toString() converts URLSearchParams into a query string
       const res = await axios.get(
