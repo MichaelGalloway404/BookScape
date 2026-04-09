@@ -1,9 +1,5 @@
-import { Pool } from "pg";
 import bcrypt from "bcrypt";
-
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-});
+import pool from "../lib/db";
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {

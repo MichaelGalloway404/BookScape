@@ -15,10 +15,6 @@ export default function BookSearch() {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
-  // const isbn = "9780439554930";
-  // const coverSize = "M";
-  // const coverUrl = `https://covers.openlibrary.org/b/isbn/${isbn}-${coverSize}.jpg`;
-
   useEffect(() => {
     const loadUser = async () => {
       try {
