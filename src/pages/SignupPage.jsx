@@ -28,7 +28,7 @@ function SignupPage() {
         throw new Error(data.error || "Signup failed");
       }
 
-      // success → navigate to login
+      // success -> navigate to login
       navigate("/login");
     } catch (err) {
       console.error(err);
