@@ -247,34 +247,6 @@ External data is retrieved from the **Open Library API** for book search and cov
 
 ---
 
-# Installation (Local Development)
-
-Clone the repository:
-
-```bash
-git clone https://github.com/yourusername/bookscape.git
-cd bookscape
-```
-
-Install dependencies:
-
-```bash
-npm install
-```
-
-Run the development server:
-
-```bash
-npm run dev
-```
-
-You will also need to configure environment variables for:
-
-- PostgreSQL connection
-- JWT secret
-
----
-
 # Project Purpose
 
 This project was built to explore:
