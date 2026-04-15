@@ -9,7 +9,7 @@ import SiteInfoFooter from '../components/SiteInfoFooter';
 
 function UsersPage() {
     // const [user, setUser] = useState(null);
-    // const [profilePublic, setProfilePrivate] = useState(false);
+    const [profilePublic, setProfilePrivate] = useState(false);
     // const [books, setBooks] = useState([]);
     // const [editMode, setEditMode] = useState(false);
     // const [editing, setEditing] = useState(false);
