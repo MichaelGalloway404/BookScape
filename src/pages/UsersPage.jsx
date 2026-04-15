@@ -263,7 +263,7 @@ function UsersPage() {
         return () => {
             document.body.style.background = originalBackground;
         };
-    }, [settings]);
+    }, [s.gradientAngle, s.pageBckColor, s.pageBckColor2]);
 
     // Close popup if click outside
     useEffect(() => {
