@@ -62,23 +62,14 @@ function UsersPage() {
 
     const navigate = useNavigate();
 
-    // ensure userQuotes exists in settings
-    useEffect(() => {
-        setSettings(prev => ({
-            ...prev,
-            mainPage: {
-                ...prev.mainPage,
-                userQuotes: prev?.mainPage?.userQuotes || []
-            }
-        }));
-    }, []);
-
     // add any changes to settings the user makes
     useEffect(() => {
         setSettings(prev => ({
             ...prev,
             mainPage: {
                 ...prev.mainPage,
+                // ensure userQuotes exists in settings
+                userQuotes: prev?.mainPage?.userQuotes || [],
                 // main page
                 pageBckColor,
                 pageBckColor2,
