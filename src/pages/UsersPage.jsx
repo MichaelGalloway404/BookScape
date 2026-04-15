@@ -8,262 +8,197 @@ import styles from "./UsersPage.module.css"
 import SiteInfoFooter from '../components/SiteInfoFooter';
 
 function UsersPage() {
-    // const [user, setUser] = useState(null);
-    const [profilePublic, setProfilePrivate] = useState(false);
-    // const [books, setBooks] = useState([]);
-    // const [editMode, setEditMode] = useState(false);
-    // const [editing, setEditing] = useState(false);
-    // const [settings, setSettings] = useState({});
-    // const [menuOpen, setMenuOpen] = useState(false);
-    // const [saving, setSaving] = useState(false);
-
-    // // main page settings
-    // const [pageBckColor, setPageBckColor] = useState("#c4ccd5");
-    // const [pageBckColor2, setPageBckColor2] = useState("#c4ccd5");
-    // const [gradientAngle, setGradientAngle] = useState(0);
-
-    // // div control settings
-    // const [mainDivGradientAngle, setMainDivGradientAngle] = useState(0);
-    // const [mainDivBGColor, setMainDivBGColor] = useState("white");
-    // const [mainDivBGColor2, setMainDivBGColor2] = useState("white");
-    // const [mainDivPadding, setMainDivPadding] = useState(0);
-    // const [mainDivBorderSize, setMainDivBorderSize] = useState(0);
-    // const [mainDivBorderStyle, setMainDivBorderStyle] = useState("solid");
-    // const [mainDivBorderColor, setMainDivBorderColor] = useState("black");
-    // const [mainDivBorderRadius, setMainDivBorderRadius] = useState(0);
-    // const [mainDivMarginLeft, setMainDivMarginLeft] = useState(0);
-    // const [mainDivMarginRight, setMainDivMarginRight] = useState(0);
-    // const [mainDivMarginTop, setMainDivMarginTop] = useState(0);
-    // const [mainDivMarginBottom, setMainDivMarginBottom] = useState(0);
-    // const [mainDivBckGrndOn, setMainDivBckGrndOn] = useState(true);
-
-    // // Book List Bounding div
-    // const [bookListDivGradientAngle, setBookListDivGradientAngle] = useState(0);
-    // const [bookListDivBGColor, setBookListDivBGColor] = useState("white");
-    // const [bookListDivBGColor2, setBookListDivBGColor2] = useState("white");
-    // const [bookListDivBorderSize, setBookListDivBorderSize] = useState(0);
-    // const [bookListDivBorderStyle, setBookListDivBorderStyle] = useState("solid");
-    // const [bookListDivBorderColor, setBookListDivBorderColor] = useState("black");
-    // const [bookListDivBorderRadius, setBookListDivBorderRadius] = useState(0);
-    // const [bookListDivMarginLeft, setBookListDivMarginLeft] = useState(0);
-    // const [bookListDivMarginRight, setBookListDivMarginRight] = useState(0);
-    // const [bookListDivMarginTop, setBookListDivMarginTop] = useState(0);
-    // const [bookListDivMarginBottom, setBookListDivMarginBottom] = useState(0);
-    // const [bookListDivPaddingLeft, setBookListDivPaddingLeft] = useState(0);
-    // const [bookListDivPaddingRight, setBookListDivPaddingRight] = useState(0);
-    // const [bookListDivPaddingTop, setBookListDivPaddingTop] = useState(0);
-    // const [bookListDivPaddingBottom, setBookListDivPaddingBottom] = useState(0);
-    // const [bookListDivBckGrndOn, setBookListDivBckGrndOn] = useState(true);
-
-
-    // const popupRef = useRef(null);
-
-    // const [loading, setLoading] = useState(true);
-
-    // const navigate = useNavigate();
-
-    // // add any changes to settings the user makes
-    // useEffect(() => {
-    //     setSettings(prev => ({
-    //         ...prev,
-    //         mainPage: {
-    //             ...prev.mainPage,
-    //             // ensure userQuotes exists in settings
-    //             // prevents accidentally deleting userQuotes every time the effect runs.
-    //             userQuotes: prev?.mainPage?.userQuotes || [],
-    //             // main page
-    //             pageBckColor,
-    //             pageBckColor2,
-    //             gradientAngle,
-    //             // main div control
-    //             mainDivGradientAngle,
-    //             mainDivBGColor,
-    //             mainDivBGColor2,
-    //             mainDivPadding,
-    //             mainDivBorderSize,
-    //             mainDivBorderStyle,
-    //             mainDivBorderColor,
-    //             mainDivBorderRadius,
-    //             mainDivMarginLeft,
-    //             mainDivMarginRight,
-    //             mainDivMarginTop,
-    //             mainDivMarginBottom,
-    //             mainDivBckGrndOn,
-    //             // Book List Bounding div
-    //             bookListDivGradientAngle,
-    //             bookListDivBGColor,
-    //             bookListDivBGColor2,
-    //             bookListDivBorderSize,
-    //             bookListDivBorderStyle,
-    //             bookListDivBorderColor,
-    //             bookListDivBorderRadius,
-    //             bookListDivMarginLeft,
-    //             bookListDivMarginRight,
-    //             bookListDivMarginTop,
-    //             bookListDivMarginBottom,
-    //             bookListDivPaddingLeft,
-    //             bookListDivPaddingRight,
-    //             bookListDivPaddingTop,
-    //             bookListDivPaddingBottom,
-    //             bookListDivBckGrndOn,
-
-    //         },
-    //     }));
-    // }, [
-    //     // main page
-    //     pageBckColor,
-    //     pageBckColor2,
-    //     gradientAngle,
-    //     // main div control
-    //     mainDivGradientAngle,
-    //     mainDivBGColor,
-    //     mainDivBGColor2,
-    //     mainDivPadding,
-    //     mainDivBorderSize,
-    //     mainDivBorderStyle,
-    //     mainDivBorderColor,
-    //     mainDivBorderRadius,
-    //     mainDivMarginLeft,
-    //     mainDivMarginRight,
-    //     mainDivMarginTop,
-    //     mainDivMarginBottom,
-    //     mainDivBckGrndOn,
-    //     // Book List Bounding div
-    //     bookListDivGradientAngle,
-    //     bookListDivBGColor,
-    //     bookListDivBGColor2,
-    //     bookListDivBorderSize,
-    //     bookListDivBorderStyle,
-    //     bookListDivBorderColor,
-    //     bookListDivBorderRadius,
-    //     bookListDivMarginLeft,
-    //     bookListDivMarginRight,
-    //     bookListDivMarginTop,
-    //     bookListDivMarginBottom,
-    //     bookListDivPaddingLeft,
-    //     bookListDivPaddingRight,
-    //     bookListDivPaddingTop,
-    //     bookListDivPaddingBottom,
-    //     bookListDivBckGrndOn,
-    // ]);
-
-    // // Check for DB saved settings
-    // useEffect(() => {
-    //     if (settings?.mainPage) {
-    //         // main page
-    //         if (settings.mainPage.pageBckColor) setPageBckColor(settings.mainPage.pageBckColor);
-    //         if (settings.mainPage.pageBckColor2) setPageBckColor2(settings.mainPage.pageBckColor2);
-    //         if (settings.mainPage.gradientAngle) setGradientAngle(settings.mainPage.gradientAngle);
-    //         // main div control
-    //         if (settings.mainPage.mainDivGradientAngle) setMainDivGradientAngle(settings.mainPage.mainDivGradientAngle);
-    //         if (settings.mainPage.mainDivBGColor) setMainDivBGColor(settings.mainPage.mainDivBGColor);
-    //         if (settings.mainPage.mainDivBGColor2) setMainDivBGColor2(settings.mainPage.mainDivBGColor2);
-    //         if (settings.mainPage.mainDivPadding) setMainDivPadding(settings.mainPage.mainDivPadding);
-    //         if (settings.mainPage.mainDivBorderSize) setMainDivBorderSize(settings.mainPage.mainDivBorderSize);
-    //         if (settings.mainPage.mainDivBorderStyle) setMainDivBorderStyle(settings.mainPage.mainDivBorderStyle);
-    //         if (settings.mainPage.mainDivBorderColor) setMainDivBorderColor(settings.mainPage.mainDivBorderColor);
-    //         if (settings.mainPage.mainDivBorderRadius) setMainDivBorderRadius(settings.mainPage.mainDivBorderRadius);
-    //         if (settings.mainPage.mainDivMarginLeft) setMainDivMarginLeft(settings.mainPage.mainDivMarginLeft);
-    //         if (settings.mainPage.mainDivMarginRight) setMainDivMarginRight(settings.mainPage.mainDivMarginRight);
-    //         if (settings.mainPage.mainDivMarginTop) setMainDivMarginTop(settings.mainPage.mainDivMarginTop);
-    //         if (settings.mainPage.mainDivMarginBottom) setMainDivMarginBottom(settings.mainPage.mainDivMarginBottom);
-    //         if (settings.mainPage.mainDivBckGrndOn !== undefined) setMainDivBckGrndOn(settings.mainPage.mainDivBckGrndOn);
-    //         // Book List Bounding div
-    //         if (settings.mainPage.bookListDivGradientAngle) setBookListDivGradientAngle(settings.mainPage.bookListDivGradientAngle);
-    //         if (settings.mainPage.bookListDivBGColor) setBookListDivBGColor(settings.mainPage.bookListDivBGColor);
-    //         if (settings.mainPage.bookListDivBGColor2) setBookListDivBGColor2(settings.mainPage.bookListDivBGColor2);
-    //         if (settings.mainPage.bookListDivBorderSize) setBookListDivBorderSize(settings.mainPage.bookListDivBorderSize);
-    //         if (settings.mainPage.bookListDivBorderStyle) setBookListDivBorderStyle(settings.mainPage.bookListDivBorderStyle);
-    //         if (settings.mainPage.bookListDivBorderColor) setBookListDivBorderColor(settings.mainPage.bookListDivBorderColor);
-    //         if (settings.mainPage.bookListDivBorderRadius) setBookListDivBorderRadius(settings.mainPage.bookListDivBorderRadius);
-    //         if (settings.mainPage.bookListDivMarginLeft) setBookListDivMarginLeft(settings.mainPage.bookListDivMarginLeft);
-    //         if (settings.mainPage.bookListDivMarginRight) setBookListDivMarginRight(settings.mainPage.bookListDivMarginRight);
-    //         if (settings.mainPage.bookListDivMarginTop) setBookListDivMarginTop(settings.mainPage.bookListDivMarginTop);
-    //         if (settings.mainPage.bookListDivMarginBottom) setBookListDivMarginBottom(settings.mainPage.bookListDivMarginBottom);
-    //         if (settings.mainPage.bookListDivPaddingLeft) setBookListDivPaddingLeft(settings.mainPage.bookListDivPaddingLeft);
-    //         if (settings.mainPage.bookListDivPaddingRight) setBookListDivPaddingRight(settings.mainPage.bookListDivPaddingRight);
-    //         if (settings.mainPage.bookListDivPaddingTop) setBookListDivPaddingTop(settings.mainPage.bookListDivPaddingTop);
-    //         if (settings.mainPage.bookListDivPaddingBottom) setBookListDivPaddingBottom(settings.mainPage.bookListDivPaddingBottom);
-    //         if (settings.mainPage.bookListDivBckGrndOn !== undefined) setBookListDivBckGrndOn(settings.mainPage.bookListDivBckGrndOn);
-    //     }
-    // }, [settings]);
-
     const [user, setUser] = useState(null);
+    const [profilePublic, setProfilePrivate] = useState(false);
     const [books, setBooks] = useState([]);
     const [editMode, setEditMode] = useState(false);
     const [editing, setEditing] = useState(false);
+    const [settings, setSettings] = useState({});
     const [menuOpen, setMenuOpen] = useState(false);
     const [saving, setSaving] = useState(false);
-    const [loading, setLoading] = useState(true);
+
+    // main page settings
+    const [pageBckColor, setPageBckColor] = useState("#c4ccd5");
+    const [pageBckColor2, setPageBckColor2] = useState("#c4ccd5");
+    const [gradientAngle, setGradientAngle] = useState(0);
+
+    // div control settings
+    const [mainDivGradientAngle, setMainDivGradientAngle] = useState(0);
+    const [mainDivBGColor, setMainDivBGColor] = useState("white");
+    const [mainDivBGColor2, setMainDivBGColor2] = useState("white");
+    const [mainDivPadding, setMainDivPadding] = useState(0);
+    const [mainDivBorderSize, setMainDivBorderSize] = useState(0);
+    const [mainDivBorderStyle, setMainDivBorderStyle] = useState("solid");
+    const [mainDivBorderColor, setMainDivBorderColor] = useState("black");
+    const [mainDivBorderRadius, setMainDivBorderRadius] = useState(0);
+    const [mainDivMarginLeft, setMainDivMarginLeft] = useState(0);
+    const [mainDivMarginRight, setMainDivMarginRight] = useState(0);
+    const [mainDivMarginTop, setMainDivMarginTop] = useState(0);
+    const [mainDivMarginBottom, setMainDivMarginBottom] = useState(0);
+    const [mainDivBckGrndOn, setMainDivBckGrndOn] = useState(true);
+
+    // Book List Bounding div
+    const [bookListDivGradientAngle, setBookListDivGradientAngle] = useState(0);
+    const [bookListDivBGColor, setBookListDivBGColor] = useState("white");
+    const [bookListDivBGColor2, setBookListDivBGColor2] = useState("white");
+    const [bookListDivBorderSize, setBookListDivBorderSize] = useState(0);
+    const [bookListDivBorderStyle, setBookListDivBorderStyle] = useState("solid");
+    const [bookListDivBorderColor, setBookListDivBorderColor] = useState("black");
+    const [bookListDivBorderRadius, setBookListDivBorderRadius] = useState(0);
+    const [bookListDivMarginLeft, setBookListDivMarginLeft] = useState(0);
+    const [bookListDivMarginRight, setBookListDivMarginRight] = useState(0);
+    const [bookListDivMarginTop, setBookListDivMarginTop] = useState(0);
+    const [bookListDivMarginBottom, setBookListDivMarginBottom] = useState(0);
+    const [bookListDivPaddingLeft, setBookListDivPaddingLeft] = useState(0);
+    const [bookListDivPaddingRight, setBookListDivPaddingRight] = useState(0);
+    const [bookListDivPaddingTop, setBookListDivPaddingTop] = useState(0);
+    const [bookListDivPaddingBottom, setBookListDivPaddingBottom] = useState(0);
+    const [bookListDivBckGrndOn, setBookListDivBckGrndOn] = useState(true);
+
 
     const popupRef = useRef(null);
+
+    const [loading, setLoading] = useState(true);
+
     const navigate = useNavigate();
 
-    const [settings, setSettings] = useState({
-        mainPage: {
-            pageBckColor: "#c4ccd5",
-            pageBckColor2: "#c4ccd5",
-            gradientAngle: 0,
-
-            mainDivGradientAngle: 0,
-            mainDivBGColor: "white",
-            mainDivBGColor2: "white",
-            mainDivPadding: 0,
-            mainDivBorderSize: 0,
-            mainDivBorderStyle: "solid",
-            mainDivBorderColor: "black",
-            mainDivBorderRadius: 0,
-            mainDivMarginLeft: 0,
-            mainDivMarginRight: 0,
-            mainDivMarginTop: 0,
-            mainDivMarginBottom: 0,
-            mainDivBckGrndOn: true,
-
-            bookListDivGradientAngle: 0,
-            bookListDivBGColor: "white",
-            bookListDivBGColor2: "white",
-            bookListDivBorderSize: 0,
-            bookListDivBorderStyle: "solid",
-            bookListDivBorderColor: "black",
-            bookListDivBorderRadius: 0,
-            bookListDivMarginLeft: 0,
-            bookListDivMarginRight: 0,
-            bookListDivMarginTop: 0,
-            bookListDivMarginBottom: 0,
-            bookListDivPaddingLeft: 0,
-            bookListDivPaddingRight: 0,
-            bookListDivPaddingTop: 0,
-            bookListDivPaddingBottom: 0,
-            bookListDivBckGrndOn: true,
-
-            userQuotes: [],
-        },
-    });
-
-    // Helper to update settings
-    const updateMainPage = (key, value) => {
+    // add any changes to settings the user makes
+    useEffect(() => {
         setSettings(prev => ({
             ...prev,
             mainPage: {
                 ...prev.mainPage,
-                [key]: value,
+                // ensure userQuotes exists in settings
+                // prevents you from accidentally deleting userQuotes every time the effect runs.
+                userQuotes: prev?.mainPage?.userQuotes || [],
+                // main page
+                pageBckColor,
+                pageBckColor2,
+                gradientAngle,
+                // main div control
+                mainDivGradientAngle,
+                mainDivBGColor,
+                mainDivBGColor2,
+                mainDivPadding,
+                mainDivBorderSize,
+                mainDivBorderStyle,
+                mainDivBorderColor,
+                mainDivBorderRadius,
+                mainDivMarginLeft,
+                mainDivMarginRight,
+                mainDivMarginTop,
+                mainDivMarginBottom,
+                mainDivBckGrndOn,
+                // Book List Bounding div
+                bookListDivGradientAngle,
+                bookListDivBGColor,
+                bookListDivBGColor2,
+                bookListDivBorderSize,
+                bookListDivBorderStyle,
+                bookListDivBorderColor,
+                bookListDivBorderRadius,
+                bookListDivMarginLeft,
+                bookListDivMarginRight,
+                bookListDivMarginTop,
+                bookListDivMarginBottom,
+                bookListDivPaddingLeft,
+                bookListDivPaddingRight,
+                bookListDivPaddingTop,
+                bookListDivPaddingBottom,
+                bookListDivBckGrndOn,
+
             },
         }));
-    };
+    }, [
+        // main page
+        pageBckColor,
+        pageBckColor2,
+        gradientAngle,
+        // main div control
+        mainDivGradientAngle,
+        mainDivBGColor,
+        mainDivBGColor2,
+        mainDivPadding,
+        mainDivBorderSize,
+        mainDivBorderStyle,
+        mainDivBorderColor,
+        mainDivBorderRadius,
+        mainDivMarginLeft,
+        mainDivMarginRight,
+        mainDivMarginTop,
+        mainDivMarginBottom,
+        mainDivBckGrndOn,
+        // Book List Bounding div
+        bookListDivGradientAngle,
+        bookListDivBGColor,
+        bookListDivBGColor2,
+        bookListDivBorderSize,
+        bookListDivBorderStyle,
+        bookListDivBorderColor,
+        bookListDivBorderRadius,
+        bookListDivMarginLeft,
+        bookListDivMarginRight,
+        bookListDivMarginTop,
+        bookListDivMarginBottom,
+        bookListDivPaddingLeft,
+        bookListDivPaddingRight,
+        bookListDivPaddingTop,
+        bookListDivPaddingBottom,
+        bookListDivBckGrndOn,
+    ]);
 
-    const s = settings.mainPage;
+    // Check for DB saved settings
+    useEffect(() => {
+        if (settings?.mainPage) {
+            // main page
+            if (settings.mainPage.pageBckColor) setPageBckColor(settings.mainPage.pageBckColor);
+            if (settings.mainPage.pageBckColor2) setPageBckColor2(settings.mainPage.pageBckColor2);
+            if (settings.mainPage.gradientAngle) setGradientAngle(settings.mainPage.gradientAngle);
+            // main div control
+            if (settings.mainPage.mainDivGradientAngle) setMainDivGradientAngle(settings.mainPage.mainDivGradientAngle);
+            if (settings.mainPage.mainDivBGColor) setMainDivBGColor(settings.mainPage.mainDivBGColor);
+            if (settings.mainPage.mainDivBGColor2) setMainDivBGColor2(settings.mainPage.mainDivBGColor2);
+            if (settings.mainPage.mainDivPadding) setMainDivPadding(settings.mainPage.mainDivPadding);
+            if (settings.mainPage.mainDivBorderSize) setMainDivBorderSize(settings.mainPage.mainDivBorderSize);
+            if (settings.mainPage.mainDivBorderStyle) setMainDivBorderStyle(settings.mainPage.mainDivBorderStyle);
+            if (settings.mainPage.mainDivBorderColor) setMainDivBorderColor(settings.mainPage.mainDivBorderColor);
+            if (settings.mainPage.mainDivBorderRadius) setMainDivBorderRadius(settings.mainPage.mainDivBorderRadius);
+            if (settings.mainPage.mainDivMarginLeft) setMainDivMarginLeft(settings.mainPage.mainDivMarginLeft);
+            if (settings.mainPage.mainDivMarginRight) setMainDivMarginRight(settings.mainPage.mainDivMarginRight);
+            if (settings.mainPage.mainDivMarginTop) setMainDivMarginTop(settings.mainPage.mainDivMarginTop);
+            if (settings.mainPage.mainDivMarginBottom) setMainDivMarginBottom(settings.mainPage.mainDivMarginBottom);
+            if (settings.mainPage.mainDivBckGrndOn !== undefined) setMainDivBckGrndOn(settings.mainPage.mainDivBckGrndOn);
+            // Book List Bounding div
+            if (settings.mainPage.bookListDivGradientAngle) setBookListDivGradientAngle(settings.mainPage.bookListDivGradientAngle);
+            if (settings.mainPage.bookListDivBGColor) setBookListDivBGColor(settings.mainPage.bookListDivBGColor);
+            if (settings.mainPage.bookListDivBGColor2) setBookListDivBGColor2(settings.mainPage.bookListDivBGColor2);
+            if (settings.mainPage.bookListDivBorderSize) setBookListDivBorderSize(settings.mainPage.bookListDivBorderSize);
+            if (settings.mainPage.bookListDivBorderStyle) setBookListDivBorderStyle(settings.mainPage.bookListDivBorderStyle);
+            if (settings.mainPage.bookListDivBorderColor) setBookListDivBorderColor(settings.mainPage.bookListDivBorderColor);
+            if (settings.mainPage.bookListDivBorderRadius) setBookListDivBorderRadius(settings.mainPage.bookListDivBorderRadius);
+            if (settings.mainPage.bookListDivMarginLeft) setBookListDivMarginLeft(settings.mainPage.bookListDivMarginLeft);
+            if (settings.mainPage.bookListDivMarginRight) setBookListDivMarginRight(settings.mainPage.bookListDivMarginRight);
+            if (settings.mainPage.bookListDivMarginTop) setBookListDivMarginTop(settings.mainPage.bookListDivMarginTop);
+            if (settings.mainPage.bookListDivMarginBottom) setBookListDivMarginBottom(settings.mainPage.bookListDivMarginBottom);
+            if (settings.mainPage.bookListDivPaddingLeft) setBookListDivPaddingLeft(settings.mainPage.bookListDivPaddingLeft);
+            if (settings.mainPage.bookListDivPaddingRight) setBookListDivPaddingRight(settings.mainPage.bookListDivPaddingRight);
+            if (settings.mainPage.bookListDivPaddingTop) setBookListDivPaddingTop(settings.mainPage.bookListDivPaddingTop);
+            if (settings.mainPage.bookListDivPaddingBottom) setBookListDivPaddingBottom(settings.mainPage.bookListDivPaddingBottom);
+            if (settings.mainPage.bookListDivBckGrndOn !== undefined) setBookListDivBckGrndOn(settings.mainPage.bookListDivBckGrndOn);
+        }
+    }, [settings]);
 
     // apply background gradient
     useEffect(() => {
         const originalBackground = document.body.style.background;
 
         document.body.style.background =
-            `linear-gradient(${s.gradientAngle}deg, ${s.pageBckColor}, ${s.pageBckColor2})`;
+            `linear-gradient(${gradientAngle}deg, ${pageBckColor}, ${pageBckColor2})`;
 
         return () => {
             document.body.style.background = originalBackground;
         };
-    }, [s.gradientAngle, s.pageBckColor, s.pageBckColor2]);
+    }, [pageBckColor, pageBckColor2, gradientAngle]);
 
     // Close popup if click outside
     useEffect(() => {
@@ -462,60 +397,64 @@ function UsersPage() {
 
     return (
         <div style={{
-            background: (s.mainDivBckGrndOn ? `linear-gradient(${s.mainDivGradientAngle}deg, ${s.mainDivBGColor},${s.mainDivBGColor2})` : "none"),
-            padding: s.mainDivPadding + "px",
-            border: `${s.mainDivBorderSize}px ${s.mainDivBorderStyle} ${s.mainDivBorderColor}`,
-            borderRadius: s.mainDivBorderRadius + "px",
-            marginLeft: s.mainDivMarginLeft + "px",
-            marginRight: s.mainDivMarginRight + "px",
-            marginTop: s.mainDivMarginTop + "px",
-            marginBottom: s.mainDivMarginBottom + "px",
+            background: (mainDivBckGrndOn ? `linear-gradient(${mainDivGradientAngle}deg, ${mainDivBGColor},${mainDivBGColor2})` : "none"),
+            padding: mainDivPadding + "px",
+            border: `${mainDivBorderSize}px ${mainDivBorderStyle} ${mainDivBorderColor}`,
+            borderRadius: mainDivBorderRadius + "px",
+            marginLeft: mainDivMarginLeft + "px",
+            marginRight: mainDivMarginRight + "px",
+            marginTop: mainDivMarginTop + "px",
+            marginBottom: mainDivMarginBottom + "px",
         }}
         >
             {editing && editMode && (
                 <EditablePopup
                     popupRef={popupRef}
                     controls={{
-                        "Center of page Background ON/OFF": [s.mainDivBckGrndOn, v => updateMainPage("mainDivBckGrndOn", v)],
-                        "Center Page Border Style": [s.mainDivBorderStyle, v => updateMainPage("mainDivBorderStyle", v)],
-                        "Book Covers Box Background ON/OFF": [s.bookListDivBckGrndOn, v => updateMainPage("bookListDivBckGrndOn", v)],
-                        "Book Covers Box Border Style": [s.bookListDivBorderStyle, v => updateMainPage("bookListDivBorderStyle", v)],
-
-                        "Page Background Color 1": [s.pageBckColor, v => updateMainPage("pageBckColor", v)],
-                        "Page Background Color 2": [s.pageBckColor2, v => updateMainPage("pageBckColor2", v)],
-                        "Gradient Angle": [Number(s.gradientAngle), v => updateMainPage("gradientAngle", v)],
-
-                        "Center of page Background Color 1": [s.mainDivBGColor, v => updateMainPage("mainDivBGColor", v)],
-                        "Center of page Background Color 2": [s.mainDivBGColor2, v => updateMainPage("mainDivBGColor2", v)],
-                        "Center Page Gradient Angle": [Number(s.mainDivGradientAngle), v => updateMainPage("mainDivGradientAngle", v)],
-                        "Center Page Padding": [s.mainDivPadding, v => updateMainPage("mainDivPadding", v)],
-
-                        "Center Page Border Size": [s.mainDivBorderSize, v => updateMainPage("mainDivBorderSize", v)],
-                        "Center Page Border Color": [s.mainDivBorderColor, v => updateMainPage("mainDivBorderColor", v)],
-                        "Center Page Border Radius": [s.mainDivBorderRadius, v => updateMainPage("mainDivBorderRadius", v)],
-
-                        "Center Page Margin Left": [s.mainDivMarginLeft, v => updateMainPage("mainDivMarginLeft", v)],
-                        "Center Page Margin Right": [s.mainDivMarginRight, v => updateMainPage("mainDivMarginRight", v)],
-                        "Center Page Margin Top": [s.mainDivMarginTop, v => updateMainPage("mainDivMarginTop", v)],
-                        "Center Page Margin Bottom": [s.mainDivMarginBottom, v => updateMainPage("mainDivMarginBottom", v)],
-
-                        "Book Covers Box Background Color 1": [s.bookListDivBGColor, v => updateMainPage("bookListDivBGColor", v)],
-                        "Book Covers Box Background Color 2": [s.bookListDivBGColor2, v => updateMainPage("bookListDivBGColor2", v)],
-                        "Book Covers Box Gradient Angle": [Number(s.bookListDivGradientAngle), v => updateMainPage("bookListDivGradientAngle", v)],
-
-                        "Book Covers Box Border Size": [s.bookListDivBorderSize, v => updateMainPage("bookListDivBorderSize", v)],
-                        "Book Covers Box Border Color": [s.bookListDivBorderColor, v => updateMainPage("bookListDivBorderColor", v)],
-                        "Book Covers Box Border Radius": [s.bookListDivBorderRadius, v => updateMainPage("bookListDivBorderRadius", v)],
-
-                        "Book Covers Box Margin Left": [s.bookListDivMarginLeft, v => updateMainPage("bookListDivMarginLeft", v)],
-                        "Book Covers Box Margin Right": [s.bookListDivMarginRight, v => updateMainPage("bookListDivMarginRight", v)],
-                        "Book Covers Box Margin Top": [s.bookListDivMarginTop, v => updateMainPage("bookListDivMarginTop", v)],
-                        "Book Covers Box Margin Bottom": [s.bookListDivMarginBottom, v => updateMainPage("bookListDivMarginBottom", v)],
-
-                        "Book Covers Box Padding Left": [s.bookListDivPaddingLeft, v => updateMainPage("bookListDivPaddingLeft", v)],
-                        "Book Covers Box Padding Right": [s.bookListDivPaddingRight, v => updateMainPage("bookListDivPaddingRight", v)],
-                        "Book Covers Box Padding Top": [s.bookListDivPaddingTop, v => updateMainPage("bookListDivPaddingTop", v)],
-                        "Book Covers Box Padding Bottom": [s.bookListDivPaddingBottom, v => updateMainPage("bookListDivPaddingBottom", v)],
+                        // body of page settings
+                        "Center of page Background ON/OFF": [mainDivBckGrndOn, setMainDivBckGrndOn],
+                        "Center Page Border Style": [mainDivBorderStyle, setMainDivBorderStyle],
+                        "Book Covers Box Background ON/OFF": [bookListDivBckGrndOn, setBookListDivBckGrndOn],
+                        "Book Covers Box Border Style": [bookListDivBorderStyle, setBookListDivBorderStyle],
+                        "break0": "",
+                        "Page Background Color 1": [pageBckColor, setPageBckColor],
+                        "Page Background Color 2": [pageBckColor2, setPageBckColor2],
+                        "Gradient Angle": [Number(gradientAngle), setGradientAngle],
+                        "Profile is Private": [profilePublic, setProfilePrivate],
+                        "break1": "",
+                        // main div of page settings
+                        "Center of page Background Color 1": [mainDivBGColor, setMainDivBGColor],
+                        "Center of page Background Color 2": [mainDivBGColor2, setMainDivBGColor2],
+                        "Center Page Gradient Angle": [Number(mainDivGradientAngle), setMainDivGradientAngle],
+                        "Center Page Padding": [mainDivPadding, setMainDivPadding],
+                        "break2": "",
+                        "Center Page Border Size": [mainDivBorderSize, setMainDivBorderSize],
+                        "Center Page Border Color": [mainDivBorderColor, setMainDivBorderColor],
+                        "Center Page Border Radius": [mainDivBorderRadius, setMainDivBorderRadius],
+                        "break3": "",
+                        "Center Page Margin Left": [mainDivMarginLeft, setMainDivMarginLeft],
+                        "Center Page Margin Right": [mainDivMarginRight, setMainDivMarginRight],
+                        "Center Page Margin Top": [mainDivMarginTop, setMainDivMarginTop],
+                        "Center Page Margin Bottom": [mainDivMarginBottom, setMainDivMarginBottom],
+                        "break4": "",
+                        // Book List Bounding div
+                        "Book Covers Box Background Color 1": [bookListDivBGColor, setBookListDivBGColor],
+                        "Book Covers Box Background Color 2": [bookListDivBGColor2, setBookListDivBGColor2],
+                        "Book Covers Box Gradient Angle": [Number(bookListDivGradientAngle), setBookListDivGradientAngle],
+                        "break5": "",
+                        "Book Covers Box Border Size": [bookListDivBorderSize, setBookListDivBorderSize],
+                        "Book Covers Box Border Color": [bookListDivBorderColor, setBookListDivBorderColor],
+                        "Book Covers Box Border Radius": [bookListDivBorderRadius, setBookListDivBorderRadius],
+                        "break6": "",
+                        "Book Covers Box Margin Left": [bookListDivMarginLeft, setBookListDivMarginLeft],
+                        "Book Covers Box Margin Right": [bookListDivMarginRight, setBookListDivMarginRight],
+                        "Book Covers Box Margin Top": [bookListDivMarginTop, setBookListDivMarginTop],
+                        "Book Covers Box Margin Bottom": [bookListDivMarginBottom, setBookListDivMarginBottom],
+                        "break7": "",
+                        "Book Covers Box Padding Left": [bookListDivPaddingLeft, setBookListDivPaddingLeft],
+                        "Book Covers Box Padding Right": [bookListDivPaddingRight, setBookListDivPaddingRight],
+                        "Book Covers Box Padding Top": [bookListDivPaddingTop, setBookListDivPaddingTop],
+                        "Book Covers Box Padding Bottom": [bookListDivPaddingBottom, setBookListDivPaddingBottom],
                     }}
                 />
             )}
@@ -539,17 +478,17 @@ function UsersPage() {
             />
 
             <div style={{
-                background: (s.bookListDivBckGrndOn ? `linear-gradient(${s.bookListDivGradientAngle}deg, ${s.bookListDivBGColor},${s.bookListDivBGColor2})` : "none"),
-                border: `${s.bookListDivBorderSize}px ${s.bookListDivBorderStyle} ${s.bookListDivBorderColor}`,
-                borderRadius: s.bookListDivBorderRadius + "px",
-                marginLeft: s.bookListDivMarginLeft + "px",
-                marginRight: s.bookListDivMarginRight + "px",
-                marginTop: s.bookListDivMarginTop + "px",
-                marginBottom: s.bookListDivMarginBottom + "px",
-                paddingLeft: s.bookListDivPaddingLeft + "px",
-                paddingRight: s.bookListDivPaddingRight + "px",
-                paddingTop: s.bookListDivPaddingTop + "px",
-                paddingBottom: s.bookListDivPaddingBottom + "px",
+                background: (bookListDivBckGrndOn ? `linear-gradient(${bookListDivGradientAngle}deg, ${bookListDivBGColor},${bookListDivBGColor2})` : "none"),
+                border: `${bookListDivBorderSize}px ${bookListDivBorderStyle} ${bookListDivBorderColor}`,
+                borderRadius: bookListDivBorderRadius + "px",
+                marginLeft: bookListDivMarginLeft + "px",
+                marginRight: bookListDivMarginRight + "px",
+                marginTop: bookListDivMarginTop + "px",
+                marginBottom: bookListDivMarginBottom + "px",
+                paddingLeft: bookListDivPaddingLeft + "px",
+                paddingRight: bookListDivPaddingRight + "px",
+                paddingTop: bookListDivPaddingTop + "px",
+                paddingBottom: bookListDivPaddingBottom + "px",
             }}>
                 <BookList
                     books={books}
