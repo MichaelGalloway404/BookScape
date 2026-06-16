@@ -11,30 +11,27 @@ function Home() {
     const navigate = useNavigate();
 
     // Fetch public users on component mount
-    useEffect(() => {
-        const loadUsers = async () => {
-            try {
-                setLoading(true);
+    const loadUsers = async () => {
+        try {
+            setLoading(true);
+            setError(null);
 
-                // Calls the public API endpoint we annotated earlier
-                const res = await fetch("/api/publicUsers", {
-                    method: "GET",
-                });
-                const data = await res.json();
+            const res = await fetch("/api/publicUsers");
+            const data = await res.json();
 
-                if (!res.ok) {
-                    throw new Error(data.error || "Failed to fetch users");
-                }
-
-                setUsers(data);
-            } catch (err) {
-                console.error(err);
-                setError(err.message);
-            } finally {
-                setLoading(false);
+            if (!res.ok) {
+                throw new Error(data.error || "Failed to fetch users");
             }
-        };
 
+            setUsers(data);
+        } catch (err) {
+            setError(err.message);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    useEffect(() => {
         loadUsers();
     }, []);
 
@@ -53,6 +50,12 @@ function Home() {
                     <p style={{ color: "red" }}>
                         Error loading users: {error}
                     </p>
+                    <button
+                        className={styles.buttonClass}
+                        onClick={loadUsers}
+                    >
+                        Try Again
+                    </button>
                 </div>
             ) : users.length === 0 ? (
                 <div style={{ textAlign: "center", margin: "50px" }}>
