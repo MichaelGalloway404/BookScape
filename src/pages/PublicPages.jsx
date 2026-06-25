@@ -274,7 +274,7 @@ function PublicPages() {
                            ${bc.borderColor || "#000"}`,
 
                   borderRadius: (bc.borderRadius || 0) + "px",
-                  maxWidth: "30%",
+                  // maxWidth: "30%",
                 }}
               >
                 <li style={{ listStyle: "none" }}>

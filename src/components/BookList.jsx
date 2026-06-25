@@ -332,7 +332,7 @@ function BookList({
               margin: margin + "px",
               border: `${borderSize}px ${borderStyle} ${borderColor}`,
               borderRadius: borderRadius + "px",
-              maxWidth: "30%",
+              // maxWidth: "30%",
             }}
           >
             <li
